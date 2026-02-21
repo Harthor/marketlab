@@ -1,0 +1,102 @@
+{
+  "experiment_id": "20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "timeframe": "1h",
+  "universe_label": "top10",
+  "robustness_score": 70.0,
+  "flags": [
+    "PAIR_DEPENDENCY_RISK",
+    "LOW_SAMPLE"
+  ],
+  "thresholds_used": {
+    "min_trades_for_confidence": 80,
+    "low_sample_trades": 30,
+    "concentration_top1_pct": 45.0,
+    "concentration_top3_pct": 75.0,
+    "pair_dependency_topn": 5,
+    "pair_dependency_topn_pct": 90.0,
+    "cost_fragile_pf_drop_threshold": 0.2,
+    "cost_fragile_fee50_below_pf": 1.0,
+    "robust_candidate_min_score": 70.0
+  },
+  "checks": {
+    "lookahead": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "freqtrade lookahead-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top10.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "recursive": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "freqtrade recursive-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top10.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "pair_concentration": {
+      "top1_share_pct": 29.096487049596547,
+      "top3_share_pct": 72.5917264661633,
+      "topn_share_pct": 100.0,
+      "top_n": 5,
+      "top_pairs": [
+        [
+          "ZEC/USDT",
+          0.06
+        ],
+        [
+          "BNB/USDT",
+          0.05
+        ],
+        [
+          "SOL/USDT",
+          0.05
+        ],
+        [
+          "DOGE/USDT",
+          0.04
+        ],
+        [
+          "OP/USDT",
+          0.02
+        ]
+      ],
+      "bottom_pairs": [
+        [
+          "SUI/USDT",
+          -0.06
+        ],
+        [
+          "ETH/USDT",
+          -0.04
+        ],
+        [
+          "BTC/USDT",
+          -0.03
+        ],
+        [
+          "XRP/USDT",
+          -0.01
+        ],
+        [
+          "AWE/USDT",
+          0.0
+        ]
+      ],
+      "flags": [
+        "PAIR_DEPENDENCY_RISK"
+      ],
+      "note": "ok"
+    },
+    "fee_sensitivity_rows": [],
+    "sample_check": {
+      "trades": 22,
+      "min_trades": 30
+    }
+  },
+  "notes": [
+    "Trades below threshold: 22 < 30"
+  ]
+}

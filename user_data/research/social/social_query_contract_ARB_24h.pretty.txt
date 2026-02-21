@@ -1,0 +1,9 @@
+[SOCIAL QUERY] ARB | tf=1h | lookback=24h | status=degraded
+degraded_reason=quality_flags_present
+score=0.053 confidence=0.4325 mentions=1 freshness_h=0.0008
+sentiment={'bullish': 0, 'bearish': 1, 'neutral': 0} hype=0.14 velocity=1
+source_mix={'youtube_transcript': 1.0}
+warnings=['LOW_SOCIAL_COVERAGE', 'SOURCE_DEPENDENCY_RISK', 'TEMPORAL_SPARSITY']
+summary=ARB social pulse is weak with low confidence (mentions=1, score=0.053). Risks: LOW_SOCIAL_COVERAGE | SOURCE_DEPENDENCY_RISK.
+cutoff=2026-02-21T08:16:07.973158+00:00 excluded_after_cutoff=2 dedupe_removed_est=0
+NFA: Research-only diagnostic signal. Not for live trading execution.

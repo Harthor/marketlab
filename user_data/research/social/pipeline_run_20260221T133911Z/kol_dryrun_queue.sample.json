@@ -1,0 +1,338 @@
+{
+  "generated_at": "2026-02-21T13:39:11+00:00",
+  "objective": "v25_dryrun_pipeline_validation",
+  "risk_flags": [
+    "BUDGET_ALERT_100",
+    "BUDGET_ALERT_70",
+    "BUDGET_ALERT_85",
+    "BUDGET_UNREALISTIC",
+    "HIGH_X_COST_LOW_SIGNAL",
+    "LOW_KOL_COVERAGE",
+    "LOW_KOL_FEEDBACK_COVERAGE",
+    "LOW_ROWS",
+    "LOW_SPLIT_COVERAGE",
+    "SOURCE_DEPENDENCY_RISK",
+    "TEMPORAL_SPARSITY"
+  ],
+  "dryrun_queue": [
+    {
+      "queue_id": "34caff192fa8cfa5",
+      "token": "SOL",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "action_type": "ask_question",
+      "priority": 0.365012,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.531075,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "f090aaafc48a639f",
+      "token": "ARB",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "action_type": "ask_question",
+      "priority": 0.365012,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.531075,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "a8b622fcfdd6d1b4",
+      "token": "SOL",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "action_type": "ask_question",
+      "priority": 0.34964,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.516621,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "9a4a4d75ff72e580",
+      "token": "ARB",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "action_type": "ask_question",
+      "priority": 0.34964,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.516621,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "398b69bc8007ea6e",
+      "token": "SOL",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "action_type": "ask_question",
+      "priority": 0.30664,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.500471,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "601b892039ea435c",
+      "token": "ARB",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "action_type": "ask_question",
+      "priority": 0.30664,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.500471,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "517c97fd3c6248fd",
+      "token": "SOL",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "action_type": "ask_question",
+      "priority": 0.293482,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.479734,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "f0f3fe2054587278",
+      "token": "ARB",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "action_type": "ask_question",
+      "priority": 0.293482,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.479734,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "9e09e9553f137469",
+      "token": "SOL",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "action_type": "ask_question",
+      "priority": 0.287515,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.477952,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "789a0c071cca367e",
+      "token": "ARB",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "action_type": "ask_question",
+      "priority": 0.287515,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.477952,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "bf416f288eec37f5",
+      "token": "SOL",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "action_type": "ask_question",
+      "priority": 0.192716,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.367312,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "42c841ed9cd3837b",
+      "token": "ARB",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "action_type": "ask_question",
+      "priority": 0.192716,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.367312,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    }
+  ],
+  "budget_context": {
+    "status": "degraded",
+    "cost_per_request": 0.02303333,
+    "budget_usage_pct": 345.5,
+    "alerts": [
+      "BUDGET_ALERT_70",
+      "BUDGET_ALERT_85",
+      "BUDGET_ALERT_100"
+    ],
+    "degradation_plan": [
+      "disable_expensive_x_source",
+      "reduce_query_frequency_50pct",
+      "switch_to_cache_or_offline_mode",
+      "allow_only_high_priority_tokens"
+    ],
+    "scenario": {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_250",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 305.0,
+      "variable_total_usd": 40.5,
+      "provider_variable_usd": 7.5,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 345.5,
+      "daily_total_usd": 11.516667,
+      "cost_per_request_usd": 0.02303333,
+      "budget_usage_pct": 345.5,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    }
+  },
+  "notes": [
+    "Dry-run only. No live posting."
+  ]
+}

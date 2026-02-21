@@ -1,0 +1,20 @@
+{
+  "timeframe": "1h",
+  "rows_in": 0,
+  "rows_out": 0,
+  "duplicates_removed": 0,
+  "rows": 0,
+  "symbols": [],
+  "missing_fields": {
+    "ts_utc": 0,
+    "symbols_detected": 0,
+    "source": 0
+  },
+  "source_counts": {},
+  "time_range_min": null,
+  "time_range_max": null,
+  "per_token_mentions": {},
+  "avg_data_completeness": 0.0,
+  "avg_source_diversity_score": 0.0,
+  "leakage_event_count": 0
+}

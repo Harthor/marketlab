@@ -1,0 +1,31 @@
+{
+  "rows": [
+    {
+      "strategy": "Strat03RSIBBMeanReversion_v3c",
+      "trades": 22,
+      "trades_per_day": 0.06,
+      "profit_total_pct": 0.07948262199999996,
+      "winrate_pct": 40.909090909090914,
+      "profit_factor": 1.1873360457101463,
+      "max_drawdown_pct": 0.3395007950000035
+    },
+    {
+      "strategy": "Strat04TrendPullback_v2",
+      "trades": 1378,
+      "trades_per_day": 3.48,
+      "profit_total_pct": -11.136293278,
+      "winrate_pct": 25.907111756168362,
+      "profit_factor": 0.6236485697506895,
+      "max_drawdown_pct": 11.225923754629626
+    },
+    {
+      "strategy": "Strat05DonchianBreakout_v1",
+      "trades": 1121,
+      "trades_per_day": 2.83,
+      "profit_total_pct": -9.424478459,
+      "winrate_pct": 38.26940231935772,
+      "profit_factor": 0.7117983809792336,
+      "max_drawdown_pct": 9.713966455168524
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "status": "ok",
+  "snapshot_ts_utc": "2026-02-21T17:46:56+00:00",
+  "windows_hours": [
+    6,
+    24,
+    72
+  ],
+  "snapshots": [
+    {
+      "window_hours": 6,
+      "rows": 37,
+      "valid_rows": 37,
+      "unique_tokens": 6,
+      "source_mix": {
+        "reddit": 0.27027,
+        "x_provider": 0.216216,
+        "openclaw_x": 0.189189,
+        "telegram": 0.189189,
+        "rss": 0.135135
+      },
+      "source_counts": {
+        "rss": 5,
+        "telegram": 7,
+        "x_provider": 8,
+        "openclaw_x": 7,
+        "reddit": 10
+      },
+      "coverage_score": 62.8032,
+      "quality_score": 100.0,
+      "readiness_score": 79.5418,
+      "low_rows_flag": false,
+      "duplicate_ratio": 0.0,
+      "time_range_min": "2026-02-21T11:58:55+00:00",
+      "time_range_max": "2026-02-21T17:36:55+00:00",
+      "flags": [],
+      "snapshot_ts_utc": "2026-02-21T17:46:56+00:00"
+    },
+    {
+      "window_hours": 24,
+      "rows": 149,
+      "valid_rows": 149,
+      "unique_tokens": 6,
+      "source_mix": {
+        "openclaw_x": 0.208054,
+        "reddit": 0.201342,
+        "telegram": 0.201342,
+        "x_provider": 0.201342,
+        "rss": 0.187919
+      },
+      "source_counts": {
+        "rss": 28,
+        "openclaw_x": 31,
+        "telegram": 30,
+        "x_provider": 30,
+        "reddit": 30
+      },
+      "coverage_score": 86.4087,
+      "quality_score": 100.0,
+      "readiness_score": 92.5248,
+      "low_rows_flag": false,
+      "duplicate_ratio": 0.0,
+      "time_range_min": "2026-02-20T18:10:55+00:00",
+      "time_range_max": "2026-02-21T17:36:55+00:00",
+      "flags": [],
+      "snapshot_ts_utc": "2026-02-21T17:46:56+00:00"
+    },
+    {
+      "window_hours": 72,
+      "rows": 489,
+      "valid_rows": 489,
+      "unique_tokens": 6,
+      "source_mix": {
+        "openclaw_x": 0.220859,
+        "telegram": 0.208589,
+        "x_provider": 0.198364,
+        "reddit": 0.190184,
+        "rss": 0.182004
+      },
+      "source_counts": {
+        "reddit": 93,
+        "x_provider": 97,
+        "openclaw_x": 108,
+        "telegram": 102,
+        "rss": 89
+      },
+      "coverage_score": 85.9985,
+      "quality_score": 100.0,
+      "readiness_score": 92.2992,
+      "low_rows_flag": false,
+      "duplicate_ratio": 0.0,
+      "time_range_min": "2026-02-18T17:54:55+00:00",
+      "time_range_max": "2026-02-21T17:36:55+00:00",
+      "flags": [],
+      "snapshot_ts_utc": "2026-02-21T17:46:56+00:00"
+    }
+  ],
+  "history_jsonl": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174655Z/social_readiness_snapshots.jsonl",
+  "history_count": 3,
+  "context": {
+    "ingest_status": null,
+    "normalize_status": "ok",
+    "x_import_status": null,
+    "features_csv": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174655Z/social_features_1h.csv"
+    ]
+  }
+}

@@ -1,0 +1,106 @@
+{
+  "experiment_id": "20260220T144656Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective-wf-a",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "timeframe": "1h",
+  "universe_label": "top20_mr1h_effective_WF_A",
+  "robustness_score": 46.0,
+  "flags": [
+    "TOO_CONCENTRATED_TOP1",
+    "TOO_CONCENTRATED_TOP3",
+    "PAIR_DEPENDENCY_RISK",
+    "LOW_SAMPLE"
+  ],
+  "thresholds_used": {
+    "min_trades_for_confidence": 80,
+    "low_sample_trades": 30,
+    "concentration_top1_pct": 45.0,
+    "concentration_top3_pct": 75.0,
+    "pair_dependency_topn": 5,
+    "pair_dependency_topn_pct": 90.0,
+    "cost_fragile_pf_drop_threshold": 0.2,
+    "cost_fragile_fee50_below_pf": 1.0,
+    "robust_candidate_min_score": 70.0
+  },
+  "checks": {
+    "lookahead": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "freqtrade lookahead-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top20_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250601-20250930"
+        }
+      ]
+    },
+    "recursive": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "freqtrade recursive-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top20_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250601-20250930"
+        }
+      ]
+    },
+    "pair_concentration": {
+      "top1_share_pct": 66.68773470321482,
+      "top3_share_pct": 100.0,
+      "topn_share_pct": 100.0,
+      "top_n": 5,
+      "top_pairs": [
+        [
+          "ARB/USDT",
+          0.12
+        ],
+        [
+          "SOL/USDT",
+          0.06
+        ],
+        [
+          "ETH/USDT",
+          0.0
+        ],
+        [
+          "XRP/USDT",
+          0.0
+        ],
+        [
+          "BNB/USDT",
+          0.0
+        ]
+      ],
+      "bottom_pairs": [
+        [
+          "NEAR/USDT",
+          -0.03
+        ],
+        [
+          "BTC/USDT",
+          -0.02
+        ],
+        [
+          "DOGE/USDT",
+          -0.02
+        ],
+        [
+          "TRX/USDT",
+          -0.02
+        ],
+        [
+          "ETH/USDT",
+          0.0
+        ]
+      ],
+      "flags": [
+        "TOO_CONCENTRATED_TOP1",
+        "TOO_CONCENTRATED_TOP3",
+        "PAIR_DEPENDENCY_RISK"
+      ],
+      "note": "ok"
+    },
+    "fee_sensitivity_rows": [],
+    "sample_check": {
+      "trades": 8,
+      "min_trades": 30
+    }
+  },
+  "notes": [
+    "Trades below threshold: 8 < 30"
+  ]
+}

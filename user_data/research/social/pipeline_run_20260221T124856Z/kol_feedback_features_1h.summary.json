@@ -1,0 +1,16 @@
+{
+  "timeframe": "1h",
+  "rows_in": 9,
+  "rows_out": 6,
+  "flags": [
+    "SOURCE_DEPENDENCY_RISK"
+  ],
+  "leakage_event_count": 0,
+  "time_range_min": "2026-02-21T08:40:00+00:00",
+  "time_range_max": "2026-02-21T12:48:57+00:00",
+  "per_token_mentions": {
+    "ARB": 1,
+    "SOL": 1
+  },
+  "avg_data_completeness": 0.1875
+}

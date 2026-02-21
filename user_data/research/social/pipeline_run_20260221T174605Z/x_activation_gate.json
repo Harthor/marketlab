@@ -1,0 +1,31 @@
+{
+  "status": "ok",
+  "can_activate_x_provider": false,
+  "recommendation": "KEEP_DRY_RUN",
+  "readiness_score": 71.8443,
+  "source_dominance_share": 0.363636,
+  "budget_readiness": {
+    "can_run_low": true,
+    "can_run_medium": true,
+    "can_run_agency_like": false,
+    "max_safe_daily_requests_low": 681,
+    "max_safe_daily_requests_medium": 517,
+    "max_safe_daily_requests_high": 0,
+    "blockers": [
+      "AGENCY_LIKE_CAPACITY_LIMITED",
+      "FIXED_COST_EXCEEDS_HARD_CAP"
+    ]
+  },
+  "blockers": [
+    "AGENCY_LIKE_CAPACITY_LIMITED",
+    "FIXED_COST_EXCEEDS_CAP",
+    "FIXED_COST_EXCEEDS_HARD_CAP",
+    "LOW_ROWS",
+    "READINESS_SCORE_BELOW_THRESHOLD"
+  ],
+  "inputs": {
+    "readiness_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/social_readiness_snapshot.json",
+    "budget_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/kol_budget_scenarios_v26.json",
+    "coverage_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/social_coverage_report.json"
+  }
+}

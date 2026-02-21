@@ -1,0 +1,6 @@
+requests_per_day,scenario,monthly_total_usd,fixed_total_usd,variable_total_usd,budget_usage_pct,cap_status,cost_per_request_usd
+50,medium,60.1,55.0,5.1,66.7778,OK,0.04006667
+100,medium,65.2,55.0,10.2,72.4444,OK,0.02173333
+200,medium,75.4,55.0,20.4,83.7778,OK,0.01256667
+300,medium,85.6,55.0,30.6,95.1111,TIGHT,0.00951111
+500,medium,106.0,55.0,51.0,117.7778,EXCEEDS_CAP,0.00706667

@@ -1,0 +1,9 @@
+[SOCIAL QUERY] SOL | tf=1h | lookback=72h | status=degraded
+degraded_reason=quality_flags_present
+score=0.508875 confidence=0.6175 mentions=4 freshness_h=0.0008
+sentiment={'bullish': 4, 'bearish': 0, 'neutral': 0} hype=0.1225 velocity=4
+source_mix={'reddit': 0.25, 'x_provider': 0.25, 'youtube_transcript': 0.5}
+warnings=['LOW_SOCIAL_COVERAGE', 'TEMPORAL_SPARSITY']
+summary=SOL social pulse is mixed with medium confidence (mentions=4, score=0.509). Risks: LOW_SOCIAL_COVERAGE | TEMPORAL_SPARSITY.
+cutoff=2026-02-21T08:16:07.901655+00:00 excluded_after_cutoff=2 dedupe_removed_est=0
+NFA: Research-only diagnostic signal. Not for live trading execution.

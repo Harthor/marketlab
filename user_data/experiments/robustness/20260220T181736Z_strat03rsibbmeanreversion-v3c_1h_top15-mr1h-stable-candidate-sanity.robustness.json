@@ -1,0 +1,106 @@
+{
+  "experiment_id": "20260220T181736Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-sanity",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "timeframe": "1h",
+  "universe_label": "top15_mr1h_stable_candidate_sanity",
+  "robustness_score": 100.0,
+  "flags": [],
+  "thresholds_used": {
+    "min_trades_for_confidence": 80,
+    "low_sample_trades": 20,
+    "concentration_top1_pct": 45.0,
+    "concentration_top3_pct": 75.0,
+    "pair_dependency_topn": 5,
+    "pair_dependency_topn_pct": 90.0,
+    "cost_fragile_pf_drop_threshold": 0.35,
+    "cost_fragile_fee50_below_pf": 1.0,
+    "robust_candidate_min_score": 80.0
+  },
+  "checks": {
+    "lookahead": {
+      "status": "ok",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade lookahead-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201",
+          "returncode": 1,
+          "output_tail": "O - Strategy using use_exit_signal: True\n2026-02-20 15:34:13,240 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using exit_profit_only: False\n2026-02-20 15:34:13,240 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using ignore_roi_if_entry_signal: False\n2026-02-20 15:34:13,240 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using exit_profit_offset: 0.0\n2026-02-20 15:34:13,240 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using disable_dataframe_checks: False\n2026-02-20 15:34:13,241 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using ignore_buying_expired_candle_after: 0\n2026-02-20 15:34:13,241 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using position_adjustment_enable: False\n2026-02-20 15:34:13,241 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using max_entry_position_adjustment: -1\n2026-02-20 15:34:13,241 - freqtrade.resolvers.strategy_resolver - INFO - Strategy using max_open_trades: -1\n2026-02-20 15:34:13,241 - freqtrade - ERROR - Configuration error: Market entry orders require entry_pricing.price_side = \"other\".\nPlease make sure to review the documentation at https://www.freqtrade.io/en/stable.\n"
+        },
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade lookahead-analysis -c /var/folders/2_/bnzc9pks4ql_9bz87nzq43wm0000gn/T/anti_smoke_1ohjsuox.lookahead.tmp.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201",
+          "returncode": 0,
+          "output_tail": "15:34:18,997 - freqtrade.optimize.backtesting - INFO - Loading data from 2024-12-22 20:00:00 up to 2025-06-12 11:00:00 (171 days).\n2026-02-20 15:34:19,063 - freqtrade.optimize.backtesting - INFO - Loading data from 2024-12-22 20:00:00 up to 2025-07-20 23:00:00 (210 days).\n2026-02-20 15:34:19,133 - freqtrade.optimize.backtesting - INFO - Loading data from 2024-12-22 20:00:00 up to 2025-07-20 23:00:00 (210 days).\n2026-02-20 15:34:19,213 - freqtrade.optimize.backtesting - INFO - Loading data from 2024-12-22 20:00:00 up to 2025-07-22 06:00:00 (211 days).\n2026-02-20 15:34:19,282 - freqtrade.optimize.backtesting - INFO - Loading data from 2024-12-22 20:00:00 up to 2025-07-22 06:00:00 (211 days).\n2026-02-20 15:34:19,341 - freqtrade.optimize.analysis.lookahead - INFO - Found targeted trade amount = 20 signals.\n2026-02-20 15:34:19,341 - freqtrade.loggers.set_log_levels - INFO - Restoring log verbosity.\n2026-02-20 15:34:19,342 - freqtrade.optimize.analysis.lookahead - INFO - Strat03RSIBBMeanReversion_v3c: no bias detected\n2026-02-20 15:34:19,342 - freqtrade.optimize.analysis.lookahead_helpers - INFO - Checking look ahead bias via backtests of Strat03RSIBBMeanReversion_v3c.py took 5 seconds.\n",
+          "retry_reason": "entry_pricing.price_side override to other"
+        }
+      ]
+    },
+    "recursive": {
+      "status": "ok",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade recursive-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201",
+          "returncode": 0,
+          "output_tail": "reqtrade.optimize.analysis.recursive - INFO - Calculating indicators using startup candle of 1999.\n2026-02-20 15:34:22,745 - freqtrade.exchange.exchange - WARNING - Using 2 calls to get OHLCV. This can result in slower operations for the bot. Please check if you really need 1999 candles for your \nstrategy.\n2026-02-20 15:34:22,753 - freqtrade.optimize.backtesting - INFO - Loading data from 2025-11-09 16:00:00 up to 2026-02-01 00:00:00 (83 days).\n2026-02-20 15:34:22,763 - freqtrade.loggers.set_log_levels - INFO - Restoring log verbosity.\n2026-02-20 15:34:22,764 - freqtrade.optimize.analysis.recursive - INFO - Start checking for recursive bias\n2026-02-20 15:34:22,767 - freqtrade.optimize.analysis.recursive - INFO - Start checking for lookahead bias on indicators only\n2026-02-20 15:34:22,768 - freqtrade.optimize.analysis.recursive - INFO - Check indicators at 2025-01-01T10:00:00\n2026-02-20 15:34:22,768 - freqtrade.optimize.analysis.recursive - INFO - No lookahead bias on indicators found.\n2026-02-20 15:34:22,768 - freqtrade.optimize.analysis.recursive_helpers - INFO - Checking recursive and indicator-only lookahead bias of indicators of Strat03RSIBBMeanReversion_v3c.py took 2 seconds.\n"
+        }
+      ]
+    },
+    "pair_concentration": {
+      "top1_share_pct": 36.36116105578134,
+      "top3_share_pct": 65.18499040760489,
+      "topn_share_pct": 88.05849876655523,
+      "top_n": 5,
+      "top_pairs": [
+        [
+          "ARB/USDT",
+          0.12
+        ],
+        [
+          "BNB/USDT",
+          0.05
+        ],
+        [
+          "SOL/USDT",
+          0.05
+        ],
+        [
+          "SNX/USDT",
+          0.04
+        ],
+        [
+          "BCH/USDT",
+          0.04
+        ]
+      ],
+      "bottom_pairs": [
+        [
+          "ETH/USDT",
+          -0.04
+        ],
+        [
+          "PAXG/USDT",
+          -0.01
+        ],
+        [
+          "XRP/USDT",
+          -0.01
+        ],
+        [
+          "LTC/USDT",
+          0.0
+        ],
+        [
+          "UNI/USDT",
+          0.0
+        ]
+      ],
+      "flags": [],
+      "note": "ok"
+    },
+    "fee_sensitivity_rows": [],
+    "sample_check": {
+      "trades": 20,
+      "min_trades": 20
+    }
+  },
+  "notes": [],
+  "temporary_config_override": "/var/folders/2_/bnzc9pks4ql_9bz87nzq43wm0000gn/T/anti_smoke_1ohjsuox.lookahead.tmp.json"
+}

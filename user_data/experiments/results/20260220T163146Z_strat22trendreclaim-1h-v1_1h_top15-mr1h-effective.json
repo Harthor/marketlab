@@ -1,0 +1,136 @@
+{
+  "experiment_id": "20260220T163146Z_strat22trendreclaim-1h-v1_1h_top15-mr1h-effective",
+  "created_at": "2026-02-20T16:31:46+00:00",
+  "status": "success",
+  "strategy_name": "Strat22TrendReclaim_1h_v1",
+  "strategy_family": "trend",
+  "config_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json",
+  "timeframe": "1h",
+  "timerange": "20250101-20260201",
+  "universe_label": "top15_mr1h_effective",
+  "pairs_count": 15,
+  "market_mode": "spot",
+  "split_label": null,
+  "metrics": {
+    "trades": 964,
+    "trades_per_day": 2.43,
+    "profit_total_pct": -9.514306576,
+    "winrate_pct": 23.858921161825727,
+    "profit_factor": 0.5015985003174983,
+    "max_drawdown_pct": 9.614693423483079
+  },
+  "robustness": {
+    "oos": null,
+    "fee_sensitivity_tested": false,
+    "fee_delta_pct": null
+  },
+  "artifacts": {
+    "backtest_meta_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/strat22_1h_20260220/strat22_1h_top15_mr1h_effective.meta.json",
+    "backtest_export_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T163146Z_strat22trendreclaim-1h-v1_1h_top15-mr1h-effective.backtest_export.json",
+    "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T163146Z_strat22trendreclaim-1h-v1_1h_top15-mr1h-effective.md",
+    "extra_files": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/strat22_1h_20260220/strat22_1h_top15_mr1h_effective.zip"
+    ]
+  },
+  "notes": {
+    "warnings": [],
+    "observations": [
+      "PF < 1 en este experimento."
+    ],
+    "top_pairs_by_profit_pct": [
+      [
+        "PAXG/USDT",
+        -0.13
+      ],
+      [
+        "SNX/USDT",
+        -0.22
+      ],
+      [
+        "ARB/USDT",
+        -0.38
+      ],
+      [
+        "LTC/USDT",
+        -0.4
+      ],
+      [
+        "TRX/USDT",
+        -0.43
+      ],
+      [
+        "BCH/USDT",
+        -0.44
+      ],
+      [
+        "ADA/USDT",
+        -0.48
+      ],
+      [
+        "OP/USDT",
+        -0.56
+      ],
+      [
+        "UNI/USDT",
+        -0.58
+      ],
+      [
+        "SOL/USDT",
+        -0.61
+      ]
+    ],
+    "bottom_pairs_by_profit_pct": [
+      [
+        "BNB/USDT",
+        -1.25
+      ],
+      [
+        "ETH/USDT",
+        -1.09
+      ],
+      [
+        "XRP/USDT",
+        -1.07
+      ],
+      [
+        "BTC/USDT",
+        -1.03
+      ],
+      [
+        "AAVE/USDT",
+        -0.85
+      ],
+      [
+        "SOL/USDT",
+        -0.61
+      ],
+      [
+        "UNI/USDT",
+        -0.58
+      ],
+      [
+        "OP/USDT",
+        -0.56
+      ],
+      [
+        "ADA/USDT",
+        -0.48
+      ],
+      [
+        "BCH/USDT",
+        -0.44
+      ]
+    ]
+  },
+  "provenance": {
+    "command_run": "",
+    "git_commit": "797ea46bb3b62ba8d0ca39b038610d82eea5be28"
+  },
+  "robustness_validation": {
+    "robustness_score": 90.0,
+    "flags": [
+      "PAIR_DEPENDENCY_RISK"
+    ],
+    "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T163146Z_strat22trendreclaim-1h-v1_1h_top15-mr1h-effective.robustness.json"
+  }
+}

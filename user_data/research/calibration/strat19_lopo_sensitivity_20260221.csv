@@ -1,0 +1,14 @@
+pair_removed,status,retry_status,trades,profit_pct,PF,maxDD_pct,delta_PF_vs_baseline,delta_profit_pct_vs_baseline,delta_maxDD_pp_vs_baseline,meta_path,infra_reason,retry_count
+XRP/USDT,ok,skipped,136,0.01626906757,1.4090307237311046,0.9529893136613762,0.1426950419500974,0.004483099300000003,0.009904662180590607,/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_strat19_4h_20260221/strat19_4h_top15_lopo_rm_xrp-usdt.meta.json,,0
+BTC/USDT,ok,skipped,129,0.016063136379999995,1.4044184519300102,0.6810157907798157,0.13808277014900305,0.004277168109999998,-0.2620688607009699,/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_strat19_4h_20260221/strat19_4h_top15_lopo_rm_btc-usdt.meta.json,,0
+TRX/USDT,ok,skipped,135,0.01280758739,1.306978243291065,0.8517666394349411,0.04064256151005785,0.0010216191200000026,-0.09131801204584444,/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_strat19_4h_20260221/strat19_4h_top15_lopo_rm_trx-usdt.meta.json,,0
+PAXG/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+BNB/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+ETH/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+SNX/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+SOL/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+ARB/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+OP/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+LTC/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+DOGE/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3
+ZEC/USDT,missing_due_infra,infra_fail,,,,,,,,,dns_unreachable,3

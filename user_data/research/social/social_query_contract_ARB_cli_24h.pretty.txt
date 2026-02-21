@@ -1,0 +1,7 @@
+[SOCIAL QUERY] ARB | tf=1h | lookback=24h | status=degraded
+score=n/a confidence=0.0 mentions=n/a
+sentiment={} flags=['LOW_SOCIAL_COVERAGE', 'STALE_DATA']
+sources=['reddit', 'rss', 'telegram']
+summary=insufficient coverage for a strong social read.
+degraded_reason=no_events_for_token_in_window
+NFA: Research-only diagnostic signal. Not for live trading execution.

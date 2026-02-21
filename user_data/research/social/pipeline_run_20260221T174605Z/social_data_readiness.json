@@ -1,0 +1,95 @@
+{
+  "status": "degraded",
+  "rows_total": 11,
+  "rows_valid": 11,
+  "rows_dropped": 27,
+  "duplicate_ratio": 0.710526,
+  "source_counts": {
+    "openclaw_x": 4,
+    "reddit": 1,
+    "rss": 1,
+    "telegram": 1,
+    "telegram_forwarder": 1,
+    "x_provider": 3
+  },
+  "source_share_pct": {
+    "openclaw_x": 36.3636,
+    "reddit": 9.0909,
+    "rss": 9.0909,
+    "telegram": 9.0909,
+    "telegram_forwarder": 9.0909,
+    "x_provider": 27.2727
+  },
+  "token_counts_top": [
+    {
+      "token": "BTC",
+      "mentions": 5
+    },
+    {
+      "token": "SOL",
+      "mentions": 5
+    },
+    {
+      "token": "ETH",
+      "mentions": 3
+    },
+    {
+      "token": "ARB",
+      "mentions": 3
+    },
+    {
+      "token": "BNB",
+      "mentions": 1
+    },
+    {
+      "token": "XRP",
+      "mentions": 1
+    },
+    {
+      "token": "OP",
+      "mentions": 1
+    }
+  ],
+  "time_range_min": "2026-02-21T07:30:00+00:00",
+  "time_range_max": "2026-02-21T17:46:08+00:00",
+  "freshness_lag_stats": {
+    "lag_min_hours": 0.000314,
+    "lag_avg_hours": 6.724658,
+    "lag_max_hours": 10.269203
+  },
+  "anti_leakage_drop_ratio": 0.0,
+  "missing_fields": {
+    "event_id": 0,
+    "source": 0,
+    "ts_utc": 0,
+    "text": 0,
+    "author": 0
+  },
+  "timestamp_parse_fail_count": 0,
+  "temporal_gap_max_hours": 8.252222,
+  "feature_bucket_count": 4,
+  "coverage_score": 47.1573,
+  "quality_score": 75.0,
+  "readiness_score": 59.6865,
+  "flags": [
+    "HIGH_DUPLICATES",
+    "LOW_ROWS"
+  ],
+  "inputs": {
+    "normalized_jsonl": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/social_events.normalized.jsonl",
+    "ingest_coverage_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/social_coverage_ingest.json",
+    "normalize_coverage_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/social_coverage_normalize.json",
+    "features_csv": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/social_features_1h.csv"
+    ],
+    "x_import_coverage_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/x_provider_import.coverage.json"
+  },
+  "coverage_context": {
+    "ingest_status": "degraded",
+    "normalize_status": "ok",
+    "x_import_status": "ok",
+    "ingest_rows_out": null,
+    "normalize_rows_out": 11,
+    "x_import_rows_out": 8
+  }
+}

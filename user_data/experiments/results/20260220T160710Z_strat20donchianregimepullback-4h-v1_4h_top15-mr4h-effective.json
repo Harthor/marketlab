@@ -1,0 +1,138 @@
+{
+  "experiment_id": "20260220T160710Z_strat20donchianregimepullback-4h-v1_4h_top15-mr4h-effective",
+  "created_at": "2026-02-20T16:07:10+00:00",
+  "status": "success",
+  "strategy_name": "Strat20DonchianRegimePullback_4h_v1",
+  "strategy_family": "trend",
+  "config_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_4h_top15_mr_effective.json",
+  "timeframe": "4h",
+  "timerange": "20250101-20260201",
+  "universe_label": "top15_mr4h_effective",
+  "pairs_count": 13,
+  "market_mode": "spot",
+  "split_label": null,
+  "metrics": {
+    "trades": 259,
+    "trades_per_day": 0.65,
+    "profit_total_pct": -3.8614557429999996,
+    "winrate_pct": 31.66023166023166,
+    "profit_factor": 0.5957520961038163,
+    "max_drawdown_pct": 4.165302690159025
+  },
+  "robustness": {
+    "oos": null,
+    "fee_sensitivity_tested": false,
+    "fee_delta_pct": null
+  },
+  "artifacts": {
+    "backtest_meta_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/strat20_4h_20260220/strat20_4h_top15_mr_effective.meta.json",
+    "backtest_export_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T160710Z_strat20donchianregimepullback-4h-v1_4h_top15-mr4h-effective.backtest_export.json",
+    "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T160710Z_strat20donchianregimepullback-4h-v1_4h_top15-mr4h-effective.md",
+    "extra_files": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/strat20_4h_20260220/strat20_4h_top15_mr_effective.zip"
+    ]
+  },
+  "notes": {
+    "warnings": [],
+    "observations": [
+      "PF < 1 en este experimento."
+    ],
+    "top_pairs_by_profit_pct": [
+      [
+        "SNX/USDT",
+        0.14
+      ],
+      [
+        "TRX/USDT",
+        0.07
+      ],
+      [
+        "ARB/USDT",
+        -0.01
+      ],
+      [
+        "PAXG/USDT",
+        -0.2
+      ],
+      [
+        "ZEC/USDT",
+        -0.22
+      ],
+      [
+        "BTC/USDT",
+        -0.23
+      ],
+      [
+        "DOGE/USDT",
+        -0.23
+      ],
+      [
+        "OP/USDT",
+        -0.27
+      ],
+      [
+        "BNB/USDT",
+        -0.4
+      ],
+      [
+        "SOL/USDT",
+        -0.4
+      ]
+    ],
+    "bottom_pairs_by_profit_pct": [
+      [
+        "ETH/USDT",
+        -0.76
+      ],
+      [
+        "LTC/USDT",
+        -0.71
+      ],
+      [
+        "XRP/USDT",
+        -0.65
+      ],
+      [
+        "SOL/USDT",
+        -0.4
+      ],
+      [
+        "BNB/USDT",
+        -0.4
+      ],
+      [
+        "OP/USDT",
+        -0.27
+      ],
+      [
+        "DOGE/USDT",
+        -0.23
+      ],
+      [
+        "BTC/USDT",
+        -0.23
+      ],
+      [
+        "ZEC/USDT",
+        -0.22
+      ],
+      [
+        "PAXG/USDT",
+        -0.2
+      ]
+    ]
+  },
+  "provenance": {
+    "command_run": "",
+    "git_commit": "797ea46bb3b62ba8d0ca39b038610d82eea5be28"
+  },
+  "robustness_validation": {
+    "robustness_score": 66.0,
+    "flags": [
+      "TOO_CONCENTRATED_TOP1",
+      "TOO_CONCENTRATED_TOP3",
+      "PAIR_DEPENDENCY_RISK"
+    ],
+    "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T160710Z_strat20donchianregimepullback-4h-v1_4h_top15-mr4h-effective.robustness.json"
+  }
+}

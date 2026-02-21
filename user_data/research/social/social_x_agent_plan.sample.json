@@ -1,0 +1,46 @@
+{
+  "generated_at": "2026-02-21T08:35:03+00:00",
+  "mode": "research_planning_only",
+  "status": "ok",
+  "inputs": {
+    "daily_posts": 5.0,
+    "daily_reply_budget": 30.0,
+    "daily_monitor_tokens": 25.0,
+    "kols_registry_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/kol_registry.sample.json",
+    "active_kols": 3,
+    "requests_per_action": {
+      "post": 3.0,
+      "reply": 2.0,
+      "monitor_token": 4.0,
+      "monitor_kol": 1.0,
+      "query": 3.0
+    },
+    "x_cost_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/social_cost_estimate_x_v23.json"
+  },
+  "requests_per_day": {
+    "post": 15.0,
+    "reply": 60.0,
+    "monitor_tokens": 100.0,
+    "monitor_kols": 3.0,
+    "total": 178.0
+  },
+  "capacity": {
+    "estimated_queries_per_day": 66.6667,
+    "requests_per_query_assumed": 3.0,
+    "monthly_requests": 5340.0
+  },
+  "costs": {
+    "x_monthly_low_usd": 120.0,
+    "x_monthly_high_usd": 124.8,
+    "llm_monthly_usd": 4.32,
+    "total_monthly_low_usd": 124.32,
+    "total_monthly_high_usd": 129.12,
+    "effective_cost_per_request_low_usd": 0.01,
+    "effective_cost_per_request_high_usd": 0.0104
+  },
+  "warnings": [],
+  "notes": [
+    "Planning/simulation only. No live posting.",
+    "Use as an Agency-like capacity model for research diagnostics."
+  ]
+}

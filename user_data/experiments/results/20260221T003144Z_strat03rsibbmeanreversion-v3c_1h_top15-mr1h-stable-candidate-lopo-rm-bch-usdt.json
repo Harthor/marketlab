@@ -1,0 +1,135 @@
+{
+  "experiment_id": "20260221T003144Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-bch-usdt",
+  "created_at": "2026-02-21T00:31:44+00:00",
+  "status": "success",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "strategy_family": "mean_reversion",
+  "config_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_stable_candidate.json",
+  "timeframe": "1h",
+  "timerange": "20250101-20260201",
+  "universe_label": "top15_mr1h_stable_candidate_LOPO_rm_BCH_USDT",
+  "pairs_count": 12,
+  "market_mode": "spot",
+  "split_label": null,
+  "idea_spec_id": null,
+  "metrics": {
+    "trades": 18,
+    "trades_per_day": 0.05,
+    "profit_total_pct": 0.236848599,
+    "winrate_pct": 50.0,
+    "profit_factor": 2.07233619349748,
+    "max_drawdown_pct": 0.1886941399999955
+  },
+  "robustness": {
+    "oos": null,
+    "fee_sensitivity_tested": false,
+    "fee_delta_pct": null
+  },
+  "robustness_validation": {
+    "robustness_score": null,
+    "flags": [],
+    "report_json": null
+  },
+  "artifacts": {
+    "backtest_meta_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_stable_candidate_20260221/v3c_1h_stable_lopo_rm_BCH_USDT.meta.json",
+    "backtest_export_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T003144Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-bch-usdt.backtest_export.json",
+    "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T003144Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-bch-usdt.md",
+    "extra_files": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_stable_candidate_20260221/v3c_1h_stable_lopo_rm_BCH_USDT.zip"
+    ]
+  },
+  "notes": {
+    "warnings": [],
+    "observations": [
+      "PF > 1 con pocos trades: evidencia estad\u00edstica limitada."
+    ],
+    "top_pairs_by_profit_pct": [
+      [
+        "ARB/USDT",
+        0.12
+      ],
+      [
+        "BNB/USDT",
+        0.05
+      ],
+      [
+        "SOL/USDT",
+        0.05
+      ],
+      [
+        "SNX/USDT",
+        0.04
+      ],
+      [
+        "OP/USDT",
+        0.02
+      ],
+      [
+        "AAVE/USDT",
+        0.02
+      ],
+      [
+        "LTC/USDT",
+        0.0
+      ],
+      [
+        "UNI/USDT",
+        0.0
+      ],
+      [
+        "ADA/USDT",
+        0.0
+      ],
+      [
+        "PAXG/USDT",
+        -0.01
+      ]
+    ],
+    "bottom_pairs_by_profit_pct": [
+      [
+        "ETH/USDT",
+        -0.04
+      ],
+      [
+        "XRP/USDT",
+        -0.01
+      ],
+      [
+        "PAXG/USDT",
+        -0.01
+      ],
+      [
+        "ADA/USDT",
+        0.0
+      ],
+      [
+        "UNI/USDT",
+        0.0
+      ],
+      [
+        "LTC/USDT",
+        0.0
+      ],
+      [
+        "AAVE/USDT",
+        0.02
+      ],
+      [
+        "OP/USDT",
+        0.02
+      ],
+      [
+        "SNX/USDT",
+        0.04
+      ],
+      [
+        "SOL/USDT",
+        0.05
+      ]
+    ]
+  },
+  "provenance": {
+    "command_run": "",
+    "git_commit": "797ea46bb3b62ba8d0ca39b038610d82eea5be28"
+  }
+}

@@ -1,0 +1,2297 @@
+{
+  "run_id": "20260221T125057Z",
+  "created_at_utc": "2026-02-21T12:50:57+00:00",
+  "mode": "degraded",
+  "timeframe": "1h",
+  "tokens": [
+    "SOL",
+    "ARB"
+  ],
+  "status": "ok",
+  "anti_smoke_flags": [
+    "BUDGET_DRIVEN_BLINDSPOTS",
+    "BUDGET_UNREALISTIC",
+    "HIGH_X_COST_LOW_SIGNAL",
+    "LOW_KOL_COVERAGE",
+    "LOW_KOL_FEEDBACK_COVERAGE",
+    "LOW_SOCIAL_COVERAGE",
+    "LOW_SPLIT_COVERAGE",
+    "SOURCE_DEPENDENCY_RISK",
+    "TEMPORAL_SPARSITY"
+  ],
+  "stage_failures": [],
+  "stages": [
+    {
+      "step": "x_provider_import_jsonl",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Imported rows_in=6 rows_out=6 dupes=0\nINFO Output: /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/x_provider_imported.raw.jsonl\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/x_provider_import_jsonl.py",
+        "--input-glob",
+        "user_data/research/social/inbox/*.jsonl",
+        "--source-name",
+        "x_export",
+        "--output-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/x_provider_imported.raw.jsonl",
+        "--coverage-log-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/x_provider_import.coverage.json"
+      ]
+    },
+    {
+      "step": "social_ingest",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Wrote 9 raw social rows to /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.raw.jsonl\nINFO Coverage status=degraded degraded_reasons=['network_disabled', 'network_disabled']\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/social_ingest.py",
+        "--source",
+        "reddit,rss,external_jsonl,mock",
+        "--output-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.raw.jsonl",
+        "--coverage-log-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_coverage_ingest.json",
+        "--external-jsonl-glob",
+        "user_data/research/social/pipeline_run_20260221T125057Z/x_provider_imported.raw.jsonl",
+        "--fallback-mock-on-error"
+      ]
+    },
+    {
+      "step": "social_normalize",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Normalized rows: 9 -> 9 (dupes dropped=0)\nINFO Source distribution: {'reddit': 1, 'telegram': 1, 'rss': 1, 'x_provider': 3, 'openclaw_x': 2, 'telegram_forwarder': 1}\nINFO Output: /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/social_normalize.py",
+        "--input-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.raw.jsonl",
+        "--output-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl",
+        "--coverage-log-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_coverage_normalize.json"
+      ]
+    },
+    {
+      "step": "social_feature_builder_1h",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Input rows: 9\nINFO Feature rows: 12\nINFO Summary: {'timeframe': '1h', 'rows_in': 9, 'rows_out': 12, 'duplicates_removed': 0, 'rows': 12, 'symbols': ['ARB', 'BNB', 'BTC', 'ETH', 'SOL', 'XRP'], 'missing_fields': {'ts_utc': 0, 'symbols_detected': 0, 'source': 0}, 'source_counts': {'openclaw_x': 2, 'reddit': 1, 'rss': 1, 'telegram': 1, 'telegram_forwarder': 1, 'x_provider': 3}, 'time_range_min': '2026-02-21T08:05:00+00:00', 'time_range_max': '2026-02-21T12:50:57+00:00', 'per_token_mentions': {'BTC': 5, 'SOL': 4, 'ARB': 2, 'ETH': 2, 'BNB': 1, 'XRP': 1}, 'avg_data_completeness': 1.0, 'avg_source_diversity_score': 0.25, 'leakage_event_count': 0}\nINFO Output: /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_features_1h.csv\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/social_feature_builder.py",
+        "--input-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl",
+        "--timeframe",
+        "1h",
+        "--output-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_features_1h.csv",
+        "--summary-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_features_1h.summary.json"
+      ]
+    },
+    {
+      "step": "social_coverage_report",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/social_coverage_report.py",
+        "--input-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl",
+        "--timeframe",
+        "1h",
+        "--output-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_coverage_report.json",
+        "--output-md",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_coverage_report.md"
+      ]
+    },
+    {
+      "step": "kol_budget_engine",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Budget scenarios=30 readiness_tiers=4 output=/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/kol_budget_engine.py",
+        "--daily-requests-grid",
+        "50,200,500",
+        "--target-monthly-usd",
+        "100.0",
+        "--hard-cap-monthly-usd",
+        "100.0",
+        "--output-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json",
+        "--output-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.csv",
+        "--readiness-target-grid",
+        "0,50,100,150",
+        "--readiness-output-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_readiness_v25.csv"
+      ]
+    },
+    {
+      "step": "social_query_SOL",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": " (med) mentions=4\nSentiment: {'bullish': 2, 'bearish': 0, 'neutral': 2} | hype=0.14 | velocity=4\nFreshness: age_h=0.0002 bucket=fresh\nCoverage: source_mix={'openclaw_x': 0.25, 'reddit': 0.25, 'telegram_forwarder': 0.25, 'x_provider': 0.25} top_sources=['openclaw_x', 'reddit', 'telegram_forwarder']\nKOL snapshot: {'top_kols': [], 'coverage': 0.0, 'trend_label': 'falling', 'trend_value': -0.25, 'feedback_coverage': 0.34375}\nWarnings: LOW_KOL_COVERAGE[high], LOW_KOL_FEEDBACK_COVERAGE[high], LOW_SOCIAL_COVERAGE[high], SOURCE_DEPENDENCY_RISK[high], BUDGET_UNREALISTIC[medium], HIGH_X_COST_LOW_SIGNAL[medium], TEMPORAL_SPARSITY[low]\nBudget pressure: {'status': 'degraded', 'usage_pct': 345.5, 'pressure': 'critical', 'degraded_mode': True, 'degradation_plan': ['disable_expensive_x_source', 'reduce_query_frequency_50pct', 'switch_to_cache_or_offline_mode', 'allow_only_high_priority_tokens'], 'scenario': 'medium'}\nContext: SOL social pulse is mixed with medium confidence (mentions=4, score=0.426). Risks: LOW_KOL_COVERAGE | LOW_KOL_FEEDBACK_COVERAGE.\nAnti-leakage: cutoff=2026-02-21T12:50:57.793789+00:00 excluded_after_cutoff=0 dedupe_removed_est=0\nNFA: Research framing only. Not trading advice.\n",
+      "stderr_tail": "",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/social_query.py",
+        "--token",
+        "SOL",
+        "--lookback-hours",
+        "72",
+        "--timeframe",
+        "1h",
+        "--normalized-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl",
+        "--features-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_features_1h.csv",
+        "--budget-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json",
+        "--budget-requests-per-day",
+        "200",
+        "--include-kol-context",
+        "--kol-registry-json",
+        "user_data/research/social/kol_registry_v1.sample.json",
+        "--pretty",
+        "--output-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/queries/social_query_SOL.json"
+      ]
+    },
+    {
+      "step": "social_query_ARB",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "=degraded\ndegraded_reason=quality_flags_present\nSummary: score=0.2105 confidence=0.4944 coverage_conf=0.3096 (low) mentions=2\nSentiment: {'bullish': 0, 'bearish': 1, 'neutral': 1} | hype=0.14 | velocity=2\nFreshness: age_h=3.3327 bucket=recent\nCoverage: source_mix={'openclaw_x': 0.5, 'x_provider': 0.5} top_sources=['openclaw_x', 'x_provider']\nKOL snapshot: {'top_kols': [], 'coverage': 0.0, 'trend_label': 'falling', 'trend_value': -0.5, 'feedback_coverage': 0.5}\nWarnings: LOW_KOL_COVERAGE[high], LOW_SOCIAL_COVERAGE[high], SOURCE_DEPENDENCY_RISK[high], BUDGET_UNREALISTIC[medium], HIGH_X_COST_LOW_SIGNAL[medium], TEMPORAL_SPARSITY[low]\nBudget pressure: {'status': 'degraded', 'usage_pct': 345.5, 'pressure': 'critical', 'degraded_mode': True, 'degradation_plan': ['disable_expensive_x_source', 'reduce_query_frequency_50pct', 'switch_to_cache_or_offline_mode', 'allow_only_high_priority_tokens'], 'scenario': 'medium'}\nContext: ARB social pulse is weak with medium confidence (mentions=2, score=0.211). Risks: LOW_KOL_COVERAGE | LOW_SOCIAL_COVERAGE.\nAnti-leakage: cutoff=2026-02-21T12:50:57.836797+00:00 excluded_after_cutoff=0 dedupe_removed_est=0\nNFA: Research framing only. Not trading advice.\n",
+      "stderr_tail": "",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/social_query.py",
+        "--token",
+        "ARB",
+        "--lookback-hours",
+        "72",
+        "--timeframe",
+        "1h",
+        "--normalized-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl",
+        "--features-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_features_1h.csv",
+        "--budget-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json",
+        "--budget-requests-per-day",
+        "200",
+        "--include-kol-context",
+        "--kol-registry-json",
+        "user_data/research/social/kol_registry_v1.sample.json",
+        "--pretty",
+        "--output-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/queries/social_query_ARB.json"
+      ]
+    },
+    {
+      "step": "kol_campaign_planner",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "{\n  \"status\": \"ok\",\n  \"actions\": 12,\n  \"queue\": 12,\n  \"tokens\": [\n    \"SOL\",\n    \"ARB\"\n  ],\n  \"risk_flags\": [\n    \"BUDGET_ALERT_100\",\n    \"BUDGET_ALERT_70\",\n    \"BUDGET_ALERT_85\",\n    \"BUDGET_UNREALISTIC\",\n    \"HIGH_X_COST_LOW_SIGNAL\",\n    \"LOW_KOL_COVERAGE\",\n    \"LOW_KOL_FEEDBACK_COVERAGE\",\n    \"LOW_ROWS\",\n    \"LOW_SOCIAL_COVERAGE\",\n    \"LOW_SPLIT_COVERAGE\",\n    \"SOURCE_DEPENDENCY_RISK\",\n    \"TEMPORAL_SPARSITY\"\n  ],\n  \"budget_status\": \"degraded\"\n}\n",
+      "stderr_tail": "INFO Campaign plan generated actions=12 output=/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/campaign_plan_v1.json\nINFO Dry-run queue output: /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_dryrun_queue.sample.json | /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_dryrun_queue.sample.md\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/kol_campaign_planner.py",
+        "--kol-registry-json",
+        "user_data/research/social/kol_registry_v1.sample.json",
+        "--social-query-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/queries/social_query_SOL.json",
+        "--coverage-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_coverage_report.json",
+        "--ablation-json",
+        "user_data/research/social/social_ablation_summary_v24.json",
+        "--budget-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json",
+        "--budget-requests-per-day",
+        "200",
+        "--tokens",
+        "SOL,ARB",
+        "--objective",
+        "v25_dryrun_pipeline_validation",
+        "--max-actions",
+        "20",
+        "--output-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/campaign_plan_v1.json",
+        "--output-queue-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_dryrun_queue.sample.json",
+        "--output-queue-md",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_dryrun_queue.sample.md"
+      ]
+    },
+    {
+      "step": "kol_scheduler_dryrun",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Scheduler rows_in=12 executed=2 skipped={'skipped_cooldown': 10} budget_used=0.046067\nINFO Outputs: /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_scheduler_run_20260221T125057Z.json | /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_scheduler_run_20260221T125057Z.md | /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.generated.jsonl\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/kol_scheduler_dryrun.py",
+        "--queue-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_dryrun_queue.sample.json",
+        "--budget-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json",
+        "--budget-requests-per-day",
+        "200",
+        "--cooldown-kol-min",
+        "120",
+        "--cooldown-token-min",
+        "60",
+        "--output-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_scheduler_run_20260221T125057Z.json",
+        "--output-md",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_scheduler_run_20260221T125057Z.md",
+        "--output-interactions-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.generated.jsonl"
+      ]
+    },
+    {
+      "step": "kol_interaction_logger",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Interaction log updated: appended=2 dropped=0 invalid=0\nINFO Output: /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.merged.jsonl\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/kol_interaction_logger.py",
+        "--log-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.merged.jsonl",
+        "--input-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.generated.jsonl",
+        "--coverage-log-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.coverage.json"
+      ]
+    },
+    {
+      "step": "kol_feedback_features_1h",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Feedback features rows=6 output=/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_feedback_features_1h.csv\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/kol_feedback_features.py",
+        "--input-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.merged.jsonl",
+        "--timeframe",
+        "1h",
+        "--output-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_feedback_features_1h.csv",
+        "--summary-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_feedback_features_1h.summary.json"
+      ]
+    },
+    {
+      "step": "social_ablation_runner",
+      "status": "ok",
+      "returncode": 0,
+      "stdout_tail": "",
+      "stderr_tail": "INFO Ablation status=ok splits=15\nINFO Outputs: /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_ablation_summary_v24.json | /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_ablation_summary_v24.md | /Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_ablation_grid_v24.csv\n",
+      "command": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/python",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/scripts/social/social_ablation_runner.py",
+        "--strategy",
+        "Strat03RSIBBMeanReversion_v3c",
+        "--timeframe",
+        "1h",
+        "--universe-match",
+        "top15_mr1h_stable_candidate",
+        "--social-features-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_features_1h.csv",
+        "--kol-feedback-features-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_feedback_features_1h.csv",
+        "--normalized-jsonl",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl",
+        "--overlay-csv",
+        "user_data/research/social/social_overlay_ranking.sample.csv",
+        "--kol-registry-json",
+        "user_data/research/social/kol_registry_v1.sample.json",
+        "--budget-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json",
+        "--output-json",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_ablation_summary_v24.json",
+        "--output-md",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_ablation_summary_v24.md",
+        "--output-grid-csv",
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_ablation_grid_v24.csv"
+      ]
+    }
+  ],
+  "coverage_by_stage": {
+    "x_provider_import_jsonl": {
+      "status": "ok",
+      "reason": null,
+      "rows_in": 6,
+      "rows_out": 6,
+      "duplicates_removed": 0,
+      "errors": [],
+      "missing_fields": {
+        "ts_utc": 0,
+        "author": 0,
+        "text": 0,
+        "channel_or_subreddit": 0
+      },
+      "source_counts": {
+        "openclaw_x": 2,
+        "telegram_forwarder": 1,
+        "x_provider": 3
+      },
+      "per_token_mentions": {
+        "BTC": 3,
+        "SOL": 3,
+        "ARB": 2,
+        "ETH": 1
+      },
+      "time_range_min": "2026-02-21T08:05:00+00:00",
+      "time_range_max": "2026-02-21T09:31:00+00:00",
+      "files_matched": [
+        "user_data/research/social/inbox/x_kol_sample.jsonl"
+      ]
+    },
+    "social_ingest": {
+      "ts_utc": "2026-02-21T12:50:57+00:00",
+      "sources_requested": [
+        "reddit",
+        "rss",
+        "external_jsonl",
+        "mock"
+      ],
+      "events_total": 9,
+      "status": "degraded",
+      "degraded_reasons": [
+        "network_disabled",
+        "network_disabled"
+      ],
+      "coverage": [
+        {
+          "source": "mock",
+          "status": "ok",
+          "events_count": 3,
+          "latency_ms": 0.0,
+          "reason": null,
+          "errors": [],
+          "rate_limited": false,
+          "source_quality": 0.4
+        },
+        {
+          "source": "external_jsonl",
+          "status": "ok",
+          "reason": null,
+          "events_count": 6,
+          "latency_ms": 0.09,
+          "errors": [],
+          "rate_limited": false,
+          "source_quality": 0.6,
+          "files_matched": [
+            "user_data/research/social/pipeline_run_20260221T125057Z/x_provider_imported.raw.jsonl"
+          ]
+        },
+        {
+          "source": "reddit",
+          "status": "degraded",
+          "reason": "network_disabled",
+          "events_count": 0,
+          "latency_ms": 0.0,
+          "errors": [],
+          "rate_limited": false,
+          "used_oauth": false,
+          "used_mock_fallback": false,
+          "source_quality": 0.8
+        },
+        {
+          "source": "rss",
+          "status": "degraded",
+          "reason": "network_disabled",
+          "events_count": 0,
+          "latency_ms": 0.0,
+          "errors": [],
+          "rate_limited": false,
+          "source_quality": 0.75
+        }
+      ],
+      "quality": {
+        "rows_in": 9,
+        "rows_out": 9,
+        "duplicates_removed": 0,
+        "missing_fields": {
+          "ts_utc": 0,
+          "author": 0,
+          "text": 0,
+          "channel_or_subreddit": 0
+        },
+        "source_counts": {
+          "openclaw_x": 2,
+          "reddit": 1,
+          "rss": 1,
+          "telegram": 1,
+          "telegram_forwarder": 1,
+          "x_provider": 3
+        },
+        "time_range_min": "2026-02-21T08:05:00+00:00",
+        "time_range_max": "2026-02-21T12:50:57+00:00",
+        "per_token_mentions": {
+          "BTC": 5,
+          "SOL": 4,
+          "ARB": 2,
+          "ETH": 2,
+          "BNB": 1,
+          "XRP": 1
+        }
+      }
+    },
+    "social_normalize": {
+      "status": "ok",
+      "rows_in": 9,
+      "rows_normalized": 9,
+      "rows_out": 9,
+      "duplicates_removed": 0,
+      "skipped_short_text": 0,
+      "missing_fields": {
+        "author": 0,
+        "text": 0,
+        "symbols_detected": 0,
+        "ts_utc": 0
+      },
+      "source_counts": {
+        "reddit": 1,
+        "telegram": 1,
+        "rss": 1,
+        "x_provider": 3,
+        "openclaw_x": 2,
+        "telegram_forwarder": 1
+      },
+      "time_range_min": "2026-02-21T08:05:00+00:00",
+      "time_range_max": "2026-02-21T12:50:57+00:00",
+      "per_token_mentions": {
+        "BTC": 5,
+        "SOL": 4,
+        "ARB": 2,
+        "ETH": 2,
+        "BNB": 1,
+        "XRP": 1
+      },
+      "avg_parse_confidence": 1.0,
+      "avg_quality_score_source": 0.611111
+    },
+    "social_feature_builder_1h": {
+      "timeframe": "1h",
+      "rows_in": 9,
+      "rows_out": 12,
+      "duplicates_removed": 0,
+      "rows": 12,
+      "symbols": [
+        "ARB",
+        "BNB",
+        "BTC",
+        "ETH",
+        "SOL",
+        "XRP"
+      ],
+      "missing_fields": {
+        "ts_utc": 0,
+        "symbols_detected": 0,
+        "source": 0
+      },
+      "source_counts": {
+        "openclaw_x": 2,
+        "reddit": 1,
+        "rss": 1,
+        "telegram": 1,
+        "telegram_forwarder": 1,
+        "x_provider": 3
+      },
+      "time_range_min": "2026-02-21T08:05:00+00:00",
+      "time_range_max": "2026-02-21T12:50:57+00:00",
+      "per_token_mentions": {
+        "BTC": 5,
+        "SOL": 4,
+        "ARB": 2,
+        "ETH": 2,
+        "BNB": 1,
+        "XRP": 1
+      },
+      "avg_data_completeness": 1.0,
+      "avg_source_diversity_score": 0.25,
+      "leakage_event_count": 0
+    },
+    "social_coverage_report": {
+      "report_date": "20260221",
+      "files": [
+        "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl"
+      ],
+      "rows_total": 9,
+      "rows_useful": 9,
+      "duplicates_estimate": 0,
+      "source_counts": {
+        "reddit": 1,
+        "telegram": 1,
+        "rss": 1,
+        "x_provider": 3,
+        "openclaw_x": 2,
+        "telegram_forwarder": 1
+      },
+      "token_counts": {
+        "BTC": 5,
+        "SOL": 4,
+        "ETH": 2,
+        "ARB": 2,
+        "BNB": 1,
+        "XRP": 1
+      },
+      "top_authors": [
+        {
+          "author": "user_001",
+          "count": 1
+        },
+        {
+          "author": "signal_bot",
+          "count": 1
+        },
+        {
+          "author": "coindesk",
+          "count": 1
+        },
+        {
+          "author": "kol_alpha",
+          "count": 1
+        },
+        {
+          "author": "kol_beta",
+          "count": 1
+        },
+        {
+          "author": "narrative_watcher",
+          "count": 1
+        },
+        {
+          "author": "desk_flow",
+          "count": 1
+        },
+        {
+          "author": "signal_bridge",
+          "count": 1
+        },
+        {
+          "author": "kol_gamma",
+          "count": 1
+        }
+      ],
+      "coverage_by_bucket": [
+        {
+          "bucket_start": "2026-02-21T08:00:00+00:00",
+          "rows": 3
+        },
+        {
+          "bucket_start": "2026-02-21T09:00:00+00:00",
+          "rows": 3
+        },
+        {
+          "bucket_start": "2026-02-21T12:00:00+00:00",
+          "rows": 3
+        }
+      ],
+      "pct_rows_with_engagement": 0.222222,
+      "pct_rows_with_token_explicit": 0.0,
+      "pct_rows_with_token_inferred": 1.0,
+      "time_range_min": "2026-02-21T08:05:00+00:00",
+      "time_range_max": "2026-02-21T12:50:57+00:00",
+      "warning_flags": [
+        "LOW_ROWS"
+      ]
+    },
+    "kol_budget_engine": {
+      "profile_name": "kol_budget_profile_default",
+      "target_monthly_usd": 100.0,
+      "hard_cap_monthly_usd": 100.0,
+      "hard_cap_daily_usd": 0.0,
+      "alert_thresholds": [
+        70.0,
+        85.0,
+        100.0
+      ],
+      "daily_requests_grid": [
+        50,
+        200,
+        500
+      ],
+      "fixed_monthly_usd": {
+        "infra": 25.0,
+        "ops": 30.0,
+        "x_seat": 60.0
+      },
+      "variable_costs": {
+        "provider_per_1k_request_usd": {
+          "low": 0.4,
+          "medium": 0.9,
+          "high": 1.8
+        },
+        "llm_per_1k_tokens_usd": 0.002,
+        "avg_tokens_per_request": 1100
+      },
+      "scenarios": [
+        {
+          "scenario": "low",
+          "scenario_family": "base",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 3.9,
+          "provider_variable_usd": 0.6,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 118.9,
+          "daily_total_usd": 3.963333,
+          "cost_per_request_usd": 0.07926667,
+          "budget_usage_pct": 118.9,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "base",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 4.65,
+          "provider_variable_usd": 1.35,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 119.65,
+          "daily_total_usd": 3.988333,
+          "cost_per_request_usd": 0.07976667,
+          "budget_usage_pct": 119.65,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "high",
+          "scenario_family": "base",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 6.0,
+          "provider_variable_usd": 2.7,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 121.0,
+          "daily_total_usd": 4.033333,
+          "cost_per_request_usd": 0.08066667,
+          "budget_usage_pct": 121.0,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "low",
+          "scenario_family": "base",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 15.6,
+          "provider_variable_usd": 2.4,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 130.6,
+          "daily_total_usd": 4.353333,
+          "cost_per_request_usd": 0.02176667,
+          "budget_usage_pct": 130.6,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "base",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 18.6,
+          "provider_variable_usd": 5.4,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 133.6,
+          "daily_total_usd": 4.453333,
+          "cost_per_request_usd": 0.02226667,
+          "budget_usage_pct": 133.6,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "high",
+          "scenario_family": "base",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 24.0,
+          "provider_variable_usd": 10.8,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 139.0,
+          "daily_total_usd": 4.633333,
+          "cost_per_request_usd": 0.02316667,
+          "budget_usage_pct": 139.0,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "low",
+          "scenario_family": "base",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 39.0,
+          "provider_variable_usd": 6.0,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 154.0,
+          "daily_total_usd": 5.133333,
+          "cost_per_request_usd": 0.01026667,
+          "budget_usage_pct": 154.0,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "base",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 46.5,
+          "provider_variable_usd": 13.5,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 161.5,
+          "daily_total_usd": 5.383333,
+          "cost_per_request_usd": 0.01076667,
+          "budget_usage_pct": 161.5,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "high",
+          "scenario_family": "base",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 115.0,
+          "variable_total_usd": 60.0,
+          "provider_variable_usd": 27.0,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 175.0,
+          "daily_total_usd": 5.833333,
+          "cost_per_request_usd": 0.01166667,
+          "budget_usage_pct": 175.0,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_disabled_research_only",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 3.3,
+          "provider_variable_usd": 0.0,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 58.3,
+          "daily_total_usd": 1.943333,
+          "cost_per_request_usd": 0.03886667,
+          "budget_usage_pct": 58.3,
+          "status": "ok",
+          "alerts": [],
+          "max_safe_daily_requests": 681,
+          "max_target_daily_requests": 681,
+          "degradation_plan": [
+            "normal_mode"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_disabled_research_only",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 13.2,
+          "provider_variable_usd": 0.0,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 68.2,
+          "daily_total_usd": 2.273333,
+          "cost_per_request_usd": 0.01136667,
+          "budget_usage_pct": 68.2,
+          "status": "ok",
+          "alerts": [],
+          "max_safe_daily_requests": 681,
+          "max_target_daily_requests": 681,
+          "degradation_plan": [
+            "normal_mode"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_disabled_research_only",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 33.0,
+          "provider_variable_usd": 0.0,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 88.0,
+          "daily_total_usd": 2.933333,
+          "cost_per_request_usd": 0.00586667,
+          "budget_usage_pct": 88.0,
+          "status": "ok",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85"
+          ],
+          "max_safe_daily_requests": 681,
+          "max_target_daily_requests": 681,
+          "degradation_plan": [
+            "reduce_query_frequency_25pct",
+            "disable_noncritical_kol_monitoring",
+            "prioritize_top2_tokens_only"
+          ]
+        },
+        {
+          "scenario": "low",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 4.35,
+          "provider_variable_usd": 1.05,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 59.35,
+          "daily_total_usd": 1.978333,
+          "cost_per_request_usd": 0.03956667,
+          "budget_usage_pct": 59.35,
+          "status": "ok",
+          "alerts": [],
+          "max_safe_daily_requests": 517,
+          "max_target_daily_requests": 517,
+          "degradation_plan": [
+            "normal_mode"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 5.1,
+          "provider_variable_usd": 1.8,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 60.1,
+          "daily_total_usd": 2.003333,
+          "cost_per_request_usd": 0.04006667,
+          "budget_usage_pct": 60.1,
+          "status": "ok",
+          "alerts": [],
+          "max_safe_daily_requests": 441,
+          "max_target_daily_requests": 441,
+          "degradation_plan": [
+            "normal_mode"
+          ]
+        },
+        {
+          "scenario": "high",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 6.3,
+          "provider_variable_usd": 3.0,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 61.3,
+          "daily_total_usd": 2.043333,
+          "cost_per_request_usd": 0.04086667,
+          "budget_usage_pct": 61.3,
+          "status": "ok",
+          "alerts": [],
+          "max_safe_daily_requests": 357,
+          "max_target_daily_requests": 357,
+          "degradation_plan": [
+            "normal_mode"
+          ]
+        },
+        {
+          "scenario": "low",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 17.4,
+          "provider_variable_usd": 4.2,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 72.4,
+          "daily_total_usd": 2.413333,
+          "cost_per_request_usd": 0.01206667,
+          "budget_usage_pct": 72.4,
+          "status": "ok",
+          "alerts": [
+            "BUDGET_ALERT_70"
+          ],
+          "max_safe_daily_requests": 517,
+          "max_target_daily_requests": 517,
+          "degradation_plan": [
+            "enable_budget_watchdog",
+            "lower_background_polling_rate"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 20.4,
+          "provider_variable_usd": 7.2,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 75.4,
+          "daily_total_usd": 2.513333,
+          "cost_per_request_usd": 0.01256667,
+          "budget_usage_pct": 75.4,
+          "status": "ok",
+          "alerts": [
+            "BUDGET_ALERT_70"
+          ],
+          "max_safe_daily_requests": 441,
+          "max_target_daily_requests": 441,
+          "degradation_plan": [
+            "enable_budget_watchdog",
+            "lower_background_polling_rate"
+          ]
+        },
+        {
+          "scenario": "high",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 25.2,
+          "provider_variable_usd": 12.0,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 80.2,
+          "daily_total_usd": 2.673333,
+          "cost_per_request_usd": 0.01336667,
+          "budget_usage_pct": 80.2,
+          "status": "ok",
+          "alerts": [
+            "BUDGET_ALERT_70"
+          ],
+          "max_safe_daily_requests": 357,
+          "max_target_daily_requests": 357,
+          "degradation_plan": [
+            "enable_budget_watchdog",
+            "lower_background_polling_rate"
+          ]
+        },
+        {
+          "scenario": "low",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 43.5,
+          "provider_variable_usd": 10.5,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 98.5,
+          "daily_total_usd": 3.283333,
+          "cost_per_request_usd": 0.00656667,
+          "budget_usage_pct": 98.5,
+          "status": "ok",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85"
+          ],
+          "max_safe_daily_requests": 517,
+          "max_target_daily_requests": 517,
+          "degradation_plan": [
+            "reduce_query_frequency_25pct",
+            "disable_noncritical_kol_monitoring",
+            "prioritize_top2_tokens_only"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 51.0,
+          "provider_variable_usd": 18.0,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 106.0,
+          "daily_total_usd": 3.533333,
+          "cost_per_request_usd": 0.00706667,
+          "budget_usage_pct": 106.0,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 441,
+          "max_target_daily_requests": 441,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "high",
+          "scenario_family": "x_pay_per_usage_100usd_cap",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 55.0,
+          "variable_total_usd": 63.0,
+          "provider_variable_usd": 30.0,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 118.0,
+          "daily_total_usd": 3.933333,
+          "cost_per_request_usd": 0.00786667,
+          "budget_usage_pct": 118.0,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 357,
+          "max_target_daily_requests": 357,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_100",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 155.0,
+          "variable_total_usd": 4.05,
+          "provider_variable_usd": 0.75,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 159.05,
+          "daily_total_usd": 5.301667,
+          "cost_per_request_usd": 0.10603333,
+          "budget_usage_pct": 159.05,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_100",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 155.0,
+          "variable_total_usd": 16.2,
+          "provider_variable_usd": 3.0,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 171.2,
+          "daily_total_usd": 5.706667,
+          "cost_per_request_usd": 0.02853333,
+          "budget_usage_pct": 171.2,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_100",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 155.0,
+          "variable_total_usd": 40.5,
+          "provider_variable_usd": 7.5,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 195.5,
+          "daily_total_usd": 6.516667,
+          "cost_per_request_usd": 0.01303333,
+          "budget_usage_pct": 195.5,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_150",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 205.0,
+          "variable_total_usd": 4.05,
+          "provider_variable_usd": 0.75,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 209.05,
+          "daily_total_usd": 6.968333,
+          "cost_per_request_usd": 0.13936667,
+          "budget_usage_pct": 209.05,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_150",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 205.0,
+          "variable_total_usd": 16.2,
+          "provider_variable_usd": 3.0,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 221.2,
+          "daily_total_usd": 7.373333,
+          "cost_per_request_usd": 0.03686667,
+          "budget_usage_pct": 221.2,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_150",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 205.0,
+          "variable_total_usd": 40.5,
+          "provider_variable_usd": 7.5,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 245.5,
+          "daily_total_usd": 8.183333,
+          "cost_per_request_usd": 0.01636667,
+          "budget_usage_pct": 245.5,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_250",
+          "requests_per_day": 50,
+          "monthly_requests": 1500,
+          "fixed_total_usd": 305.0,
+          "variable_total_usd": 4.05,
+          "provider_variable_usd": 0.75,
+          "llm_variable_usd": 3.3,
+          "monthly_total_usd": 309.05,
+          "daily_total_usd": 10.301667,
+          "cost_per_request_usd": 0.20603333,
+          "budget_usage_pct": 309.05,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_250",
+          "requests_per_day": 200,
+          "monthly_requests": 6000,
+          "fixed_total_usd": 305.0,
+          "variable_total_usd": 16.2,
+          "provider_variable_usd": 3.0,
+          "llm_variable_usd": 13.2,
+          "monthly_total_usd": 321.2,
+          "daily_total_usd": 10.706667,
+          "cost_per_request_usd": 0.05353333,
+          "budget_usage_pct": 321.2,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        },
+        {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_250",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 305.0,
+          "variable_total_usd": 40.5,
+          "provider_variable_usd": 7.5,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 345.5,
+          "daily_total_usd": 11.516667,
+          "cost_per_request_usd": 0.02303333,
+          "budget_usage_pct": 345.5,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        }
+      ],
+      "readiness_plan": [
+        {
+          "target_monthly_usd": 0.0,
+          "features_active": {
+            "reddit": false,
+            "rss": true,
+            "youtube": true,
+            "x_provider": false
+          },
+          "max_safe_daily_requests": 0,
+          "recommended_daily_requests": 0,
+          "kol_universe_limit": 10,
+          "polling_interval_sec": 1800,
+          "coverage_expected": "low",
+          "coverage_score": 0.35,
+          "degradation_plan": [
+            "disable_x_provider",
+            "reduce_requests_per_day",
+            "use_cached_or_mock_sources",
+            "monitor_top_tokens_only"
+          ]
+        },
+        {
+          "target_monthly_usd": 50.0,
+          "features_active": {
+            "reddit": true,
+            "rss": true,
+            "youtube": true,
+            "x_provider": false
+          },
+          "max_safe_daily_requests": 0,
+          "recommended_daily_requests": 0,
+          "kol_universe_limit": 20,
+          "polling_interval_sec": 900,
+          "coverage_expected": "medium",
+          "coverage_score": 0.6,
+          "degradation_plan": [
+            "reduce_requests_per_day_25pct",
+            "reduce_kol_universe",
+            "prioritize_reddit_rss_youtube"
+          ]
+        },
+        {
+          "target_monthly_usd": 100.0,
+          "features_active": {
+            "reddit": true,
+            "rss": true,
+            "youtube": true,
+            "x_provider": true
+          },
+          "max_safe_daily_requests": 0,
+          "recommended_daily_requests": 0,
+          "kol_universe_limit": 35,
+          "polling_interval_sec": 600,
+          "coverage_expected": "med_high",
+          "coverage_score": 0.75,
+          "degradation_plan": [
+            "cap_x_provider_calls",
+            "reduce_noncritical_queries",
+            "keep_high_priority_kols"
+          ]
+        },
+        {
+          "target_monthly_usd": 150.0,
+          "features_active": {
+            "reddit": true,
+            "rss": true,
+            "youtube": true,
+            "x_provider": true
+          },
+          "max_safe_daily_requests": 376,
+          "recommended_daily_requests": 350,
+          "kol_universe_limit": 50,
+          "polling_interval_sec": 300,
+          "coverage_expected": "high",
+          "coverage_score": 0.85,
+          "degradation_plan": [
+            "normal_mode_with_watchdog",
+            "keep_budget_alert_thresholds_active"
+          ]
+        }
+      ],
+      "scenarios_supported_v24": [
+        "x_disabled_research_only",
+        "x_pay_per_usage_100usd_cap",
+        "x_monthly_fixed_100_150_250"
+      ],
+      "scenarios_supported_v25": [
+        "readiness_target_grid",
+        "degradation_plan_by_budget_tier"
+      ],
+      "notes": [
+        "Research budgeting only. No live execution.",
+        "Automatic degradation plans are advisory/dry-run.",
+        "Bridge rows may come from social_costs.py assumptions."
+      ]
+    },
+    "social_query_SOL": {
+      "status": "degraded",
+      "mention_count": 4,
+      "warning_flags": [
+        "LOW_KOL_COVERAGE",
+        "LOW_KOL_FEEDBACK_COVERAGE",
+        "LOW_SOCIAL_COVERAGE",
+        "SOURCE_DEPENDENCY_RISK",
+        "BUDGET_UNREALISTIC",
+        "HIGH_X_COST_LOW_SIGNAL",
+        "TEMPORAL_SPARSITY"
+      ],
+      "coverage_confidence": 0.532544
+    },
+    "social_query_ARB": {
+      "status": "degraded",
+      "mention_count": 2,
+      "warning_flags": [
+        "LOW_KOL_COVERAGE",
+        "LOW_SOCIAL_COVERAGE",
+        "SOURCE_DEPENDENCY_RISK",
+        "BUDGET_UNREALISTIC",
+        "HIGH_X_COST_LOW_SIGNAL",
+        "TEMPORAL_SPARSITY"
+      ],
+      "coverage_confidence": 0.3096
+    },
+    "kol_campaign_planner": {
+      "generated_at": "2026-02-21T12:50:57+00:00",
+      "objective": "v25_dryrun_pipeline_validation",
+      "risk_flags": [
+        "BUDGET_ALERT_100",
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_UNREALISTIC",
+        "HIGH_X_COST_LOW_SIGNAL",
+        "LOW_KOL_COVERAGE",
+        "LOW_KOL_FEEDBACK_COVERAGE",
+        "LOW_ROWS",
+        "LOW_SOCIAL_COVERAGE",
+        "LOW_SPLIT_COVERAGE",
+        "SOURCE_DEPENDENCY_RISK",
+        "TEMPORAL_SPARSITY"
+      ],
+      "dryrun_queue": [
+        {
+          "queue_id": "1e5421aa1452cd08",
+          "token": "SOL",
+          "kol_id": "kol_sol_01",
+          "x_handle": "sol_researcher",
+          "action_type": "ask_question",
+          "priority": 0.339574,
+          "rationale": [
+            "high_kol_score",
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.511418,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "1e8c521f5a2f5786",
+          "token": "ARB",
+          "kol_id": "kol_sol_01",
+          "x_handle": "sol_researcher",
+          "action_type": "ask_question",
+          "priority": 0.339574,
+          "rationale": [
+            "high_kol_score",
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.511418,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "f531ebb792f61b64",
+          "token": "SOL",
+          "kol_id": "kol_arb_01",
+          "x_handle": "arb_insights",
+          "action_type": "ask_question",
+          "priority": 0.326517,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.498237,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "c6c5ea902abd32a8",
+          "token": "ARB",
+          "kol_id": "kol_arb_01",
+          "x_handle": "arb_insights",
+          "action_type": "ask_question",
+          "priority": 0.326517,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.498237,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "23313126dd081631",
+          "token": "SOL",
+          "kol_id": "kol_multi_01",
+          "x_handle": "multi_chain_flow",
+          "action_type": "ask_question",
+          "priority": 0.281936,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.467717,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "5834c902eb8a5caf",
+          "token": "ARB",
+          "kol_id": "kol_multi_01",
+          "x_handle": "multi_chain_flow",
+          "action_type": "ask_question",
+          "priority": 0.281936,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.467717,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "2171a641da5b6b83",
+          "token": "SOL",
+          "kol_id": "kol_btc_macro_01",
+          "x_handle": "btc_macro_view",
+          "action_type": "ask_question",
+          "priority": 0.278687,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.47943,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "7dc686649aac0c01",
+          "token": "ARB",
+          "kol_id": "kol_btc_macro_01",
+          "x_handle": "btc_macro_view",
+          "action_type": "ask_question",
+          "priority": 0.278687,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.47943,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "70b8d3a1da555aab",
+          "token": "SOL",
+          "kol_id": "kol_latam_01",
+          "x_handle": "latam_crypto_radar",
+          "action_type": "ask_question",
+          "priority": 0.26522,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.460024,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "60d19d99ea7e0148",
+          "token": "ARB",
+          "kol_id": "kol_latam_01",
+          "x_handle": "latam_crypto_radar",
+          "action_type": "ask_question",
+          "priority": 0.26522,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.460024,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "1f3996f5533b1acc",
+          "token": "SOL",
+          "kol_id": "kol_memes_01",
+          "x_handle": "meme_buzz",
+          "action_type": "ask_question",
+          "priority": 0.203954,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.367827,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        },
+        {
+          "queue_id": "7583592ddb6480a9",
+          "token": "ARB",
+          "kol_id": "kol_memes_01",
+          "x_handle": "meme_buzz",
+          "action_type": "ask_question",
+          "priority": 0.203954,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.367827,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true
+        }
+      ],
+      "budget_context": {
+        "status": "degraded",
+        "cost_per_request": 0.02303333,
+        "budget_usage_pct": 345.5,
+        "alerts": [
+          "BUDGET_ALERT_70",
+          "BUDGET_ALERT_85",
+          "BUDGET_ALERT_100"
+        ],
+        "degradation_plan": [
+          "disable_expensive_x_source",
+          "reduce_query_frequency_50pct",
+          "switch_to_cache_or_offline_mode",
+          "allow_only_high_priority_tokens"
+        ],
+        "scenario": {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_250",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 305.0,
+          "variable_total_usd": 40.5,
+          "provider_variable_usd": 7.5,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 345.5,
+          "daily_total_usd": 11.516667,
+          "cost_per_request_usd": 0.02303333,
+          "budget_usage_pct": 345.5,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        }
+      },
+      "notes": [
+        "Dry-run only. No live posting."
+      ]
+    },
+    "kol_scheduler_dryrun": {
+      "run_id": "20260221T125057Z",
+      "created_at_utc": "2026-02-21T12:50:57+00:00",
+      "queue_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_dryrun_queue.sample.json",
+      "rows_in": 12,
+      "rows_out": 12,
+      "executed_count": 2,
+      "skipped_by_reason": {
+        "skipped_cooldown": 10
+      },
+      "budget_context": {
+        "status": "degraded",
+        "hard_cap_monthly_usd": 100.0,
+        "daily_budget_cap_usd": 3.3333333333333335,
+        "scenario": {
+          "scenario": "medium",
+          "scenario_family": "x_monthly_fixed_250",
+          "requests_per_day": 500,
+          "monthly_requests": 15000,
+          "fixed_total_usd": 305.0,
+          "variable_total_usd": 40.5,
+          "provider_variable_usd": 7.5,
+          "llm_variable_usd": 33.0,
+          "monthly_total_usd": 345.5,
+          "daily_total_usd": 11.516667,
+          "cost_per_request_usd": 0.02303333,
+          "budget_usage_pct": 345.5,
+          "status": "degraded",
+          "alerts": [
+            "BUDGET_ALERT_70",
+            "BUDGET_ALERT_85",
+            "BUDGET_ALERT_100"
+          ],
+          "max_safe_daily_requests": 0,
+          "max_target_daily_requests": 0,
+          "degradation_plan": [
+            "disable_expensive_x_source",
+            "reduce_query_frequency_50pct",
+            "switch_to_cache_or_offline_mode",
+            "allow_only_high_priority_tokens"
+          ]
+        }
+      },
+      "daily_budget_cap_usd": 3.33333333,
+      "budget_used_estimated_usd": 0.04606666,
+      "queue_age_stats": {
+        "has_queue_timestamp": true,
+        "age_hours_min": 0.0,
+        "age_hours_avg": 0.0,
+        "age_hours_max": 0.0
+      },
+      "available_sources": [
+        "budget_engine",
+        "kol_registry",
+        "social_query"
+      ],
+      "cooldown_kol_min": 120,
+      "cooldown_token_min": 60,
+      "interactions_generated_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.generated.jsonl",
+      "actions": [
+        {
+          "queue_id": "1e5421aa1452cd08",
+          "token": "SOL",
+          "kol_id": "kol_sol_01",
+          "x_handle": "sol_researcher",
+          "action_type": "ask_question",
+          "priority": 0.339574,
+          "rationale": [
+            "high_kol_score",
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.511418,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "executed_mock",
+          "skip_reason": null,
+          "executed_at_utc": "2026-02-21T12:50:57+00:00"
+        },
+        {
+          "queue_id": "1e8c521f5a2f5786",
+          "token": "ARB",
+          "kol_id": "kol_sol_01",
+          "x_handle": "sol_researcher",
+          "action_type": "ask_question",
+          "priority": 0.339574,
+          "rationale": [
+            "high_kol_score",
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.511418,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "kol_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "f531ebb792f61b64",
+          "token": "SOL",
+          "kol_id": "kol_arb_01",
+          "x_handle": "arb_insights",
+          "action_type": "ask_question",
+          "priority": 0.326517,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.498237,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "c6c5ea902abd32a8",
+          "token": "ARB",
+          "kol_id": "kol_arb_01",
+          "x_handle": "arb_insights",
+          "action_type": "ask_question",
+          "priority": 0.326517,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.498237,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "executed_mock",
+          "skip_reason": null,
+          "executed_at_utc": "2026-02-21T12:50:57+00:00"
+        },
+        {
+          "queue_id": "23313126dd081631",
+          "token": "SOL",
+          "kol_id": "kol_multi_01",
+          "x_handle": "multi_chain_flow",
+          "action_type": "ask_question",
+          "priority": 0.281936,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.467717,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "5834c902eb8a5caf",
+          "token": "ARB",
+          "kol_id": "kol_multi_01",
+          "x_handle": "multi_chain_flow",
+          "action_type": "ask_question",
+          "priority": 0.281936,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.467717,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "2171a641da5b6b83",
+          "token": "SOL",
+          "kol_id": "kol_btc_macro_01",
+          "x_handle": "btc_macro_view",
+          "action_type": "ask_question",
+          "priority": 0.278687,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.47943,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "7dc686649aac0c01",
+          "token": "ARB",
+          "kol_id": "kol_btc_macro_01",
+          "x_handle": "btc_macro_view",
+          "action_type": "ask_question",
+          "priority": 0.278687,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.47943,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "70b8d3a1da555aab",
+          "token": "SOL",
+          "kol_id": "kol_latam_01",
+          "x_handle": "latam_crypto_radar",
+          "action_type": "ask_question",
+          "priority": 0.26522,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.460024,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "60d19d99ea7e0148",
+          "token": "ARB",
+          "kol_id": "kol_latam_01",
+          "x_handle": "latam_crypto_radar",
+          "action_type": "ask_question",
+          "priority": 0.26522,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.460024,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "1f3996f5533b1acc",
+          "token": "SOL",
+          "kol_id": "kol_memes_01",
+          "x_handle": "meme_buzz",
+          "action_type": "ask_question",
+          "priority": 0.203954,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.367827,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        },
+        {
+          "queue_id": "7583592ddb6480a9",
+          "token": "ARB",
+          "kol_id": "kol_memes_01",
+          "x_handle": "meme_buzz",
+          "action_type": "ask_question",
+          "priority": 0.203954,
+          "rationale": [
+            "low_coverage_use_soft_actions",
+            "budget_degraded_mode"
+          ],
+          "estimated_cost_impact": 0.02303333,
+          "confidence": 0.367827,
+          "required_data_sources": [
+            "social_query",
+            "kol_registry",
+            "budget_engine"
+          ],
+          "approve_required": true,
+          "initial_status": "planned",
+          "final_status": "skipped_cooldown",
+          "skip_reason": "token_cooldown",
+          "executed_at_utc": null
+        }
+      ],
+      "notes": [
+        "research-only dry-run scheduler",
+        "No live posting was executed."
+      ]
+    },
+    "kol_interaction_logger": {
+      "status": "ok",
+      "rows_in": 2,
+      "rows_appended": 2,
+      "duplicates_removed": 0,
+      "invalid_rows": 0,
+      "leakage_flag_count": 0,
+      "time_range_min": "2026-02-21T08:40:00+00:00",
+      "time_range_max": "2026-02-21T12:50:57+00:00",
+      "action_type_counts": {
+        "like_count_update": 1,
+        "mention_detected": 2,
+        "planned_reply": 2,
+        "quote_received": 1,
+        "reply_received": 2,
+        "repost_count_update": 1
+      }
+    },
+    "kol_feedback_features_1h": {
+      "timeframe": "1h",
+      "rows_in": 9,
+      "rows_out": 6,
+      "flags": [
+        "SOURCE_DEPENDENCY_RISK"
+      ],
+      "leakage_event_count": 0,
+      "time_range_min": "2026-02-21T08:40:00+00:00",
+      "time_range_max": "2026-02-21T12:50:57+00:00",
+      "per_token_mentions": {
+        "ARB": 1,
+        "SOL": 1
+      },
+      "avg_data_completeness": 0.1875
+    },
+    "social_ablation_runner": {
+      "status": "ok",
+      "flags": [
+        "BUDGET_DRIVEN_BLINDSPOTS",
+        "BUDGET_UNREALISTIC",
+        "LOW_KOL_FEEDBACK_COVERAGE",
+        "LOW_SPLIT_COVERAGE",
+        "SOURCE_DEPENDENCY_RISK"
+      ],
+      "splits_count": 15
+    }
+  },
+  "artifacts": {
+    "run_dir": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z",
+    "normalized_jsonl": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_events.normalized.jsonl",
+    "features_csv": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_features_1h.csv",
+    "budget_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_budget_scenarios_v25.json",
+    "queue_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_dryrun_queue.sample.json",
+    "scheduler_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_scheduler_run_20260221T125057Z.json",
+    "scheduler_interactions": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.generated.jsonl",
+    "interaction_log": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_interactions.merged.jsonl",
+    "feedback_csv": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/kol_feedback_features_1h.csv",
+    "ablation_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T125057Z/social_ablation_summary_v24.json"
+  },
+  "counts": {
+    "normalized_rows": 9,
+    "scheduler_generated_interactions": 2,
+    "interaction_log_rows": 9
+  },
+  "notes": [
+    "research-only dry-run orchestration",
+    "No live posting or strategy/trading execution"
+  ]
+}

@@ -1,0 +1,21 @@
+{
+  "report_date": "20260221",
+  "files": [
+    "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T124832Z/social_events.normalized.jsonl"
+  ],
+  "rows_total": 0,
+  "rows_useful": 0,
+  "duplicates_estimate": 0,
+  "source_counts": {},
+  "token_counts": {},
+  "top_authors": [],
+  "coverage_by_bucket": [],
+  "pct_rows_with_engagement": 0.0,
+  "pct_rows_with_token_explicit": 0.0,
+  "pct_rows_with_token_inferred": 0.0,
+  "time_range_min": null,
+  "time_range_max": null,
+  "warning_flags": [
+    "LOW_ROWS"
+  ]
+}

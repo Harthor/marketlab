@@ -1,0 +1,19 @@
+{
+  "status": "ok",
+  "schema_version_default": "v1",
+  "mode": "normalized",
+  "strict": false,
+  "rows_total": 642,
+  "rows_valid": 642,
+  "rows_invalid": 0,
+  "rows_warn_only": 0,
+  "mode_counts": {
+    "normalized": 642
+  },
+  "schema_version_counts": {
+    "v1": 642
+  },
+  "error_by_field": {},
+  "error_by_type": {},
+  "errors_sample": []
+}

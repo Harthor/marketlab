@@ -1,0 +1,32 @@
+[
+  {
+    "scenario": "base",
+    "trades": 27,
+    "profit_pct": 0.18315285199999998,
+    "pf": 1.5490820965293062,
+    "maxdd_pct": 0.24595993499999624,
+    "delta_profit_pct": 0.0,
+    "delta_pf": 0.0,
+    "delta_maxdd_pp": 0.0
+  },
+  {
+    "scenario": "fee_p25",
+    "trades": 27,
+    "profit_pct": 0.15344450899999998,
+    "pf": 1.4275834249224542,
+    "maxdd_pct": 0.2638488339999981,
+    "delta_profit_pct": -0.029708342999999998,
+    "delta_pf": -0.12149867160685202,
+    "delta_maxdd_pp": 0.017888899000001846
+  },
+  {
+    "scenario": "fee_p50",
+    "trades": 27,
+    "profit_pct": 0.025078504,
+    "pf": 1.0648121831823227,
+    "maxdd_pct": 0.28173773400000074,
+    "delta_profit_pct": -0.15807434799999998,
+    "delta_pf": -0.48426991334698344,
+    "delta_maxdd_pp": 0.035777799000004495
+  }
+]

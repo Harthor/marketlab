@@ -1,0 +1,47 @@
+{
+  "best_universe": "top15",
+  "top5": [
+    {
+      "pair": "ARB/USDT",
+      "profit_pct": 0.12
+    },
+    {
+      "pair": "BNB/USDT",
+      "profit_pct": 0.05
+    },
+    {
+      "pair": "SOL/USDT",
+      "profit_pct": 0.05
+    },
+    {
+      "pair": "SNX/USDT",
+      "profit_pct": 0.04
+    },
+    {
+      "pair": "BCH/USDT",
+      "profit_pct": 0.04
+    }
+  ],
+  "bottom5": [
+    {
+      "pair": "PAXG/USDT",
+      "profit_pct": -0.01
+    },
+    {
+      "pair": "XRP/USDT",
+      "profit_pct": -0.01
+    },
+    {
+      "pair": "BTC/USDT",
+      "profit_pct": -0.03
+    },
+    {
+      "pair": "ETH/USDT",
+      "profit_pct": -0.04
+    },
+    {
+      "pair": "TRX/USDT",
+      "profit_pct": -0.06
+    }
+  ]
+}

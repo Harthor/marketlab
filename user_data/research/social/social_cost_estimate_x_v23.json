@@ -1,0 +1,495 @@
+{
+  "profile": "x_agency_like_personal",
+  "assumptions": {
+    "day_count_for_month": 30,
+    "provider_fixed_monthly_usd": 0.0,
+    "provider_cost_per_1k_requests_usd": 0.8,
+    "infra_monthly_usd": 15.0,
+    "x_monthly_fixed_usd": 99.0,
+    "notes": [
+      "Cost model is approximate and range-based.",
+      "Provider costs are parameterized for adapter-agnostic integration.",
+      "X/Twitter costs are placeholders unless explicit provider pricing is supplied."
+    ]
+  },
+  "costo_por_fuente": {
+    "reddit": {
+      "volume_per_day": 0,
+      "unit": "requests",
+      "free_units_per_day": 1000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "telegram": {
+      "volume_per_day": 0,
+      "unit": "messages",
+      "free_units_per_day": 1000000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "rss": {
+      "volume_per_day": 0,
+      "unit": "fetches",
+      "free_units_per_day": 1000000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "x": {
+      "volume_per_day": 300,
+      "unit": "requests",
+      "free_units_per_day": 0,
+      "daily_cost_low_usd": 0.06,
+      "daily_cost_high_usd": 0.3,
+      "placeholder_pricing": true
+    }
+  },
+  "cost_components_monthly": {
+    "provider_external_usd": 7.2,
+    "x_fixed_usd": 99.0,
+    "infra_usd": 15.0
+  },
+  "costo_estimado_mensual": {
+    "low_usd": 123.0,
+    "high_usd": 130.2
+  },
+  "totals": {
+    "estimated_daily_cost_low_usd": 4.1,
+    "estimated_daily_cost_high_usd": 4.34,
+    "monthly_requests": 18000,
+    "effective_cost_per_request_low_usd": 0.00683333,
+    "effective_cost_per_request_high_usd": 0.00723333
+  },
+  "request_volume_scenarios": [
+    {
+      "requests_per_day": 50,
+      "volumes": {
+        "reddit_requests_per_day": 0,
+        "telegram_messages_per_day": 0,
+        "rss_fetches_per_day": 0,
+        "x_requests_per_day": 50,
+        "provider_requests_per_day": 50
+      },
+      "monthly_low_usd": 115.5,
+      "monthly_high_usd": 116.7,
+      "monthly_requests": 3000,
+      "effective_cost_per_request_low_usd": 0.0385,
+      "effective_cost_per_request_high_usd": 0.0389,
+      "query_scenarios": [
+        {
+          "requests_per_day": 50,
+          "requests_per_query": 1,
+          "monthly_requests": 1500,
+          "monthly_queries_estimate": 1500.0,
+          "effective_cost_per_request_low_usd": 0.077,
+          "effective_cost_per_request_high_usd": 0.0778,
+          "estimated_queries_per_day": 50.0,
+          "effective_cost_per_query_low_usd": 0.077,
+          "effective_cost_per_query_high_usd": 0.0778
+        },
+        {
+          "requests_per_day": 50,
+          "requests_per_query": 3,
+          "monthly_requests": 1500,
+          "monthly_queries_estimate": 500.0,
+          "effective_cost_per_request_low_usd": 0.077,
+          "effective_cost_per_request_high_usd": 0.0778,
+          "estimated_queries_per_day": 16.6667,
+          "effective_cost_per_query_low_usd": 0.23099954,
+          "effective_cost_per_query_high_usd": 0.23339953
+        },
+        {
+          "requests_per_day": 50,
+          "requests_per_query": 5,
+          "monthly_requests": 1500,
+          "monthly_queries_estimate": 300.0,
+          "effective_cost_per_request_low_usd": 0.077,
+          "effective_cost_per_request_high_usd": 0.0778,
+          "estimated_queries_per_day": 10.0,
+          "effective_cost_per_query_low_usd": 0.385,
+          "effective_cost_per_query_high_usd": 0.389
+        },
+        {
+          "requests_per_day": 50,
+          "requests_per_query": 8,
+          "monthly_requests": 1500,
+          "monthly_queries_estimate": 187.5,
+          "effective_cost_per_request_low_usd": 0.077,
+          "effective_cost_per_request_high_usd": 0.0778,
+          "estimated_queries_per_day": 6.25,
+          "effective_cost_per_query_low_usd": 0.616,
+          "effective_cost_per_query_high_usd": 0.6224
+        },
+        {
+          "requests_per_day": 50,
+          "requests_per_query": 10,
+          "monthly_requests": 1500,
+          "monthly_queries_estimate": 150.0,
+          "effective_cost_per_request_low_usd": 0.077,
+          "effective_cost_per_request_high_usd": 0.0778,
+          "estimated_queries_per_day": 5.0,
+          "effective_cost_per_query_low_usd": 0.77,
+          "effective_cost_per_query_high_usd": 0.778
+        }
+      ]
+    },
+    {
+      "requests_per_day": 200,
+      "volumes": {
+        "reddit_requests_per_day": 0,
+        "telegram_messages_per_day": 0,
+        "rss_fetches_per_day": 0,
+        "x_requests_per_day": 200,
+        "provider_requests_per_day": 200
+      },
+      "monthly_low_usd": 120.0,
+      "monthly_high_usd": 124.8,
+      "monthly_requests": 12000,
+      "effective_cost_per_request_low_usd": 0.01,
+      "effective_cost_per_request_high_usd": 0.0104,
+      "query_scenarios": [
+        {
+          "requests_per_day": 200,
+          "requests_per_query": 1,
+          "monthly_requests": 6000,
+          "monthly_queries_estimate": 6000.0,
+          "effective_cost_per_request_low_usd": 0.02,
+          "effective_cost_per_request_high_usd": 0.0208,
+          "estimated_queries_per_day": 200.0,
+          "effective_cost_per_query_low_usd": 0.02,
+          "effective_cost_per_query_high_usd": 0.0208
+        },
+        {
+          "requests_per_day": 200,
+          "requests_per_query": 3,
+          "monthly_requests": 6000,
+          "monthly_queries_estimate": 2000.0,
+          "effective_cost_per_request_low_usd": 0.02,
+          "effective_cost_per_request_high_usd": 0.0208,
+          "estimated_queries_per_day": 66.6667,
+          "effective_cost_per_query_low_usd": 0.05999997,
+          "effective_cost_per_query_high_usd": 0.06239997
+        },
+        {
+          "requests_per_day": 200,
+          "requests_per_query": 5,
+          "monthly_requests": 6000,
+          "monthly_queries_estimate": 1200.0,
+          "effective_cost_per_request_low_usd": 0.02,
+          "effective_cost_per_request_high_usd": 0.0208,
+          "estimated_queries_per_day": 40.0,
+          "effective_cost_per_query_low_usd": 0.1,
+          "effective_cost_per_query_high_usd": 0.104
+        },
+        {
+          "requests_per_day": 200,
+          "requests_per_query": 8,
+          "monthly_requests": 6000,
+          "monthly_queries_estimate": 750.0,
+          "effective_cost_per_request_low_usd": 0.02,
+          "effective_cost_per_request_high_usd": 0.0208,
+          "estimated_queries_per_day": 25.0,
+          "effective_cost_per_query_low_usd": 0.16,
+          "effective_cost_per_query_high_usd": 0.1664
+        },
+        {
+          "requests_per_day": 200,
+          "requests_per_query": 10,
+          "monthly_requests": 6000,
+          "monthly_queries_estimate": 600.0,
+          "effective_cost_per_request_low_usd": 0.02,
+          "effective_cost_per_request_high_usd": 0.0208,
+          "estimated_queries_per_day": 20.0,
+          "effective_cost_per_query_low_usd": 0.2,
+          "effective_cost_per_query_high_usd": 0.208
+        }
+      ]
+    },
+    {
+      "requests_per_day": 500,
+      "volumes": {
+        "reddit_requests_per_day": 0,
+        "telegram_messages_per_day": 0,
+        "rss_fetches_per_day": 0,
+        "x_requests_per_day": 500,
+        "provider_requests_per_day": 500
+      },
+      "monthly_low_usd": 129.0,
+      "monthly_high_usd": 141.0,
+      "monthly_requests": 30000,
+      "effective_cost_per_request_low_usd": 0.0043,
+      "effective_cost_per_request_high_usd": 0.0047,
+      "query_scenarios": [
+        {
+          "requests_per_day": 500,
+          "requests_per_query": 1,
+          "monthly_requests": 15000,
+          "monthly_queries_estimate": 15000.0,
+          "effective_cost_per_request_low_usd": 0.0086,
+          "effective_cost_per_request_high_usd": 0.0094,
+          "estimated_queries_per_day": 500.0,
+          "effective_cost_per_query_low_usd": 0.0086,
+          "effective_cost_per_query_high_usd": 0.0094
+        },
+        {
+          "requests_per_day": 500,
+          "requests_per_query": 3,
+          "monthly_requests": 15000,
+          "monthly_queries_estimate": 5000.0,
+          "effective_cost_per_request_low_usd": 0.0086,
+          "effective_cost_per_request_high_usd": 0.0094,
+          "estimated_queries_per_day": 166.6667,
+          "effective_cost_per_query_low_usd": 0.02579999,
+          "effective_cost_per_query_high_usd": 0.02819999
+        },
+        {
+          "requests_per_day": 500,
+          "requests_per_query": 5,
+          "monthly_requests": 15000,
+          "monthly_queries_estimate": 3000.0,
+          "effective_cost_per_request_low_usd": 0.0086,
+          "effective_cost_per_request_high_usd": 0.0094,
+          "estimated_queries_per_day": 100.0,
+          "effective_cost_per_query_low_usd": 0.043,
+          "effective_cost_per_query_high_usd": 0.047
+        },
+        {
+          "requests_per_day": 500,
+          "requests_per_query": 8,
+          "monthly_requests": 15000,
+          "monthly_queries_estimate": 1875.0,
+          "effective_cost_per_request_low_usd": 0.0086,
+          "effective_cost_per_request_high_usd": 0.0094,
+          "estimated_queries_per_day": 62.5,
+          "effective_cost_per_query_low_usd": 0.0688,
+          "effective_cost_per_query_high_usd": 0.0752
+        },
+        {
+          "requests_per_day": 500,
+          "requests_per_query": 10,
+          "monthly_requests": 15000,
+          "monthly_queries_estimate": 1500.0,
+          "effective_cost_per_request_low_usd": 0.0086,
+          "effective_cost_per_request_high_usd": 0.0094,
+          "estimated_queries_per_day": 50.0,
+          "effective_cost_per_query_low_usd": 0.086,
+          "effective_cost_per_query_high_usd": 0.094
+        }
+      ]
+    }
+  ],
+  "break_even_table": [
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 50,
+      "requests_per_query": 1,
+      "monthly_requests": 1500,
+      "monthly_queries_estimate": 1500.0,
+      "monthly_low_usd": 115.5,
+      "monthly_high_usd": 116.7,
+      "effective_cost_per_request_low_usd": 0.077,
+      "effective_cost_per_request_high_usd": 0.0778,
+      "estimated_queries_per_day": 50.0,
+      "effective_cost_per_query_low_usd": 0.077,
+      "effective_cost_per_query_high_usd": 0.0778
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 50,
+      "requests_per_query": 3,
+      "monthly_requests": 1500,
+      "monthly_queries_estimate": 500.0,
+      "monthly_low_usd": 115.5,
+      "monthly_high_usd": 116.7,
+      "effective_cost_per_request_low_usd": 0.077,
+      "effective_cost_per_request_high_usd": 0.0778,
+      "estimated_queries_per_day": 16.6667,
+      "effective_cost_per_query_low_usd": 0.23099954,
+      "effective_cost_per_query_high_usd": 0.23339953
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 50,
+      "requests_per_query": 5,
+      "monthly_requests": 1500,
+      "monthly_queries_estimate": 300.0,
+      "monthly_low_usd": 115.5,
+      "monthly_high_usd": 116.7,
+      "effective_cost_per_request_low_usd": 0.077,
+      "effective_cost_per_request_high_usd": 0.0778,
+      "estimated_queries_per_day": 10.0,
+      "effective_cost_per_query_low_usd": 0.385,
+      "effective_cost_per_query_high_usd": 0.389
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 50,
+      "requests_per_query": 8,
+      "monthly_requests": 1500,
+      "monthly_queries_estimate": 187.5,
+      "monthly_low_usd": 115.5,
+      "monthly_high_usd": 116.7,
+      "effective_cost_per_request_low_usd": 0.077,
+      "effective_cost_per_request_high_usd": 0.0778,
+      "estimated_queries_per_day": 6.25,
+      "effective_cost_per_query_low_usd": 0.616,
+      "effective_cost_per_query_high_usd": 0.6224
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 50,
+      "requests_per_query": 10,
+      "monthly_requests": 1500,
+      "monthly_queries_estimate": 150.0,
+      "monthly_low_usd": 115.5,
+      "monthly_high_usd": 116.7,
+      "effective_cost_per_request_low_usd": 0.077,
+      "effective_cost_per_request_high_usd": 0.0778,
+      "estimated_queries_per_day": 5.0,
+      "effective_cost_per_query_low_usd": 0.77,
+      "effective_cost_per_query_high_usd": 0.778
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 200,
+      "requests_per_query": 1,
+      "monthly_requests": 6000,
+      "monthly_queries_estimate": 6000.0,
+      "monthly_low_usd": 120.0,
+      "monthly_high_usd": 124.8,
+      "effective_cost_per_request_low_usd": 0.02,
+      "effective_cost_per_request_high_usd": 0.0208,
+      "estimated_queries_per_day": 200.0,
+      "effective_cost_per_query_low_usd": 0.02,
+      "effective_cost_per_query_high_usd": 0.0208
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 200,
+      "requests_per_query": 3,
+      "monthly_requests": 6000,
+      "monthly_queries_estimate": 2000.0,
+      "monthly_low_usd": 120.0,
+      "monthly_high_usd": 124.8,
+      "effective_cost_per_request_low_usd": 0.02,
+      "effective_cost_per_request_high_usd": 0.0208,
+      "estimated_queries_per_day": 66.6667,
+      "effective_cost_per_query_low_usd": 0.05999997,
+      "effective_cost_per_query_high_usd": 0.06239997
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 200,
+      "requests_per_query": 5,
+      "monthly_requests": 6000,
+      "monthly_queries_estimate": 1200.0,
+      "monthly_low_usd": 120.0,
+      "monthly_high_usd": 124.8,
+      "effective_cost_per_request_low_usd": 0.02,
+      "effective_cost_per_request_high_usd": 0.0208,
+      "estimated_queries_per_day": 40.0,
+      "effective_cost_per_query_low_usd": 0.1,
+      "effective_cost_per_query_high_usd": 0.104
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 200,
+      "requests_per_query": 8,
+      "monthly_requests": 6000,
+      "monthly_queries_estimate": 750.0,
+      "monthly_low_usd": 120.0,
+      "monthly_high_usd": 124.8,
+      "effective_cost_per_request_low_usd": 0.02,
+      "effective_cost_per_request_high_usd": 0.0208,
+      "estimated_queries_per_day": 25.0,
+      "effective_cost_per_query_low_usd": 0.16,
+      "effective_cost_per_query_high_usd": 0.1664
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 200,
+      "requests_per_query": 10,
+      "monthly_requests": 6000,
+      "monthly_queries_estimate": 600.0,
+      "monthly_low_usd": 120.0,
+      "monthly_high_usd": 124.8,
+      "effective_cost_per_request_low_usd": 0.02,
+      "effective_cost_per_request_high_usd": 0.0208,
+      "estimated_queries_per_day": 20.0,
+      "effective_cost_per_query_low_usd": 0.2,
+      "effective_cost_per_query_high_usd": 0.208
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 500,
+      "requests_per_query": 1,
+      "monthly_requests": 15000,
+      "monthly_queries_estimate": 15000.0,
+      "monthly_low_usd": 129.0,
+      "monthly_high_usd": 141.0,
+      "effective_cost_per_request_low_usd": 0.0086,
+      "effective_cost_per_request_high_usd": 0.0094,
+      "estimated_queries_per_day": 500.0,
+      "effective_cost_per_query_low_usd": 0.0086,
+      "effective_cost_per_query_high_usd": 0.0094
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 500,
+      "requests_per_query": 3,
+      "monthly_requests": 15000,
+      "monthly_queries_estimate": 5000.0,
+      "monthly_low_usd": 129.0,
+      "monthly_high_usd": 141.0,
+      "effective_cost_per_request_low_usd": 0.0086,
+      "effective_cost_per_request_high_usd": 0.0094,
+      "estimated_queries_per_day": 166.6667,
+      "effective_cost_per_query_low_usd": 0.02579999,
+      "effective_cost_per_query_high_usd": 0.02819999
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 500,
+      "requests_per_query": 5,
+      "monthly_requests": 15000,
+      "monthly_queries_estimate": 3000.0,
+      "monthly_low_usd": 129.0,
+      "monthly_high_usd": 141.0,
+      "effective_cost_per_request_low_usd": 0.0086,
+      "effective_cost_per_request_high_usd": 0.0094,
+      "estimated_queries_per_day": 100.0,
+      "effective_cost_per_query_low_usd": 0.043,
+      "effective_cost_per_query_high_usd": 0.047
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 500,
+      "requests_per_query": 8,
+      "monthly_requests": 15000,
+      "monthly_queries_estimate": 1875.0,
+      "monthly_low_usd": 129.0,
+      "monthly_high_usd": 141.0,
+      "effective_cost_per_request_low_usd": 0.0086,
+      "effective_cost_per_request_high_usd": 0.0094,
+      "estimated_queries_per_day": 62.5,
+      "effective_cost_per_query_low_usd": 0.0688,
+      "effective_cost_per_query_high_usd": 0.0752
+    },
+    {
+      "profile": "x_agency_like_personal",
+      "requests_per_day": 500,
+      "requests_per_query": 10,
+      "monthly_requests": 15000,
+      "monthly_queries_estimate": 1500.0,
+      "monthly_low_usd": 129.0,
+      "monthly_high_usd": 141.0,
+      "effective_cost_per_request_low_usd": 0.0086,
+      "effective_cost_per_request_high_usd": 0.0094,
+      "estimated_queries_per_day": 50.0,
+      "effective_cost_per_query_low_usd": 0.086,
+      "effective_cost_per_query_high_usd": 0.094
+    }
+  ]
+}

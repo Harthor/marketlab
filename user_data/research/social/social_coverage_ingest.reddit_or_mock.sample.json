@@ -1,0 +1,47 @@
+{
+  "ts_utc": "2026-02-21T08:16:17+00:00",
+  "sources_requested": [
+    "reddit"
+  ],
+  "events_total": 1,
+  "status": "degraded",
+  "degraded_reasons": [
+    "missing_reddit_credentials_or_user_agent"
+  ],
+  "coverage": [
+    {
+      "source": "reddit",
+      "status": "degraded",
+      "reason": "missing_reddit_credentials_or_user_agent",
+      "events_count": 1,
+      "latency_ms": null,
+      "errors": [],
+      "rate_limited": false,
+      "used_oauth": false,
+      "used_mock_fallback": true,
+      "source_quality": 0.8,
+      "request_attempts": []
+    }
+  ],
+  "quality": {
+    "rows_in": 1,
+    "rows_out": 1,
+    "duplicates_removed": 0,
+    "missing_fields": {
+      "ts_utc": 0,
+      "author": 0,
+      "text": 0,
+      "channel_or_subreddit": 0
+    },
+    "source_counts": {
+      "reddit": 1
+    },
+    "time_range_min": "2026-02-21T08:16:17+00:00",
+    "time_range_max": "2026-02-21T08:16:17+00:00",
+    "per_token_mentions": {
+      "BTC": 1,
+      "ETH": 1,
+      "SOL": 1
+    }
+  }
+}

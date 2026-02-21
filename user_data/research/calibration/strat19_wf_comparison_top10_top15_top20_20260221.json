@@ -1,0 +1,164 @@
+{
+  "splits_common": [
+    "WF_A_TEST",
+    "WF_B_TEST",
+    "WF4_TEST"
+  ],
+  "by_universe": {
+    "top10": {
+      "splits_count": 3,
+      "trades_total_wf": 124,
+      "pf_avg": 1.5507045136580306,
+      "pf_median": 1.533201096230938,
+      "splits_pf_gt_1": 3,
+      "worst_maxDD_pct": 0.5221683220000045,
+      "top1_share_avg_pct": 42.002935289147494,
+      "top1_share_worst_pct": 52.54039285404784,
+      "top3_share_avg_pct": 81.99234336757375,
+      "top3_share_worst_pct": 100.0
+    },
+    "top15": {
+      "splits_count": 3,
+      "trades_total_wf": 168,
+      "pf_avg": 1.7877431183029178,
+      "pf_median": 1.8322003391645014,
+      "splits_pf_gt_1": 3,
+      "worst_maxDD_pct": 0.432157030999997,
+      "top1_share_avg_pct": 36.74607825551647,
+      "top1_share_worst_pct": 56.775311704440966,
+      "top3_share_avg_pct": 69.64665080231131,
+      "top3_share_worst_pct": 86.41423447993482
+    },
+    "top20": {
+      "splits_count": 3,
+      "trades_total_wf": 189,
+      "pf_avg": 1.5877312918074302,
+      "pf_median": 1.5851847370928065,
+      "splits_pf_gt_1": 3,
+      "worst_maxDD_pct": 0.432157030999997,
+      "top1_share_avg_pct": 33.70388628007167,
+      "top1_share_worst_pct": 52.706505320809285,
+      "top3_share_avg_pct": 63.749789357141104,
+      "top3_share_worst_pct": 80.22135277954072
+    }
+  },
+  "per_split_rows": [
+    {
+      "split": "WF_A_TEST",
+      "experiment_id": "20260220T171810Z_strat19volcompressionbreakout-4h-v1_4h_top10-mr4h-effective-wf-a-ext",
+      "universe": "top10",
+      "trades": 58,
+      "trades_per_day": 0.48,
+      "profit_pct": 0.7752974570000001,
+      "winrate_pct": 50.0,
+      "pf": 1.533201096230938,
+      "maxDD_pct": 0.5221683220000045,
+      "top1_share_pct": 40.93343610589202,
+      "top3_share_pct": 82.65196058587524
+    },
+    {
+      "split": "WF_B_TEST",
+      "experiment_id": "20260220T171810Z_strat19volcompressionbreakout-4h-v1_4h_top10-mr4h-effective-wf-b-ext",
+      "universe": "top10",
+      "trades": 17,
+      "trades_per_day": 0.14,
+      "profit_pct": 0.040835252,
+      "winrate_pct": 41.17647058823529,
+      "pf": 1.1027153293167204,
+      "maxDD_pct": 0.152887439999995,
+      "top1_share_pct": 52.54039285404784,
+      "top3_share_pct": 100.0
+    },
+    {
+      "split": "WF4_TEST",
+      "experiment_id": "20260220T161648Z_strat19volcompressionbreakout-4h-v1_4h_top10-mr4h-effective-wf4-refresh",
+      "universe": "top10",
+      "trades": 49,
+      "trades_per_day": 0.4,
+      "profit_pct": 1.081958006,
+      "winrate_pct": 55.10204081632652,
+      "pf": 2.0161971154264338,
+      "maxDD_pct": 0.2981537679402652,
+      "top1_share_pct": 32.534976907502624,
+      "top3_share_pct": 63.325069516846014
+    },
+    {
+      "split": "WF_A_TEST",
+      "experiment_id": "20260220T171811Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-effective-wf-a-ext",
+      "universe": "top15",
+      "trades": 71,
+      "trades_per_day": 0.59,
+      "profit_pct": 1.151254972,
+      "winrate_pct": 54.929577464788736,
+      "pf": 1.5820401865098959,
+      "maxDD_pct": 0.432157030999997,
+      "top1_share_pct": 30.875812987899632,
+      "top3_share_pct": 63.78550342065571
+    },
+    {
+      "split": "WF_B_TEST",
+      "experiment_id": "20260220T171811Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-effective-wf-b-ext",
+      "universe": "top15",
+      "trades": 31,
+      "trades_per_day": 0.26,
+      "profit_pct": 0.688387593,
+      "winrate_pct": 61.29032258064516,
+      "pf": 1.8322003391645014,
+      "maxDD_pct": 0.34069375111913525,
+      "top1_share_pct": 56.775311704440966,
+      "top3_share_pct": 86.41423447993482
+    },
+    {
+      "split": "WF4_TEST",
+      "experiment_id": "20260220T161648Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-effective-wf4-refresh",
+      "universe": "top15",
+      "trades": 66,
+      "trades_per_day": 0.54,
+      "profit_pct": 1.6146716380000001,
+      "winrate_pct": 60.60606060606061,
+      "pf": 1.948988829234356,
+      "maxDD_pct": 0.41718832155497443,
+      "top1_share_pct": 22.587110074208827,
+      "top3_share_pct": 58.74021450634343
+    },
+    {
+      "split": "WF_A_TEST",
+      "experiment_id": "20260221T004946Z_strat19volcompressionbreakout-4h-v1_4h_top20-mr4h-effective-wf-a-ext",
+      "universe": "top20",
+      "trades": 78,
+      "trades_per_day": 0.64,
+      "profit_pct": 1.2880213150000002,
+      "winrate_pct": 55.12820512820513,
+      "pf": 1.5851847370928065,
+      "maxDD_pct": 0.432157030999997,
+      "top1_share_pct": 27.77975158140996,
+      "top3_share_pct": 57.38943425442512
+    },
+    {
+      "split": "WF_B_TEST",
+      "experiment_id": "20260221T004946Z_strat19volcompressionbreakout-4h-v1_4h_top20-mr4h-effective-wf-b-ext",
+      "universe": "top20",
+      "trades": 36,
+      "trades_per_day": 0.3,
+      "profit_pct": 0.527986806,
+      "winrate_pct": 58.333333333333336,
+      "pf": 1.452155879153869,
+      "maxDD_pct": 0.3412366246742771,
+      "top1_share_pct": 52.706505320809285,
+      "top3_share_pct": 80.22135277954072
+    },
+    {
+      "split": "WF4_TEST",
+      "experiment_id": "20260221T004946Z_strat19volcompressionbreakout-4h-v1_4h_top20-mr4h-effective-wf4-ext",
+      "universe": "top20",
+      "trades": 75,
+      "trades_per_day": 0.61,
+      "profit_pct": 1.5839132800000002,
+      "winrate_pct": 60.0,
+      "pf": 1.7258532591756155,
+      "maxDD_pct": 0.4157106625007719,
+      "top1_share_pct": 20.625401937995758,
+      "top3_share_pct": 53.63858103745747
+    }
+  ]
+}

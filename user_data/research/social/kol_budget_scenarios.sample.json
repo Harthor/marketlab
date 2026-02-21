@@ -1,0 +1,160 @@
+{
+  "profile_name": "kol_budget_profile_default",
+  "daily_requests_grid": [
+    50,
+    200,
+    500
+  ],
+  "fixed_monthly_usd": {
+    "infra": 25.0,
+    "ops": 30.0,
+    "x_seat": 60.0
+  },
+  "variable_costs": {
+    "provider_per_1k_request_usd": {
+      "low": 0.4,
+      "medium": 0.9,
+      "high": 1.8
+    },
+    "llm_per_1k_tokens_usd": 0.002,
+    "avg_tokens_per_request": 1100
+  },
+  "scenarios": [
+    {
+      "scenario": "low",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 3.9,
+      "provider_variable_usd": 0.6,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 118.9,
+      "cost_per_request_usd": 0.07926667
+    },
+    {
+      "scenario": "medium",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 4.65,
+      "provider_variable_usd": 1.35,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 119.65,
+      "cost_per_request_usd": 0.07976667
+    },
+    {
+      "scenario": "high",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 6.0,
+      "provider_variable_usd": 2.7,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 121.0,
+      "cost_per_request_usd": 0.08066667
+    },
+    {
+      "scenario": "low",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 15.6,
+      "provider_variable_usd": 2.4,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 130.6,
+      "cost_per_request_usd": 0.02176667
+    },
+    {
+      "scenario": "medium",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 18.6,
+      "provider_variable_usd": 5.4,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 133.6,
+      "cost_per_request_usd": 0.02226667
+    },
+    {
+      "scenario": "high",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 24.0,
+      "provider_variable_usd": 10.8,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 139.0,
+      "cost_per_request_usd": 0.02316667
+    },
+    {
+      "scenario": "low",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 39.0,
+      "provider_variable_usd": 6.0,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 154.0,
+      "cost_per_request_usd": 0.01026667
+    },
+    {
+      "scenario": "medium",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 46.5,
+      "provider_variable_usd": 13.5,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 161.5,
+      "cost_per_request_usd": 0.01076667
+    },
+    {
+      "scenario": "high",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 60.0,
+      "provider_variable_usd": 27.0,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 175.0,
+      "cost_per_request_usd": 0.01166667
+    },
+    {
+      "scenario": "x_provider_from_social_costs",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 114.0,
+      "variable_total_usd": 21.0,
+      "provider_variable_usd": null,
+      "llm_variable_usd": null,
+      "monthly_total_usd": 120.0,
+      "cost_per_request_usd": 0.01
+    },
+    {
+      "scenario": "x_provider_from_social_costs",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 114.0,
+      "variable_total_usd": 30.0,
+      "provider_variable_usd": null,
+      "llm_variable_usd": null,
+      "monthly_total_usd": 129.0,
+      "cost_per_request_usd": 0.0043
+    },
+    {
+      "scenario": "x_provider_from_social_costs",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 114.0,
+      "variable_total_usd": 30.0,
+      "provider_variable_usd": null,
+      "llm_variable_usd": null,
+      "monthly_total_usd": 129.0,
+      "cost_per_request_usd": 0.0043
+    }
+  ],
+  "notes": [
+    "Research budgeting only. No live execution.",
+    "Use with social_costs.py for external provider assumptions."
+  ]
+}

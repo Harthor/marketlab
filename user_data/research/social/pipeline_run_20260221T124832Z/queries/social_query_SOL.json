@@ -1,0 +1,75 @@
+{
+  "status": "degraded",
+  "reason": "no_events_for_token_in_window",
+  "token": "SOL",
+  "contract": null,
+  "contract_resolution": {
+    "reason": null
+  },
+  "token_aliases": [
+    "SOL",
+    "SOLANA"
+  ],
+  "timeframe": "1h",
+  "lookback_hours": 72,
+  "cutoff_ts_utc": "2026-02-21T12:48:33.101119+00:00",
+  "source_breakdown": {},
+  "confidence": 0.0,
+  "warning_flags": [
+    "LOW_SOCIAL_COVERAGE",
+    "NO_RECENT_EVENTS",
+    "STALE_DATA"
+  ],
+  "warnings_ordered": [
+    {
+      "flag": "LOW_SOCIAL_COVERAGE",
+      "severity": "high"
+    },
+    {
+      "flag": "NO_RECENT_EVENTS",
+      "severity": "high"
+    },
+    {
+      "flag": "STALE_DATA",
+      "severity": "medium"
+    }
+  ],
+  "anti_leakage": {
+    "excluded_rows_after_cutoff": 0,
+    "parse_errors": 0,
+    "duplicates_removed_estimate": 0,
+    "current_window_start": "2026-02-18T12:48:33.101119+00:00",
+    "previous_window_start": "2026-02-15T12:48:33.101119+00:00",
+    "cutoff_ts_utc": "2026-02-21T12:48:33.101119+00:00"
+  },
+  "budget_context": {
+    "status": "degraded",
+    "budget_usage_pct": 345.5,
+    "alerts": [
+      "BUDGET_ALERT_70",
+      "BUDGET_ALERT_85",
+      "BUDGET_ALERT_100"
+    ],
+    "degradation_plan": [
+      "disable_expensive_x_source",
+      "reduce_query_frequency_50pct",
+      "switch_to_cache_or_offline_mode",
+      "allow_only_high_priority_tokens"
+    ],
+    "cost_per_request_usd": 0.02303333,
+    "scenario": "medium"
+  },
+  "budget_pressure": {
+    "status": "degraded",
+    "usage_pct": 345.5,
+    "pressure": "critical",
+    "degraded_mode": true,
+    "degradation_plan": [
+      "disable_expensive_x_source",
+      "reduce_query_frequency_50pct",
+      "switch_to_cache_or_offline_mode",
+      "allow_only_high_priority_tokens"
+    ],
+    "scenario": "medium"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "rows_in": 43,
+  "social_feature_rows": 9,
+  "weight_grid": [
+    0.0,
+    0.05,
+    0.1,
+    0.2,
+    0.3
+  ],
+  "summary_by_weight": [
+    {
+      "w_social": 0.0,
+      "rows": 43,
+      "avg_abs_rank_shift": 0.0,
+      "top_symbol": "BTC/USDT"
+    },
+    {
+      "w_social": 0.05,
+      "rows": 43,
+      "avg_abs_rank_shift": 0.139535,
+      "top_symbol": "BTC/USDT"
+    },
+    {
+      "w_social": 0.1,
+      "rows": 43,
+      "avg_abs_rank_shift": 0.139535,
+      "top_symbol": "BTC/USDT"
+    },
+    {
+      "w_social": 0.2,
+      "rows": 43,
+      "avg_abs_rank_shift": 0.139535,
+      "top_symbol": "BTC/USDT"
+    },
+    {
+      "w_social": 0.3,
+      "rows": 43,
+      "avg_abs_rank_shift": 0.139535,
+      "top_symbol": "BTC/USDT"
+    }
+  ],
+  "output_csv": "user_data/research/social/social_overlay_ranking.sample.csv"
+}

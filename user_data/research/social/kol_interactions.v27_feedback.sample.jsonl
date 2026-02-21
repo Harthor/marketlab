@@ -1,0 +1,6 @@
+{"action_type":"planned_reply","token":"SOL","kol_handle":"solsignals","channel":"x","ts_utc":"2026-02-20T10:00:00+00:00"}
+{"action_type":"reply_received","token":"SOL","kol_handle":"solsignals","channel":"x","ts_utc":"2026-02-20T10:30:00+00:00"}
+{"action_type":"mention_detected","token":"SOL","kol_handle":"solsignals","channel":"x","ts_utc":"2026-02-20T11:00:00+00:00"}
+{"action_type":"planned_post","token":"ARB","kol_handle":"arbresearch","channel":"x","ts_utc":"2026-02-20T10:00:00+00:00"}
+{"action_type":"quote_received","token":"ARB","kol_handle":"arbresearch","channel":"x","ts_utc":"2026-02-20T12:00:00+00:00"}
+{"action_type":"mention_detected","token":"ETH","kol_handle":"macrodesk","channel":"x","ts_utc":"2026-02-19T15:00:00+00:00"}

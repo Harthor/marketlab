@@ -1,0 +1,394 @@
+{
+  "report_date": "20260221",
+  "files": [
+    "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T133543Z/social_events.normalized.jsonl"
+  ],
+  "rows_total": 207,
+  "rows_useful": 207,
+  "duplicates_estimate": 0,
+  "source_counts": {
+    "x_provider": 51,
+    "reddit": 38,
+    "openclaw_x": 48,
+    "telegram": 38,
+    "rss": 32
+  },
+  "token_counts": {
+    "BNB": 40,
+    "ARB": 36,
+    "SOL": 35,
+    "BTC": 35,
+    "XRP": 33,
+    "ETH": 28
+  },
+  "top_authors": [
+    {
+      "author": "narrative_watch",
+      "count": 45
+    },
+    {
+      "author": "alpha_trader",
+      "count": 39
+    },
+    {
+      "author": "kol_sol",
+      "count": 35
+    },
+    {
+      "author": "macro_flow",
+      "count": 30
+    },
+    {
+      "author": "kol_arb",
+      "count": 29
+    },
+    {
+      "author": "signal_bridge",
+      "count": 29
+    }
+  ],
+  "coverage_by_bucket": [
+    {
+      "bucket_start": "2026-02-17T13:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-17T15:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-17T17:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-17T18:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-17T19:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-17T20:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-17T21:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-17T22:00:00+00:00",
+      "rows": 5
+    },
+    {
+      "bucket_start": "2026-02-17T23:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T00:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T01:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-18T02:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T03:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T04:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-18T05:00:00+00:00",
+      "rows": 6
+    },
+    {
+      "bucket_start": "2026-02-18T06:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-18T07:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T09:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T10:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T11:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-18T12:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-18T13:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-18T14:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-18T15:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T16:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-18T17:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-18T18:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-18T19:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-18T20:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-18T21:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-18T22:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-19T00:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-19T01:00:00+00:00",
+      "rows": 7
+    },
+    {
+      "bucket_start": "2026-02-19T02:00:00+00:00",
+      "rows": 5
+    },
+    {
+      "bucket_start": "2026-02-19T03:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-19T04:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-19T05:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-19T06:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-19T07:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-19T08:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-19T09:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-19T11:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-19T12:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-19T13:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-19T15:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-19T16:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-19T17:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-19T18:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-19T19:00:00+00:00",
+      "rows": 8
+    },
+    {
+      "bucket_start": "2026-02-19T21:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-19T22:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-19T23:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-20T00:00:00+00:00",
+      "rows": 6
+    },
+    {
+      "bucket_start": "2026-02-20T01:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-20T02:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-20T03:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-20T04:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-20T05:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-20T06:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-20T07:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-20T08:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-20T10:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-20T11:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-20T12:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-20T13:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-20T14:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-20T15:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-20T16:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-20T17:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-20T18:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-20T19:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-20T20:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-20T21:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-21T00:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-21T01:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-21T02:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-21T03:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-21T04:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-21T07:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-21T08:00:00+00:00",
+      "rows": 4
+    },
+    {
+      "bucket_start": "2026-02-21T09:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-21T10:00:00+00:00",
+      "rows": 1
+    },
+    {
+      "bucket_start": "2026-02-21T11:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-21T12:00:00+00:00",
+      "rows": 3
+    }
+  ],
+  "pct_rows_with_engagement": 0.0,
+  "pct_rows_with_token_explicit": 0.0,
+  "pct_rows_with_token_inferred": 1.0,
+  "time_range_min": "2026-02-17T13:38:44+00:00",
+  "time_range_max": "2026-02-21T12:19:44+00:00",
+  "warning_flags": []
+}

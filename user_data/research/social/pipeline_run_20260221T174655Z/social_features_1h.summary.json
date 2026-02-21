@@ -1,0 +1,40 @@
+{
+  "timeframe": "1h",
+  "rows_in": 642,
+  "rows_out": 403,
+  "duplicates_removed": 0,
+  "rows": 403,
+  "symbols": [
+    "ARB",
+    "BNB",
+    "BTC",
+    "ETH",
+    "SOL",
+    "XRP"
+  ],
+  "missing_fields": {
+    "ts_utc": 0,
+    "symbols_detected": 0,
+    "source": 0
+  },
+  "source_counts": {
+    "openclaw_x": 144,
+    "reddit": 123,
+    "rss": 115,
+    "telegram": 129,
+    "x_provider": 131
+  },
+  "time_range_min": "2026-02-17T17:49:55+00:00",
+  "time_range_max": "2026-02-21T18:32:55+00:00",
+  "per_token_mentions": {
+    "BTC": 120,
+    "BNB": 117,
+    "SOL": 104,
+    "ETH": 103,
+    "ARB": 100,
+    "XRP": 98
+  },
+  "avg_data_completeness": 1.0,
+  "avg_source_diversity_score": 0.325076,
+  "leakage_event_count": 0
+}

@@ -1,0 +1,51 @@
+{
+  "profile": "low_cost",
+  "assumptions": {
+    "day_count_for_month": 30,
+    "models": {
+      "reddit": {
+        "unit": "requests",
+        "unit_cost_usd": 5e-05,
+        "free_units_per_day": 1000
+      },
+      "telegram": {
+        "unit": "messages",
+        "unit_cost_usd": 0.0,
+        "free_units_per_day": 1000000
+      },
+      "rss": {
+        "unit": "fetches",
+        "unit_cost_usd": 0.0,
+        "free_units_per_day": 1000000
+      },
+      "x": {
+        "unit": "requests",
+        "unit_cost_usd": 0.0005,
+        "free_units_per_day": 0
+      }
+    }
+  },
+  "breakdown": {
+    "reddit": {
+      "volume_per_day": 400,
+      "daily_cost_usd": 0.0
+    },
+    "telegram": {
+      "volume_per_day": 4000,
+      "daily_cost_usd": 0.0
+    },
+    "rss": {
+      "volume_per_day": 120,
+      "daily_cost_usd": 0.0
+    },
+    "x": {
+      "volume_per_day": 0,
+      "daily_cost_usd": 0.0,
+      "monthly_fixed_usd": 0
+    }
+  },
+  "totals": {
+    "estimated_daily_cost_usd": 0.0,
+    "estimated_monthly_cost_usd": 0.0
+  }
+}

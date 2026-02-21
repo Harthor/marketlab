@@ -1,0 +1,28 @@
+{
+  "score_total": 85.2,
+  "sub_scores": {
+    "implementability_ohlcv": 80.0,
+    "lookahead_safety": 100.0,
+    "microstructure_independence": 70.0,
+    "freqtrade_compatibility": 85.0,
+    "preference_alignment": 100.0,
+    "hypothesis_clarity": 80.0
+  },
+  "flags": [
+    "needs_orderflow"
+  ],
+  "recommendation": "IMPLEMENT",
+  "diagnostics": {
+    "microstructure_hits": 1,
+    "lookahead_hits": 0,
+    "non_ohlcv_hits": 0,
+    "structure": {
+      "has_hypothesis": false,
+      "has_entry": true,
+      "has_exit": true,
+      "has_stop": true,
+      "has_regime": true
+    }
+  },
+  "timeframe": "1h"
+}

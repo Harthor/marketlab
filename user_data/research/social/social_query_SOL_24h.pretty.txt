@@ -1,0 +1,6 @@
+[SOCIAL QUERY] SOL | tf=1h | lookback=24h
+score=0.5275 confidence=0.405833 mentions=1
+sentiment={'bullish': 1, 'bearish': 0, 'neutral': 0} flags=['LOW_SOCIAL_COVERAGE', 'SOURCE_DEPENDENCY_RISK']
+sources=['reddit']
+summary=SOL social pulse is mixed with low confidence (mentions=1, score=0.527). Risks: LOW_SOCIAL_COVERAGE | SOURCE_DEPENDENCY_RISK.
+NFA: Research-only diagnostic signal. Not for live trading execution.

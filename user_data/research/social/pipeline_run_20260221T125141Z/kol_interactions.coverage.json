@@ -1,0 +1,18 @@
+{
+  "status": "ok",
+  "rows_in": 2,
+  "rows_appended": 2,
+  "duplicates_removed": 0,
+  "invalid_rows": 0,
+  "leakage_flag_count": 0,
+  "time_range_min": "2026-02-21T08:40:00+00:00",
+  "time_range_max": "2026-02-21T12:51:41+00:00",
+  "action_type_counts": {
+    "like_count_update": 1,
+    "mention_detected": 2,
+    "planned_reply": 2,
+    "quote_received": 1,
+    "reply_received": 2,
+    "repost_count_update": 1
+  }
+}

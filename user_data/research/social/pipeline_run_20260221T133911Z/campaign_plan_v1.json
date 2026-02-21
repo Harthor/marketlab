@@ -1,0 +1,563 @@
+{
+  "generated_at": "2026-02-21T13:39:11+00:00",
+  "mode": "research_campaign_planning_only",
+  "objective": "v25_dryrun_pipeline_validation",
+  "tokens": [
+    "SOL",
+    "ARB"
+  ],
+  "inputs": {
+    "social_status": "degraded",
+    "social_confidence": 0.661062,
+    "social_score": 0.402175,
+    "coverage_rows": null,
+    "ablation_status": "ok",
+    "kol_count_active": 6,
+    "budget_status": "degraded",
+    "budget_usage_pct": 345.5
+  },
+  "risk_flags": [
+    "BUDGET_ALERT_100",
+    "BUDGET_ALERT_70",
+    "BUDGET_ALERT_85",
+    "BUDGET_UNREALISTIC",
+    "HIGH_X_COST_LOW_SIGNAL",
+    "LOW_KOL_COVERAGE",
+    "LOW_KOL_FEEDBACK_COVERAGE",
+    "LOW_ROWS",
+    "LOW_SPLIT_COVERAGE",
+    "SOURCE_DEPENDENCY_RISK",
+    "TEMPORAL_SPARSITY"
+  ],
+  "actions": [
+    {
+      "token": "SOL",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "tier": "A",
+      "action": "ask_question",
+      "priority": 0.365012,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "ARB",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "tier": "A",
+      "action": "ask_question",
+      "priority": 0.365012,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "SOL",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "tier": "A",
+      "action": "ask_question",
+      "priority": 0.34964,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "ARB",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "tier": "A",
+      "action": "ask_question",
+      "priority": 0.34964,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "SOL",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "tier": "B",
+      "action": "ask_question",
+      "priority": 0.30664,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "ARB",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "tier": "B",
+      "action": "ask_question",
+      "priority": 0.30664,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "SOL",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "tier": "B",
+      "action": "ask_question",
+      "priority": 0.293482,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "ARB",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "tier": "B",
+      "action": "ask_question",
+      "priority": 0.293482,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "SOL",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "tier": "B",
+      "action": "ask_question",
+      "priority": 0.287515,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "ARB",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "tier": "B",
+      "action": "ask_question",
+      "priority": 0.287515,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "SOL",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "tier": "C",
+      "action": "ask_question",
+      "priority": 0.192716,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    },
+    {
+      "token": "ARB",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "tier": "C",
+      "action": "ask_question",
+      "priority": 0.192716,
+      "estimated_effort": "low",
+      "rationale": [
+        "budget_degraded_mode"
+      ]
+    }
+  ],
+  "actions_by_token": {
+    "SOL": [
+      {
+        "token": "SOL",
+        "kol_id": "kol_sol_01",
+        "x_handle": "sol_researcher",
+        "tier": "A",
+        "action": "ask_question",
+        "priority": 0.365012,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "SOL",
+        "kol_id": "kol_arb_01",
+        "x_handle": "arb_insights",
+        "tier": "A",
+        "action": "ask_question",
+        "priority": 0.34964,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "SOL",
+        "kol_id": "kol_btc_macro_01",
+        "x_handle": "btc_macro_view",
+        "tier": "B",
+        "action": "ask_question",
+        "priority": 0.30664,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "SOL",
+        "kol_id": "kol_multi_01",
+        "x_handle": "multi_chain_flow",
+        "tier": "B",
+        "action": "ask_question",
+        "priority": 0.293482,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "SOL",
+        "kol_id": "kol_latam_01",
+        "x_handle": "latam_crypto_radar",
+        "tier": "B",
+        "action": "ask_question",
+        "priority": 0.287515,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "SOL",
+        "kol_id": "kol_memes_01",
+        "x_handle": "meme_buzz",
+        "tier": "C",
+        "action": "ask_question",
+        "priority": 0.192716,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      }
+    ],
+    "ARB": [
+      {
+        "token": "ARB",
+        "kol_id": "kol_sol_01",
+        "x_handle": "sol_researcher",
+        "tier": "A",
+        "action": "ask_question",
+        "priority": 0.365012,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "ARB",
+        "kol_id": "kol_arb_01",
+        "x_handle": "arb_insights",
+        "tier": "A",
+        "action": "ask_question",
+        "priority": 0.34964,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "ARB",
+        "kol_id": "kol_btc_macro_01",
+        "x_handle": "btc_macro_view",
+        "tier": "B",
+        "action": "ask_question",
+        "priority": 0.30664,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "ARB",
+        "kol_id": "kol_multi_01",
+        "x_handle": "multi_chain_flow",
+        "tier": "B",
+        "action": "ask_question",
+        "priority": 0.293482,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "ARB",
+        "kol_id": "kol_latam_01",
+        "x_handle": "latam_crypto_radar",
+        "tier": "B",
+        "action": "ask_question",
+        "priority": 0.287515,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      },
+      {
+        "token": "ARB",
+        "kol_id": "kol_memes_01",
+        "x_handle": "meme_buzz",
+        "tier": "C",
+        "action": "ask_question",
+        "priority": 0.192716,
+        "estimated_effort": "low",
+        "rationale": [
+          "budget_degraded_mode"
+        ]
+      }
+    ]
+  },
+  "dryrun_queue": [
+    {
+      "queue_id": "34caff192fa8cfa5",
+      "token": "SOL",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "action_type": "ask_question",
+      "priority": 0.365012,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.531075,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "f090aaafc48a639f",
+      "token": "ARB",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "action_type": "ask_question",
+      "priority": 0.365012,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.531075,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "a8b622fcfdd6d1b4",
+      "token": "SOL",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "action_type": "ask_question",
+      "priority": 0.34964,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.516621,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "9a4a4d75ff72e580",
+      "token": "ARB",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "action_type": "ask_question",
+      "priority": 0.34964,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.516621,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "398b69bc8007ea6e",
+      "token": "SOL",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "action_type": "ask_question",
+      "priority": 0.30664,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.500471,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "601b892039ea435c",
+      "token": "ARB",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "action_type": "ask_question",
+      "priority": 0.30664,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.500471,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "517c97fd3c6248fd",
+      "token": "SOL",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "action_type": "ask_question",
+      "priority": 0.293482,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.479734,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "f0f3fe2054587278",
+      "token": "ARB",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "action_type": "ask_question",
+      "priority": 0.293482,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.479734,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "9e09e9553f137469",
+      "token": "SOL",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "action_type": "ask_question",
+      "priority": 0.287515,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.477952,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "789a0c071cca367e",
+      "token": "ARB",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "action_type": "ask_question",
+      "priority": 0.287515,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.477952,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "bf416f288eec37f5",
+      "token": "SOL",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "action_type": "ask_question",
+      "priority": 0.192716,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.367312,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    },
+    {
+      "queue_id": "42c841ed9cd3837b",
+      "token": "ARB",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "action_type": "ask_question",
+      "priority": 0.192716,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.02303333,
+      "confidence": 0.367312,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true
+    }
+  ],
+  "notes": [
+    "Diagnostic planner only. No live posting or execution.",
+    "Do not infer alpha from engagement alone.",
+    "All queue items require explicit approval before any external action."
+  ]
+}

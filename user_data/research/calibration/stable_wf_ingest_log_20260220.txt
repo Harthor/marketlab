@@ -1,0 +1,120 @@
+===== WF_A 20250601-20250930 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-a",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-a.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-a.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Priorizar aumento de muestra en 1h mediante universo/splits antes de variar timeframe. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es peor en PF por -1.187 y en DD por -0.340pp."
+}
+===== WF_B 20250901-20251231 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-b",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-b.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-b.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +7.395 y en DD por -0.318pp."
+}
+===== WF_C 20251101-20260201 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-c",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-c.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-c.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Priorizar aumento de muestra en 1h mediante universo/splits antes de variar timeframe. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es peor en PF por -1.187 y en DD por -0.340pp."
+}
+===== WF_D 20250101-20250430 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-d",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-d.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-d.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Priorizar aumento de muestra en 1h mediante universo/splits antes de variar timeframe. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es peor en PF por -1.024 y en DD por -0.129pp."
+}
+===== WF_E 20250401-20250731 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-e",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-e.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-e.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +2.253 y en DD por -0.288pp."
+}
+===== WF_F 20250701-20251031 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-f",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-f.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-f.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +2.303 y en DD por -0.291pp."
+}
+===== WF_G 20250115-20250515 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-g",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-g.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-g.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Priorizar aumento de muestra en 1h mediante universo/splits antes de variar timeframe. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es peor en PF por -0.986 y en DD por -0.168pp."
+}
+===== WF_H 20250215-20250615 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-h",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-h.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-h.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.114 y en DD por -0.232pp."
+}
+===== WF_I 20250315-20250715 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-i",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-i.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-i.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +1.289 y en DD por -0.288pp."
+}
+===== WF_J 20250415-20250815 =====
+{
+  "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-j",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-j.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-j.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182843Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +1.513 y en DD por -0.271pp."
+}
+===== WF_K 20250515-20250915 =====
+{
+  "experiment_id": "20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-k",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-k.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-k.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182844Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +20.775 y en DD por -0.329pp."
+}
+===== WF_L 20250615-20251015 =====
+{
+  "experiment_id": "20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-l",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-l.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-l.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T182844Z.md",
+  "recommendation_code": "BASELINE_CANDIDATE",
+  "recommendation_text": "Resultado OOS con PF>1. Marcar como baseline candidato y correr sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +10.262 y en DD por -0.318pp."
+}

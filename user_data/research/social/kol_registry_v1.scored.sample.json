@@ -1,0 +1,182 @@
+{
+  "registry_path": "user_data/research/social/kol_registry_v1.sample.json",
+  "rows_total": 6,
+  "rows_active": 6,
+  "rows": [
+    {
+      "id": "kol_sol_01",
+      "display_name": "Solana Research Alpha",
+      "x_handle": "sol_researcher",
+      "platforms": [
+        "x",
+        "rss"
+      ],
+      "chains_focus": [
+        "solana"
+      ],
+      "topics": [
+        "sol",
+        "defi",
+        "airdrop"
+      ],
+      "tier": "tier1",
+      "reliability_score": 0.84,
+      "noise_score": 0.18,
+      "alpha_score": 0.79,
+      "posting_freq_est": 0.72,
+      "reply_rate_est": 0.44,
+      "toxicity_risk": 0.12,
+      "language": "en",
+      "active": true,
+      "notes": "High-signal SOL threads, medium cadence.",
+      "kol_priority_score": 0.6584,
+      "quality_band": "medium"
+    },
+    {
+      "id": "kol_arb_01",
+      "display_name": "Arbitrum Signals",
+      "x_handle": "arb_insights",
+      "platforms": [
+        "x"
+      ],
+      "chains_focus": [
+        "arbitrum",
+        "ethereum"
+      ],
+      "topics": [
+        "arb",
+        "l2",
+        "defi"
+      ],
+      "tier": "tier1",
+      "reliability_score": 0.8,
+      "noise_score": 0.22,
+      "alpha_score": 0.75,
+      "posting_freq_est": 0.69,
+      "reply_rate_est": 0.41,
+      "toxicity_risk": 0.16,
+      "language": "en",
+      "active": true,
+      "notes": "Strong L2 focus, good consistency.",
+      "kol_priority_score": 0.6181,
+      "quality_band": "medium"
+    },
+    {
+      "id": "kol_multi_01",
+      "display_name": "Multi Chain Flow",
+      "x_handle": "multi_chain_flow",
+      "platforms": [
+        "x",
+        "telegram"
+      ],
+      "chains_focus": [
+        "solana",
+        "arbitrum",
+        "ethereum"
+      ],
+      "topics": [
+        "rotation",
+        "momentum",
+        "narratives"
+      ],
+      "tier": "tier2",
+      "reliability_score": 0.69,
+      "noise_score": 0.31,
+      "alpha_score": 0.62,
+      "posting_freq_est": 0.81,
+      "reply_rate_est": 0.58,
+      "toxicity_risk": 0.2,
+      "language": "en",
+      "active": true,
+      "notes": "Good coverage breadth, medium noise.",
+      "kol_priority_score": 0.480505,
+      "quality_band": "medium"
+    },
+    {
+      "id": "kol_btc_macro_01",
+      "display_name": "BTC Macro View",
+      "x_handle": "btc_macro_view",
+      "platforms": [
+        "x",
+        "youtube"
+      ],
+      "chains_focus": [
+        "bitcoin"
+      ],
+      "topics": [
+        "btc",
+        "macro",
+        "risk"
+      ],
+      "tier": "tier2",
+      "reliability_score": 0.78,
+      "noise_score": 0.2,
+      "alpha_score": 0.66,
+      "posting_freq_est": 0.55,
+      "reply_rate_est": 0.25,
+      "toxicity_risk": 0.11,
+      "language": "en",
+      "active": true,
+      "notes": "Macro heavy, lower intraday relevance.",
+      "kol_priority_score": 0.470475,
+      "quality_band": "medium"
+    },
+    {
+      "id": "kol_latam_01",
+      "display_name": "Latam Crypto Radar",
+      "x_handle": "latam_crypto_radar",
+      "platforms": [
+        "x",
+        "rss"
+      ],
+      "chains_focus": [
+        "bitcoin",
+        "solana"
+      ],
+      "topics": [
+        "btc",
+        "sol",
+        "latam"
+      ],
+      "tier": "tier2",
+      "reliability_score": 0.71,
+      "noise_score": 0.27,
+      "alpha_score": 0.61,
+      "posting_freq_est": 0.52,
+      "reply_rate_est": 0.33,
+      "toxicity_risk": 0.19,
+      "language": "es",
+      "active": true,
+      "notes": "Useful regional context.",
+      "kol_priority_score": 0.42891,
+      "quality_band": "low"
+    },
+    {
+      "id": "kol_memes_01",
+      "display_name": "Meme Buzz",
+      "x_handle": "meme_buzz",
+      "platforms": [
+        "x"
+      ],
+      "chains_focus": [
+        "solana"
+      ],
+      "topics": [
+        "memecoins",
+        "hype"
+      ],
+      "tier": "tier3",
+      "reliability_score": 0.42,
+      "noise_score": 0.72,
+      "alpha_score": 0.4,
+      "posting_freq_est": 0.88,
+      "reply_rate_est": 0.52,
+      "toxicity_risk": 0.58,
+      "language": "en",
+      "active": true,
+      "notes": "High traffic but unstable signal quality.",
+      "kol_priority_score": 0.23982,
+      "quality_band": "low"
+    }
+  ]
+}

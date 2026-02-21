@@ -1,0 +1,29 @@
+{
+  "rows_total": 6,
+  "rows_active": 6,
+  "by_tier": {
+    "tier1": 2,
+    "tier2": 3,
+    "tier3": 1
+  },
+  "by_platform": {
+    "rss": 2,
+    "telegram": 1,
+    "x": 6,
+    "youtube": 1
+  },
+  "by_chain": {
+    "arbitrum": 2,
+    "bitcoin": 2,
+    "ethereum": 2,
+    "solana": 4
+  },
+  "by_language": {
+    "en": 5,
+    "es": 1
+  },
+  "avg_reliability": 0.706667,
+  "avg_alpha": 0.638333,
+  "avg_noise": 0.316667,
+  "avg_toxicity": 0.226667
+}

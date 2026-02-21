@@ -1,0 +1,88 @@
+{
+  "status": "ok",
+  "reason": null,
+  "input_format": "auto",
+  "rows_in": 8,
+  "rows_out": 8,
+  "duplicates_removed": 0,
+  "errors": [],
+  "missing_fields": {
+    "ts_utc": 0,
+    "author": 0,
+    "text": 0,
+    "channel_or_subreddit": 0
+  },
+  "source_counts": {
+    "openclaw_x": 4,
+    "telegram_forwarder": 1,
+    "x_provider": 3
+  },
+  "per_token_mentions": {
+    "SOL": 4,
+    "ARB": 3,
+    "BTC": 3,
+    "ETH": 2,
+    "OP": 1
+  },
+  "time_range_min": "2026-02-21T07:30:00+00:00",
+  "time_range_max": "2026-02-21T09:31:00+00:00",
+  "mapping_stats": {
+    "fields_seen_counts": {
+      "author": 7,
+      "engagement": 7,
+      "token_candidates": 7,
+      "url": 7,
+      "meta": 6,
+      "published_ts_utc": 6,
+      "source": 6,
+      "text": 6,
+      "_wrapper_meta": 2,
+      "content": 1,
+      "createdAt": 1,
+      "entities": 1,
+      "full_text": 1,
+      "handle": 1,
+      "id": 1,
+      "like_count": 1,
+      "publishedAt": 1,
+      "reply_count": 1,
+      "retweet_count": 1,
+      "symbols": 1,
+      "tweet_id": 1
+    },
+    "fields_mapped_counts": {
+      "author": 8,
+      "entities": 8,
+      "handle": 8,
+      "links": 8,
+      "screen_name": 8,
+      "url": 8,
+      "user": 8,
+      "username": 8,
+      "published_ts_utc": 6,
+      "source": 6,
+      "createdAt": 1,
+      "full_text": 1,
+      "id": 1,
+      "publishedAt": 1,
+      "tweet_id": 1
+    },
+    "fields_unmapped_counts": {
+      "engagement": 7,
+      "token_candidates": 7,
+      "meta": 6,
+      "text": 6,
+      "_wrapper_meta": 2,
+      "content": 1,
+      "like_count": 1,
+      "reply_count": 1,
+      "retweet_count": 1,
+      "symbols": 1
+    },
+    "rows_with_unmapped_fields": 8
+  },
+  "files_matched": [
+    "user_data/research/social/inbox/openclaw_export_sample.jsonl",
+    "user_data/research/social/inbox/x_kol_sample.jsonl"
+  ]
+}

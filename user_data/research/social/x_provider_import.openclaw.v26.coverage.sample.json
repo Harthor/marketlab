@@ -1,0 +1,73 @@
+{
+  "status": "ok",
+  "reason": null,
+  "input_format": "openclaw_export",
+  "rows_in": 2,
+  "rows_out": 2,
+  "duplicates_removed": 0,
+  "errors": [],
+  "missing_fields": {
+    "ts_utc": 0,
+    "author": 0,
+    "text": 0,
+    "channel_or_subreddit": 0
+  },
+  "source_counts": {
+    "openclaw_x": 2
+  },
+  "per_token_mentions": {
+    "ARB": 1,
+    "ETH": 1,
+    "OP": 1,
+    "SOL": 1
+  },
+  "time_range_min": "2026-02-21T07:30:00+00:00",
+  "time_range_max": "2026-02-21T07:45:00+00:00",
+  "mapping_stats": {
+    "fields_seen_counts": {
+      "_wrapper_meta": 2,
+      "author": 1,
+      "content": 1,
+      "createdAt": 1,
+      "engagement": 1,
+      "entities": 1,
+      "full_text": 1,
+      "handle": 1,
+      "id": 1,
+      "like_count": 1,
+      "publishedAt": 1,
+      "reply_count": 1,
+      "retweet_count": 1,
+      "symbols": 1,
+      "token_candidates": 1,
+      "tweet_id": 1,
+      "url": 1
+    },
+    "fields_mapped_counts": {
+      "entities": 2,
+      "links": 2,
+      "url": 2,
+      "author": 1,
+      "createdAt": 1,
+      "full_text": 1,
+      "handle": 1,
+      "id": 1,
+      "publishedAt": 1,
+      "tweet_id": 1
+    },
+    "fields_unmapped_counts": {
+      "_wrapper_meta": 2,
+      "content": 1,
+      "engagement": 1,
+      "like_count": 1,
+      "reply_count": 1,
+      "retweet_count": 1,
+      "symbols": 1,
+      "token_candidates": 1
+    },
+    "rows_with_unmapped_fields": 2
+  },
+  "files_matched": [
+    "user_data/research/social/inbox/openclaw_export_sample.jsonl"
+  ]
+}

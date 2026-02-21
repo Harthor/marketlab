@@ -1,0 +1,123 @@
+{
+  "registry_path": "user_data/research/social/kol_registry_v2.sample.json",
+  "rows_total": 3,
+  "rows_active": 3,
+  "rows": [
+    {
+      "id": "kol_sol_01",
+      "display_name": "Solana Signals",
+      "x_handle": "solsignals",
+      "platforms": [
+        "x",
+        "youtube"
+      ],
+      "chains_focus": [
+        "solana"
+      ],
+      "topics": [
+        "breakouts",
+        "narratives"
+      ],
+      "token_focus": [
+        "SOL",
+        "JUP",
+        "PYTH"
+      ],
+      "tier": "A",
+      "priority_weight": 1.4,
+      "quality_score": 0.82,
+      "spam_risk_score": 0.18,
+      "interaction_success_rate": 0.64,
+      "last_seen_ts_utc": "2026-02-20T18:00:00+00:00",
+      "reliability_score": 0.79,
+      "noise_score": 0.22,
+      "alpha_score": 0.76,
+      "posting_freq_est": 0.72,
+      "reply_rate_est": 0.58,
+      "toxicity_risk": 0.08,
+      "language": "en",
+      "active": true,
+      "notes": "Consistent SOL ecosystem coverage",
+      "kol_priority_score": 0.6366,
+      "kol_priority_score_v2": 0.6366,
+      "quality_band": "medium"
+    },
+    {
+      "id": "kol_arb_01",
+      "display_name": "Arbitrum Research",
+      "x_handle": "arbresearch",
+      "platforms": [
+        "x",
+        "rss"
+      ],
+      "chains_focus": [
+        "arbitrum",
+        "ethereum"
+      ],
+      "topics": [
+        "defi",
+        "l2"
+      ],
+      "token_focus": [
+        "ARB",
+        "ETH",
+        "GMX"
+      ],
+      "tier": "B",
+      "priority_weight": 1.1,
+      "quality_score": 0.74,
+      "spam_risk_score": 0.21,
+      "interaction_success_rate": 0.55,
+      "last_seen_ts_utc": "2026-02-20T16:00:00+00:00",
+      "reliability_score": 0.71,
+      "noise_score": 0.26,
+      "alpha_score": 0.68,
+      "posting_freq_est": 0.66,
+      "reply_rate_est": 0.49,
+      "toxicity_risk": 0.11,
+      "language": "en",
+      "active": true,
+      "notes": "Good on L2 flow updates",
+      "kol_priority_score": 0.46359,
+      "kol_priority_score_v2": 0.46359,
+      "quality_band": "medium"
+    },
+    {
+      "id": "kol_macro_01",
+      "display_name": "Macro Context Desk",
+      "x_handle": "macrodesk",
+      "platforms": [
+        "x"
+      ],
+      "chains_focus": [
+        "multi"
+      ],
+      "topics": [
+        "macro",
+        "risk"
+      ],
+      "token_focus": [
+        "BTC",
+        "ETH"
+      ],
+      "tier": "C",
+      "priority_weight": 0.8,
+      "quality_score": 0.62,
+      "spam_risk_score": 0.33,
+      "interaction_success_rate": 0.37,
+      "last_seen_ts_utc": "2026-02-19T22:00:00+00:00",
+      "reliability_score": 0.65,
+      "noise_score": 0.34,
+      "alpha_score": 0.52,
+      "posting_freq_est": 0.6,
+      "reply_rate_est": 0.35,
+      "toxicity_risk": 0.19,
+      "language": "en",
+      "active": true,
+      "notes": "Useful for context, weaker token specificity",
+      "kol_priority_score": 0.28028,
+      "kol_priority_score_v2": 0.28028,
+      "quality_band": "low"
+    }
+  ]
+}

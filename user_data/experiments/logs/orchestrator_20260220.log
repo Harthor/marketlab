@@ -1,0 +1,368 @@
+2026-02-20 08:03:43,981 INFO Running command: ingest
+2026-02-20 08:03:44,009 INFO Command ingest finished with rc=0
+2026-02-20 08:03:46,894 INFO Running command: recommend
+2026-02-20 08:03:46,896 INFO Command recommend finished with rc=0
+2026-02-20 08:04:06,413 INFO Running command: status
+2026-02-20 08:04:06,415 INFO Command status finished with rc=0
+2026-02-20 08:11:32,522 INFO Running command: ingest-and-recommend
+2026-02-20 08:11:32,522 INFO Running command: status
+2026-02-20 08:11:32,523 INFO Command status finished with rc=0
+2026-02-20 08:11:32,552 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 08:11:38,015 INFO Running command: status
+2026-02-20 08:11:38,015 INFO Command status finished with rc=0
+2026-02-20 08:11:44,346 INFO Running command: baseline
+2026-02-20 08:11:44,347 INFO Running command: recommend
+2026-02-20 08:11:44,347 INFO Command baseline finished with rc=0
+2026-02-20 08:11:44,348 INFO Command recommend finished with rc=0
+2026-02-20 08:11:48,732 INFO Running command: recommend
+2026-02-20 08:11:48,733 INFO Command recommend finished with rc=0
+2026-02-20 08:11:51,961 INFO Running command: status
+2026-02-20 08:11:51,961 INFO Command status finished with rc=0
+2026-02-20 08:33:26,431 INFO Running command: ingest-and-recommend
+2026-02-20 08:33:26,468 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 08:58:17,757 INFO Running command: ingest-and-recommend
+2026-02-20 08:58:17,792 INFO Running command: ingest-and-recommend
+2026-02-20 08:58:17,803 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 08:58:17,835 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 09:04:53,609 INFO Running command: ingest-and-recommend
+2026-02-20 09:04:53,684 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 09:10:13,984 INFO Running command: ingest
+2026-02-20 09:10:14,012 INFO Command ingest finished with rc=0
+2026-02-20 09:10:19,596 INFO Running command: recommend
+2026-02-20 09:10:19,597 INFO Command recommend finished with rc=0
+2026-02-20 09:30:24,080 INFO Running command: ingest-and-recommend
+2026-02-20 09:30:24,145 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 09:45:03,311 INFO Running command: recommend
+2026-02-20 09:45:03,313 INFO Command recommend finished with rc=0
+2026-02-20 09:45:08,590 INFO Running command: ingest-and-recommend
+2026-02-20 09:45:08,612 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 09:45:21,257 INFO Running command: ingest-and-recommend
+2026-02-20 09:45:21,296 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:32:06,388 INFO Running command: ingest-and-recommend
+2026-02-20 11:32:06,390 INFO Running command: ingest-and-recommend
+2026-02-20 11:32:06,392 INFO Running command: ingest-and-recommend
+2026-02-20 11:32:06,420 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:32:06,420 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:32:06,420 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:29,035 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:29,035 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:29,035 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:29,059 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:29,059 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:29,059 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:56,734 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:56,763 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:56,809 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:56,829 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:56,872 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:56,890 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:56,932 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:56,951 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:56,993 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:57,012 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:46:57,054 INFO Running command: ingest-and-recommend
+2026-02-20 11:46:57,072 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 11:47:19,001 INFO Running command: recommend
+2026-02-20 11:47:19,003 INFO Command recommend finished with rc=0
+2026-02-20 11:47:19,045 INFO Running command: recommend
+2026-02-20 11:47:19,046 INFO Command recommend finished with rc=0
+2026-02-20 11:47:19,093 INFO Running command: recommend
+2026-02-20 11:47:19,094 INFO Command recommend finished with rc=0
+2026-02-20 11:47:19,139 INFO Running command: recommend
+2026-02-20 11:47:19,140 INFO Command recommend finished with rc=0
+2026-02-20 11:47:19,195 INFO Running command: recommend
+2026-02-20 11:47:19,196 INFO Command recommend finished with rc=0
+2026-02-20 11:47:19,247 INFO Running command: recommend
+2026-02-20 11:47:19,248 INFO Command recommend finished with rc=0
+2026-02-20 12:07:48,946 INFO Running command: ingest-and-recommend
+2026-02-20 12:07:48,978 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:07:49,022 INFO Running command: ingest-and-recommend
+2026-02-20 12:07:49,044 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:07:49,089 INFO Running command: ingest-and-recommend
+2026-02-20 12:07:49,114 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:07:49,158 INFO Running command: ingest-and-recommend
+2026-02-20 12:07:49,183 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:10,882 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:10,906 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:10,951 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:10,977 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,020 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,040 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,082 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,102 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,145 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,164 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,208 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,227 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,272 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,291 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,333 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,357 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,401 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,422 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,466 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,485 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,528 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,548 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:08:11,591 INFO Running command: ingest-and-recommend
+2026-02-20 12:08:11,611 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:32:33,997 INFO Running command: ingest-and-recommend
+2026-02-20 12:32:34,021 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:32:34,068 INFO Running command: ingest-and-recommend
+2026-02-20 12:32:34,091 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:32:34,132 INFO Running command: ingest-and-recommend
+2026-02-20 12:32:34,149 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:45:33,847 INFO Running command: ingest-and-recommend
+2026-02-20 12:45:33,882 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:45:39,287 INFO Running command: ingest-and-recommend
+2026-02-20 12:45:39,313 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:45:43,955 INFO Running command: ingest-and-recommend
+2026-02-20 12:45:43,986 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:46:33,369 INFO Running command: ingest-and-recommend
+2026-02-20 12:46:33,369 INFO Running command: ingest-and-recommend
+2026-02-20 12:46:33,401 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 12:46:33,401 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:02:14,320 INFO Running command: ingest-and-recommend
+2026-02-20 13:02:14,320 INFO Running command: ingest-and-recommend
+2026-02-20 13:02:14,320 INFO Running command: ingest-and-recommend
+2026-02-20 13:02:14,320 INFO Running command: ingest-and-recommend
+2026-02-20 13:02:14,365 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:02:14,365 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:02:14,365 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:02:14,366 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:02:24,566 INFO Running command: ingest-and-recommend
+2026-02-20 13:02:24,596 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:07:10,389 INFO Running command: ingest-and-recommend
+2026-02-20 13:07:10,436 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:12:05,915 INFO Running command: ingest-and-recommend
+2026-02-20 13:12:05,955 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:16:37,876 INFO Running command: ingest-and-recommend
+2026-02-20 13:16:37,876 INFO Running command: ingest-and-recommend
+2026-02-20 13:16:37,876 INFO Running command: ingest-and-recommend
+2026-02-20 13:16:37,920 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:16:37,920 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:16:37,920 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:16:48,870 INFO Running command: ingest-and-recommend
+2026-02-20 13:16:48,870 INFO Running command: ingest-and-recommend
+2026-02-20 13:16:48,871 INFO Running command: ingest-and-recommend
+2026-02-20 13:16:48,903 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:16:48,903 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:16:48,907 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:31:46,911 INFO Running command: ingest-and-recommend
+2026-02-20 13:31:46,992 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 13:55:33,556 INFO Running command: recommend
+2026-02-20 13:55:33,558 INFO Command recommend finished with rc=0
+2026-02-20 13:56:06,989 INFO Running command: status
+2026-02-20 13:56:06,992 INFO Running command: ingest-and-recommend
+2026-02-20 13:56:06,992 INFO Command status finished with rc=0
+2026-02-20 13:56:07,027 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 14:06:56,569 INFO Running command: recommend
+2026-02-20 14:06:56,574 INFO Command recommend finished with rc=0
+2026-02-20 14:17:40,790 INFO Running command: recommend
+2026-02-20 14:17:40,790 INFO Running command: recommend
+2026-02-20 14:17:40,790 INFO Running command: recommend
+2026-02-20 14:17:40,790 INFO Running command: recommend
+2026-02-20 14:17:40,790 INFO Running command: recommend
+2026-02-20 14:17:40,796 INFO Command recommend finished with rc=0
+2026-02-20 14:17:40,796 INFO Command recommend finished with rc=0
+2026-02-20 14:17:40,796 INFO Command recommend finished with rc=0
+2026-02-20 14:17:40,796 INFO Command recommend finished with rc=0
+2026-02-20 14:17:40,796 INFO Command recommend finished with rc=0
+2026-02-20 14:18:10,691 INFO Running command: ingest
+2026-02-20 14:18:10,723 INFO Command ingest finished with rc=0
+2026-02-20 14:18:10,786 INFO Running command: ingest
+2026-02-20 14:18:10,807 INFO Command ingest finished with rc=0
+2026-02-20 14:18:10,851 INFO Running command: ingest
+2026-02-20 14:18:10,871 INFO Command ingest finished with rc=0
+2026-02-20 14:18:10,914 INFO Running command: ingest
+2026-02-20 14:18:10,936 INFO Command ingest finished with rc=0
+2026-02-20 14:18:10,979 INFO Running command: ingest
+2026-02-20 14:18:10,999 INFO Command ingest finished with rc=0
+2026-02-20 14:18:11,042 INFO Running command: ingest
+2026-02-20 14:18:11,070 INFO Command ingest finished with rc=0
+2026-02-20 14:18:11,116 INFO Running command: ingest
+2026-02-20 14:18:11,141 INFO Command ingest finished with rc=0
+2026-02-20 14:36:16,223 INFO Running command: ingest
+2026-02-20 14:36:16,250 INFO Command ingest finished with rc=0
+2026-02-20 14:36:16,305 INFO Running command: ingest
+2026-02-20 14:36:16,329 INFO Command ingest finished with rc=0
+2026-02-20 14:36:16,377 INFO Running command: ingest
+2026-02-20 14:36:16,399 INFO Command ingest finished with rc=0
+2026-02-20 14:47:50,440 INFO Running command: ingest
+2026-02-20 14:47:50,483 INFO Command ingest finished with rc=0
+2026-02-20 14:47:50,532 INFO Running command: ingest
+2026-02-20 14:47:50,558 INFO Command ingest finished with rc=0
+2026-02-20 14:47:50,609 INFO Running command: ingest
+2026-02-20 14:47:50,636 INFO Command ingest finished with rc=0
+2026-02-20 14:47:50,687 INFO Running command: ingest
+2026-02-20 14:47:50,716 INFO Command ingest finished with rc=0
+2026-02-20 14:47:50,765 INFO Running command: ingest
+2026-02-20 14:47:50,793 INFO Command ingest finished with rc=0
+2026-02-20 14:48:31,212 INFO Running command: recommend
+2026-02-20 14:48:31,212 INFO Running command: recommend
+2026-02-20 14:48:31,212 INFO Running command: recommend
+2026-02-20 14:48:31,212 INFO Running command: recommend
+2026-02-20 14:48:31,212 INFO Running command: recommend
+2026-02-20 14:48:31,217 INFO Command recommend finished with rc=0
+2026-02-20 14:48:31,217 INFO Command recommend finished with rc=0
+2026-02-20 14:48:31,217 INFO Command recommend finished with rc=0
+2026-02-20 14:48:31,217 INFO Command recommend finished with rc=0
+2026-02-20 14:48:31,217 INFO Command recommend finished with rc=0
+2026-02-20 14:54:56,954 INFO Running command: ingest
+2026-02-20 14:54:56,999 INFO Command ingest finished with rc=0
+2026-02-20 14:54:57,153 INFO Running command: ingest
+2026-02-20 14:54:57,198 INFO Command ingest finished with rc=0
+2026-02-20 14:54:57,248 INFO Running command: ingest
+2026-02-20 14:54:57,272 INFO Command ingest finished with rc=0
+2026-02-20 14:54:57,320 INFO Running command: ingest
+2026-02-20 14:54:57,349 INFO Command ingest finished with rc=0
+2026-02-20 14:54:57,395 INFO Running command: ingest
+2026-02-20 14:54:57,416 INFO Command ingest finished with rc=0
+2026-02-20 14:54:57,462 INFO Running command: ingest
+2026-02-20 14:54:57,483 INFO Command ingest finished with rc=0
+2026-02-20 14:55:30,007 INFO Running command: recommend
+2026-02-20 14:55:30,009 INFO Command recommend finished with rc=0
+2026-02-20 14:55:30,056 INFO Running command: recommend
+2026-02-20 14:55:30,057 INFO Command recommend finished with rc=0
+2026-02-20 14:55:30,101 INFO Running command: recommend
+2026-02-20 14:55:30,103 INFO Command recommend finished with rc=0
+2026-02-20 14:55:30,144 INFO Running command: recommend
+2026-02-20 14:55:30,145 INFO Command recommend finished with rc=0
+2026-02-20 14:55:30,187 INFO Running command: recommend
+2026-02-20 14:55:30,188 INFO Command recommend finished with rc=0
+2026-02-20 14:55:30,230 INFO Running command: recommend
+2026-02-20 14:55:30,231 INFO Command recommend finished with rc=0
+2026-02-20 15:12:56,977 INFO Running command: ingest
+2026-02-20 15:12:57,015 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,067 INFO Running command: ingest
+2026-02-20 15:12:57,090 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,134 INFO Running command: ingest
+2026-02-20 15:12:57,155 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,199 INFO Running command: ingest
+2026-02-20 15:12:57,220 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,264 INFO Running command: ingest
+2026-02-20 15:12:57,286 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,330 INFO Running command: ingest
+2026-02-20 15:12:57,351 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,396 INFO Running command: ingest
+2026-02-20 15:12:57,418 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,462 INFO Running command: ingest
+2026-02-20 15:12:57,484 INFO Command ingest finished with rc=0
+2026-02-20 15:12:57,527 INFO Running command: ingest
+2026-02-20 15:12:57,548 INFO Command ingest finished with rc=0
+2026-02-20 15:13:07,591 INFO Running command: ingest
+2026-02-20 15:13:07,619 INFO Command ingest finished with rc=0
+2026-02-20 15:13:07,665 INFO Running command: ingest
+2026-02-20 15:13:07,695 INFO Command ingest finished with rc=0
+2026-02-20 15:13:07,739 INFO Running command: ingest
+2026-02-20 15:13:07,763 INFO Command ingest finished with rc=0
+2026-02-20 15:13:07,806 INFO Running command: ingest
+2026-02-20 15:13:07,831 INFO Command ingest finished with rc=0
+2026-02-20 15:13:07,876 INFO Running command: ingest
+2026-02-20 15:13:07,903 INFO Command ingest finished with rc=0
+2026-02-20 15:13:07,948 INFO Running command: ingest
+2026-02-20 15:13:07,975 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,019 INFO Running command: ingest
+2026-02-20 15:13:08,044 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,087 INFO Running command: ingest
+2026-02-20 15:13:08,113 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,159 INFO Running command: ingest
+2026-02-20 15:13:08,185 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,234 INFO Running command: ingest
+2026-02-20 15:13:08,261 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,304 INFO Running command: ingest
+2026-02-20 15:13:08,329 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,372 INFO Running command: ingest
+2026-02-20 15:13:08,397 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,441 INFO Running command: ingest
+2026-02-20 15:13:08,466 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,509 INFO Running command: ingest
+2026-02-20 15:13:08,536 INFO Command ingest finished with rc=0
+2026-02-20 15:13:08,580 INFO Running command: ingest
+2026-02-20 15:13:08,605 INFO Command ingest finished with rc=0
+2026-02-20 15:17:36,612 INFO Running command: ingest
+2026-02-20 15:17:36,639 INFO Command ingest finished with rc=0
+2026-02-20 15:18:18,107 INFO Running command: ingest
+2026-02-20 15:18:18,132 INFO Command ingest finished with rc=0
+2026-02-20 15:19:34,741 INFO Running command: recommend
+2026-02-20 15:19:34,744 INFO Command recommend finished with rc=0
+2026-02-20 15:19:34,786 INFO Running command: recommend
+2026-02-20 15:19:34,788 INFO Command recommend finished with rc=0
+2026-02-20 15:19:34,829 INFO Running command: recommend
+2026-02-20 15:19:34,831 INFO Command recommend finished with rc=0
+2026-02-20 15:19:34,871 INFO Running command: recommend
+2026-02-20 15:19:34,873 INFO Command recommend finished with rc=0
+2026-02-20 15:19:34,914 INFO Running command: recommend
+2026-02-20 15:19:34,916 INFO Command recommend finished with rc=0
+2026-02-20 15:19:34,957 INFO Running command: recommend
+2026-02-20 15:19:34,958 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,001 INFO Running command: recommend
+2026-02-20 15:19:35,003 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,047 INFO Running command: recommend
+2026-02-20 15:19:35,048 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,089 INFO Running command: recommend
+2026-02-20 15:19:35,091 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,131 INFO Running command: recommend
+2026-02-20 15:19:35,133 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,174 INFO Running command: recommend
+2026-02-20 15:19:35,175 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,216 INFO Running command: recommend
+2026-02-20 15:19:35,218 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,258 INFO Running command: recommend
+2026-02-20 15:19:35,260 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,302 INFO Running command: recommend
+2026-02-20 15:19:35,303 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,345 INFO Running command: recommend
+2026-02-20 15:19:35,346 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,387 INFO Running command: recommend
+2026-02-20 15:19:35,389 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,432 INFO Running command: recommend
+2026-02-20 15:19:35,434 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,475 INFO Running command: recommend
+2026-02-20 15:19:35,477 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,518 INFO Running command: recommend
+2026-02-20 15:19:35,520 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,561 INFO Running command: recommend
+2026-02-20 15:19:35,563 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,604 INFO Running command: recommend
+2026-02-20 15:19:35,606 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,647 INFO Running command: recommend
+2026-02-20 15:19:35,649 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,690 INFO Running command: recommend
+2026-02-20 15:19:35,691 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,732 INFO Running command: recommend
+2026-02-20 15:19:35,734 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,775 INFO Running command: recommend
+2026-02-20 15:19:35,776 INFO Command recommend finished with rc=0
+2026-02-20 15:19:35,818 INFO Running command: recommend
+2026-02-20 15:19:35,819 INFO Command recommend finished with rc=0
+2026-02-20 15:28:43,295 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,331 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,382 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,406 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,453 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,475 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,521 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,544 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,590 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,613 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,662 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,685 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,736 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,759 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,806 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,830 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,878 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,901 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:43,950 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:43,973 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:44,020 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:44,045 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:28:44,093 INFO Running command: ingest-and-recommend
+2026-02-20 15:28:44,116 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:35:44,070 INFO Running command: ingest-and-recommend
+2026-02-20 15:35:44,101 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:35:44,157 INFO Running command: ingest-and-recommend
+2026-02-20 15:35:44,182 INFO Command ingest-and-recommend finished with rc=0
+2026-02-20 15:35:44,228 INFO Running command: ingest-and-recommend
+2026-02-20 15:35:44,254 INFO Command ingest-and-recommend finished with rc=0

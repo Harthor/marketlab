@@ -1,0 +1,95 @@
+{
+  "profile": "agency_like_usage",
+  "assumptions": {
+    "day_count_for_month": 30,
+    "x_monthly_fixed_usd": 0,
+    "notes": [
+      "Cost model is approximate and range-based.",
+      "Reddit/RSS/Telegram estimates are low-cost heuristics for research.",
+      "X/Twitter numbers are placeholders unless explicit pricing is provided."
+    ]
+  },
+  "costo_por_fuente": {
+    "reddit": {
+      "volume_per_day": 500,
+      "unit": "requests",
+      "free_units_per_day": 1000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "telegram": {
+      "volume_per_day": 20000,
+      "unit": "messages",
+      "free_units_per_day": 1000000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "rss": {
+      "volume_per_day": 300,
+      "unit": "fetches",
+      "free_units_per_day": 1000000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "x": {
+      "volume_per_day": 0,
+      "unit": "requests",
+      "free_units_per_day": 0,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": true
+    }
+  },
+  "costo_estimado_mensual": {
+    "low_usd": 0.0,
+    "high_usd": 0.0
+  },
+  "totals": {
+    "estimated_daily_cost_low_usd": 0.0,
+    "estimated_daily_cost_high_usd": 0.0
+  },
+  "agency_usage_scenarios": [
+    {
+      "requests_per_day": 50,
+      "sources_used": [
+        "reddit",
+        "rss",
+        "telegram"
+      ],
+      "with_x": false,
+      "monthly_low_usd": 0.0,
+      "monthly_high_usd": 0.0,
+      "daily_low_usd": 0.0,
+      "daily_high_usd": 0.0
+    },
+    {
+      "requests_per_day": 200,
+      "sources_used": [
+        "reddit",
+        "rss",
+        "telegram"
+      ],
+      "with_x": false,
+      "monthly_low_usd": 0.0,
+      "monthly_high_usd": 0.0,
+      "daily_low_usd": 0.0,
+      "daily_high_usd": 0.0
+    },
+    {
+      "requests_per_day": 500,
+      "sources_used": [
+        "reddit",
+        "rss",
+        "telegram"
+      ],
+      "with_x": false,
+      "monthly_low_usd": 0.0,
+      "monthly_high_usd": 0.0,
+      "daily_low_usd": 0.0,
+      "daily_high_usd": 0.0
+    }
+  ]
+}

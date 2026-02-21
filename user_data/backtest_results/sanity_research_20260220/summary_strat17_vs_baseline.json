@@ -1,0 +1,78 @@
+{
+  "baseline": {
+    "strategy": "Strat03RSIBBMeanReversion_v3c",
+    "trades": 22,
+    "trades_per_day": 0.06,
+    "profit_total_pct": 0.07948262199999996,
+    "winrate_pct": 40.909090909090914,
+    "profit_factor": 1.1873360457101463,
+    "max_drawdown_pct": 0.3395007950000035
+  },
+  "new": {
+    "strategy": "Strat17HTFTrendLTFReversion_v1",
+    "trades": 809,
+    "trades_per_day": 2.04,
+    "profit_total_pct": -6.865219531999999,
+    "winrate_pct": 21.26081582200247,
+    "profit_factor": 0.530081391044602,
+    "max_drawdown_pct": 6.904643583000006,
+    "delta_pf_vs_baseline": -0.6572546546655443,
+    "delta_maxdd_vs_baseline_pp": 6.565142788000002
+  },
+  "breakdown": {
+    "top5": [
+      {
+        "pair": "DOGE/USDT",
+        "profit_total_pct": 0.34,
+        "trades": 24
+      },
+      {
+        "pair": "OP/USDT",
+        "profit_total_pct": 0.0,
+        "trades": 0
+      },
+      {
+        "pair": "AWE/USDT",
+        "profit_total_pct": 0.0,
+        "trades": 0
+      },
+      {
+        "pair": "SUI/USDT",
+        "profit_total_pct": -0.39,
+        "trades": 53
+      },
+      {
+        "pair": "ZEC/USDT",
+        "profit_total_pct": -0.62,
+        "trades": 91
+      }
+    ],
+    "bottom5": [
+      {
+        "pair": "BNB/USDT",
+        "profit_total_pct": -2.28,
+        "trades": 208
+      },
+      {
+        "pair": "BTC/USDT",
+        "profit_total_pct": -1.63,
+        "trades": 160
+      },
+      {
+        "pair": "SOL/USDT",
+        "profit_total_pct": -0.83,
+        "trades": 69
+      },
+      {
+        "pair": "ETH/USDT",
+        "profit_total_pct": -0.79,
+        "trades": 88
+      },
+      {
+        "pair": "XRP/USDT",
+        "profit_total_pct": -0.67,
+        "trades": 116
+      }
+    ]
+  }
+}

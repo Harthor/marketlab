@@ -1,0 +1,74 @@
+[
+  {
+    "split": "WF1",
+    "universe": "top15",
+    "experiment_id": "20260220T150810Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF1",
+    "universe": "top20",
+    "experiment_id": "20260220T150810Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective",
+    "recommendation_code": "INCREASE_SAMPLE_SIZE"
+  },
+  {
+    "split": "WF2",
+    "universe": "top15",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF2",
+    "universe": "top20",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF3",
+    "universe": "top15",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF3",
+    "universe": "top20",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF4",
+    "universe": "top15",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF4",
+    "universe": "top20",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF5",
+    "universe": "top15",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF5",
+    "universe": "top20",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective",
+    "recommendation_code": "BASELINE_CANDIDATE"
+  },
+  {
+    "split": "WF6",
+    "universe": "top15",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective",
+    "recommendation_code": "INCREASE_SAMPLE_SIZE"
+  },
+  {
+    "split": "WF6",
+    "universe": "top20",
+    "experiment_id": "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective",
+    "recommendation_code": "INCREASE_SAMPLE_SIZE"
+  }
+]

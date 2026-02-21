@@ -1,0 +1,5 @@
+target_monthly_usd,feature_reddit,feature_rss,feature_youtube,feature_x_provider,max_safe_daily_requests,recommended_daily_requests,kol_universe_limit,polling_interval_sec,coverage_expected,coverage_score,degradation_plan,estimated_kols_monitored,estimated_token_queries_per_day,estimated_followups_per_day,estimated_coverage_tier
+0.0,False,True,True,False,0,0,10,1800,low,0.35,"[""disable_x_provider"", ""reduce_requests_per_day"", ""use_cached_or_mock_sources"", ""monitor_top_tokens_only""]",0,0,0,C
+50.0,True,True,True,False,0,0,20,900,medium,0.6,"[""reduce_requests_per_day_25pct"", ""reduce_kol_universe"", ""prioritize_reddit_rss_youtube""]",0,0,0,C
+100.0,True,True,True,True,0,0,35,600,med_high,0.75,"[""cap_x_provider_calls"", ""reduce_noncritical_queries"", ""keep_high_priority_kols""]",0,0,0,C
+150.0,True,True,True,True,376,350,50,300,high,0.85,"[""normal_mode_with_watchdog"", ""keep_budget_alert_thresholds_active""]",38,157,77,B

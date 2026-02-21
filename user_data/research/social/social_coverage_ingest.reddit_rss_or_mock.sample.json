@@ -1,0 +1,135 @@
+{
+  "ts_utc": "2026-02-21T07:54:52+00:00",
+  "sources_requested": [
+    "reddit",
+    "rss"
+  ],
+  "events_total": 2,
+  "status": "degraded",
+  "degraded_reasons": [
+    "missing_reddit_credentials_or_user_agent",
+    "rss_no_events_or_fetch_failed"
+  ],
+  "coverage": [
+    {
+      "source": "reddit",
+      "status": "degraded",
+      "reason": "missing_reddit_credentials_or_user_agent",
+      "events_count": 1,
+      "latency_ms": null,
+      "errors": [],
+      "rate_limited": false,
+      "used_oauth": false,
+      "used_mock_fallback": true,
+      "source_quality": 0.8,
+      "request_attempts": []
+    },
+    {
+      "source": "rss",
+      "status": "degraded",
+      "reason": "rss_no_events_or_fetch_failed",
+      "events_count": 1,
+      "latency_ms": 13665.28,
+      "errors": [
+        "https://www.coindesk.com/arc/outboundfeeds/rss/: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://www.theblock.co/rss.xml: <urlopen error [Errno 8] nodename nor servname provided, or not known>",
+        "https://decrypt.co/feed: <urlopen error [Errno 8] nodename nor servname provided, or not known>"
+      ],
+      "rate_limited": false,
+      "source_quality": 0.75,
+      "request_attempts": [
+        {
+          "step": "rss_url_https://www.coindesk.com/arc/outboundfeeds/rss/",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "error",
+              "latency_ms": 25.7,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            },
+            {
+              "attempt": 2,
+              "status": "error",
+              "latency_ms": 13.55,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            },
+            {
+              "attempt": 3,
+              "status": "error",
+              "latency_ms": 14.04,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            }
+          ]
+        },
+        {
+          "step": "rss_url_https://www.theblock.co/rss.xml",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "error",
+              "latency_ms": 9.5,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            },
+            {
+              "attempt": 2,
+              "status": "error",
+              "latency_ms": 14.53,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            },
+            {
+              "attempt": 3,
+              "status": "error",
+              "latency_ms": 11.85,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            }
+          ]
+        },
+        {
+          "step": "rss_url_https://decrypt.co/feed",
+          "attempts": [
+            {
+              "attempt": 1,
+              "status": "error",
+              "latency_ms": 8.74,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            },
+            {
+              "attempt": 2,
+              "status": "error",
+              "latency_ms": 13.38,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            },
+            {
+              "attempt": 3,
+              "status": "error",
+              "latency_ms": 11.96,
+              "error": "<urlopen error [Errno 8] nodename nor servname provided, or not known>"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "quality": {
+    "rows_in": 2,
+    "rows_out": 2,
+    "duplicates_removed": 0,
+    "missing_fields": {
+      "ts_utc": 0,
+      "author": 0,
+      "text": 0,
+      "channel_or_subreddit": 0
+    },
+    "source_counts": {
+      "reddit": 1,
+      "rss": 1
+    },
+    "time_range_min": "2026-02-21T07:54:38+00:00",
+    "time_range_max": "2026-02-21T07:54:52+00:00",
+    "per_token_mentions": {
+      "BTC": 2,
+      "ETH": 1,
+      "SOL": 1
+    }
+  }
+}

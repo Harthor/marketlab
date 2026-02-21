@@ -1,0 +1,122 @@
+[
+  {
+    "split": "WF1",
+    "universe": "top15",
+    "trades": 11,
+    "trades_per_day": 0.09,
+    "profit_pct": 0.002828138999999996,
+    "winrate_pct": 27.27272727272727,
+    "pf": 1.0186878048566783,
+    "maxdd_pct": 0.13055290099999864
+  },
+  {
+    "split": "WF1",
+    "universe": "top20",
+    "trades": 12,
+    "trades_per_day": 0.1,
+    "profit_pct": -0.052027460999999976,
+    "winrate_pct": 25.0,
+    "pf": 0.7476742865362949,
+    "maxdd_pct": 0.1854085009999949
+  },
+  {
+    "split": "WF2",
+    "universe": "top15",
+    "trades": 12,
+    "trades_per_day": 0.1,
+    "profit_pct": 0.073494751,
+    "winrate_pct": 33.33333333333333,
+    "pf": 1.5224435567293062,
+    "maxdd_pct": 0.0743400700000052
+  },
+  {
+    "split": "WF2",
+    "universe": "top20",
+    "trades": 12,
+    "trades_per_day": 0.1,
+    "profit_pct": 0.073494751,
+    "winrate_pct": 33.33333333333333,
+    "pf": 1.5224435567293062,
+    "maxdd_pct": 0.0743400700000052
+  },
+  {
+    "split": "WF3",
+    "universe": "top15",
+    "trades": 5,
+    "trades_per_day": 0.04,
+    "profit_pct": 0.134363751,
+    "winrate_pct": 60.0,
+    "pf": 3.949693628775965,
+    "maxdd_pct": 0.045551765000004706
+  },
+  {
+    "split": "WF3",
+    "universe": "top20",
+    "trades": 8,
+    "trades_per_day": 0.07,
+    "profit_pct": 0.084542069,
+    "winrate_pct": 50.0,
+    "pf": 1.5448070819217712,
+    "maxdd_pct": 0.08340514870044786
+  },
+  {
+    "split": "WF4",
+    "universe": "top15",
+    "trades": 5,
+    "trades_per_day": 0.04,
+    "profit_pct": 0.16222588000000002,
+    "winrate_pct": 80.0,
+    "pf": 8.628056613532705,
+    "maxdd_pct": 0.021238652400239585
+  },
+  {
+    "split": "WF4",
+    "universe": "top20",
+    "trades": 8,
+    "trades_per_day": 0.07,
+    "profit_pct": 0.11240419800000001,
+    "winrate_pct": 62.5,
+    "pf": 1.8587472444238846,
+    "maxdd_pct": 0.0834171966720993
+  },
+  {
+    "split": "WF5",
+    "universe": "top15",
+    "trades": 6,
+    "trades_per_day": 0.05,
+    "profit_pct": 0.18295356599999998,
+    "winrate_pct": 83.33333333333334,
+    "pf": 9.60269741853576,
+    "maxdd_pct": 0.02126411620861697
+  },
+  {
+    "split": "WF5",
+    "universe": "top20",
+    "trades": 9,
+    "trades_per_day": 0.07,
+    "profit_pct": 0.29654948200000003,
+    "winrate_pct": 77.77777777777779,
+    "pf": 11.73846559859274,
+    "maxdd_pct": 0.027611884338650566
+  },
+  {
+    "split": "WF6",
+    "universe": "top15",
+    "trades": 12,
+    "trades_per_day": 0.1,
+    "profit_pct": -0.018656114000000005,
+    "winrate_pct": 25.0,
+    "pf": 0.89204907529222,
+    "maxdd_pct": 0.13055290099999864
+  },
+  {
+    "split": "WF6",
+    "universe": "top20",
+    "trades": 13,
+    "trades_per_day": 0.11,
+    "profit_pct": -0.07351171399999998,
+    "winrate_pct": 23.076923076923077,
+    "pf": 0.6771212692904564,
+    "maxdd_pct": 0.1854085009999949
+  }
+]

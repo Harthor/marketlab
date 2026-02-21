@@ -1,0 +1,191 @@
+{
+  "registry_path": "user_data/research/social/kol_registry_v2.sample.json",
+  "rows_total": 3,
+  "rows_active": 3,
+  "score_mode": "v2_feedback",
+  "feedback_rows": 3,
+  "rows": [
+    {
+      "id": "kol_sol_01",
+      "display_name": "Solana Signals",
+      "x_handle": "solsignals",
+      "platforms": [
+        "x",
+        "youtube"
+      ],
+      "chains_focus": [
+        "solana"
+      ],
+      "topics": [
+        "breakouts",
+        "narratives"
+      ],
+      "token_focus": [
+        "SOL",
+        "JUP",
+        "PYTH"
+      ],
+      "tier": "A",
+      "priority_weight": 1.4,
+      "quality_score": 0.82,
+      "spam_risk_score": 0.18,
+      "interaction_success_rate": 0.64,
+      "last_seen_ts_utc": "2026-02-20T18:00:00+00:00",
+      "reliability_score": 0.79,
+      "noise_score": 0.22,
+      "alpha_score": 0.76,
+      "posting_freq_est": 0.72,
+      "reply_rate_est": 0.58,
+      "toxicity_risk": 0.08,
+      "language": "en",
+      "active": true,
+      "notes": "Consistent SOL ecosystem coverage",
+      "kol_priority_score": 1.0,
+      "kol_priority_score_v2": 1.0,
+      "score_mode": "v2_feedback",
+      "score_breakdown": {
+        "base_v2_score_raw": 0.6366,
+        "feedback_hitrate_component": 0.18,
+        "feedback_response_component": 0.14,
+        "feedback_recency_component": 0.083242,
+        "feedback_spam_penalty_component": 0.0144,
+        "inactive_multiplier_applied": false
+      },
+      "feedback_metrics": {
+        "events_total": 3,
+        "planned_actions": 1,
+        "mention_detected": 1,
+        "reply_received": 1,
+        "quote_received": 0,
+        "like_repost_updates": 0,
+        "last_seen_ts_utc": "2026-02-20T11:00:00+00:00",
+        "historical_mention_hitrate": 1.0,
+        "response_rate": 1.0,
+        "recency_decay": 0.832421,
+        "age_hours": 30.814035
+      },
+      "quality_band": "high"
+    },
+    {
+      "id": "kol_arb_01",
+      "display_name": "Arbitrum Research",
+      "x_handle": "arbresearch",
+      "platforms": [
+        "x",
+        "rss"
+      ],
+      "chains_focus": [
+        "arbitrum",
+        "ethereum"
+      ],
+      "topics": [
+        "defi",
+        "l2"
+      ],
+      "token_focus": [
+        "ARB",
+        "ETH",
+        "GMX"
+      ],
+      "tier": "B",
+      "priority_weight": 1.1,
+      "quality_score": 0.74,
+      "spam_risk_score": 0.21,
+      "interaction_success_rate": 0.55,
+      "last_seen_ts_utc": "2026-02-20T16:00:00+00:00",
+      "reliability_score": 0.71,
+      "noise_score": 0.26,
+      "alpha_score": 0.68,
+      "posting_freq_est": 0.66,
+      "reply_rate_est": 0.49,
+      "toxicity_risk": 0.11,
+      "language": "en",
+      "active": true,
+      "notes": "Good on L2 flow updates",
+      "kol_priority_score": 0.850529,
+      "kol_priority_score_v2": 0.850529,
+      "score_mode": "v2_feedback",
+      "score_breakdown": {
+        "base_v2_score_raw": 0.46359,
+        "feedback_hitrate_component": 0.18,
+        "feedback_response_component": 0.14,
+        "feedback_recency_component": 0.083739,
+        "feedback_spam_penalty_component": 0.0168,
+        "inactive_multiplier_applied": false
+      },
+      "feedback_metrics": {
+        "events_total": 2,
+        "planned_actions": 1,
+        "mention_detected": 0,
+        "reply_received": 0,
+        "quote_received": 1,
+        "like_repost_updates": 0,
+        "last_seen_ts_utc": "2026-02-20T12:00:00+00:00",
+        "historical_mention_hitrate": 1.0,
+        "response_rate": 1.0,
+        "recency_decay": 0.837391,
+        "age_hours": 29.814035
+      },
+      "quality_band": "high"
+    },
+    {
+      "id": "kol_macro_01",
+      "display_name": "Macro Context Desk",
+      "x_handle": "macrodesk",
+      "platforms": [
+        "x"
+      ],
+      "chains_focus": [
+        "multi"
+      ],
+      "topics": [
+        "macro",
+        "risk"
+      ],
+      "token_focus": [
+        "BTC",
+        "ETH"
+      ],
+      "tier": "C",
+      "priority_weight": 0.8,
+      "quality_score": 0.62,
+      "spam_risk_score": 0.33,
+      "interaction_success_rate": 0.37,
+      "last_seen_ts_utc": "2026-02-19T22:00:00+00:00",
+      "reliability_score": 0.65,
+      "noise_score": 0.34,
+      "alpha_score": 0.52,
+      "posting_freq_est": 0.6,
+      "reply_rate_est": 0.35,
+      "toxicity_risk": 0.19,
+      "language": "en",
+      "active": true,
+      "notes": "Useful for context, weaker token specificity",
+      "kol_priority_score": 0.327779,
+      "kol_priority_score_v2": 0.327779,
+      "score_mode": "v2_feedback",
+      "score_breakdown": {
+        "base_v2_score_raw": 0.28028,
+        "feedback_hitrate_component": 0.0,
+        "feedback_response_component": 0.0,
+        "feedback_recency_component": 0.073899,
+        "feedback_spam_penalty_component": 0.0264,
+        "inactive_multiplier_applied": false
+      },
+      "feedback_metrics": {
+        "events_total": 1,
+        "planned_actions": 0,
+        "mention_detected": 1,
+        "reply_received": 0,
+        "quote_received": 0,
+        "like_repost_updates": 0,
+        "last_seen_ts_utc": "2026-02-19T15:00:00+00:00",
+        "historical_mention_hitrate": 0.0,
+        "response_rate": 0.0,
+        "recency_decay": 0.738995,
+        "age_hours": 50.814035
+      },
+      "quality_band": "low"
+    }
+  ]
+}

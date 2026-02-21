@@ -1,0 +1,25 @@
+Estamos en MI repo existente de Freqtrade. NO crear repo nuevo.
+
+Contexto actual
+- Experimento: {experiment_id}
+- Estrategia: {strategy_name} ({strategy_family})
+- Config: {config_path}
+- Timeframe: {timeframe}
+- Timerange: {timerange}
+- Universo actual: {universe_label} ({pairs_count} pares)
+- Últimas métricas: trades={trades}, trades/día={trades_per_day}, profit%={profit_total_pct}, winrate%={winrate_pct}, PF={profit_factor}, maxDD%={max_drawdown_pct}
+
+Recomendación
+- {recommendation_text}
+
+Tarea
+1) Mantener estrategia sin cambios de lógica.
+2) Escalar universo de pares (ej. top10 -> top20) usando scoring puro.
+3) Asegurar data para mismo timeframe y timerange.
+4) Correr backtest homogéneo y comparar contra el baseline actual.
+5) Entregar tabla: universo, trades, trades/día, profit%, winrate, PF, maxDD.
+
+Restricciones
+- NO tocar configs UI.
+- Mantener setup homogéneo (config, timerange, fees, mercado).
+- No cambiar estrategia base salvo instrucción explícita.

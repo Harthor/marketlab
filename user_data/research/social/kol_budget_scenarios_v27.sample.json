@@ -1,0 +1,2583 @@
+{
+  "profile_name": "kol_budget_profile_default",
+  "target_monthly_usd": 100.0,
+  "hard_cap_monthly_usd": 100.0,
+  "hard_cap_daily_usd": 0.0,
+  "alert_thresholds": [
+    70.0,
+    85.0,
+    100.0
+  ],
+  "daily_requests_grid": [
+    50,
+    200,
+    500
+  ],
+  "fixed_monthly_usd": {
+    "infra": 25.0,
+    "ops": 30.0,
+    "x_seat": 60.0
+  },
+  "variable_costs": {
+    "provider_per_1k_request_usd": {
+      "low": 0.4,
+      "medium": 0.9,
+      "high": 1.8
+    },
+    "llm_per_1k_tokens_usd": 0.002,
+    "avg_tokens_per_request": 1100
+  },
+  "scenarios": [
+    {
+      "scenario": "low",
+      "scenario_family": "base",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 3.9,
+      "provider_variable_usd": 0.6,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 118.9,
+      "daily_total_usd": 3.963333,
+      "cost_per_request_usd": 0.07926667,
+      "budget_usage_pct": 118.9,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 4,
+      "estimated_followups_per_day": 2,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "base",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 4.65,
+      "provider_variable_usd": 1.35,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 119.65,
+      "daily_total_usd": 3.988333,
+      "cost_per_request_usd": 0.07976667,
+      "budget_usage_pct": 119.65,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 4,
+      "estimated_followups_per_day": 2,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "high",
+      "scenario_family": "base",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 6.0,
+      "provider_variable_usd": 2.7,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 121.0,
+      "daily_total_usd": 4.033333,
+      "cost_per_request_usd": 0.08066667,
+      "budget_usage_pct": 121.0,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 4,
+      "estimated_followups_per_day": 2,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "low",
+      "scenario_family": "base",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 15.6,
+      "provider_variable_usd": 2.4,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 130.6,
+      "daily_total_usd": 4.353333,
+      "cost_per_request_usd": 0.02176667,
+      "budget_usage_pct": 130.6,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 4,
+      "estimated_token_queries_per_day": 18,
+      "estimated_followups_per_day": 8,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "base",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 18.6,
+      "provider_variable_usd": 5.4,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 133.6,
+      "daily_total_usd": 4.453333,
+      "cost_per_request_usd": 0.02226667,
+      "budget_usage_pct": 133.6,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 4,
+      "estimated_token_queries_per_day": 18,
+      "estimated_followups_per_day": 8,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "high",
+      "scenario_family": "base",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 24.0,
+      "provider_variable_usd": 10.8,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 139.0,
+      "daily_total_usd": 4.633333,
+      "cost_per_request_usd": 0.02316667,
+      "budget_usage_pct": 139.0,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 4,
+      "estimated_token_queries_per_day": 18,
+      "estimated_followups_per_day": 8,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "low",
+      "scenario_family": "base",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 39.0,
+      "provider_variable_usd": 6.0,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 154.0,
+      "daily_total_usd": 5.133333,
+      "cost_per_request_usd": 0.01026667,
+      "budget_usage_pct": 154.0,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "base",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 46.5,
+      "provider_variable_usd": 13.5,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 161.5,
+      "daily_total_usd": 5.383333,
+      "cost_per_request_usd": 0.01076667,
+      "budget_usage_pct": 161.5,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "high",
+      "scenario_family": "base",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 60.0,
+      "provider_variable_usd": 27.0,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 175.0,
+      "daily_total_usd": 5.833333,
+      "cost_per_request_usd": 0.01166667,
+      "budget_usage_pct": 175.0,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_disabled_research_only",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 3.3,
+      "provider_variable_usd": 0.0,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 58.3,
+      "daily_total_usd": 1.943333,
+      "cost_per_request_usd": 0.03886667,
+      "budget_usage_pct": 58.3,
+      "status": "ok",
+      "alerts": [],
+      "max_safe_daily_requests": 681,
+      "max_target_daily_requests": 681,
+      "degradation_plan": [
+        "normal_mode"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "normal_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 7,
+      "estimated_followups_per_day": 3,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_disabled_research_only",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 13.2,
+      "provider_variable_usd": 0.0,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 68.2,
+      "daily_total_usd": 2.273333,
+      "cost_per_request_usd": 0.01136667,
+      "budget_usage_pct": 68.2,
+      "status": "ok",
+      "alerts": [],
+      "max_safe_daily_requests": 681,
+      "max_target_daily_requests": 681,
+      "degradation_plan": [
+        "normal_mode"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "normal_mode"
+      ],
+      "estimated_kols_monitored": 6,
+      "estimated_token_queries_per_day": 25,
+      "estimated_followups_per_day": 12,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_disabled_research_only",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 33.0,
+      "provider_variable_usd": 0.0,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 88.0,
+      "daily_total_usd": 2.933333,
+      "cost_per_request_usd": 0.00586667,
+      "budget_usage_pct": 88.0,
+      "status": "ok",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85"
+      ],
+      "max_safe_daily_requests": 681,
+      "max_target_daily_requests": 681,
+      "degradation_plan": [
+        "reduce_query_frequency_25pct",
+        "disable_noncritical_kol_monitoring",
+        "prioritize_top2_tokens_only"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "low",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 4.35,
+      "provider_variable_usd": 1.05,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 59.35,
+      "daily_total_usd": 1.978333,
+      "cost_per_request_usd": 0.03956667,
+      "budget_usage_pct": 59.35,
+      "status": "ok",
+      "alerts": [],
+      "max_safe_daily_requests": 517,
+      "max_target_daily_requests": 517,
+      "degradation_plan": [
+        "normal_mode"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "normal_mode"
+      ],
+      "estimated_kols_monitored": 2,
+      "estimated_token_queries_per_day": 11,
+      "estimated_followups_per_day": 5,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 5.1,
+      "provider_variable_usd": 1.8,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 60.1,
+      "daily_total_usd": 2.003333,
+      "cost_per_request_usd": 0.04006667,
+      "budget_usage_pct": 60.1,
+      "status": "ok",
+      "alerts": [],
+      "max_safe_daily_requests": 441,
+      "max_target_daily_requests": 441,
+      "degradation_plan": [
+        "normal_mode"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "normal_mode"
+      ],
+      "estimated_kols_monitored": 2,
+      "estimated_token_queries_per_day": 10,
+      "estimated_followups_per_day": 5,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "high",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 6.3,
+      "provider_variable_usd": 3.0,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 61.3,
+      "daily_total_usd": 2.043333,
+      "cost_per_request_usd": 0.04086667,
+      "budget_usage_pct": 61.3,
+      "status": "ok",
+      "alerts": [],
+      "max_safe_daily_requests": 357,
+      "max_target_daily_requests": 357,
+      "degradation_plan": [
+        "normal_mode"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "normal_mode"
+      ],
+      "estimated_kols_monitored": 2,
+      "estimated_token_queries_per_day": 10,
+      "estimated_followups_per_day": 5,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "low",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 17.4,
+      "provider_variable_usd": 4.2,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 72.4,
+      "daily_total_usd": 2.413333,
+      "cost_per_request_usd": 0.01206667,
+      "budget_usage_pct": 72.4,
+      "status": "ok",
+      "alerts": [
+        "BUDGET_ALERT_70"
+      ],
+      "max_safe_daily_requests": 517,
+      "max_target_daily_requests": 517,
+      "degradation_plan": [
+        "enable_budget_watchdog",
+        "lower_background_polling_rate"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first"
+      ],
+      "estimated_kols_monitored": 9,
+      "estimated_token_queries_per_day": 36,
+      "estimated_followups_per_day": 18,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 20.4,
+      "provider_variable_usd": 7.2,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 75.4,
+      "daily_total_usd": 2.513333,
+      "cost_per_request_usd": 0.01256667,
+      "budget_usage_pct": 75.4,
+      "status": "ok",
+      "alerts": [
+        "BUDGET_ALERT_70"
+      ],
+      "max_safe_daily_requests": 441,
+      "max_target_daily_requests": 441,
+      "degradation_plan": [
+        "enable_budget_watchdog",
+        "lower_background_polling_rate"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first"
+      ],
+      "estimated_kols_monitored": 8,
+      "estimated_token_queries_per_day": 35,
+      "estimated_followups_per_day": 17,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "high",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 25.2,
+      "provider_variable_usd": 12.0,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 80.2,
+      "daily_total_usd": 2.673333,
+      "cost_per_request_usd": 0.01336667,
+      "budget_usage_pct": 80.2,
+      "status": "ok",
+      "alerts": [
+        "BUDGET_ALERT_70"
+      ],
+      "max_safe_daily_requests": 357,
+      "max_target_daily_requests": 357,
+      "degradation_plan": [
+        "enable_budget_watchdog",
+        "lower_background_polling_rate"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first"
+      ],
+      "estimated_kols_monitored": 7,
+      "estimated_token_queries_per_day": 32,
+      "estimated_followups_per_day": 15,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "low",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 43.5,
+      "provider_variable_usd": 10.5,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 98.5,
+      "daily_total_usd": 3.283333,
+      "cost_per_request_usd": 0.00656667,
+      "budget_usage_pct": 98.5,
+      "status": "ok",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85"
+      ],
+      "max_safe_daily_requests": 517,
+      "max_target_daily_requests": 517,
+      "degradation_plan": [
+        "reduce_query_frequency_25pct",
+        "disable_noncritical_kol_monitoring",
+        "prioritize_top2_tokens_only"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency"
+      ],
+      "estimated_kols_monitored": 13,
+      "estimated_token_queries_per_day": 56,
+      "estimated_followups_per_day": 27,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 51.0,
+      "provider_variable_usd": 18.0,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 106.0,
+      "daily_total_usd": 3.533333,
+      "cost_per_request_usd": 0.00706667,
+      "budget_usage_pct": 106.0,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 441,
+      "max_target_daily_requests": 441,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 46,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "high",
+      "scenario_family": "x_pay_per_usage_100usd_cap",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 55.0,
+      "variable_total_usd": 63.0,
+      "provider_variable_usd": 30.0,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 118.0,
+      "daily_total_usd": 3.933333,
+      "cost_per_request_usd": 0.00786667,
+      "budget_usage_pct": 118.0,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 357,
+      "max_target_daily_requests": 357,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 9,
+      "estimated_token_queries_per_day": 38,
+      "estimated_followups_per_day": 18,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_100",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 155.0,
+      "variable_total_usd": 4.05,
+      "provider_variable_usd": 0.75,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 159.05,
+      "daily_total_usd": 5.301667,
+      "cost_per_request_usd": 0.10603333,
+      "budget_usage_pct": 159.05,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 4,
+      "estimated_followups_per_day": 2,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_100",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 155.0,
+      "variable_total_usd": 16.2,
+      "provider_variable_usd": 3.0,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 171.2,
+      "daily_total_usd": 5.706667,
+      "cost_per_request_usd": 0.02853333,
+      "budget_usage_pct": 171.2,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 4,
+      "estimated_token_queries_per_day": 18,
+      "estimated_followups_per_day": 8,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_100",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 155.0,
+      "variable_total_usd": 40.5,
+      "provider_variable_usd": 7.5,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 195.5,
+      "daily_total_usd": 6.516667,
+      "cost_per_request_usd": 0.01303333,
+      "budget_usage_pct": 195.5,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_150",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 205.0,
+      "variable_total_usd": 4.05,
+      "provider_variable_usd": 0.75,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 209.05,
+      "daily_total_usd": 6.968333,
+      "cost_per_request_usd": 0.13936667,
+      "budget_usage_pct": 209.05,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 4,
+      "estimated_followups_per_day": 2,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_150",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 205.0,
+      "variable_total_usd": 16.2,
+      "provider_variable_usd": 3.0,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 221.2,
+      "daily_total_usd": 7.373333,
+      "cost_per_request_usd": 0.03686667,
+      "budget_usage_pct": 221.2,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 4,
+      "estimated_token_queries_per_day": 18,
+      "estimated_followups_per_day": 8,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_150",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 205.0,
+      "variable_total_usd": 40.5,
+      "provider_variable_usd": 7.5,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 245.5,
+      "daily_total_usd": 8.183333,
+      "cost_per_request_usd": 0.01636667,
+      "budget_usage_pct": 245.5,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_250",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 305.0,
+      "variable_total_usd": 4.05,
+      "provider_variable_usd": 0.75,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 309.05,
+      "daily_total_usd": 10.301667,
+      "cost_per_request_usd": 0.20603333,
+      "budget_usage_pct": 309.05,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 4,
+      "estimated_followups_per_day": 2,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_250",
+      "requests_per_day": 200,
+      "monthly_requests": 6000,
+      "fixed_total_usd": 305.0,
+      "variable_total_usd": 16.2,
+      "provider_variable_usd": 3.0,
+      "llm_variable_usd": 13.2,
+      "monthly_total_usd": 321.2,
+      "daily_total_usd": 10.706667,
+      "cost_per_request_usd": 0.05353333,
+      "budget_usage_pct": 321.2,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 4,
+      "estimated_token_queries_per_day": 18,
+      "estimated_followups_per_day": 8,
+      "estimated_coverage_tier": "C"
+    },
+    {
+      "scenario": "medium",
+      "scenario_family": "x_monthly_fixed_250",
+      "requests_per_day": 500,
+      "monthly_requests": 15000,
+      "fixed_total_usd": 305.0,
+      "variable_total_usd": 40.5,
+      "provider_variable_usd": 7.5,
+      "llm_variable_usd": 33.0,
+      "monthly_total_usd": 345.5,
+      "daily_total_usd": 11.516667,
+      "cost_per_request_usd": 0.02303333,
+      "budget_usage_pct": 345.5,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 11,
+      "estimated_token_queries_per_day": 45,
+      "estimated_followups_per_day": 22,
+      "estimated_coverage_tier": "C"
+    }
+  ],
+  "readiness_plan": [
+    {
+      "target_monthly_usd": 0.0,
+      "features_active": {
+        "reddit": false,
+        "rss": true,
+        "youtube": true,
+        "x_provider": false
+      },
+      "max_safe_daily_requests": 0,
+      "recommended_daily_requests": 0,
+      "kol_universe_limit": 10,
+      "polling_interval_sec": 1800,
+      "coverage_expected": "low",
+      "coverage_score": 0.35,
+      "degradation_plan": [
+        "disable_x_provider",
+        "reduce_requests_per_day",
+        "use_cached_or_mock_sources",
+        "monitor_top_tokens_only"
+      ],
+      "capacity_estimates": {
+        "estimated_kols_monitored": 0,
+        "estimated_token_queries_per_day": 0,
+        "estimated_followups_per_day": 0,
+        "estimated_coverage_tier": "C"
+      }
+    },
+    {
+      "target_monthly_usd": 50.0,
+      "features_active": {
+        "reddit": true,
+        "rss": true,
+        "youtube": true,
+        "x_provider": false
+      },
+      "max_safe_daily_requests": 0,
+      "recommended_daily_requests": 0,
+      "kol_universe_limit": 20,
+      "polling_interval_sec": 900,
+      "coverage_expected": "medium",
+      "coverage_score": 0.6,
+      "degradation_plan": [
+        "reduce_requests_per_day_25pct",
+        "reduce_kol_universe",
+        "prioritize_reddit_rss_youtube"
+      ],
+      "capacity_estimates": {
+        "estimated_kols_monitored": 0,
+        "estimated_token_queries_per_day": 0,
+        "estimated_followups_per_day": 0,
+        "estimated_coverage_tier": "C"
+      }
+    },
+    {
+      "target_monthly_usd": 100.0,
+      "features_active": {
+        "reddit": true,
+        "rss": true,
+        "youtube": true,
+        "x_provider": true
+      },
+      "max_safe_daily_requests": 0,
+      "recommended_daily_requests": 0,
+      "kol_universe_limit": 35,
+      "polling_interval_sec": 600,
+      "coverage_expected": "med_high",
+      "coverage_score": 0.75,
+      "degradation_plan": [
+        "cap_x_provider_calls",
+        "reduce_noncritical_queries",
+        "keep_high_priority_kols"
+      ],
+      "capacity_estimates": {
+        "estimated_kols_monitored": 0,
+        "estimated_token_queries_per_day": 0,
+        "estimated_followups_per_day": 0,
+        "estimated_coverage_tier": "C"
+      }
+    },
+    {
+      "target_monthly_usd": 150.0,
+      "features_active": {
+        "reddit": true,
+        "rss": true,
+        "youtube": true,
+        "x_provider": true
+      },
+      "max_safe_daily_requests": 376,
+      "recommended_daily_requests": 350,
+      "kol_universe_limit": 50,
+      "polling_interval_sec": 300,
+      "coverage_expected": "high",
+      "coverage_score": 0.85,
+      "degradation_plan": [
+        "normal_mode_with_watchdog",
+        "keep_budget_alert_thresholds_active"
+      ],
+      "capacity_estimates": {
+        "estimated_kols_monitored": 38,
+        "estimated_token_queries_per_day": 157,
+        "estimated_followups_per_day": 77,
+        "estimated_coverage_tier": "B"
+      }
+    }
+  ],
+  "budget_readiness": {
+    "can_run_low": true,
+    "can_run_medium": true,
+    "can_run_agency_like": false,
+    "max_safe_daily_requests_low": 681,
+    "max_safe_daily_requests_medium": 517,
+    "max_safe_daily_requests_high": 0,
+    "blockers": [
+      "AGENCY_LIKE_CAPACITY_LIMITED",
+      "FIXED_COST_EXCEEDS_HARD_CAP"
+    ]
+  },
+  "scenarios_supported_v24": [
+    "x_disabled_research_only",
+    "x_pay_per_usage_100usd_cap",
+    "x_monthly_fixed_100_150_250"
+  ],
+  "scenarios_supported_v25": [
+    "readiness_target_grid",
+    "degradation_plan_by_budget_tier"
+  ],
+  "scenarios_supported_v26": [
+    "capacity_estimates_per_scenario",
+    "budget_readiness_summary",
+    "degradation_ladder_explicit"
+  ],
+  "scenarios_supported_v27": [
+    "prepaid_cap_optimization",
+    "cap_status_OK_TIGHT_EXCEEDS_CAP"
+  ],
+  "notes": [
+    "Research budgeting only. No live execution.",
+    "Automatic degradation plans are advisory/dry-run.",
+    "Bridge rows may come from social_costs.py assumptions."
+  ],
+  "prepaid_cap_optimization": {
+    "cap_monthly_usd": 100.0,
+    "reserve_buffer_pct": 10.0,
+    "effective_cap_monthly_usd": 90.0,
+    "fixed_total_usd": 115.0,
+    "variable_budget_available_usd": 0.0,
+    "recommended_requests_per_day": {
+      "low": 530,
+      "medium": 402,
+      "high": 0
+    },
+    "cap_utilization_table": [
+      {
+        "scenario": "medium",
+        "scenario_family": "prepaid_cap_optimization",
+        "requests_per_day": 50,
+        "monthly_requests": 1500,
+        "fixed_total_usd": 55.0,
+        "variable_total_usd": 5.1,
+        "provider_variable_usd": 1.8,
+        "llm_variable_usd": 3.3,
+        "monthly_total_usd": 60.1,
+        "daily_total_usd": 2.003333,
+        "cost_per_request_usd": 0.04006667,
+        "budget_usage_pct": 66.7778,
+        "status": "ok",
+        "alerts": [],
+        "max_safe_daily_requests": 343,
+        "max_target_daily_requests": 343,
+        "degradation_plan": [
+          "normal_mode"
+        ],
+        "degradation_ladder": [
+          {
+            "order": 1,
+            "step": "reduce_quote_actions_first",
+            "trigger_pct": 70.0
+          },
+          {
+            "order": 2,
+            "step": "reduce_reply_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 3,
+            "step": "disable_ask_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 4,
+            "step": "reduce_polling_frequency",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 5,
+            "step": "disable_expensive_x_source",
+            "trigger_pct": 100.0
+          },
+          {
+            "order": 6,
+            "step": "cache_or_offline_only_mode",
+            "trigger_pct": 100.0
+          }
+        ],
+        "degradation_active_steps": [
+          "normal_mode"
+        ],
+        "estimated_kols_monitored": 2,
+        "estimated_token_queries_per_day": 11,
+        "estimated_followups_per_day": 5,
+        "estimated_coverage_tier": "C",
+        "cap_status": "OK"
+      },
+      {
+        "scenario": "medium",
+        "scenario_family": "prepaid_cap_optimization",
+        "requests_per_day": 100,
+        "monthly_requests": 3000,
+        "fixed_total_usd": 55.0,
+        "variable_total_usd": 10.2,
+        "provider_variable_usd": 3.6,
+        "llm_variable_usd": 6.6,
+        "monthly_total_usd": 65.2,
+        "daily_total_usd": 2.173333,
+        "cost_per_request_usd": 0.02173333,
+        "budget_usage_pct": 72.4444,
+        "status": "ok",
+        "alerts": [
+          "BUDGET_ALERT_70"
+        ],
+        "max_safe_daily_requests": 343,
+        "max_target_daily_requests": 343,
+        "degradation_plan": [
+          "enable_budget_watchdog",
+          "lower_background_polling_rate"
+        ],
+        "degradation_ladder": [
+          {
+            "order": 1,
+            "step": "reduce_quote_actions_first",
+            "trigger_pct": 70.0
+          },
+          {
+            "order": 2,
+            "step": "reduce_reply_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 3,
+            "step": "disable_ask_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 4,
+            "step": "reduce_polling_frequency",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 5,
+            "step": "disable_expensive_x_source",
+            "trigger_pct": 100.0
+          },
+          {
+            "order": 6,
+            "step": "cache_or_offline_only_mode",
+            "trigger_pct": 100.0
+          }
+        ],
+        "degradation_active_steps": [
+          "reduce_quote_actions_first"
+        ],
+        "estimated_kols_monitored": 5,
+        "estimated_token_queries_per_day": 21,
+        "estimated_followups_per_day": 10,
+        "estimated_coverage_tier": "C",
+        "cap_status": "OK"
+      },
+      {
+        "scenario": "medium",
+        "scenario_family": "prepaid_cap_optimization",
+        "requests_per_day": 200,
+        "monthly_requests": 6000,
+        "fixed_total_usd": 55.0,
+        "variable_total_usd": 20.4,
+        "provider_variable_usd": 7.2,
+        "llm_variable_usd": 13.2,
+        "monthly_total_usd": 75.4,
+        "daily_total_usd": 2.513333,
+        "cost_per_request_usd": 0.01256667,
+        "budget_usage_pct": 83.7778,
+        "status": "ok",
+        "alerts": [
+          "BUDGET_ALERT_70"
+        ],
+        "max_safe_daily_requests": 343,
+        "max_target_daily_requests": 343,
+        "degradation_plan": [
+          "enable_budget_watchdog",
+          "lower_background_polling_rate"
+        ],
+        "degradation_ladder": [
+          {
+            "order": 1,
+            "step": "reduce_quote_actions_first",
+            "trigger_pct": 70.0
+          },
+          {
+            "order": 2,
+            "step": "reduce_reply_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 3,
+            "step": "disable_ask_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 4,
+            "step": "reduce_polling_frequency",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 5,
+            "step": "disable_expensive_x_source",
+            "trigger_pct": 100.0
+          },
+          {
+            "order": 6,
+            "step": "cache_or_offline_only_mode",
+            "trigger_pct": 100.0
+          }
+        ],
+        "degradation_active_steps": [
+          "reduce_quote_actions_first"
+        ],
+        "estimated_kols_monitored": 8,
+        "estimated_token_queries_per_day": 36,
+        "estimated_followups_per_day": 17,
+        "estimated_coverage_tier": "C",
+        "cap_status": "OK"
+      },
+      {
+        "scenario": "medium",
+        "scenario_family": "prepaid_cap_optimization",
+        "requests_per_day": 300,
+        "monthly_requests": 9000,
+        "fixed_total_usd": 55.0,
+        "variable_total_usd": 30.6,
+        "provider_variable_usd": 10.8,
+        "llm_variable_usd": 19.8,
+        "monthly_total_usd": 85.6,
+        "daily_total_usd": 2.853333,
+        "cost_per_request_usd": 0.00951111,
+        "budget_usage_pct": 95.1111,
+        "status": "ok",
+        "alerts": [
+          "BUDGET_ALERT_70",
+          "BUDGET_ALERT_85"
+        ],
+        "max_safe_daily_requests": 343,
+        "max_target_daily_requests": 343,
+        "degradation_plan": [
+          "reduce_query_frequency_25pct",
+          "disable_noncritical_kol_monitoring",
+          "prioritize_top2_tokens_only"
+        ],
+        "degradation_ladder": [
+          {
+            "order": 1,
+            "step": "reduce_quote_actions_first",
+            "trigger_pct": 70.0
+          },
+          {
+            "order": 2,
+            "step": "reduce_reply_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 3,
+            "step": "disable_ask_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 4,
+            "step": "reduce_polling_frequency",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 5,
+            "step": "disable_expensive_x_source",
+            "trigger_pct": 100.0
+          },
+          {
+            "order": 6,
+            "step": "cache_or_offline_only_mode",
+            "trigger_pct": 100.0
+          }
+        ],
+        "degradation_active_steps": [
+          "reduce_quote_actions_first",
+          "reduce_reply_actions",
+          "disable_ask_actions",
+          "reduce_polling_frequency"
+        ],
+        "estimated_kols_monitored": 10,
+        "estimated_token_queries_per_day": 43,
+        "estimated_followups_per_day": 21,
+        "estimated_coverage_tier": "C",
+        "cap_status": "TIGHT"
+      },
+      {
+        "scenario": "medium",
+        "scenario_family": "prepaid_cap_optimization",
+        "requests_per_day": 500,
+        "monthly_requests": 15000,
+        "fixed_total_usd": 55.0,
+        "variable_total_usd": 51.0,
+        "provider_variable_usd": 18.0,
+        "llm_variable_usd": 33.0,
+        "monthly_total_usd": 106.0,
+        "daily_total_usd": 3.533333,
+        "cost_per_request_usd": 0.00706667,
+        "budget_usage_pct": 117.7778,
+        "status": "degraded",
+        "alerts": [
+          "BUDGET_ALERT_70",
+          "BUDGET_ALERT_85",
+          "BUDGET_ALERT_100"
+        ],
+        "max_safe_daily_requests": 343,
+        "max_target_daily_requests": 343,
+        "degradation_plan": [
+          "disable_expensive_x_source",
+          "reduce_query_frequency_50pct",
+          "switch_to_cache_or_offline_mode",
+          "allow_only_high_priority_tokens"
+        ],
+        "degradation_ladder": [
+          {
+            "order": 1,
+            "step": "reduce_quote_actions_first",
+            "trigger_pct": 70.0
+          },
+          {
+            "order": 2,
+            "step": "reduce_reply_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 3,
+            "step": "disable_ask_actions",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 4,
+            "step": "reduce_polling_frequency",
+            "trigger_pct": 85.0
+          },
+          {
+            "order": 5,
+            "step": "disable_expensive_x_source",
+            "trigger_pct": 100.0
+          },
+          {
+            "order": 6,
+            "step": "cache_or_offline_only_mode",
+            "trigger_pct": 100.0
+          }
+        ],
+        "degradation_active_steps": [
+          "reduce_quote_actions_first",
+          "reduce_reply_actions",
+          "disable_ask_actions",
+          "reduce_polling_frequency",
+          "disable_expensive_x_source",
+          "cache_or_offline_only_mode"
+        ],
+        "estimated_kols_monitored": 11,
+        "estimated_token_queries_per_day": 45,
+        "estimated_followups_per_day": 22,
+        "estimated_coverage_tier": "C",
+        "cap_status": "EXCEEDS_CAP"
+      }
+    ]
+  }
+}

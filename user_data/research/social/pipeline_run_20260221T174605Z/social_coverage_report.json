@@ -1,0 +1,94 @@
+{
+  "report_date": "20260221",
+  "files": [
+    "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174605Z/social_events.normalized.jsonl"
+  ],
+  "rows_total": 11,
+  "rows_useful": 11,
+  "duplicates_estimate": 0,
+  "source_counts": {
+    "reddit": 1,
+    "telegram": 1,
+    "rss": 1,
+    "openclaw_x": 4,
+    "x_provider": 3,
+    "telegram_forwarder": 1
+  },
+  "token_counts": {
+    "BTC": 5,
+    "SOL": 5,
+    "ETH": 3,
+    "ARB": 3,
+    "BNB": 1,
+    "XRP": 1,
+    "OP": 1
+  },
+  "top_authors": [
+    {
+      "author": "user_001",
+      "count": 1
+    },
+    {
+      "author": "signal_bot",
+      "count": 1
+    },
+    {
+      "author": "coindesk",
+      "count": 1
+    },
+    {
+      "author": "kol_openclaw_1",
+      "count": 1
+    },
+    {
+      "author": "kol_openclaw_2",
+      "count": 1
+    },
+    {
+      "author": "kol_alpha",
+      "count": 1
+    },
+    {
+      "author": "kol_beta",
+      "count": 1
+    },
+    {
+      "author": "narrative_watcher",
+      "count": 1
+    },
+    {
+      "author": "desk_flow",
+      "count": 1
+    },
+    {
+      "author": "signal_bridge",
+      "count": 1
+    }
+  ],
+  "coverage_by_bucket": [
+    {
+      "bucket_start": "2026-02-21T07:00:00+00:00",
+      "rows": 2
+    },
+    {
+      "bucket_start": "2026-02-21T08:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-21T09:00:00+00:00",
+      "rows": 3
+    },
+    {
+      "bucket_start": "2026-02-21T17:00:00+00:00",
+      "rows": 3
+    }
+  ],
+  "pct_rows_with_engagement": 0.181818,
+  "pct_rows_with_token_explicit": 0.0,
+  "pct_rows_with_token_inferred": 1.0,
+  "time_range_min": "2026-02-21T07:30:00+00:00",
+  "time_range_max": "2026-02-21T17:46:08+00:00",
+  "warning_flags": [
+    "LOW_ROWS"
+  ]
+}

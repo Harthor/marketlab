@@ -1,0 +1,28 @@
+{
+  "status": "ok",
+  "mode": "balanced",
+  "seed": 42,
+  "rows_out": 748,
+  "duplicate_rows_injected": 12,
+  "spam_rows_injected": 0,
+  "quote_reply_rows_injected": 136,
+  "out_of_order_rows_injected": 0,
+  "source_counts": {
+    "openclaw_x": 169,
+    "reddit": 139,
+    "rss": 138,
+    "telegram": 149,
+    "x_provider": 153
+  },
+  "token_counts": {
+    "BTC": 142,
+    "BNB": 137,
+    "SOL": 122,
+    "ETH": 117,
+    "XRP": 116,
+    "ARB": 114
+  },
+  "time_range_min": "2026-02-17T17:49:55+00:00",
+  "time_range_max": "2026-02-21T18:32:55+00:00",
+  "warnings": []
+}

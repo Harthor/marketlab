@@ -1,0 +1,14 @@
+{
+  "generated_at_utc": "2026-02-21T00:45:34.684591Z",
+  "exchange": "binance",
+  "market": "spot",
+  "timerange_requested": "20250101-20260201",
+  "timerange_checked": "20240923-20260201",
+  "timeframes": [
+    "4h"
+  ],
+  "require_full_range": true,
+  "pairs_total": 10,
+  "pairs_effective": 10,
+  "pairs_excluded": []
+}

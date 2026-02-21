@@ -1,0 +1,11 @@
+[AGENCY SOCIAL QUERY] token=SOL tf=1h lookback=72h status=degraded
+degraded_reason=quality_flags_present
+Summary: score=0.465875 confidence=0.67995 mentions=6 freshness_h=3.0268
+Sentiment: {'bullish': 4, 'bearish': 0, 'neutral': 2} | hype=0.128333 | velocity=6
+Coverage: source_mix={'openclaw_x': 0.166667, 'reddit': 0.166667, 'telegram_forwarder': 0.166667, 'x_provider': 0.166667, 'youtube_transcript': 0.333333}
+KOL: top_kols=[] trend=-0.25
+Warnings: ['BUDGET_UNREALISTIC', 'HIGH_X_COST_LOW_SIGNAL', 'LOW_KOL_COVERAGE', 'LOW_KOL_FEEDBACK_COVERAGE', 'SOURCE_DEPENDENCY_RISK', 'TEMPORAL_SPARSITY']
+Budget: status=degraded usage_pct=129.0
+Context: SOL social pulse is mixed with medium confidence (mentions=6, score=0.466). Risks: BUDGET_UNREALISTIC | HIGH_X_COST_LOW_SIGNAL.
+Anti-leakage: cutoff=2026-02-21T12:21:36.599064+00:00 excluded_after_cutoff=0 dedupe_removed_est=0
+NFA: Research framing only. Not trading advice.

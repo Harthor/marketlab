@@ -1,0 +1,21 @@
+{
+  "status": "ok",
+  "reason": null,
+  "rows_in": 3,
+  "rows_out": 3,
+  "source_counts": {
+    "youtube_transcript": 3
+  },
+  "missing_fields": {
+    "text": 0,
+    "ts_utc": 0
+  },
+  "per_token_mentions": {
+    "ARB": 1,
+    "BTC": 1,
+    "ETH": 1,
+    "SOL": 2
+  },
+  "time_range_min": "2026-02-21T08:16:06+00:00",
+  "time_range_max": "2026-02-21T08:16:06+00:00"
+}

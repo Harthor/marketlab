@@ -1,0 +1,225 @@
+{
+  "status": "degraded",
+  "reason": "quality_flags_present",
+  "token": "ARB",
+  "contract": null,
+  "contract_resolution": {
+    "reason": null
+  },
+  "token_aliases": [
+    "ARB",
+    "ARBITRUM"
+  ],
+  "timeframe": "1h",
+  "lookback_hours": 72,
+  "cutoff_ts_utc": "2026-02-21T17:46:09.290602+00:00",
+  "social_score": 0.251,
+  "confidence": 0.5136,
+  "coverage_confidence": 0.3324,
+  "coverage_confidence_bucket": "low",
+  "mention_count": 3,
+  "freshness_hours": 8.2526,
+  "signal_freshness": {
+    "hours": 8.2526,
+    "bucket": "recent"
+  },
+  "sentiment_score": -0.333333,
+  "sentiment_breakdown": {
+    "bullish": 0,
+    "bearish": 1,
+    "neutral": 2
+  },
+  "hype_score": 0.14,
+  "mention_velocity_delta": 3,
+  "mention_velocity_ratio": null,
+  "source_breakdown": {
+    "openclaw_x": 2,
+    "x_provider": 1
+  },
+  "source_mix": {
+    "openclaw_x": 0.666667,
+    "x_provider": 0.333333
+  },
+  "top_sources": [
+    "openclaw_x",
+    "x_provider"
+  ],
+  "top_authors": [
+    {
+      "author": "kol_gamma",
+      "mentions": 1
+    },
+    {
+      "author": "kol_beta",
+      "mentions": 1
+    },
+    {
+      "author": "kol_openclaw_2",
+      "mentions": 1
+    }
+  ],
+  "top_terms": [
+    "arb",
+    "btc",
+    "still",
+    "could",
+    "stabilize",
+    "range",
+    "continues",
+    "weak",
+    "trend",
+    "context",
+    "momentum",
+    "fading"
+  ],
+  "top_text_snippets": [
+    {
+      "ts_utc": "2026-02-21T09:31:00+00:00",
+      "source": "openclaw_x",
+      "author": "kol_gamma",
+      "snippet": "ARB could stabilize if BTC range continues, still weak trend context.",
+      "engagement_score": null
+    },
+    {
+      "ts_utc": "2026-02-21T08:18:00+00:00",
+      "source": "x_provider",
+      "author": "kol_beta",
+      "snippet": "ARB momentum fading vs BTC, risk of further pullback.",
+      "engagement_score": null
+    },
+    {
+      "ts_utc": "2026-02-21T07:45:00+00:00",
+      "source": "openclaw_x",
+      "author": "kol_openclaw_2",
+      "snippet": "ARB and OP rotation is mixed; ETH strength still dominant.",
+      "engagement_score": null
+    }
+  ],
+  "warning_flags": [
+    "LOW_KOL_COVERAGE",
+    "LOW_SOCIAL_COVERAGE",
+    "SOURCE_DEPENDENCY_RISK",
+    "BUDGET_UNREALISTIC",
+    "HIGH_X_COST_LOW_SIGNAL",
+    "TEMPORAL_SPARSITY"
+  ],
+  "warnings_ordered": [
+    {
+      "flag": "LOW_KOL_COVERAGE",
+      "severity": "high"
+    },
+    {
+      "flag": "LOW_SOCIAL_COVERAGE",
+      "severity": "high"
+    },
+    {
+      "flag": "SOURCE_DEPENDENCY_RISK",
+      "severity": "high"
+    },
+    {
+      "flag": "BUDGET_UNREALISTIC",
+      "severity": "medium"
+    },
+    {
+      "flag": "HIGH_X_COST_LOW_SIGNAL",
+      "severity": "medium"
+    },
+    {
+      "flag": "TEMPORAL_SPARSITY",
+      "severity": "low"
+    }
+  ],
+  "anti_leakage": {
+    "excluded_rows_after_cutoff": 0,
+    "parse_errors": 0,
+    "duplicates_removed_estimate": 0,
+    "current_window_start": "2026-02-18T17:46:09.290602+00:00",
+    "previous_window_start": "2026-02-15T17:46:09.290602+00:00",
+    "cutoff_ts_utc": "2026-02-21T17:46:09.290602+00:00"
+  },
+  "budget_context": {
+    "status": "degraded",
+    "budget_usage_pct": 118.9,
+    "alerts": [
+      "BUDGET_ALERT_70",
+      "BUDGET_ALERT_85",
+      "BUDGET_ALERT_100"
+    ],
+    "degradation_plan": [
+      "disable_expensive_x_source",
+      "reduce_query_frequency_50pct",
+      "switch_to_cache_or_offline_mode",
+      "allow_only_high_priority_tokens"
+    ],
+    "cost_per_request_usd": 0.07926667,
+    "scenario": "low"
+  },
+  "budget_pressure": {
+    "status": "degraded",
+    "usage_pct": 118.9,
+    "pressure": "critical",
+    "degraded_mode": true,
+    "degradation_plan": [
+      "disable_expensive_x_source",
+      "reduce_query_frequency_50pct",
+      "switch_to_cache_or_offline_mode",
+      "allow_only_high_priority_tokens"
+    ],
+    "scenario": "low"
+  },
+  "kol_feedback_summary": {
+    "status": "ok",
+    "reason": null,
+    "mention_velocity_mean": -0.5,
+    "reply_rate_mean": 0.5,
+    "quote_rate_mean": 0.0,
+    "unique_kol_engagers_mean": 3.5,
+    "engagement_score_proxy_mean": 17.325,
+    "coverage_mean": 0.5,
+    "source_diversity_mean": 0.0
+  },
+  "kol_context": {
+    "kol_mentions": 0,
+    "kol_signal_score": null,
+    "kol_coverage": 0.0,
+    "top_kols": [],
+    "kol_registry_size": 0,
+    "kol_warnings": [
+      "LOW_KOL_COVERAGE"
+    ],
+    "kol_attention_trend": -0.5,
+    "kol_registry_warnings": [
+      "KOL_REGISTRY_EMPTY_ACTIVE",
+      "KOL_REGISTRY_ROW_0_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_1_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_2_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_3_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_4_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_5_MISSING_handle_platform_priority_weight"
+    ],
+    "scored_kol_mentions": 0,
+    "scored_kol_signal_score": null,
+    "scored_top_kols": []
+  },
+  "kol_mentions": 0,
+  "kol_signal_score": null,
+  "kol_coverage": 0.0,
+  "top_kols_mentioning_token": [],
+  "kol_attention_trend": -0.5,
+  "kol_attention_snapshot": {
+    "top_kols": [],
+    "coverage": 0.0,
+    "trend_label": "falling",
+    "trend_value": -0.5,
+    "feedback_coverage": 0.5
+  },
+  "executive_summary": "ARB social pulse is weak with medium confidence (mentions=3, score=0.251). Risks: LOW_KOL_COVERAGE | LOW_SOCIAL_COVERAGE.",
+  "notes": {
+    "mode": "research_only",
+    "diagnostic_only": true,
+    "feature_rows_used": 3,
+    "kol_feedback_rows_used": 2,
+    "nfa": "Not financial advice. Social/KOL layer is not a trading trigger.",
+    "window_previous_mentions": 0
+  }
+}

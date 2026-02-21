@@ -1,0 +1,64 @@
+{
+  "ts_utc": "2026-02-21T12:51:41+00:00",
+  "sources_requested": [
+    "mock",
+    "external_jsonl"
+  ],
+  "events_total": 9,
+  "status": "ok",
+  "degraded_reasons": [],
+  "coverage": [
+    {
+      "source": "mock",
+      "status": "ok",
+      "events_count": 3,
+      "latency_ms": 0.0,
+      "reason": null,
+      "errors": [],
+      "rate_limited": false,
+      "source_quality": 0.4
+    },
+    {
+      "source": "external_jsonl",
+      "status": "ok",
+      "reason": null,
+      "events_count": 6,
+      "latency_ms": 0.19,
+      "errors": [],
+      "rate_limited": false,
+      "source_quality": 0.6,
+      "files_matched": [
+        "user_data/research/social/pipeline_run_20260221T125141Z/x_provider_imported.raw.jsonl"
+      ]
+    }
+  ],
+  "quality": {
+    "rows_in": 9,
+    "rows_out": 9,
+    "duplicates_removed": 0,
+    "missing_fields": {
+      "ts_utc": 0,
+      "author": 0,
+      "text": 0,
+      "channel_or_subreddit": 0
+    },
+    "source_counts": {
+      "openclaw_x": 2,
+      "reddit": 1,
+      "rss": 1,
+      "telegram": 1,
+      "telegram_forwarder": 1,
+      "x_provider": 3
+    },
+    "time_range_min": "2026-02-21T08:05:00+00:00",
+    "time_range_max": "2026-02-21T12:51:41+00:00",
+    "per_token_mentions": {
+      "BTC": 5,
+      "SOL": 4,
+      "ARB": 2,
+      "ETH": 2,
+      "BNB": 1,
+      "XRP": 1
+    }
+  }
+}

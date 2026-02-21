@@ -1,0 +1,251 @@
+{
+  "generated_at_utc": "2026-02-19T23:08:39.520298+00:00",
+  "generated_by": "build_liquid_pairs.py",
+  "exchange": "binance",
+  "market": "futures",
+  "pair_whitelist": [
+    "ETH/USDT:USDT",
+    "BTC/USDT:USDT",
+    "SOL/USDT:USDT",
+    "XRP/USDT:USDT",
+    "XAG/USDT:USDT",
+    "RIVER/USDT:USDT",
+    "PIPPIN/USDT:USDT",
+    "XAU/USDT:USDT",
+    "DOGE/USDT:USDT",
+    "ZEC/USDT:USDT",
+    "BNB/USDT:USDT",
+    "SPACE/USDT:USDT",
+    "INJ/USDT:USDT",
+    "NAORIS/USDT:USDT",
+    "1000PEPE/USDT:USDT",
+    "HYPE/USDT:USDT",
+    "ORCA/USDT:USDT",
+    "OP/USDT:USDT",
+    "BCH/USDT:USDT",
+    "WLFI/USDT:USDT"
+  ],
+  "filters": {
+    "top": 20,
+    "min_count": 100000,
+    "min_quote_volume": 10000000.0,
+    "max_abs_change_pct": 20.0,
+    "weight_volume": 0.65,
+    "weight_count": 0.35,
+    "excluded_bases": [
+      "AUD",
+      "BIDR",
+      "BRL",
+      "BUSD",
+      "DAI",
+      "EUR",
+      "FDUSD",
+      "GBP",
+      "IDRT",
+      "NGN",
+      "RUB",
+      "TRY",
+      "TUSD",
+      "UAH",
+      "USDC",
+      "USDP",
+      "USDT",
+      "ZAR"
+    ],
+    "excluded_suffixes": [
+      "UP",
+      "DOWN",
+      "BULL",
+      "BEAR"
+    ]
+  },
+  "stats": {
+    "total_rows": 678,
+    "eligible_rows": 145,
+    "selected_rows": 20
+  },
+  "ranking": [
+    {
+      "symbol": "ETHUSDT",
+      "pair": "ETH/USDT",
+      "base": "ETH",
+      "quote_volume": 8137437071.08,
+      "trade_count": 7092919,
+      "price_change_percent": -0.194,
+      "score": 8.83960573957111
+    },
+    {
+      "symbol": "BTCUSDT",
+      "pair": "BTC/USDT",
+      "base": "BTC",
+      "quote_volume": 9839597749.65,
+      "trade_count": 4253237,
+      "price_change_percent": 0.794,
+      "score": 8.815487163833508
+    },
+    {
+      "symbol": "SOLUSDT",
+      "pair": "SOL/USDT",
+      "base": "SOL",
+      "quote_volume": 1571366881.1513,
+      "trade_count": 1759063,
+      "price_change_percent": 1.009,
+      "score": 8.163429011501048
+    },
+    {
+      "symbol": "XRPUSDT",
+      "pair": "XRP/USDT",
+      "base": "XRP",
+      "quote_volume": 873051530.5412,
+      "trade_count": 1679429,
+      "price_change_percent": -1.032,
+      "score": 7.99048258842926
+    },
+    {
+      "symbol": "XAGUSDT",
+      "pair": "XAG/USDT",
+      "base": "XAG",
+      "quote_volume": 1107212461.8689,
+      "trade_count": 543725,
+      "price_change_percent": 1.554,
+      "score": 7.886133162872966
+    },
+    {
+      "symbol": "RIVERUSDT",
+      "pair": "RIVER/USDT",
+      "base": "RIVER",
+      "quote_volume": 344909283.5516,
+      "trade_count": 3704034,
+      "price_change_percent": -1.474,
+      "score": 7.848544454004129
+    },
+    {
+      "symbol": "PIPPINUSDT",
+      "pair": "PIPPIN/USDT",
+      "base": "PIPPIN",
+      "quote_volume": 277888893.13871,
+      "trade_count": 4000820,
+      "price_change_percent": -7.651,
+      "score": 7.799268466215567
+    },
+    {
+      "symbol": "XAUUSDT",
+      "pair": "XAU/USDT",
+      "base": "XAU",
+      "quote_volume": 781305823.67,
+      "trade_count": 463007,
+      "price_change_percent": 0.794,
+      "score": 7.763289663540736
+    },
+    {
+      "symbol": "DOGEUSDT",
+      "pair": "DOGE/USDT",
+      "base": "DOGE",
+      "quote_volume": 462008673.03544,
+      "trade_count": 1167041,
+      "price_change_percent": -0.377,
+      "score": 7.755502854139014
+    },
+    {
+      "symbol": "ZECUSDT",
+      "pair": "ZEC/USDT",
+      "base": "ZEC",
+      "quote_volume": 325698197.98,
+      "trade_count": 1810380,
+      "price_change_percent": -0.81,
+      "score": 7.723549476142061
+    },
+    {
+      "symbol": "BNBUSDT",
+      "pair": "BNB/USDT",
+      "base": "BNB",
+      "quote_volume": 358985762.291,
+      "trade_count": 1218052,
+      "price_change_percent": 0.315,
+      "score": 7.690783361659489
+    },
+    {
+      "symbol": "SPACEUSDT",
+      "pair": "SPACE/USDT",
+      "base": "SPACE",
+      "quote_volume": 172264075.302127,
+      "trade_count": 2543653,
+      "price_change_percent": -19.677,
+      "score": 7.595436880503593
+    },
+    {
+      "symbol": "INJUSDT",
+      "pair": "INJ/USDT",
+      "base": "INJ",
+      "quote_volume": 231252337.5968,
+      "trade_count": 1269306,
+      "price_change_percent": 10.323,
+      "score": 7.572904322963524
+    },
+    {
+      "symbol": "NAORISUSDT",
+      "pair": "NAORIS/USDT",
+      "base": "NAORIS",
+      "quote_volume": 159884160.51478,
+      "trade_count": 2508813,
+      "price_change_percent": -11.68,
+      "score": 7.572287500977305
+    },
+    {
+      "symbol": "1000PEPEUSDT",
+      "pair": "1000PEPE/USDT",
+      "base": "1000PEPE",
+      "quote_volume": 212143356.2191804,
+      "trade_count": 1410918,
+      "price_change_percent": -0.157,
+      "score": 7.564634862960364
+    },
+    {
+      "symbol": "HYPEUSDT",
+      "pair": "HYPE/USDT",
+      "base": "HYPE",
+      "quote_volume": 218763802.96673,
+      "trade_count": 1194403,
+      "price_change_percent": 0.75,
+      "score": 7.547986990416264
+    },
+    {
+      "symbol": "ORCAUSDT",
+      "pair": "ORCA/USDT",
+      "base": "ORCA",
+      "quote_volume": 222125699.7351,
+      "trade_count": 1019070,
+      "price_change_percent": -6.556,
+      "score": 7.528160782091028
+    },
+    {
+      "symbol": "OPUSDT",
+      "pair": "OP/USDT",
+      "base": "OP",
+      "quote_volume": 197491276.71637,
+      "trade_count": 628266,
+      "price_change_percent": -17.633,
+      "score": 7.421456634816713
+    },
+    {
+      "symbol": "BCHUSDT",
+      "pair": "BCH/USDT",
+      "base": "BCH",
+      "quote_volume": 160307617.79,
+      "trade_count": 747091,
+      "price_change_percent": 0.953,
+      "score": 7.388901136123323
+    },
+    {
+      "symbol": "WLFIUSDT",
+      "pair": "WLFI/USDT",
+      "base": "WLFI",
+      "quote_volume": 212848447.6339,
+      "trade_count": 440667,
+      "price_change_percent": -0.939,
+      "score": 7.3886848480016205
+    }
+  ],
+  "pair_whitelist_original": [],
+  "note": "Normalized to binanceusdm symbols with :USDT suffix."
+}

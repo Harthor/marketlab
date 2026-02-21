@@ -1,0 +1,16 @@
+profile,requests_per_day,requests_per_query,monthly_requests,monthly_queries_estimate,monthly_low_usd,monthly_high_usd,effective_cost_per_request_low_usd,effective_cost_per_request_high_usd,estimated_queries_per_day,effective_cost_per_query_low_usd,effective_cost_per_query_high_usd
+x_agency_like_personal,50,1,1500,1500.0,115.5,116.7,0.077,0.0778,50.0,0.077,0.0778
+x_agency_like_personal,50,3,1500,500.0,115.5,116.7,0.077,0.0778,16.6667,0.23099954,0.23339953
+x_agency_like_personal,50,5,1500,300.0,115.5,116.7,0.077,0.0778,10.0,0.385,0.389
+x_agency_like_personal,50,8,1500,187.5,115.5,116.7,0.077,0.0778,6.25,0.616,0.6224
+x_agency_like_personal,50,10,1500,150.0,115.5,116.7,0.077,0.0778,5.0,0.77,0.778
+x_agency_like_personal,200,1,6000,6000.0,120.0,124.8,0.02,0.0208,200.0,0.02,0.0208
+x_agency_like_personal,200,3,6000,2000.0,120.0,124.8,0.02,0.0208,66.6667,0.05999997,0.06239997
+x_agency_like_personal,200,5,6000,1200.0,120.0,124.8,0.02,0.0208,40.0,0.1,0.104
+x_agency_like_personal,200,8,6000,750.0,120.0,124.8,0.02,0.0208,25.0,0.16,0.1664
+x_agency_like_personal,200,10,6000,600.0,120.0,124.8,0.02,0.0208,20.0,0.2,0.208
+x_agency_like_personal,500,1,15000,15000.0,129.0,141.0,0.0086,0.0094,500.0,0.0086,0.0094
+x_agency_like_personal,500,3,15000,5000.0,129.0,141.0,0.0086,0.0094,166.6667,0.02579999,0.02819999
+x_agency_like_personal,500,5,15000,3000.0,129.0,141.0,0.0086,0.0094,100.0,0.043,0.047
+x_agency_like_personal,500,8,15000,1875.0,129.0,141.0,0.0086,0.0094,62.5,0.0688,0.0752
+x_agency_like_personal,500,10,15000,1500.0,129.0,141.0,0.0086,0.0094,50.0,0.086,0.094

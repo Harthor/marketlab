@@ -1,0 +1,66 @@
+{
+  "status": "degraded",
+  "reason": "quality_flags_present",
+  "token": "SOL",
+  "contract": null,
+  "contract_resolution": {
+    "reason": null
+  },
+  "token_aliases": [
+    "SOL",
+    "SOLANA"
+  ],
+  "timeframe": "1h",
+  "lookback_hours": 72,
+  "cutoff_ts_utc": "2026-02-21T07:54:25.965204+00:00",
+  "social_score": 0.5275,
+  "sentiment_score": 1.0,
+  "hype_score": 0.21,
+  "mention_count": 1,
+  "sentiment_breakdown": {
+    "bullish": 1,
+    "bearish": 0,
+    "neutral": 0
+  },
+  "source_breakdown": {
+    "reddit": 1
+  },
+  "top_sources": [
+    "reddit"
+  ],
+  "confidence": 0.405833,
+  "warning_flags": [
+    "LOW_SOCIAL_COVERAGE",
+    "SOURCE_DEPENDENCY_RISK"
+  ],
+  "top_terms": [
+    "btc",
+    "eth",
+    "bullish",
+    "breakout",
+    "watching",
+    "sol",
+    "https",
+    "example",
+    "com"
+  ],
+  "latest_events": [
+    {
+      "ts_utc": "2026-02-21T07:54:17+00:00",
+      "source": "reddit",
+      "channel_or_subreddit": "CryptoCurrency",
+      "author": "user_001",
+      "text": "BTC and ETH look bullish after breakout. Watching SOL support. https://example.com/a",
+      "sentiment_score": 1.0,
+      "hype_score": 0.21,
+      "engagement_score": 120.0
+    }
+  ],
+  "executive_summary": "SOL social pulse is mixed with low confidence (mentions=1, score=0.527). Risks: LOW_SOCIAL_COVERAGE | SOURCE_DEPENDENCY_RISK.",
+  "notes": {
+    "mode": "research_only",
+    "diagnostic_only": true,
+    "feature_rows_used": 1,
+    "nfa": "Not financial advice. Social layer is not a trading trigger."
+  }
+}

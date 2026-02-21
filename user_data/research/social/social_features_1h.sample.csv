@@ -1,0 +1,10 @@
+bucket_start,symbol,mentions_count,mention_velocity,unique_authors,unique_authors_proxy,sentiment_mean,sentiment_abs_mean,recency_weighted_sentiment,hype_mean,hype_spike_zscore,source_mix,source_diversity_score,data_completeness,quality_score_mean,feature_lag_min,bucket_coverage
+2026-02-21T08:00:00+00:00,ARB,2,0,2,2,-0.5,0.5,-0.495346,0.14,,"{""x_provider"": 0.5, ""youtube_transcript"": 0.5}",1.0,1.0,0.625,42.958333,1.0
+2026-02-21T08:00:00+00:00,BNB,1,0,1,1,1.0,1.0,1.0,0.14,,"{""telegram"": 1.0}",0.0,1.0,0.65,43.916667,1.0
+2026-02-21T08:00:00+00:00,BTC,4,0,4,4,0.0,0.5,0.0,0.2275,,"{""reddit"": 0.25, ""rss"": 0.25, ""x_provider"": 0.25, ""youtube_transcript"": 0.25}",1.0,1.0,0.7,43.4375,1.0
+2026-02-21T08:00:00+00:00,ETH,3,0,3,3,0.666667,0.666667,0.606252,0.186667,,"{""openclaw_x"": 0.333333, ""reddit"": 0.333333, ""youtube_transcript"": 0.333333}",1.0,1.0,0.683333,35.944444,1.0
+2026-02-21T08:00:00+00:00,SOL,5,0,4,4,0.8,0.8,0.750324,0.14,,"{""openclaw_x"": 0.2, ""reddit"": 0.2, ""x_provider"": 0.2, ""youtube_transcript"": 0.4}",0.960964,1.0,0.66,41.35,1.0
+2026-02-21T08:00:00+00:00,XRP,1,0,1,1,1.0,1.0,1.0,0.14,,"{""telegram"": 1.0}",0.0,1.0,0.65,43.916667,1.0
+2026-02-21T09:00:00+00:00,ARB,1,-1,1,1,-1.0,1.0,-1.0,0.14,,"{""openclaw_x"": 1.0}",0.0,1.0,0.55,29.0,1.0
+2026-02-21T09:00:00+00:00,BTC,2,-2,2,2,-0.5,0.5,-0.570048,0.105,,"{""openclaw_x"": 0.5, ""x_provider"": 0.5}",1.0,1.0,0.55,43.5,1.0
+2026-02-21T09:00:00+00:00,SOL,1,-4,1,1,0.0,0.0,0.0,0.07,,"{""telegram_forwarder"": 1.0}",0.0,1.0,0.55,40.0,1.0

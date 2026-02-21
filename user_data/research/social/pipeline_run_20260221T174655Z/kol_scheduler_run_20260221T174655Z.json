@@ -1,0 +1,386 @@
+{
+  "run_id": "20260221T174656Z",
+  "created_at_utc": "2026-02-21T17:46:56+00:00",
+  "queue_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174655Z/kol_dryrun_queue.sample.json",
+  "rows_in": 12,
+  "rows_out": 12,
+  "executed_count": 2,
+  "skipped_by_reason": {
+    "skipped_cooldown": 10
+  },
+  "budget_context": {
+    "status": "degraded",
+    "hard_cap_monthly_usd": 100.0,
+    "daily_budget_cap_usd": 3.3333333333333335,
+    "scenario": {
+      "scenario": "low",
+      "scenario_family": "base",
+      "requests_per_day": 50,
+      "monthly_requests": 1500,
+      "fixed_total_usd": 115.0,
+      "variable_total_usd": 3.9,
+      "provider_variable_usd": 0.6,
+      "llm_variable_usd": 3.3,
+      "monthly_total_usd": 118.9,
+      "daily_total_usd": 3.963333,
+      "cost_per_request_usd": 0.07926667,
+      "budget_usage_pct": 118.9,
+      "status": "degraded",
+      "alerts": [
+        "BUDGET_ALERT_70",
+        "BUDGET_ALERT_85",
+        "BUDGET_ALERT_100"
+      ],
+      "max_safe_daily_requests": 0,
+      "max_target_daily_requests": 0,
+      "degradation_plan": [
+        "disable_expensive_x_source",
+        "reduce_query_frequency_50pct",
+        "switch_to_cache_or_offline_mode",
+        "allow_only_high_priority_tokens"
+      ],
+      "degradation_ladder": [
+        {
+          "order": 1,
+          "step": "reduce_quote_actions_first",
+          "trigger_pct": 70.0
+        },
+        {
+          "order": 2,
+          "step": "reduce_reply_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 3,
+          "step": "disable_ask_actions",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 4,
+          "step": "reduce_polling_frequency",
+          "trigger_pct": 85.0
+        },
+        {
+          "order": 5,
+          "step": "disable_expensive_x_source",
+          "trigger_pct": 100.0
+        },
+        {
+          "order": 6,
+          "step": "cache_or_offline_only_mode",
+          "trigger_pct": 100.0
+        }
+      ],
+      "degradation_active_steps": [
+        "reduce_quote_actions_first",
+        "reduce_reply_actions",
+        "disable_ask_actions",
+        "reduce_polling_frequency",
+        "disable_expensive_x_source",
+        "cache_or_offline_only_mode"
+      ],
+      "estimated_kols_monitored": 1,
+      "estimated_token_queries_per_day": 4,
+      "estimated_followups_per_day": 2,
+      "estimated_coverage_tier": "C"
+    }
+  },
+  "daily_budget_cap_usd": 3.33333333,
+  "budget_used_estimated_usd": 0.47560002,
+  "queue_age_stats": {
+    "has_queue_timestamp": true,
+    "age_hours_min": 0.0,
+    "age_hours_avg": 0.0,
+    "age_hours_max": 0.0
+  },
+  "available_sources": [
+    "budget_engine",
+    "kol_registry",
+    "social_query"
+  ],
+  "cooldown_kol_min": 120,
+  "cooldown_token_min": 60,
+  "interactions_generated_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/research/social/pipeline_run_20260221T174655Z/kol_interactions.generated.jsonl",
+  "actions": [
+    {
+      "queue_id": "84575a87f7314f7e",
+      "token": "SOL",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "action_type": "quote_kol",
+      "priority": 0.451778,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.23780001,
+      "confidence": 0.66379,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "executed_mock",
+      "skip_reason": null,
+      "executed_at_utc": "2026-02-21T17:46:56+00:00"
+    },
+    {
+      "queue_id": "66d606493a71f6c2",
+      "token": "ARB",
+      "kol_id": "kol_sol_01",
+      "x_handle": "sol_researcher",
+      "action_type": "quote_kol",
+      "priority": 0.451778,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.23780001,
+      "confidence": 0.66379,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "kol_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "88719106b1685f7d",
+      "token": "SOL",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "action_type": "quote_kol",
+      "priority": 0.436406,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.23780001,
+      "confidence": 0.649336,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "3432900bb4c73278",
+      "token": "ARB",
+      "kol_id": "kol_arb_01",
+      "x_handle": "arb_insights",
+      "action_type": "quote_kol",
+      "priority": 0.436406,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.23780001,
+      "confidence": 0.649336,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "executed_mock",
+      "skip_reason": null,
+      "executed_at_utc": "2026-02-21T17:46:56+00:00"
+    },
+    {
+      "queue_id": "e4915152d8c942db",
+      "token": "SOL",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "action_type": "ask_question",
+      "priority": 0.393406,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.07926667,
+      "confidence": 0.633186,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "45fa566079709886",
+      "token": "ARB",
+      "kol_id": "kol_btc_macro_01",
+      "x_handle": "btc_macro_view",
+      "action_type": "ask_question",
+      "priority": 0.393406,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.07926667,
+      "confidence": 0.633186,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "ddc7b8028c2b1696",
+      "token": "SOL",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "action_type": "reply_to_kol",
+      "priority": 0.380248,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.15853334,
+      "confidence": 0.612449,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "bd72cb69f5cc2395",
+      "token": "ARB",
+      "kol_id": "kol_multi_01",
+      "x_handle": "multi_chain_flow",
+      "action_type": "reply_to_kol",
+      "priority": 0.380248,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.15853334,
+      "confidence": 0.612449,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "f87bc4944e92bea0",
+      "token": "SOL",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "action_type": "ask_question",
+      "priority": 0.374281,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.07926667,
+      "confidence": 0.610667,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "03d3a976a0abf2c2",
+      "token": "ARB",
+      "kol_id": "kol_latam_01",
+      "x_handle": "latam_crypto_radar",
+      "action_type": "ask_question",
+      "priority": 0.374281,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.07926667,
+      "confidence": 0.610667,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "516b1aead8640ef5",
+      "token": "SOL",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "action_type": "reply_to_kol",
+      "priority": 0.279482,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.15853334,
+      "confidence": 0.500028,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    },
+    {
+      "queue_id": "fea157cac7875f63",
+      "token": "ARB",
+      "kol_id": "kol_memes_01",
+      "x_handle": "meme_buzz",
+      "action_type": "reply_to_kol",
+      "priority": 0.279482,
+      "rationale": [
+        "budget_degraded_mode"
+      ],
+      "estimated_cost_impact": 0.15853334,
+      "confidence": 0.500028,
+      "required_data_sources": [
+        "social_query",
+        "kol_registry",
+        "budget_engine"
+      ],
+      "approve_required": true,
+      "initial_status": "planned",
+      "final_status": "skipped_cooldown",
+      "skip_reason": "token_cooldown",
+      "executed_at_utc": null
+    }
+  ],
+  "notes": [
+    "research-only dry-run scheduler",
+    "No live posting was executed."
+  ]
+}

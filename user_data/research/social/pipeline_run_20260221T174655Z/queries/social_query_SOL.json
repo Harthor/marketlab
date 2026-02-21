@@ -1,0 +1,249 @@
+{
+  "status": "degraded",
+  "reason": "quality_flags_present",
+  "token": "SOL",
+  "contract": null,
+  "contract_resolution": {
+    "reason": null
+  },
+  "token_aliases": [
+    "SOL",
+    "SOLANA"
+  ],
+  "timeframe": "1h",
+  "lookback_hours": 72,
+  "cutoff_ts_utc": "2026-02-21T17:46:56.428010+00:00",
+  "social_score": 0.375567,
+  "confidence": 0.944375,
+  "coverage_confidence": 0.986094,
+  "coverage_confidence_bucket": "high",
+  "mention_count": 78,
+  "freshness_hours": 0.1671,
+  "signal_freshness": {
+    "hours": 0.1671,
+    "bucket": "fresh"
+  },
+  "sentiment_score": -0.24359,
+  "sentiment_breakdown": {
+    "bullish": 0,
+    "bearish": 19,
+    "neutral": 59
+  },
+  "hype_score": 0.07,
+  "mention_velocity_delta": 54,
+  "mention_velocity_ratio": 2.25,
+  "source_breakdown": {
+    "openclaw_x": 19,
+    "reddit": 10,
+    "rss": 8,
+    "telegram": 17,
+    "x_provider": 24
+  },
+  "source_mix": {
+    "openclaw_x": 0.24359,
+    "reddit": 0.128205,
+    "rss": 0.102564,
+    "telegram": 0.217949,
+    "x_provider": 0.307692
+  },
+  "top_sources": [
+    "x_provider",
+    "openclaw_x",
+    "telegram"
+  ],
+  "top_authors": [
+    {
+      "author": "narrative_watch",
+      "mentions": 24
+    },
+    {
+      "author": "alpha_trader",
+      "mentions": 16
+    },
+    {
+      "author": "macro_flow",
+      "mentions": 14
+    },
+    {
+      "author": "signal_bridge",
+      "mentions": 9
+    },
+    {
+      "author": "kol_arb",
+      "mentions": 8
+    }
+  ],
+  "top_terms": [
+    "sol",
+    "reclaim",
+    "constructive",
+    "momentum",
+    "continuation",
+    "potential",
+    "range",
+    "bound",
+    "action",
+    "waiting",
+    "confirmation",
+    "directional"
+  ],
+  "top_text_snippets": [
+    {
+      "ts_utc": "2026-02-21T17:36:55+00:00",
+      "source": "telegram",
+      "author": "alpha_trader",
+      "snippet": "$SOL still weak in this window, risk of breakdown remains elevated.",
+      "engagement_score": null
+    },
+    {
+      "ts_utc": "2026-02-21T15:45:55+00:00",
+      "source": "reddit",
+      "author": "narrative_watch",
+      "snippet": "SOL range-bound action; waiting for confirmation before directional bias.",
+      "engagement_score": null
+    },
+    {
+      "ts_utc": "2026-02-21T13:16:55+00:00",
+      "source": "x_provider",
+      "author": "macro_flow",
+      "snippet": "$SOL reclaim looks constructive with momentum continuation potential. [quote:chain_52]",
+      "engagement_score": null
+    },
+    {
+      "ts_utc": "2026-02-21T12:35:55+00:00",
+      "source": "x_provider",
+      "author": "narrative_watch",
+      "snippet": "SOL range-bound action; waiting for confirmation before directional bias. [reply:chain_52]",
+      "engagement_score": null
+    },
+    {
+      "ts_utc": "2026-02-21T05:02:55+00:00",
+      "source": "openclaw_x",
+      "author": "alpha_trader",
+      "snippet": "$SOL reclaim looks constructive with momentum continuation potential.",
+      "engagement_score": null
+    }
+  ],
+  "warning_flags": [
+    "LOW_KOL_COVERAGE",
+    "LOW_KOL_FEEDBACK_COVERAGE",
+    "SOURCE_DEPENDENCY_RISK",
+    "BUDGET_UNREALISTIC",
+    "HIGH_X_COST_LOW_SIGNAL"
+  ],
+  "warnings_ordered": [
+    {
+      "flag": "LOW_KOL_COVERAGE",
+      "severity": "high"
+    },
+    {
+      "flag": "LOW_KOL_FEEDBACK_COVERAGE",
+      "severity": "high"
+    },
+    {
+      "flag": "SOURCE_DEPENDENCY_RISK",
+      "severity": "high"
+    },
+    {
+      "flag": "BUDGET_UNREALISTIC",
+      "severity": "medium"
+    },
+    {
+      "flag": "HIGH_X_COST_LOW_SIGNAL",
+      "severity": "medium"
+    }
+  ],
+  "anti_leakage": {
+    "excluded_rows_after_cutoff": 2,
+    "parse_errors": 0,
+    "duplicates_removed_estimate": 0,
+    "current_window_start": "2026-02-18T17:46:56.428010+00:00",
+    "previous_window_start": "2026-02-15T17:46:56.428010+00:00",
+    "cutoff_ts_utc": "2026-02-21T17:46:56.428010+00:00"
+  },
+  "budget_context": {
+    "status": "degraded",
+    "budget_usage_pct": 118.9,
+    "alerts": [
+      "BUDGET_ALERT_70",
+      "BUDGET_ALERT_85",
+      "BUDGET_ALERT_100"
+    ],
+    "degradation_plan": [
+      "disable_expensive_x_source",
+      "reduce_query_frequency_50pct",
+      "switch_to_cache_or_offline_mode",
+      "allow_only_high_priority_tokens"
+    ],
+    "cost_per_request_usd": 0.07926667,
+    "scenario": "low"
+  },
+  "budget_pressure": {
+    "status": "degraded",
+    "usage_pct": 118.9,
+    "pressure": "critical",
+    "degraded_mode": true,
+    "degradation_plan": [
+      "disable_expensive_x_source",
+      "reduce_query_frequency_50pct",
+      "switch_to_cache_or_offline_mode",
+      "allow_only_high_priority_tokens"
+    ],
+    "scenario": "low"
+  },
+  "kol_feedback_summary": {
+    "status": "ok",
+    "reason": null,
+    "mention_velocity_mean": -0.25,
+    "reply_rate_mean": 0.25,
+    "quote_rate_mean": 0.25,
+    "unique_kol_engagers_mean": 2.5,
+    "engagement_score_proxy_mean": 49.5125,
+    "coverage_mean": 0.34375,
+    "source_diversity_mean": 0.0
+  },
+  "kol_context": {
+    "kol_mentions": 0,
+    "kol_signal_score": null,
+    "kol_coverage": 0.0,
+    "top_kols": [],
+    "kol_registry_size": 0,
+    "kol_warnings": [
+      "LOW_KOL_COVERAGE"
+    ],
+    "kol_attention_trend": -0.25,
+    "kol_registry_warnings": [
+      "KOL_REGISTRY_EMPTY_ACTIVE",
+      "KOL_REGISTRY_ROW_0_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_1_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_2_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_3_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_4_MISSING_handle_platform_priority_weight",
+      "KOL_REGISTRY_ROW_5_MISSING_handle_platform_priority_weight"
+    ],
+    "scored_kol_mentions": 0,
+    "scored_kol_signal_score": null,
+    "scored_top_kols": []
+  },
+  "kol_mentions": 0,
+  "kol_signal_score": null,
+  "kol_coverage": 0.0,
+  "top_kols_mentioning_token": [],
+  "kol_attention_trend": -0.25,
+  "kol_attention_snapshot": {
+    "top_kols": [],
+    "coverage": 0.0,
+    "trend_label": "falling",
+    "trend_value": -0.25,
+    "feedback_coverage": 0.34375
+  },
+  "executive_summary": "SOL social pulse is weak with high confidence (mentions=78, score=0.376). Risks: LOW_KOL_COVERAGE | LOW_KOL_FEEDBACK_COVERAGE.",
+  "notes": {
+    "mode": "research_only",
+    "diagnostic_only": true,
+    "feature_rows_used": 45,
+    "kol_feedback_rows_used": 4,
+    "nfa": "Not financial advice. Social/KOL layer is not a trading trigger.",
+    "window_previous_mentions": 24
+  }
+}

@@ -1,0 +1,169 @@
+{
+  "generated_at": "2026-02-21T18:41:13.648272+00:00",
+  "repo": "/Users/carlaherrera/Desktop/codex/freqtrade",
+  "readiness": {
+    "mock": {
+      "status": "ready",
+      "details": "ingest ok in smoke run"
+    },
+    "external_jsonl": {
+      "status": "ready",
+      "details": "2 inbox JSONL files detected"
+    },
+    "rss": {
+      "status": "degraded",
+      "details": "network disabled in smoke; feed pack present with 3 enabled feeds"
+    },
+    "reddit": {
+      "status": "degraded",
+      "details": "missing_reddit_credentials_or_user_agent in allow-network run"
+    },
+    "youtube_transcripts": {
+      "status": "degraded",
+      "details": "folder missing: user_data/research/social/youtube_transcripts"
+    },
+    "telegram_discord_dump_import": {
+      "status": "degraded",
+      "details": "no local telegram/discord dumps found"
+    }
+  },
+  "smoke_coverage": {
+    "ts_utc": "2026-02-21T18:40:48+00:00",
+    "sources_requested": [
+      "reddit",
+      "rss",
+      "external_jsonl",
+      "mock"
+    ],
+    "events_total": 9,
+    "status": "degraded",
+    "degraded_reasons": [
+      "network_disabled",
+      "network_disabled"
+    ],
+    "coverage": [
+      {
+        "source": "mock",
+        "status": "ok",
+        "events_count": 3,
+        "latency_ms": 0.0,
+        "reason": null,
+        "errors": [],
+        "rate_limited": false,
+        "source_quality": 0.4
+      },
+      {
+        "source": "external_jsonl",
+        "status": "ok",
+        "reason": null,
+        "events_count": 6,
+        "latency_ms": 0.57,
+        "errors": [],
+        "rate_limited": false,
+        "source_quality": 0.6,
+        "files_matched": [
+          "user_data/research/social/inbox/openclaw_export_sample.jsonl",
+          "user_data/research/social/inbox/x_kol_sample.jsonl"
+        ]
+      },
+      {
+        "source": "reddit",
+        "status": "degraded",
+        "reason": "network_disabled",
+        "events_count": 0,
+        "latency_ms": 0.0,
+        "errors": [],
+        "rate_limited": false,
+        "used_oauth": false,
+        "used_mock_fallback": false,
+        "source_quality": 0.8
+      },
+      {
+        "source": "rss",
+        "status": "degraded",
+        "reason": "network_disabled",
+        "events_count": 0,
+        "latency_ms": 0.0,
+        "errors": [],
+        "rate_limited": false,
+        "source_quality": 0.75
+      }
+    ],
+    "quality": {
+      "rows_in": 9,
+      "rows_out": 9,
+      "duplicates_removed": 0,
+      "missing_fields": {
+        "ts_utc": 0,
+        "author": 0,
+        "text": 0,
+        "channel_or_subreddit": 0
+      },
+      "source_counts": {
+        "openclaw_x": 2,
+        "reddit": 1,
+        "rss": 1,
+        "telegram": 1,
+        "telegram_forwarder": 1,
+        "x_provider": 3
+      },
+      "time_range_min": "2026-02-21T08:05:00+00:00",
+      "time_range_max": "2026-02-21T18:40:48+00:00",
+      "per_token_mentions": {
+        "BTC": 5,
+        "SOL": 4,
+        "ARB": 2,
+        "ETH": 2,
+        "BNB": 1,
+        "XRP": 1
+      }
+    }
+  },
+  "reddit_coverage": {
+    "ts_utc": "2026-02-21T18:40:54+00:00",
+    "sources_requested": [
+      "reddit"
+    ],
+    "events_total": 1,
+    "status": "degraded",
+    "degraded_reasons": [
+      "missing_reddit_credentials_or_user_agent"
+    ],
+    "coverage": [
+      {
+        "source": "reddit",
+        "status": "degraded",
+        "reason": "missing_reddit_credentials_or_user_agent",
+        "events_count": 1,
+        "latency_ms": null,
+        "errors": [],
+        "rate_limited": false,
+        "used_oauth": false,
+        "used_mock_fallback": true,
+        "source_quality": 0.8,
+        "request_attempts": []
+      }
+    ],
+    "quality": {
+      "rows_in": 1,
+      "rows_out": 1,
+      "duplicates_removed": 0,
+      "missing_fields": {
+        "ts_utc": 0,
+        "author": 0,
+        "text": 0,
+        "channel_or_subreddit": 0
+      },
+      "source_counts": {
+        "reddit": 1
+      },
+      "time_range_min": "2026-02-21T18:40:54+00:00",
+      "time_range_max": "2026-02-21T18:40:54+00:00",
+      "per_token_mentions": {
+        "BTC": 1,
+        "ETH": 1,
+        "SOL": 1
+      }
+    }
+  }
+}

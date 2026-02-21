@@ -1,0 +1,136 @@
+{
+  "status": "degraded",
+  "reason": "quality_flags_present",
+  "token": "SOL",
+  "contract": null,
+  "contract_resolution": {
+    "reason": null
+  },
+  "token_aliases": [
+    "SOL",
+    "SOLANA"
+  ],
+  "timeframe": "1h",
+  "lookback_hours": 72,
+  "cutoff_ts_utc": "2026-02-21T08:36:13.195531+00:00",
+  "social_score": 0.508875,
+  "confidence": 0.6175,
+  "mention_count": 4,
+  "freshness_hours": 0.3356,
+  "sentiment_score": 1.0,
+  "sentiment_breakdown": {
+    "bullish": 4,
+    "bearish": 0,
+    "neutral": 0
+  },
+  "hype_score": 0.1225,
+  "mention_velocity_delta": 4,
+  "mention_velocity_ratio": null,
+  "source_breakdown": {
+    "reddit": 1,
+    "x_provider": 1,
+    "youtube_transcript": 2
+  },
+  "source_mix": {
+    "reddit": 0.25,
+    "x_provider": 0.25,
+    "youtube_transcript": 0.5
+  },
+  "top_sources": [
+    "youtube_transcript",
+    "reddit",
+    "x_provider"
+  ],
+  "top_authors": [
+    {
+      "author": "youtube_channel",
+      "mentions": 2
+    },
+    {
+      "author": "user_001",
+      "mentions": 1
+    },
+    {
+      "author": "kol_alpha",
+      "mentions": 1
+    }
+  ],
+  "top_terms": [
+    "sol",
+    "watching",
+    "eth",
+    "reclaim",
+    "btc",
+    "bullish",
+    "breakout",
+    "https",
+    "example",
+    "com",
+    "today",
+    "loses"
+  ],
+  "top_text_snippets": [
+    {
+      "ts_utc": "2026-02-21T08:05:00+00:00",
+      "source": "x_provider",
+      "author": "kol_alpha",
+      "snippet": "SOL reclaim looks strong above support, watching continuation.",
+      "engagement_score": 420.0
+    },
+    {
+      "ts_utc": "2026-02-21T08:16:05+00:00",
+      "source": "reddit",
+      "author": "user_001",
+      "snippet": "BTC and ETH look bullish after breakout. Watching SOL support. https://example.com/a",
+      "engagement_score": 120.0
+    },
+    {
+      "ts_utc": "2026-02-21T08:16:05+00:00",
+      "source": "youtube_transcript",
+      "author": "youtube_channel",
+      "snippet": "Today we're watching SOL and ETH after a strong reclaim.",
+      "engagement_score": null
+    },
+    {
+      "ts_utc": "2026-02-21T08:16:05+00:00",
+      "source": "youtube_transcript",
+      "author": "youtube_channel",
+      "snippet": "If SOL loses support, risk increases quickly.",
+      "engagement_score": null
+    }
+  ],
+  "warning_flags": [
+    "LOW_KOL_COVERAGE",
+    "LOW_SOCIAL_COVERAGE",
+    "TEMPORAL_SPARSITY"
+  ],
+  "anti_leakage": {
+    "excluded_rows_after_cutoff": 2,
+    "parse_errors": 0,
+    "duplicates_removed_estimate": 0,
+    "current_window_start": "2026-02-18T08:36:13.195531+00:00",
+    "previous_window_start": "2026-02-15T08:36:13.195531+00:00",
+    "cutoff_ts_utc": "2026-02-21T08:36:13.195531+00:00"
+  },
+  "executive_summary": "SOL social pulse is mixed with medium confidence (mentions=4, score=0.509). Risks: LOW_KOL_COVERAGE | LOW_SOCIAL_COVERAGE.",
+  "kol_context": {
+    "kol_mentions": 0,
+    "kol_signal_score": null,
+    "kol_coverage": 0.0,
+    "top_kols": [],
+    "kol_registry_size": 3,
+    "kol_warnings": [
+      "LOW_KOL_COVERAGE"
+    ]
+  },
+  "kol_mentions": 0,
+  "kol_signal_score": null,
+  "kol_coverage": 0.0,
+  "notes": {
+    "mode": "research_only",
+    "diagnostic_only": true,
+    "feature_rows_used": 1,
+    "nfa": "Not financial advice. Social layer is not a trading trigger.",
+    "window_previous_mentions": 0
+  }
+}

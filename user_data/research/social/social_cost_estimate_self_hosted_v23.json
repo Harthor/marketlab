@@ -1,0 +1,106 @@
+{
+  "profile": "self_hosted_research",
+  "assumptions": {
+    "day_count_for_month": 30,
+    "provider_fixed_monthly_usd": 0.0,
+    "provider_cost_per_1k_requests_usd": 0.0,
+    "infra_monthly_usd": 25.0,
+    "notes": [
+      "Cost model is approximate and range-based.",
+      "Provider costs are parameterized for adapter-agnostic integration.",
+      "X/Twitter costs are placeholders unless explicit provider pricing is supplied."
+    ]
+  },
+  "costo_por_fuente": {
+    "reddit": {
+      "volume_per_day": 400,
+      "unit": "requests",
+      "free_units_per_day": 1000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "telegram": {
+      "volume_per_day": 12000,
+      "unit": "messages",
+      "free_units_per_day": 1000000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "rss": {
+      "volume_per_day": 250,
+      "unit": "fetches",
+      "free_units_per_day": 1000000,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": false
+    },
+    "x": {
+      "volume_per_day": 0,
+      "unit": "requests",
+      "free_units_per_day": 0,
+      "daily_cost_low_usd": 0.0,
+      "daily_cost_high_usd": 0.0,
+      "placeholder_pricing": true
+    }
+  },
+  "cost_components_monthly": {
+    "provider_external_usd": 0.0,
+    "infra_usd": 25.0
+  },
+  "costo_estimado_mensual": {
+    "low_usd": 25.0,
+    "high_usd": 25.0
+  },
+  "totals": {
+    "estimated_daily_cost_low_usd": 0.8333,
+    "estimated_daily_cost_high_usd": 0.8333
+  },
+  "request_volume_scenarios": [
+    {
+      "requests_per_day": 50,
+      "monthly_low_usd": 25.0,
+      "monthly_high_usd": 25.0,
+      "cost_per_request_low_usd": 0.016667,
+      "cost_per_request_high_usd": 0.016667
+    },
+    {
+      "requests_per_day": 200,
+      "monthly_low_usd": 25.0,
+      "monthly_high_usd": 25.0,
+      "cost_per_request_low_usd": 0.004167,
+      "cost_per_request_high_usd": 0.004167
+    },
+    {
+      "requests_per_day": 500,
+      "monthly_low_usd": 25.0,
+      "monthly_high_usd": 25.0,
+      "cost_per_request_low_usd": 0.001667,
+      "cost_per_request_high_usd": 0.001667
+    }
+  ],
+  "break_even_table": [
+    {
+      "requests_per_day": 50,
+      "monthly_low_usd": 25.0,
+      "monthly_high_usd": 25.0,
+      "cost_per_request_low_usd": 0.016667,
+      "cost_per_request_high_usd": 0.016667
+    },
+    {
+      "requests_per_day": 200,
+      "monthly_low_usd": 25.0,
+      "monthly_high_usd": 25.0,
+      "cost_per_request_low_usd": 0.004167,
+      "cost_per_request_high_usd": 0.004167
+    },
+    {
+      "requests_per_day": 500,
+      "monthly_low_usd": 25.0,
+      "monthly_high_usd": 25.0,
+      "cost_per_request_low_usd": 0.001667,
+      "cost_per_request_high_usd": 0.001667
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+[
+  {
+    "handle": "sol_researcher",
+    "platform": "x",
+    "priority": 1,
+    "topics": ["solana", "defi", "alts"],
+    "weight": 1.2,
+    "active": true
+  },
+  {
+    "handle": "arb_insights",
+    "platform": "x",
+    "priority": 1,
+    "topics": ["arbitrum", "l2", "defi"],
+    "weight": 1.1,
+    "active": true
+  },
+  {
+    "handle": "btc_macro_view",
+    "platform": "x",
+    "priority": 2,
+    "topics": ["bitcoin", "macro", "risk"],
+    "weight": 1.0,
+    "active": true
+  },
+  {
+    "handle": "noise_account",
+    "platform": "x",
+    "priority": 3,
+    "topics": ["memecoins"],
+    "weight": 0.5,
+    "active": false
+  }
+]

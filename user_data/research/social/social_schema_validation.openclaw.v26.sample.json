@@ -1,0 +1,40 @@
+{
+  "status": "degraded",
+  "schema_version_default": "v1",
+  "mode": "external",
+  "strict": true,
+  "rows_total": 2,
+  "rows_valid": 0,
+  "rows_invalid": 2,
+  "rows_warn_only": 0,
+  "mode_counts": {
+    "external": 2
+  },
+  "schema_version_counts": {
+    "v1": 2
+  },
+  "error_by_field": {
+    "token_hints": 2
+  },
+  "error_by_type": {
+    "warn": 2
+  },
+  "errors_sample": [
+    {
+      "index": 0,
+      "mode": "external",
+      "schema_version": "v1",
+      "errors": [
+        "warn:token_hints:missing_or_invalid"
+      ]
+    },
+    {
+      "index": 1,
+      "mode": "external",
+      "schema_version": "v1",
+      "errors": [
+        "warn:token_hints:missing_or_invalid"
+      ]
+    }
+  ]
+}

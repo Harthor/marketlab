@@ -1,0 +1,86 @@
+{
+  "results": [
+    {
+      "split": "A",
+      "universe": "top10",
+      "pairs": 10,
+      "trades": 5,
+      "trades_per_day": 0.04,
+      "profit_total_pct": -0.020313178000000008,
+      "winrate_pct": 40.0,
+      "profit_factor": 0.8549593883062733,
+      "max_drawdown_pct": 0.10495147999999971
+    },
+    {
+      "split": "A",
+      "universe": "top20",
+      "pairs": 20,
+      "trades": 11,
+      "trades_per_day": 0.09,
+      "profit_total_pct": -0.123006964,
+      "winrate_pct": 36.36363636363637,
+      "profit_factor": 0.660882825039022,
+      "max_drawdown_pct": 0.1959117303475414
+    },
+    {
+      "split": "B",
+      "universe": "top10",
+      "pairs": 10,
+      "trades": 5,
+      "trades_per_day": 0.04,
+      "profit_total_pct": 0.025259891999999992,
+      "winrate_pct": 60.0,
+      "profit_factor": 1.1748092762779898,
+      "max_drawdown_pct": 0.08346722700000554
+    },
+    {
+      "split": "B",
+      "universe": "top20",
+      "pairs": 20,
+      "trades": 8,
+      "trades_per_day": 0.07,
+      "profit_total_pct": -0.044181483,
+      "winrate_pct": 37.5,
+      "profit_factor": 0.7934876308805333,
+      "max_drawdown_pct": 0.08346722700000554
+    },
+    {
+      "split": "C",
+      "universe": "top10",
+      "pairs": 10,
+      "trades": 2,
+      "trades_per_day": 0.02,
+      "profit_total_pct": 0.029938658000000007,
+      "winrate_pct": 50.0,
+      "profit_factor": 1.9947707733081272,
+      "max_drawdown_pct": 0.0300779797765774
+    },
+    {
+      "split": "C",
+      "universe": "top20",
+      "pairs": 20,
+      "trades": 6,
+      "trades_per_day": 0.07,
+      "profit_total_pct": 0.093105344,
+      "winrate_pct": 50.0,
+      "profit_factor": 2.0781222402566706,
+      "max_drawdown_pct": 0.05022341622356167
+    }
+  ],
+  "avg_pf": {
+    "top10": 1.3415131459641298,
+    "top20": 1.1774975653920754
+  },
+  "pf_gt_1_count": {
+    "top10": 2,
+    "top20": 1
+  },
+  "best_universe_by_avg_pf": "top10",
+  "fee_sensitivity": {
+    "split": "A",
+    "universe": "top10",
+    "trades": 5,
+    "profit_total_pct": -0.024694216000000005,
+    "profit_factor": 0.8290615287278505
+  }
+}

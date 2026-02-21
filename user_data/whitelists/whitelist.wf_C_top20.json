@@ -1,0 +1,212 @@
+{
+  "generated_by": "walkforward_scoring_train_only",
+  "split": "C",
+  "market": "spot",
+  "timeframe": "1h",
+  "train_timerange": "20250401-20251031",
+  "top_n": 20,
+  "pair_whitelist": [
+    "BTC/USDT",
+    "SOL/USDT",
+    "XRP/USDT",
+    "DOGE/USDT",
+    "BNB/USDT",
+    "SUI/USDT",
+    "ENA/USDT",
+    "ADA/USDT",
+    "AVAX/USDT",
+    "TRX/USDT",
+    "UNI/USDT",
+    "VIRTUAL/USDT",
+    "ARB/USDT",
+    "ZEC/USDT",
+    "ETH/USDT",
+    "LTC/USDT",
+    "TAO/USDT",
+    "NEAR/USDT",
+    "BIO/USDT",
+    "INJ/USDT"
+  ],
+  "ranking": [
+    {
+      "pair": "BTC/USDT",
+      "score": 0.07497814153333199,
+      "quote_volume": 80574478.95651701,
+      "atr_pct": 0.0053283463985597645,
+      "wickiness": 0.5357678187002198,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "SOL/USDT",
+      "score": 0.07349561921048665,
+      "quote_volume": 28295659.30966997,
+      "atr_pct": 0.011766497650378599,
+      "wickiness": 0.5432850375226645,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "XRP/USDT",
+      "score": 0.02578247816305858,
+      "quote_volume": 17684664.329221416,
+      "atr_pct": 0.010580268434547242,
+      "wickiness": 0.5518739101722095,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "DOGE/USDT",
+      "score": 0.02111228002416072,
+      "quote_volume": 11837935.270518739,
+      "atr_pct": 0.013614880530121299,
+      "wickiness": 0.5537820016138728,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "BNB/USDT",
+      "score": 0.0194156188375322,
+      "quote_volume": 11100526.265819639,
+      "atr_pct": 0.007184891014448061,
+      "wickiness": 0.5332978227807741,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "SUI/USDT",
+      "score": 0.015283067060725415,
+      "quote_volume": 7929231.025850987,
+      "atr_pct": 0.014655994951088625,
+      "wickiness": 0.5539012049944977,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "ENA/USDT",
+      "score": 0.01191369160001473,
+      "quote_volume": 4366523.781519704,
+      "atr_pct": 0.020404294246959418,
+      "wickiness": 0.5543695512209937,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "ADA/USDT",
+      "score": 0.011467104386900294,
+      "quote_volume": 4864053.845516695,
+      "atr_pct": 0.012800874473399476,
+      "wickiness": 0.5473334613386756,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "AVAX/USDT",
+      "score": 0.008512811618737324,
+      "quote_volume": 3086418.080364058,
+      "atr_pct": 0.013450934361985403,
+      "wickiness": 0.5448879805754364,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "TRX/USDT",
+      "score": 0.004514074307568202,
+      "quote_volume": 5188396.190372634,
+      "atr_pct": 0.0048166543523720275,
+      "wickiness": 0.5287113371056857,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "UNI/USDT",
+      "score": 0.004267829512700779,
+      "quote_volume": 2365340.7246490377,
+      "atr_pct": 0.014842903668510132,
+      "wickiness": 0.5543570378013457,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "VIRTUAL/USDT",
+      "score": 0.004236005381685843,
+      "quote_volume": 1408132.5198183963,
+      "atr_pct": 0.022109200827940816,
+      "wickiness": 0.5523957256603158,
+      "data_completeness": 0.9505451713395638,
+      "age_days": 203.375
+    },
+    {
+      "pair": "ARB/USDT",
+      "score": 0.004131505819907253,
+      "quote_volume": 1651838.1917042288,
+      "atr_pct": 0.015412678771437423,
+      "wickiness": 0.5494376415061882,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "ZEC/USDT",
+      "score": 0.004044860293076235,
+      "quote_volume": 1403658.3360674393,
+      "atr_pct": 0.019509500613021178,
+      "wickiness": 0.5515687309243945,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "ETH/USDT",
+      "score": 0.0038688446957831297,
+      "quote_volume": 78475665.10937276,
+      "atr_pct": 0.010255138558753582,
+      "wickiness": 0.5672809050104188,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "LTC/USDT",
+      "score": 0.003765097454441355,
+      "quote_volume": 2410555.7724195775,
+      "atr_pct": 0.01104201223798279,
+      "wickiness": 0.5507375922523673,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "TAO/USDT",
+      "score": 0.003742383818409228,
+      "quote_volume": 1578980.9135621437,
+      "atr_pct": 0.01619400044353603,
+      "wickiness": 0.5513475416355759,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "NEAR/USDT",
+      "score": 0.003499044921651821,
+      "quote_volume": 1402084.7337768886,
+      "atr_pct": 0.014516809210179112,
+      "wickiness": 0.5476856478479609,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    },
+    {
+      "pair": "BIO/USDT",
+      "score": 0.00236386491456153,
+      "quote_volume": 722034.5232334405,
+      "atr_pct": 0.024924469035535187,
+      "wickiness": 0.5520261515963958,
+      "data_completeness": 1.0,
+      "age_days": 301.5416666666667
+    },
+    {
+      "pair": "INJ/USDT",
+      "score": 0.0015138628600892296,
+      "quote_volume": 546843.1467769666,
+      "atr_pct": 0.015898782772881342,
+      "wickiness": 0.5429717324872243,
+      "data_completeness": 1.0,
+      "age_days": 395.9583333333333
+    }
+  ]
+}

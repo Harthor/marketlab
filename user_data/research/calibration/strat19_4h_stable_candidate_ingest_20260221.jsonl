@@ -1,0 +1,72 @@
+{
+  "experiment_id": "20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012208Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.780 y en DD por +0.301pp."
+}
+{
+  "experiment_id": "20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf-a",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf-a.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf-a.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012208Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +1.610 y en DD por -0.052pp."
+}
+{
+  "experiment_id": "20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf-b",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf-b.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf-b.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012208Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +1.174 y en DD por +0.000pp."
+}
+{
+  "experiment_id": "20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf4",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf4.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012208Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-wf4.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012208Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +2.355 y en DD por -0.052pp."
+}
+{
+  "experiment_id": "20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee25",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee25.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee25.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012209Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.726 y en DD por +0.320pp."
+}
+{
+  "experiment_id": "20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee50",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee50.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee50.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012209Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.676 y en DD por +0.339pp."
+}
+{
+  "experiment_id": "20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee75",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee75.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee75.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012209Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.534 y en DD por +0.540pp."
+}
+{
+  "experiment_id": "20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee100",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee100.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260221T012209Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-stable-candidate-fee100.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260221T012209Z.md",
+  "recommendation_code": "INCREASE_SAMPLE_SIZE",
+  "recommendation_text": "Normalizar al timeframe preferido (1h) y aumentar muestra por universo/splits. No bajar timeframe por defecto. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.416 y en DD por +0.562pp."
+}

@@ -1,0 +1,4 @@
+snapshot_ts_utc,window_hours,rows,unique_tokens,coverage_score,quality_score,readiness_score,low_rows_flag,duplicate_ratio,source_mix,flags
+2026-02-21T17:46:09+00:00,6,3,5,47.7167,100.0,71.2442,True,0.0,"{""reddit"": 0.333333, ""rss"": 0.333333, ""telegram"": 0.333333}","[""LOW_ROWS""]"
+2026-02-21T17:46:09+00:00,24,11,7,48.8078,100.0,71.8443,True,0.0,"{""openclaw_x"": 0.363636, ""x_provider"": 0.272727, ""reddit"": 0.090909, ""rss"": 0.090909, ""telegram"": 0.090909, ""telegram_forwarder"": 0.090909}","[""LOW_ROWS""]"
+2026-02-21T17:46:09+00:00,72,11,7,48.8078,100.0,71.8443,True,0.0,"{""openclaw_x"": 0.363636, ""x_provider"": 0.272727, ""reddit"": 0.090909, ""rss"": 0.090909, ""telegram"": 0.090909, ""telegram_forwarder"": 0.090909}","[""LOW_ROWS""]"
