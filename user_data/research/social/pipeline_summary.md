@@ -56,3 +56,51 @@
 - x_provider_import_jsonl: {"status": "ok", "reason": null, "rows_in": 6, "rows_out": 6, "duplicates_removed": 0, "errors": [], "missing_fields": {"ts_utc": 0, "author": 0, "text": 0, "channel_or_subreddit": 0}, "source_counts": {"openclaw_x": 2, "telegram_forwarder": 1, "x_provider": 3}, "per_token_mentions": {"BTC": 3, "SOL": 3, "ARB": 2, "ETH": 1}, "time_range_min": "2026-02-21T08:05:00+00:00", "time_range_max": "2026-02-21T09:31:00+00:00", "files_matched": ["user_data/research/social/inbox/x_kol_sample.jsonl"]}
 
 NFA: research diagnostics only; no trading/live execution.
+
+## Social Features Merge Example
+
+Example command to merge `social_features_1h.csv` into candle data:
+
+```bash
+python3 -m user_data.scripts.social.social_cli merge-with-candles \
+  --candles-csv user_data/tmp/social_test/candles_1h.csv \
+  --social-features-csv user_data/tmp/social_test/social_features_1h.csv \
+  --output-csv user_data/tmp/social_test/candles_1h.social_merged.csv
+```
+
+Expected new columns in output CSV:
+- `social_mentions_count_1h`
+- `social_avg_engagement_score_1h`
+- `social_bucket_start_utc`
+
+## Safe For zsh
+
+Copy/paste safe commands:
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab
+python3 -m user_data.scripts.social.social_cli features-1h --input-jsonl user_data/tmp/social_test/social_events.normalized.jsonl --output-jsonl user_data/tmp/social_test/social_features_1h.jsonl --output-csv user_data/tmp/social_test/social_features_1h.csv
+python3 -m user_data.scripts.social.social_cli merge-with-candles --candles-csv user_data/tmp/social_test/candles_1h.csv --social-features-csv user_data/tmp/social_test/social_features_1h.csv --output-csv user_data/tmp/social_test/candles_1h.social_merged.csv
+```
+
+If your shell shows `>` prompt, press `Ctrl+C` once and paste again.
+
+Safe For zsh:
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && user_data/scripts/run_research_refresh.sh
+```
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && .env/bin/python user_data/scripts/social/generate_runtime_config_from_research.py --base-config user_data/configs/config.bt_spot_1h_top10_mr1h_effective.json --candidates-csv user_data/research/out/candidates_latest.csv --output-config user_data/configs/runtime.config.bt_spot_1h_from_research.json --top-n 10 --quote USDT
+```
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && .env/bin/freqtrade backtesting -c user_data/configs/runtime.config.bt_spot_1h_from_research.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201
+```
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && .env/bin/python user_data/scripts/summarize_last_backtest.py
+```
+
+If prompt `>` or `bquote>` appears, press `Ctrl+C` and paste again.

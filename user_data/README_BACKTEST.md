@@ -157,3 +157,25 @@ cd /Users/carlaherrera/Desktop/market-sentiment-lab && .env/bin/python user_data
 ```bash
 cd /Users/carlaherrera/Desktop/market-sentiment-lab && cat user_data/reports/walkforward_1h.md
 ```
+
+## Deploy a VPS (systemd)
+
+Comandos zsh-safe:
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && bash deploy/bootstrap_vps.sh
+```
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && PROJECT_DIR=/opt/market-sentiment-lab bash deploy/systemd/install_systemd_units.sh
+```
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && STRICT_BACKTEST=0 user_data/scripts/run_daily_pipeline.sh
+```
+
+Guia completa:
+
+```bash
+cat deploy/DEPLOY_VPS.md
+```
