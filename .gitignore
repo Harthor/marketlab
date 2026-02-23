@@ -3,6 +3,7 @@ __pycache__/
 *.pyo
 *.pyd
 .venv/
+.env/
 lab/.venv/
 .DS_Store
 .idea/
@@ -12,3 +13,11 @@ tmp/
 youtube-watcher/
 logs/
 *.bak.*
+user_data/logs/
+user_data/reports/
+user_data/configs/runtime.*.json
+user_data/backtest_results/.last_result.json
+user_data/backtest_results/**/backtest-result-*.meta.json
+user_data/backtest_results/**/backtest-result-*.zip
+user_data/data/social_merged/
+user_data/research/out/
