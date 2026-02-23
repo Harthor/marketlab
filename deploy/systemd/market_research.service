@@ -1,0 +1,14 @@
+[Unit]
+Description=Market Sentiment Lab Research Refresh
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/market-sentiment-lab
+ExecStart=/opt/market-sentiment-lab/user_data/scripts/run_research_refresh.sh
+User=ubuntu
+Group=ubuntu
+
+[Install]
+WantedBy=multi-user.target
+

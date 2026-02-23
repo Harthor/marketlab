@@ -1,0 +1,14 @@
+[Unit]
+Description=Market Sentiment Lab Backtest Batch 1h
+After=network.target
+
+[Service]
+Type=oneshot
+WorkingDirectory=/opt/market-sentiment-lab
+ExecStart=/opt/market-sentiment-lab/user_data/scripts/run_backtest_batch_1h.sh
+User=ubuntu
+Group=ubuntu
+
+[Install]
+WantedBy=multi-user.target
+
