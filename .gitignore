@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.venv/
+lab/.venv/
+.DS_Store
+.idea/
+.vscode/
+openclaw/
+tmp/
+youtube-watcher/
+logs/
+*.bak.*
