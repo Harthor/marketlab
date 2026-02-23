@@ -1,0 +1,7 @@
+openai>=1.0.0
+feedparser>=6.0.11
+youtube-transcript-api>=0.6.2
+PyYAML>=6.0.1
+python-dateutil>=2.9.0.post0
+rich>=13.7.1
+yt-dlp>=2024.01.01

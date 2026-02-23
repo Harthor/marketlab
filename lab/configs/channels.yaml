@@ -1,0 +1,20 @@
+channels:
+  - name: MoonDev
+    youtube_url: "https://www.youtube.com/@moondev"
+    channel_id: "UCN7D80fY9xMYu5mHhUhXEFw"
+
+  - name: Coin Bureau
+    youtube_url: "https://www.youtube.com/@CoinBureau"
+    channel_id: "UCqK_GSMbpiV8spgD3ZGloSw"
+
+  - name: Bankless
+    youtube_url: "https://www.youtube.com/@Bankless"
+    channel_id: "UCAl9Ld79qaZxp9JzEOwd3aA"
+
+  - name: The Defiant
+    youtube_url: "https://www.youtube.com/@TheDefiant"
+    channel_id: "UCL0J4MLEdLP0-UyLu0hCktg"
+
+  - name: BenjaminCowen
+    youtube_url: "https://www.youtube.com/@intothecryptoverse"
+    channel_id: "UCRvqjQPSeaWn-uEx-w0XOIg"
