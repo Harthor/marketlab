@@ -23,6 +23,8 @@ class Strat03RSIBBMeanReversion_v3c(IStrategy):
     startup_candle_count: int = 220
 
     atr_stop_mult: float = 1.4
+    debug_social: bool = False
+    _social_debug_logged_pairs: set[str] = set()
 
     def populate_indicators(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
         dataframe["ema200"] = ta.EMA(dataframe, timeperiod=200)
@@ -35,6 +37,36 @@ class Strat03RSIBBMeanReversion_v3c(IStrategy):
         dataframe["bb_middleband"] = bb["mid"]
 
         dataframe["atr"] = ta.ATR(dataframe, timeperiod=14)
+
+        # Social columns are optional in the merged candles input. Keep strategy safe by
+        # defaulting to zero and deriving indicators without future-data leakage.
+        if "social_mentions_count_1h" not in dataframe.columns:
+            dataframe["social_mentions_count_1h"] = 0
+        if "social_avg_engagement_score_1h" not in dataframe.columns:
+            dataframe["social_avg_engagement_score_1h"] = 0.0
+
+        mentions_mean_48 = dataframe["social_mentions_count_1h"].rolling(window=48, min_periods=12).mean()
+        mentions_std_48 = dataframe["social_mentions_count_1h"].rolling(window=48, min_periods=12).std()
+        mentions_z = (dataframe["social_mentions_count_1h"] - mentions_mean_48) / mentions_std_48
+        dataframe["social_mentions_z"] = mentions_z.replace([float("inf"), float("-inf")], 0.0).fillna(0.0)
+
+        engagement_mean_48 = dataframe["social_avg_engagement_score_1h"].rolling(window=48, min_periods=12).mean()
+        engagement_std_48 = dataframe["social_avg_engagement_score_1h"].rolling(window=48, min_periods=12).std()
+        engagement_z = (dataframe["social_avg_engagement_score_1h"] - engagement_mean_48) / engagement_std_48
+        dataframe["social_engagement_z"] = engagement_z.replace([float("inf"), float("-inf")], 0.0).fillna(0.0)
+        dataframe["social_hype"] = dataframe["social_mentions_z"] + dataframe["social_engagement_z"]
+
+        pair = str(metadata.get("pair", "UNKNOWN"))
+        if self.debug_social and pair not in self.__class__._social_debug_logged_pairs:
+            created = [
+                "social_mentions_count_1h",
+                "social_avg_engagement_score_1h",
+                "social_mentions_z",
+                "social_engagement_z",
+                "social_hype",
+            ]
+            print(f"[social-debug] pair={pair} social_columns_ready={created}")
+            self.__class__._social_debug_logged_pairs.add(pair)
         return dataframe
 
     def populate_entry_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
@@ -49,6 +81,7 @@ class Strat03RSIBBMeanReversion_v3c(IStrategy):
             ),
             ["enter_long", "enter_tag"],
         ] = (1, "rsi_bb_meanrev_v3c")
+
         return dataframe
 
     def populate_exit_trend(self, dataframe: DataFrame, metadata: dict) -> DataFrame:
