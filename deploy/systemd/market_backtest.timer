@@ -4,8 +4,8 @@ Description=Run Market Backtest Batch Daily
 [Timer]
 OnCalendar=*-*-* 06:30:00 UTC
 Persistent=true
+RandomizedDelaySec=180
 Unit=market_backtest.service
 
 [Install]
 WantedBy=timers.target
-

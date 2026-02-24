@@ -1,14 +1,18 @@
 [Unit]
 Description=Market Sentiment Lab Research Refresh
 After=network.target
+StartLimitIntervalSec=300
+StartLimitBurst=5
 
 [Service]
 Type=oneshot
+EnvironmentFile=/etc/default/market-sentiment-lab
 WorkingDirectory=/opt/market-sentiment-lab
 ExecStart=/opt/market-sentiment-lab/user_data/scripts/run_research_refresh.sh
+Restart=on-failure
+RestartSec=30
 User=ubuntu
 Group=ubuntu
 
 [Install]
 WantedBy=multi-user.target
-
