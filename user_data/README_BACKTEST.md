@@ -179,3 +179,22 @@ Guia completa:
 ```bash
 cat deploy/DEPLOY_VPS.md
 ```
+
+## Social research: Reddit RSS sources
+
+Esta capa es de research (no toca pair whitelist ni configuraciones de trading/backtest).
+
+- Configuracion de subreddits RSS:
+  - `user_data/configs/reddit_rss_sources.json`
+- Fetch manual:
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab && .env/bin/python user_data/scripts/social/reddit_rss_fetch.py --sources-config user_data/configs/reddit_rss_sources.json --output-json user_data/research/out/reddit_rss_latest.json
+```
+
+- Output de research:
+  - `user_data/research/out/reddit_rss_latest.json`
+- Logs:
+  - `user_data/logs/reddit_rss_fetch_<timestamp>.log`
+
+Integracion opcional: `user_data/scripts/run_research_refresh.sh` ejecuta este fetch cuando `RESEARCH_ENABLE_REDDIT_RSS=1` (default), y si falla una fuente/red sigue con el resto sin romper pipeline.

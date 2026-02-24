@@ -10,6 +10,8 @@ TS_UTC="$(date -u +%Y%m%dT%H%M%SZ)"
 LOG_PATH="user_data/logs/research_refresh_${TS_UTC}.log"
 CANDIDATES_OUT="user_data/research/out/candidates_latest.csv"
 FEATURES_CSV="user_data/tmp/social_test/social_features_1h.csv"
+REDDIT_RSS_JSON="user_data/research/out/reddit_rss_latest.json"
+RESEARCH_ENABLE_REDDIT_RSS="${RESEARCH_ENABLE_REDDIT_RSS:-1}"
 
 {
   echo "[$(date -u +%Y-%m-%dT%H:%M:%SZ)] research_refresh start"
@@ -19,6 +21,15 @@ FEATURES_CSV="user_data/tmp/social_test/social_features_1h.csv"
     user_data/scripts/run_social_merge_1h.sh user_data/tmp/social_test
   else
     echo "run_social_merge_1h.sh not found or not executable, skipping social merge step"
+  fi
+
+  if [ "$RESEARCH_ENABLE_REDDIT_RSS" = "1" ] && [ -f user_data/scripts/social/reddit_rss_fetch.py ]; then
+    echo "Running optional reddit RSS fetch"
+    if ! .env/bin/python user_data/scripts/social/reddit_rss_fetch.py --output-json "$REDDIT_RSS_JSON"; then
+      echo "reddit_rss_fetch.py failed, continuing without blocking research pipeline"
+    fi
+  else
+    echo "reddit RSS fetch disabled or script missing (RESEARCH_ENABLE_REDDIT_RSS=$RESEARCH_ENABLE_REDDIT_RSS)"
   fi
 
   if [ -f "$FEATURES_CSV" ]; then
@@ -82,4 +93,3 @@ PY
 
 echo "research_log=$LOG_PATH"
 echo "candidates_csv=$CANDIDATES_OUT"
-
