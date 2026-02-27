@@ -53,7 +53,7 @@ def main() -> int:
     (OUT / "next_prompts").mkdir(exist_ok=True)
 
     # always include status files
-    for f in ["marketlab_status.json", "marketlab_status_plus.json", "marketlab_status_report.md"]:
+    for f in ["marketlab_status.json", "marketlab_status_plus.json", "marketlab_status_report.md", "OPEN_ISSUES.md"]:
         fp = ROOT / f
         if fp.exists():
             copy_file(fp, OUT / fp.name)
@@ -105,7 +105,36 @@ def main() -> int:
             if _contains_match(p, EMPTY_PATH_RE):
                 copy_file(p, OUT / "manifests" / _manifest_name("FOUND_EMPTY_PATH", p, fc_runs))
 
-    # dashboard backend code (explicit allowlist)
+    
+
+    # --- scan best-effort for known bad patterns (even if status_plus didn't include them) ---
+    import re as _re
+    _NONFINITE = _re.compile(r"\bNaN\b|\bInfinity\b|\b-Infinity\b")
+    _EMPTY_PATH = _re.compile(r"\"path\"\s*:\s*\"\"")
+
+    corr_reports = ROOT / "correlation-engine" / "reports"
+    if corr_reports.is_dir():
+        for f in corr_reports.rglob("summary.json"):
+            try:
+                s = f.read_text("utf-8", errors="ignore")
+            except Exception:
+                continue
+            if _NONFINITE.search(s):
+                rid = f.parent.name
+                copy_file(f, OUT / "manifests" / f"FOUND_NONFINITE__corr__{rid}__summary.json")
+
+    fc_runs = ROOT / "forecasting-backtest" / "runs"
+    if fc_runs.is_dir():
+        for f in fc_runs.rglob("run_summary.json"):
+            try:
+                s = f.read_text("utf-8", errors="ignore")
+            except Exception:
+                continue
+            if _EMPTY_PATH.search(s):
+                rid = f.parent.name
+                copy_file(f, OUT / "manifests" / f"FOUND_EMPTY_PATH__fc__{rid}__run_summary.json")
+
+# dashboard backend code (explicit allowlist)
     allow = [
         ROOT / "market-research-dashboard" / "backend" / "api" / "views.py",
         ROOT / "market-research-dashboard" / "backend" / "api" / "utils.py",
@@ -114,7 +143,9 @@ def main() -> int:
         ROOT / "market-research-dashboard" / "backend" / "api" / "urls.py",
         ROOT / "market-research-dashboard" / "backend" / "marketlab_backend" / "settings.py",
         ROOT / "market-research-dashboard" / "backend" / "marketlab_backend" / "urls.py",
-    ]
+    
+        ROOT / "correlation-engine" / "src" / "correngine" / "runner.py",
+        ROOT / "forecasting-backtest" / "src" / "forecasting_backtest" / "pipeline.py",]
     for p in allow:
         if p.exists():
             rel = p.relative_to(ROOT)

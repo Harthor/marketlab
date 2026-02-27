@@ -1,0 +1,12 @@
+*** Begin Patch
+*** Update File: /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/tests/test_connectors_cli_quality.py
+@@
+         original_get_connector = ingestion.get_connector
+-        from market_data_ingest import storage
+-
+-        original_raw = storage.write_raw_dump
+-        original_processed = storage.write_processed_parquet
++        original_raw = ingestion.write_raw_dump
++        original_processed = ingestion.write_processed_parquet
+*** End Patch
+apply_patch < /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/patch3.diff

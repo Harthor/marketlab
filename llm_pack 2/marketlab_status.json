@@ -1,0 +1,252 @@
+{
+  "generated_at_utc": "2026-02-26T20:30:39.732669+00:00",
+  "root": "/Users/carlaherrera/Desktop/market-sentiment-lab",
+  "workspace_artifacts": {
+    "corr_manifests": {
+      "count": 2,
+      "latest": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/20260226T194255_213Z_returns_1d_30lag_71ff8b4a_seed42/summary.json",
+      "latest_mtime_utc": "2026-02-26T19:42:55.251809+00:00"
+    },
+    "forecast_manifests": {
+      "count": 8,
+      "latest": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/runs/ridge_20260226-192002_527cf975/run_summary.json",
+      "latest_mtime_utc": "2026-02-26T19:20:03.271524+00:00"
+    },
+    "datasets": {
+      "count": 1,
+      "latest": "/Users/carlaherrera/Desktop/market-sentiment-lab/altdata-web-signals/data/datasets/BTC-USD/1d.parquet",
+      "latest_mtime_utc": "2026-02-26T18:49:00.978502+00:00"
+    },
+    "signals": {
+      "count": 4,
+      "latest": "/Users/carlaherrera/Desktop/market-sentiment-lab/altdata-web-signals/data/signals/rss/nvidia/1d.parquet",
+      "latest_mtime_utc": "2026-02-26T18:49:00.969706+00:00"
+    },
+    "processed_prices": {
+      "count": 1,
+      "latest": "/Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/data/processed/DEMO/1d.parquet",
+      "latest_mtime_utc": "2026-02-26T19:18:30.547060+00:00"
+    }
+  },
+  "repos": [
+    {
+      "name": "marketlab-core",
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/marketlab-core",
+      "git": {
+        "present": false
+      },
+      "checklist": {
+        "present": true,
+        "total": 24,
+        "done": 18,
+        "percent": 75,
+        "parse_error": false
+      },
+      "keyfiles": [
+        "AGENTS.md",
+        "CHECKLIST.md",
+        "RUNBOOK.md",
+        "README.md",
+        "docs/contracts.md",
+        "docs/artifacts.md"
+      ],
+      "stack": {
+        "has_pyproject": true,
+        "has_requirements": false,
+        "has_frontend": false,
+        "has_backend": false,
+        "has_makefile": false,
+        "has_docker_compose": false,
+        "has_venv": true
+      },
+      "observability": {
+        "manifests": {
+          "count": 0
+        }
+      },
+      "next_step": "Ensure docs/contracts.md + docs/artifacts.md + manifest/dataset validators + tests."
+    },
+    {
+      "name": "market-data-ingest",
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest",
+      "git": {
+        "present": false
+      },
+      "checklist": {
+        "present": true,
+        "total": 10,
+        "done": 4,
+        "percent": 40,
+        "parse_error": false
+      },
+      "keyfiles": [
+        "AGENTS.md",
+        "CHECKLIST.md",
+        "RUNBOOK.md",
+        "README.md"
+      ],
+      "stack": {
+        "has_pyproject": true,
+        "has_requirements": false,
+        "has_frontend": false,
+        "has_backend": false,
+        "has_makefile": false,
+        "has_docker_compose": false,
+        "has_venv": true
+      },
+      "observability": {
+        "manifests": {
+          "count": 0
+        }
+      },
+      "next_step": "Close checklist items with highest leverage (contracts + golden-path offline)."
+    },
+    {
+      "name": "altdata-web-signals",
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/altdata-web-signals",
+      "git": {
+        "present": false
+      },
+      "checklist": {
+        "present": true,
+        "total": 13,
+        "done": 11,
+        "percent": 85,
+        "parse_error": false
+      },
+      "keyfiles": [
+        "AGENTS.md",
+        "CHECKLIST.md",
+        "RUNBOOK.md",
+        "README.md"
+      ],
+      "stack": {
+        "has_pyproject": true,
+        "has_requirements": false,
+        "has_frontend": false,
+        "has_backend": false,
+        "has_makefile": false,
+        "has_docker_compose": false,
+        "has_venv": true
+      },
+      "observability": {
+        "manifests": {
+          "count": 0
+        }
+      },
+      "next_step": "Review open checklist items and generate golden-path artifacts."
+    },
+    {
+      "name": "correlation-engine",
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine",
+      "git": {
+        "present": false
+      },
+      "checklist": {
+        "present": true,
+        "total": 16,
+        "done": 0,
+        "percent": 0,
+        "parse_error": false
+      },
+      "keyfiles": [
+        "AGENTS.md",
+        "CHECKLIST.md",
+        "RUNBOOK.md",
+        "README.md"
+      ],
+      "stack": {
+        "has_pyproject": true,
+        "has_requirements": false,
+        "has_frontend": false,
+        "has_backend": false,
+        "has_makefile": false,
+        "has_docker_compose": false,
+        "has_venv": true
+      },
+      "observability": {
+        "manifests": {
+          "count": 2,
+          "latest": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/20260226T194255_213Z_returns_1d_30lag_71ff8b4a_seed42/summary.json",
+          "latest_mtime_utc": "2026-02-26T19:42:55.251809+00:00"
+        }
+      },
+      "next_step": "Close checklist items with highest leverage (contracts + golden-path offline)."
+    },
+    {
+      "name": "forecasting-backtest",
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest",
+      "git": {
+        "present": false
+      },
+      "checklist": {
+        "present": true,
+        "total": 15,
+        "done": 15,
+        "percent": 100,
+        "parse_error": false
+      },
+      "keyfiles": [
+        "AGENTS.md",
+        "CHECKLIST.md",
+        "RUNBOOK.md",
+        "README.md",
+        "Makefile"
+      ],
+      "stack": {
+        "has_pyproject": true,
+        "has_requirements": false,
+        "has_frontend": false,
+        "has_backend": false,
+        "has_makefile": true,
+        "has_docker_compose": false,
+        "has_venv": true
+      },
+      "observability": {
+        "manifests": {
+          "count": 8,
+          "latest": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/runs/ridge_20260226-192002_527cf975/run_summary.json",
+          "latest_mtime_utc": "2026-02-26T19:20:03.271524+00:00"
+        }
+      },
+      "next_step": "Run CI (ruff/mypy/pytest or npm build) and generate 1 real run."
+    },
+    {
+      "name": "market-research-dashboard",
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/market-research-dashboard",
+      "git": {
+        "present": false
+      },
+      "checklist": {
+        "present": true,
+        "total": 15,
+        "done": 13,
+        "percent": 87,
+        "parse_error": false
+      },
+      "keyfiles": [
+        "AGENTS.md",
+        "CHECKLIST.md",
+        "RUNBOOK.md",
+        "README.md",
+        "Makefile",
+        "docker-compose.yml"
+      ],
+      "stack": {
+        "has_pyproject": false,
+        "has_requirements": true,
+        "has_frontend": true,
+        "has_backend": true,
+        "has_makefile": true,
+        "has_docker_compose": true,
+        "has_venv": true
+      },
+      "observability": {
+        "manifests": {
+          "count": 0
+        }
+      },
+      "next_step": "Run frontend in demo mode; then wire real mode reading manifests via MARKETLAB_WORKSPACE."
+    }
+  ]
+}

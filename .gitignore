@@ -1,23 +1,24 @@
+# Python
+.venv/
 __pycache__/
-*.py[cod]
+*.pyc
 *.pyo
 *.pyd
-.venv/
-.env/
-lab/.venv/
+
+# Node
+node_modules/
+
+# Data (NO subir datasets grandes)
+data/
+*/data/
+
+# Runtime outputs
+reports/
+runs/
+llm_pack/
+llm_pack.zip
+*.parquet
+*.csv
+
+# OS
 .DS_Store
-.idea/
-.vscode/
-openclaw/
-tmp/
-youtube-watcher/
-logs/
-*.bak.*
-user_data/logs/
-user_data/reports/
-user_data/configs/runtime.*.json
-user_data/backtest_results/.last_result.json
-user_data/backtest_results/**/backtest-result-*.meta.json
-user_data/backtest_results/**/backtest-result-*.zip
-user_data/data/social_merged/
-user_data/research/out/

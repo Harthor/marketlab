@@ -132,7 +132,7 @@ Supuestos explicitos:
 
 ```bash
 cd /Users/carlaherrera/Desktop/market-sentiment-lab
-python3 --version
+/Users/carlaherrera/Desktop/market-sentiment-lab/tools/python_select.sh -V
 test -x .env/bin/python && .env/bin/python --version
 test -x .env/bin/freqtrade && .env/bin/freqtrade --version
 ```

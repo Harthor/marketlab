@@ -1,0 +1,2 @@
+[console_scripts]
+signals = altdata_web_signals.cli:main

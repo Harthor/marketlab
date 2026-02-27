@@ -1,0 +1,48 @@
+{
+  "artifacts": [],
+  "config": {
+    "bootstrap": 0,
+    "cache_root": "/tmp/corr-cache",
+    "dataset": "reports/run_smoke_dataset.parquet",
+    "distance_corr": true,
+    "max_lag": 5,
+    "min_effective_obs": 10,
+    "output_root": "reports_csv_check",
+    "seed": 42,
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "top": 25,
+    "windows": [
+      5,
+      10,
+      20
+    ]
+  },
+  "config_file": null,
+  "config_hash": "74dd1aa37f0879601e9a3317af9a9076b7199542a662a7badb76112bf718feb0",
+  "created_at_utc": "2026-02-27T07:42:27.847108+00:00",
+  "created_utc": "2026-02-27T07:42:27.847113+00:00",
+  "dataset_hash": "87a1e24e01a84e75cc2885fbd9ab63dbad3fd8457123960d3a66c3ab99024f54",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+  "dataset_rows": 600,
+  "kind": "correlation",
+  "notes": [
+    "run in_progress"
+  ],
+  "plots": [],
+  "run_id": "20260227T074227_814Z_returns_1d_5lag_87a1e24e",
+  "schema_version": "1.0",
+  "seed": 42,
+  "status": "running",
+  "tables": [],
+  "top_features": {
+    "best_lag": [],
+    "distance_correlation": [],
+    "mi": [],
+    "mutual_information": [],
+    "pearson": [],
+    "pearson_abs": [],
+    "spearman": [],
+    "spearman_abs": []
+  }
+}

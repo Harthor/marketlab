@@ -9,6 +9,7 @@ import mimetypes
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+from urllib.parse import unquote
 from typing import Any, Dict, List, Optional, Tuple
 
 from django.conf import settings
@@ -62,11 +63,19 @@ CREATED_AT_KEYS = (
 
 DATASET_HASH_KEYS = (
     "dataset_hash",
+    "dataset_sha256",
     "dataset_hash_id",
     "datasetHash",
     "dataset",
     "dataset_name",
     "datasetName",
+)
+DATASET_PATH_KEYS = (
+    "dataset_path",
+    "dataset.path",
+    "dataset.file",
+    "dataset_file",
+    "dataset_file_path",
 )
 
 MODEL_NAME_KEYS = (
@@ -87,6 +96,7 @@ RUN_STATUS_COMPLETE = "complete"
 RUN_STATUS_RUNNING = "running"
 RUN_STATUS_FAILED = "failed"
 RUN_STATUS_PARTIAL = "partial"
+RUN_STATUS_STALE = "stale"
 
 KNOWN_STATUS_KEYS = (
     "status",
@@ -162,6 +172,8 @@ class RunSummary:
     dataset_hash: str
     schema_version: Optional[str]
     status: str
+    status_ui: str
+    is_stale: bool
     error: Optional[str]
     errors: Optional[List[str]]
     label: str
@@ -200,10 +212,12 @@ def _run_id_from_path(run_type: str, path: Path) -> str:
 
 
 def _decode_run_id(run_id: str) -> Tuple[str, str]:
-    if '::' not in run_id:
+    decoded_run_id = unquote(run_id)
+
+    if '::' not in decoded_run_id:
         raise BadRequest('run_id has invalid format')
 
-    run_type, encoded = run_id.split('::', 1)
+    run_type, encoded = decoded_run_id.split('::', 1)
     if run_type not in RUN_TYPES:
         raise BadRequest('run_id has invalid run type')
 
@@ -256,6 +270,86 @@ def _extract_string(payload: Dict[str, Any], keys: Tuple[str, ...]) -> Optional[
             if normalized:
                 return normalized
     return None
+
+
+def _extract_dataset_path(summary: Dict[str, Any], run_dir: Path) -> Optional[Path]:
+    raw_path = _extract_string(summary, DATASET_PATH_KEYS)
+    if raw_path is None:
+        dataset_payload = summary.get("dataset")
+        if isinstance(dataset_payload, str):
+            raw_path = dataset_payload.strip()
+        elif isinstance(dataset_payload, dict):
+            raw_path = _extract_string(
+                dataset_payload,
+                (
+                    "path",
+                    "dataset_path",
+                    "file",
+                    "filename",
+                ),
+            )
+
+    if raw_path is None:
+        return None
+
+    normalized = raw_path.strip()
+    if not normalized:
+        return None
+
+    dataset_path = Path(normalized).expanduser()
+    if dataset_path.is_absolute():
+        return dataset_path
+
+    return (run_dir / dataset_path).resolve()
+
+
+def _extract_dataset_meta_hash(meta: Dict[str, Any]) -> Optional[str]:
+    for key in ("out_sha256", "sha256", "hash", "dataset_hash"):
+        value = meta.get(key)
+        if isinstance(value, str):
+            cleaned = value.strip()
+            if cleaned:
+                return cleaned
+
+    nested_dataset = meta.get("dataset")
+    if isinstance(nested_dataset, dict):
+        for key in ("hash", "sha256", "out_sha256", "dataset_hash"):
+            value = nested_dataset.get(key)
+            if isinstance(value, str):
+                cleaned = value.strip()
+                if cleaned:
+                    return cleaned
+
+    nested_checksum = meta.get("checksum")
+    if isinstance(nested_checksum, dict):
+        for key in ("sha256", "hash", "out_sha256"):
+            value = nested_checksum.get(key)
+            if isinstance(value, str):
+                cleaned = value.strip()
+                if cleaned:
+                    return cleaned
+
+    return None
+
+
+def _is_dataset_stale(dataset_hash: str, summary: Dict[str, Any], run_dir: Path) -> bool:
+    dataset_path = _extract_dataset_path(summary, run_dir)
+    if not dataset_path or not dataset_hash:
+        return False
+
+    meta_path = dataset_path.with_suffix(".meta.json")
+    if not meta_path.exists():
+        return False
+
+    meta_payload = _read_json_if_possible(meta_path)
+    if not meta_payload:
+        return False
+
+    current_hash = _extract_dataset_meta_hash(meta_payload)
+    if not current_hash:
+        return False
+
+    return dataset_hash != current_hash
 
 
 def _extract_int(payload: Dict[str, Any], keys: Tuple[str, ...]) -> Optional[int]:
@@ -423,15 +517,18 @@ def _discover_run_manifests(base_dir: Path, run_type: str) -> List[Path]:
     return sorted(base_dir.glob(f"*/{manifest_name}"))
 
 
-def _gather_artifact_values(value: Any, fallback_name: Optional[str] = None) -> List[Tuple[Optional[str], Any]]:
+def _gather_artifact_values(
+    value: Any,
+    fallback_name: Optional[str] = None,
+) -> List[Tuple[Optional[str], Optional[str], Any]]:
     if value is None:
         return []
 
     if isinstance(value, (str, Path)):
-        return [(fallback_name, value)]
+        return [(fallback_name, None, value)]
 
     if isinstance(value, (list, tuple, set)):
-        entries: List[Tuple[Optional[str], Any]] = []
+        entries: List[Tuple[Optional[str], Optional[str], Any]] = []
         for item in value:
             entries.extend(_gather_artifact_values(item, fallback_name=fallback_name))
         return entries
@@ -443,9 +540,12 @@ def _gather_artifact_values(value: Any, fallback_name: Optional[str] = None) -> 
             path_value = value.get('path') or value.get('file') or value.get('filename')
             if path_value is None:
                 return []
-            return [(value.get('name') or value.get('artifact_name') or fallback_name, path_value)]
+            artifact_id = value.get('artifact_id')
+            if not isinstance(artifact_id, str) or not artifact_id.strip():
+                artifact_id = None
+            return [(value.get('name') or value.get('artifact_name') or fallback_name, artifact_id, path_value)]
 
-        entries: List[Tuple[Optional[str], Any]] = []
+        entries: List[Tuple[Optional[str], Optional[str], Any]] = []
         for key, item in value.items():
             if not isinstance(item, (str, Path, list, tuple, set, dict)):
                 continue
@@ -457,12 +557,12 @@ def _gather_artifact_values(value: Any, fallback_name: Optional[str] = None) -> 
 
 
 
-def _collect_artifacts_from_manifest_items(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Any]]:
+def _collect_artifacts_from_manifest_items(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Optional[str], Any]]:
     raw_artifacts = payload.get("artifacts")
     if not isinstance(raw_artifacts, list):
         return []
 
-    entries: List[Tuple[Optional[str], Any]] = []
+    entries: List[Tuple[Optional[str], Optional[str], Any]] = []
     target_kind = kind.lower()
     for item in raw_artifacts:
         if not isinstance(item, dict):
@@ -480,24 +580,28 @@ def _collect_artifacts_from_manifest_items(payload: Dict[str, Any], kind: str) -
         if isinstance(name, str) and not name.strip():
             name = None
 
-        entries.append((name, raw_path))
+        artifact_id = item.get('artifact_id')
+        if not isinstance(artifact_id, str) or not artifact_id.strip():
+            artifact_id = None
+
+        entries.append((name, artifact_id, raw_path))
 
     return entries
 
 
-def _collect_artifacts_from_manifest_sections(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Any]]:
+def _collect_artifacts_from_manifest_sections(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Optional[str], Any]]:
     section = payload.get(f"{kind}s") if isinstance(payload, dict) else None
     if section is None:
         return []
     return _gather_artifact_values(section)
 
 
-def _collect_artifacts_from_files(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Any]]:
+def _collect_artifacts_from_files(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Optional[str], Any]]:
     raw_files = payload.get("files")
     if not isinstance(raw_files, dict):
         return []
 
-    entries: List[Tuple[Optional[str], Any]] = []
+    entries: List[Tuple[Optional[str], Optional[str], Any]] = []
     for name, value in raw_files.items():
         if not isinstance(name, str):
             continue
@@ -507,12 +611,33 @@ def _collect_artifacts_from_files(payload: Dict[str, Any], kind: str) -> List[Tu
 
         path_text = str(value)
         if kind == 'table' and Path(path_text).suffix.lower() in TABLE_EXTS:
-            entries.append((name, value))
+            entries.append((name, None, value))
             continue
 
         if kind == 'plot' and Path(path_text).suffix.lower() in PLOT_EXTS:
-            entries.append((name, value))
+            entries.append((name, None, value))
     return entries
+
+
+def _artifact_key(
+    kind: str,
+    artifact_id: Optional[str],
+    raw_path: Any,
+    declared_name: Optional[str],
+    index: int,
+) -> str:
+    if artifact_id:
+        return f"id::{artifact_id}"
+
+    raw_path_text = str(raw_path).strip()
+    if raw_path_text:
+        return f"{kind.lower()}::{raw_path_text}"
+
+    fallback = (declared_name or "").strip().lower()
+    if fallback:
+        return f"{kind.lower()}::{fallback}::{index}"
+
+    return f"{kind.lower()}::<index>::{index}"
 
 
 def _normalize_artifact_path(run_dir: Path, raw_path: Any) -> Path:
@@ -527,7 +652,7 @@ def _normalize_artifact_path(run_dir: Path, raw_path: Any) -> Path:
 
 
 def _collect_artifacts(payload: Dict[str, Any], run_dir: Path, kind: str) -> List[RunArtifact]:
-    candidates: List[Tuple[Optional[str], Any]] = []
+    candidates: List[Tuple[Optional[str], Optional[str], Any]] = []
     source_keys = TABLE_KEYS if kind == 'table' else PLOT_KEYS
     for key in source_keys:
         value = _lookup_nested(payload, key)
@@ -540,7 +665,7 @@ def _collect_artifacts(payload: Dict[str, Any], run_dir: Path, kind: str) -> Lis
 
     artifacts: List[RunArtifact] = []
     seen: set[str] = set()
-    for declared_name, raw_path in candidates:
+    for index, (declared_name, artifact_id, raw_path) in enumerate(candidates):
         try:
             path = _normalize_artifact_path(run_dir, raw_path)
         except ValueError:
@@ -559,7 +684,13 @@ def _collect_artifacts(payload: Dict[str, Any], run_dir: Path, kind: str) -> Lis
         except ValueError:
             display_name = display_name or str(path.name)
 
-        normalized_key = display_name.lower()
+        normalized_key = _artifact_key(
+            kind=kind,
+            artifact_id=artifact_id,
+            raw_path=raw_path,
+            declared_name=declared_name,
+            index=index,
+        )
         if normalized_key in seen:
             continue
 
@@ -607,6 +738,8 @@ def _build_invalid_run_summary(run_type: str, manifest: Path, errors: List[str])
         dataset_hash=run_dir.name,
         schema_version=None,
         status=RUN_STATUS_INVALID,
+        status_ui=RUN_STATUS_INVALID,
+        is_stale=False,
         error='; '.join(errors),
         errors=list(errors),
         label=f"{run_type} run",
@@ -658,6 +791,9 @@ def _build_run_summary(run_type: str, manifest_path: Path) -> RunSummary:
     if error_message:
         status = RUN_STATUS_FAILED
 
+    is_stale = _is_dataset_stale(dataset_hash, summary, run_dir)
+    status_ui = RUN_STATUS_STALE if is_stale else status
+
     return RunSummary(
         run_id=run_id,
         kind=run_type,
@@ -667,6 +803,8 @@ def _build_run_summary(run_type: str, manifest_path: Path) -> RunSummary:
         dataset_hash=dataset_hash,
         schema_version=schema_version,
         status=status,
+        status_ui=status_ui,
+        is_stale=is_stale,
         error=error_message,
         errors=errors,
         label=label,
@@ -829,11 +967,16 @@ def get_run_health(run_id: str) -> Dict[str, Any]:
 
     for artifact in [*run.tables, *run.plots]:
         if not artifact.path.is_file():
+            if artifact.path.exists():
+                reason = "artifact path exists but is not a file"
+            else:
+                reason = "artifact file not found"
             missing_artifacts.append(
                 {
                     "kind": artifact.kind,
                     "name": artifact.name,
                     "path": str(artifact.path),
+                    "reason": reason,
                 },
             )
 
@@ -843,9 +986,14 @@ def get_run_health(run_id: str) -> Dict[str, Any]:
     if run.error and status not in (RUN_STATUS_FAILED, RUN_STATUS_RUNNING):
         status = RUN_STATUS_FAILED
 
+    if run.is_stale and status not in (RUN_STATUS_FAILED, RUN_STATUS_RUNNING):
+        warnings.append("dataset hash in manifest does not match dataset metadata sidecar")
+
     return {
         "run_id": run.run_id,
         "status": status,
+        "status_ui": run.status_ui,
+        "is_stale": run.is_stale,
         "schema_version": schema_version,
         "missing_artifacts": missing_artifacts,
         "warnings": warnings,

@@ -1,0 +1,2 @@
+[console_scripts]
+forecast = forecasting_backtest.cli:main

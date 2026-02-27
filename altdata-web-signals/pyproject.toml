@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "altdata-web-signals"
+version = "0.1.0"
+description = "Collect web alternative data signals and align them with price series for research."
+readme = "README.md"
+requires-python = ">=3.11"
+authors = [
+  { name = "market-lab" }
+]
+license = { text = "MIT" }
+dependencies = [
+  "polars>=0.20.31,<2",
+  "pandas>=2.1",
+  "PyYAML>=6.0.1",
+  "requests>=2.31.0",
+  "feedparser>=6.0.11",
+  "python-dateutil>=2.9.0",
+  "marketlab-core>=0.1.0",
+  "pyarrow>=14.0.0",
+  "yfinance>=0.2.55",
+]
+
+[project.optional-dependencies]
+trends = ["pytrends>=4.9.0"]
+analysis = ["numpy>=1.26"]
+dev = [
+  "pytest>=8.3.0",
+  "matplotlib>=3.8",
+]
+
+[project.scripts]
+signals = "altdata_web_signals.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 120

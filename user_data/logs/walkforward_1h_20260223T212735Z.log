@@ -1,0 +1,10 @@
+[2026-02-23T21:27:35Z] walkforward_1h start
+strategy=Strat03RSIBBMeanReversion_v3c
+windows=A=20250101-20250601,B=20250601-20251001,C=20251001-20260201
+{"status": "ok", "pairs_count": 8, "output_config": "user_data/configs/runtime.config.bt_spot_1h_walkforward.json", "quote": "USDT", "top_n": 10}
+window=A timerange=20250101-20250601 status=error log=user_data/logs/walkforward_1h_A_20260223T212735Z.log
+window=B timerange=20250601-20251001 status=error log=user_data/logs/walkforward_1h_B_20260223T212735Z.log
+window=C timerange=20251001-20260201 status=error log=user_data/logs/walkforward_1h_C_20260223T212735Z.log
+[2026-02-23T21:27:42Z] walkforward_1h done
+status_json=user_data/reports/walkforward_status_1h.json
+master_log=user_data/logs/walkforward_1h_20260223T212735Z.log

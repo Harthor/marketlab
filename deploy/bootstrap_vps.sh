@@ -4,13 +4,20 @@ set -euo pipefail
 PROJECT_DIR="${PROJECT_DIR:-$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)}"
 cd "$PROJECT_DIR"
 
-PYTHON_BIN="${PYTHON_BIN:-python3.11}"
-if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
-  PYTHON_BIN="python3"
+PYTHON_SELECTOR="$PROJECT_DIR/tools/python_select.sh"
+if [ -x "$PYTHON_SELECTOR" ]; then
+  PYTHON_BIN="$("$PYTHON_SELECTOR")"
+else
+  if command -v python3.11 >/dev/null 2>&1; then
+    PYTHON_BIN="$(command -v python3.11)"
+  else
+    echo "[bootstrap_vps] error: Python >=3.11 is required (python3.11 not found)" >&2
+    exit 1
+  fi
 fi
 
 if ! command -v "$PYTHON_BIN" >/dev/null 2>&1; then
-  echo "[bootstrap_vps] error: python3.11/python3 not found" >&2
+  echo "[bootstrap_vps] error: no valid Python interpreter at ${PYTHON_BIN}" >&2
   exit 1
 fi
 

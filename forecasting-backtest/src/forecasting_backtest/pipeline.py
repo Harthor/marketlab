@@ -243,6 +243,7 @@ def execute_train(
     run_id: str | None = None,
     command: str | None = None,
     output_root: str | None = None,
+    timestamp_col: str | None = None,
 ) -> dict:
     base_config = deepcopy(config)
     base_config["dataset"] = dict(base_config.get("dataset", {}))
@@ -264,6 +265,11 @@ def execute_train(
     threshold = float(base_config["backtest"]["threshold"])
     walk_cfg = dict(base_config["walk_forward"])
     imputation_cfg = dict(base_config.get("imputation", {}))
+    resolved_timestamp_col: str | None = timestamp_col
+    if resolved_timestamp_col is None:
+        config_timestamp = base_config.get("dataset", {}).get("timestamp_col")
+        if isinstance(config_timestamp, str) and config_timestamp.strip():
+            resolved_timestamp_col = config_timestamp
 
     resolved_config = dict(base_config)
     resolved_config_hash = config_fingerprint(resolved_config)
@@ -290,6 +296,7 @@ def execute_train(
         "dataset": {
             "path": str(dataset_path),
             "hash": dataset_hash,
+            "timestamp_col": resolved_timestamp_col,
         },
         "target": target,
         "features": [],
@@ -311,7 +318,7 @@ def execute_train(
     try:
         dataset_hash = dataset_checksum(dataset_path)
         df = load_dataset(dataset_path)
-        df = normalize_dataset(df, target=target)
+        df = normalize_dataset(df, target=target, timestamp_col=resolved_timestamp_col)
         run_summary["dataset_hash"] = dataset_hash
         dataset_payload = run_summary.setdefault("dataset", {})
         if isinstance(dataset_payload, dict):
@@ -527,6 +534,7 @@ def execute_train(
                 "path": str(dataset_path),
                 "hash": dataset_hash,
                 "rows": int(len(imputed_df)),
+                "timestamp_col": resolved_timestamp_col,
             },
             "target": target,
             "features": feature_cols,

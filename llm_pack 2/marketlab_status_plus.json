@@ -1,0 +1,141 @@
+{
+  "generated_at_utc": "2026-02-26T20:30:39.758429+00:00",
+  "root": "/Users/carlaherrera/Desktop/market-sentiment-lab",
+  "corr_manifests_checked": [
+    {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/20260226T194255_213Z_returns_1d_30lag_71ff8b4a_seed42/summary.json",
+      "mtime_utc": "2026-02-26T19:42:55.251809+00:00",
+      "ok": false,
+      "errors": [
+        "nonfinite_values_in_manifest"
+      ],
+      "kind": "correlation",
+      "status": "complete",
+      "schema_version": "1.0",
+      "run_id": "20260226T194255_213Z_returns_1d_30lag_71ff8b4a_seed42",
+      "artifacts_count": 11,
+      "missing_artifacts_count": 0,
+      "missing_artifacts": [],
+      "nonfinite_values": [
+        "feature_summary_preview[3].n_effective",
+        "feature_summary_preview[6].n_effective",
+        "feature_summary_preview[8].n_effective",
+        "feature_summary_preview[14].n_effective",
+        "feature_summary_preview[16].n_effective",
+        "feature_summary_preview[20].n_effective",
+        "feature_summary_preview[27].n_effective",
+        "feature_summary_preview[30].n_effective",
+        "feature_summary_preview[33].n_effective"
+      ]
+    },
+    {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/20260226T192523_200Z_returns_1d_30lag_71ff8b4a_seed42/summary.json",
+      "mtime_utc": "2026-02-26T19:25:23.230401+00:00",
+      "ok": false,
+      "errors": [
+        "nonfinite_values_in_manifest"
+      ],
+      "kind": "correlation",
+      "status": "complete",
+      "schema_version": "1.0",
+      "run_id": "20260226T192523_200Z_returns_1d_30lag_71ff8b4a_seed42",
+      "artifacts_count": 11,
+      "missing_artifacts_count": 0,
+      "missing_artifacts": [],
+      "nonfinite_values": [
+        "feature_summary_preview[3].n_effective",
+        "feature_summary_preview[6].n_effective",
+        "feature_summary_preview[8].n_effective",
+        "feature_summary_preview[14].n_effective",
+        "feature_summary_preview[16].n_effective",
+        "feature_summary_preview[20].n_effective",
+        "feature_summary_preview[27].n_effective",
+        "feature_summary_preview[30].n_effective",
+        "feature_summary_preview[33].n_effective"
+      ]
+    }
+  ],
+  "forecast_manifests_checked": [
+    {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/runs/ridge_20260226-192002_527cf975/run_summary.json",
+      "mtime_utc": "2026-02-26T19:20:03.271524+00:00",
+      "ok": true,
+      "errors": [],
+      "kind": "forecast",
+      "status": "complete",
+      "schema_version": "1.0",
+      "run_id": "ridge_20260226-192002_527cf975",
+      "artifacts_count": 8,
+      "missing_artifacts_count": 0,
+      "missing_artifacts": [],
+      "nonfinite_values": []
+    },
+    {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/runs/ridge_20260226-173632_76276435/run_summary.json",
+      "mtime_utc": "2026-02-26T19:17:40.414565+00:00",
+      "ok": true,
+      "errors": [],
+      "kind": "forecast",
+      "status": "complete",
+      "schema_version": "1.0",
+      "run_id": "ridge_20260226-173632_76276435",
+      "artifacts_count": 6,
+      "missing_artifacts_count": 0,
+      "missing_artifacts": [],
+      "nonfinite_values": []
+    },
+    {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/runs/ridge_20260226-173555_d8b251cd/run_summary.json",
+      "mtime_utc": "2026-02-26T19:17:40.413974+00:00",
+      "ok": true,
+      "errors": [],
+      "kind": "forecast",
+      "status": "complete",
+      "schema_version": "1.0",
+      "run_id": "ridge_20260226-173555_d8b251cd",
+      "artifacts_count": 6,
+      "missing_artifacts_count": 0,
+      "missing_artifacts": [],
+      "nonfinite_values": []
+    },
+    {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/runs/ridge_20260226-173440_e0253e2d/run_summary.json",
+      "mtime_utc": "2026-02-26T19:17:40.413499+00:00",
+      "ok": true,
+      "errors": [],
+      "kind": "forecast",
+      "status": "complete",
+      "schema_version": "1.0",
+      "run_id": "ridge_20260226-173440_e0253e2d",
+      "artifacts_count": 6,
+      "missing_artifacts_count": 0,
+      "missing_artifacts": [],
+      "nonfinite_values": []
+    },
+    {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/runs/ridge_20260226-173406_8a0c4233/run_summary.json",
+      "mtime_utc": "2026-02-26T19:17:40.412219+00:00",
+      "ok": false,
+      "errors": [
+        "missing_artifacts"
+      ],
+      "kind": "forecast",
+      "status": "complete",
+      "schema_version": "1.0",
+      "run_id": "ridge_20260226-173406_8a0c4233",
+      "artifacts_count": 6,
+      "missing_artifacts_count": 1,
+      "missing_artifacts": [
+        {
+          "artifact": {
+            "type": "model",
+            "name": "ridge",
+            "path": ""
+          },
+          "reason": "no_path"
+        }
+      ],
+      "nonfinite_values": []
+    }
+  ]
+}

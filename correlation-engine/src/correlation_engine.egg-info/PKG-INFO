@@ -1,0 +1,145 @@
+Metadata-Version: 2.4
+Name: correlation-engine
+Version: 0.1.0
+Summary: Quantitative correlation engine for signal/target time-series relationships
+Requires-Python: >=3.11
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=1.24
+Requires-Dist: pandas>=2.0
+Requires-Dist: polars>=0.20
+Requires-Dist: scipy>=1.11
+Requires-Dist: scikit-learn>=1.3
+Requires-Dist: matplotlib>=3.8
+Requires-Dist: pyarrow>=14
+Requires-Dist: marketlab-core>=0.1.0
+
+# correlation-engine
+
+Motor reproducible de relaciones estadísticas entre señales (`features`) y `target` (ej. `returns_1d`) sobre datasets tabulares con `ts`.
+
+## Instalación rápida
+
+```bash
+pip install -e .
+```
+
+## Uso
+
+### 1) Correr análisis
+
+```bash
+corr run \
+  --dataset path/to/dataset.parquet \
+  --target returns_1d \
+  --timestamp ts_utc \
+  --max-lag 30 \
+  --windows 30,90,180
+```
+
+### 2) Ranking por métrica
+
+```bash
+corr rank --metric spearman_abs --top 50
+```
+
+### 3) Smoke run reproducible
+
+```bash
+python correlation-engine/scripts/run_smoke.py
+```
+
+Este script crea `reports/run_smoke_dataset.parquet`, corre el engine y deja un run en `reports/<run_id>/` para validar que el pipeline termina correctamente.
+
+## Estructura del output
+
+Cada corrida guarda un run en `reports/<run_id>/`:
+
+- `summary.json`: métricas top por feature, ordenadas por métrica.
+- `tables/correlations.parquet`: Pearson/Spearman + p-values + corrección BH.
+- `tables/rolling_corr.parquet`: rolling correlation por ventanas.
+- `tables/lag.parquet`: cross-correlation por lag (-max_lag .. +max_lag).
+- `tables/lag_summary.parquet`: mejor lag por feature.
+- `tables/mi.parquet`: mutual information.
+- `tables/distance_correlation.parquet`: distancia no lineal (si se habilita).
+- `tables/bootstrap_ci.parquet`: IC bootstrap opcional.
+- `plots/rolling_corr.png`: evolución por ventanas.
+- `plots/lag_profiles.png`: perfil cross-correlación por feature.
+- `README.md`: metadatos del run, configuración y hash del dataset.
+
+### Contrato de salida del `summary.json` (mínimo)
+
+El dashboard solo necesita leer `reports/<run_id>/summary.json` para listar runs y navegar artefactos.
+
+Campos mínimos requeridos:
+
+- `run_id`
+- `kind: "correlation"`
+- `created_at_utc`
+- `dataset_path`
+- `dataset_hash`
+- `config`: configuración efectiva del run
+- `config_hash`
+- `seed`
+- `artifacts`: lista de objetos `{type, name, path}`
+- `top_features`: métricas `pearson`, `spearman`, `mi`, `best_lag`
+
+Nombres de artefactos estables:
+
+- `tables/correlations.parquet` (`name="correlations"`)
+- `tables/rolling_corr.parquet` (`name="rolling_corr"`)
+- `tables/lag.parquet` (`name="lag"`)
+- `tables/lag_summary.parquet` (`name="lag_summary"`)
+- `tables/mi.parquet` (`name="mutual_information"`)
+- `tables/distance_correlation.parquet` (`name="distance_correlation"`, si aplica)
+- `tables/bootstrap_ci.parquet` (`name="bootstrap_ci"`, si aplica)
+- `plots/rolling_corr.png` (`name="rolling_corr"`)
+- `plots/lag_profiles.png` (`name="lag_profiles"`)
+
+Además, el run incluye `README.md` como documento reproducible.
+
+## Métricas
+
+### Correlaciones
+- Pearson / Spearman con `p-value` y ajuste BH.
+
+### Lead-lag
+- Cross-correlation con lags en `[-max_lag, +max_lag]`.
+- `lag>0` = la feature es líder (lead): hoy la señal de la feature ayuda a predecir el target futuro a `lag` períodos.
+- `lag<0` = el target es líder (lag): hoy el target ayuda a predecir la feature pasada (`-lag` períodos antes).
+- `lag=0` = correlación sin desfase (sin lead-lag).
+- Para producción, confirmar `best_lag` en la muestra de validación y no confundir con causalidad.
+
+### Dependencia no lineal
+- `mutual_info_regression` de sklearn.
+- `distance_correlation` (opcional).
+
+### Robustez
+- Bootstrap simple (si `--bootstrap > 0`) para IC de Pearson por feature.
+
+## Anti-pitfalls
+
+1. **Lookahead bias**
+   - No mezclar columnas computadas con timestamp futuro.
+   - Si hay operaciones de ventana, validar que todas las features estén alineadas con un orden temporal estrictamente causal.
+
+2. **Data snooping**
+   - No elegir la métrica con mejor métrica in-sample sin validación fuera de muestra.
+   - Si se ajustan hiperparámetros, reservar walk-forward / hold-out temporal.
+
+3. **Non-stationarity**
+   - Un lead-lag estable en un sub-período puede romperse al cambiar régimen.
+   - Revisar estabilidad temporal con `rolling_corr` y perfiles de lag.
+
+4. **Correlación ≠ causalidad**
+   - El signo / magnitud de corr puede ser spurious si hay factores omitidos o cambios de régimen.
+
+5. **Significancia múltiple**
+   - Con muchas features, interpretar señales solo con p-value cruda genera falsos positivos.
+   - Este engine reporta BH-corrección.
+
+## Notas de reproducibilidad
+
+- Se guarda `dataset_hash` y `config`.
+- Se añade `config_hash` (hash determinista de la configuración del run).
+- Se usa semilla fija (`--seed`) para MI y bootstrap.
+- Si `marketlab-core` está instalado, se reutiliza `align`, `compute_returns`, cache e IO para trazabilidad.

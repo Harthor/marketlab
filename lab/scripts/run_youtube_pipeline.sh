@@ -16,7 +16,7 @@ if [[ -z "${OPENAI_API_KEY:-}" ]]; then
   exit 1
 fi
 
-python3 -m venv "$ROOT/.venv" >/dev/null 2>&1 || true
+"$REPO/tools/bootstrap_venv.sh" "$ROOT" --requirements requirements.txt
 source "$ROOT/.venv/bin/activate"
 pip -q install -U pip
 pip -q install -r "$ROOT/requirements.txt"

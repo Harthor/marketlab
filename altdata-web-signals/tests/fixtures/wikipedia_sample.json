@@ -1,0 +1,18 @@
+{
+  "items": [
+    {
+      "project": "en.wikipedia",
+      "article": "Bitcoin",
+      "granularity": "daily",
+      "timestamp": "2022010100",
+      "views": 1200
+    },
+    {
+      "project": "en.wikipedia",
+      "article": "Bitcoin",
+      "granularity": "daily",
+      "timestamp": "2022010200",
+      "views": 1500
+    }
+  ]
+}

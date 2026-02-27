@@ -41,7 +41,10 @@ const getArtifactError = (health, artifactName) => {
   const missing = (health.missing_artifacts || []).find(
     (item) => item.name === artifactName || item.path?.endsWith(`/${artifactName}`) || item.path === artifactName,
   );
-  return missing ? `artifact missing: ${artifactName}` : null;
+  if (!missing) {
+    return null;
+  }
+  return `artifact missing: ${artifactName}${missing.reason ? ` (${missing.reason})` : ''}`;
 };
 
 const BacktestsPage = () => {
@@ -188,7 +191,9 @@ const BacktestsPage = () => {
 
       {loading && <p>Cargando…</p>}
       {error && <p className="error">{error}</p>}
-      {runHealth && <p className={`run-status run-status-${runHealth.status}`}>Estado: {runHealth.status}</p>}
+      {runHealth && (
+        <p className={`run-status run-status-${runHealth.status_ui || runHealth.status}`}>Estado: {runHealth.status_ui || runHealth.status}</p>
+      )}
       {runHealth?.status === 'failed' && runHealth?.error?.message && <p className="error">error: {runHealth.error.message}</p>}
       {warnings.length > 0 && (
         <div className="warning-box">
@@ -219,7 +224,7 @@ const BacktestsPage = () => {
                       getArtifactCounts(run).total > 0 ? 'run-option-has-artifacts' : 'run-option-empty'
                     }
                   >
-                    {run.name} ({run.dataset}) · {run.status || 'unknown'} · T:{getArtifactCounts(run).tableCount} P:{getArtifactCounts(run).plotCount}
+                    {run.name} ({run.dataset}) · {(run.status_ui || run.status) || 'unknown'} · T:{getArtifactCounts(run).tableCount} P:{getArtifactCounts(run).plotCount}
                   </option>
                 ))}
               </select>

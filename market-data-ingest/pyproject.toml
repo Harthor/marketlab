@@ -1,0 +1,36 @@
+[build-system]
+requires = ["setuptools>=65.5", "setuptools-scm>=8.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "market-data-ingest"
+version = "0.1.0"
+description = "OHLCV ingestion toolkit with local parquet + DuckDB lake."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "typer>=0.12.0",
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "pyarrow>=15.0.0",
+    "duckdb>=1.0.0",
+    "pydantic>=2.7.0",
+    "yfinance>=0.2.50",
+    "marketlab-core>=0.0.1"
+]
+
+[project.optional-dependencies]
+ccxt = ["ccxt>=4.3.0"]
+trading-calendar = ["pandas-market-calendars>=4.4.0"]
+dev = [
+    "pytest>=8.2.0",
+    "pytest-cov>=5.0.0",
+    "ruff>=0.6.0",
+    "mypy>=1.11.0",
+]
+
+[project.scripts]
+ingest = "market_data_ingest.cli:app"
+
+[tool.setuptools.packages.find]
+where = ["src"]

@@ -1,0 +1,17 @@
+README.md
+pyproject.toml
+src/correlation_engine.egg-info/PKG-INFO
+src/correlation_engine.egg-info/SOURCES.txt
+src/correlation_engine.egg-info/dependency_links.txt
+src/correlation_engine.egg-info/entry_points.txt
+src/correlation_engine.egg-info/requires.txt
+src/correlation_engine.egg-info/top_level.txt
+src/correngine/__init__.py
+src/correngine/__main__.py
+src/correngine/cli.py
+src/correngine/config.py
+src/correngine/marketlab_bridge.py
+src/correngine/plotting.py
+src/correngine/runner.py
+src/correngine/statistics.py
+tests/test_synthetic_lag.py

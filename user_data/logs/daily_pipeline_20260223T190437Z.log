@@ -1,0 +1,200 @@
+[2026-02-23T19:04:37Z] daily_pipeline start
+strict_backtest=0
+[2026-02-23T19:04:37Z] research_refresh start
+Running user_data/scripts/run_social_merge_1h.sh user_data/tmp/social_test
+INFO stage=features_1h rows_in=430 rows_out=23 output=user_data/tmp/social_test/social_features_1h.csv
+{"status": "ok", "timeframe": "1h", "rows_in": 430, "rows_out": 23, "output_jsonl": "user_data/tmp/social_test/social_features_1h.jsonl", "output_csv": "user_data/tmp/social_test/social_features_1h.csv"}
+INFO stage=merge_with_candles rows_in=4 rows_out=4 output=user_data/tmp/social_test/candles_1h.social_merged.csv
+{"status": "ok", "rows_in": 4, "rows_out": 4, "filled_zeros": 1, "include_unknown": false, "social_rows_loaded": 21, "social_rows_skipped_unknown": 1, "output_csv": "user_data/tmp/social_test/candles_1h.social_merged.csv"}
+timestamp,symbol,close,social_mentions_count_1h,social_avg_engagement_score_1h,social_bucket_start_utc
+2026-02-23T12:15:00Z,BNB/USDT,300,14,3.0,2026-02-23T12:00:00+00:00
+2026-02-23T12:20:00Z,XRP/USDT,1.2,14,2.0,2026-02-23T12:00:00+00:00
+total 808
+-rw-r--r--@ 1 carlaherrera  staff   162B Feb 23 11:31 candles_1h.csv
+-rw-r--r--@ 1 carlaherrera  staff   392B Feb 23 16:04 candles_1h.social_merged.csv
+-rw-r--r--@ 1 carlaherrera  staff   391B Feb 23 11:38 candles_1h.social_merged.v2.csv
+-rw-r--r--@ 1 carlaherrera  staff    93B Feb 23 11:20 ext.jsonl
+-rw-r--r--@ 1 carlaherrera  staff    13K Feb 23 11:20 new_flags.raw.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   3.4K Feb 23 11:20 old_flags.raw.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   158K Feb 23 11:50 social_events.normalized.jsonl
+-rw-r--r--@ 1 carlaherrera  staff    35K Feb 23 11:36 social_events.normalized.v2.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   146K Feb 23 11:50 social_events.raw.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   961B Feb 23 16:04 social_features_1h.csv
+-rw-r--r--@ 1 carlaherrera  staff   2.6K Feb 23 16:04 social_features_1h.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   567B Feb 23 11:38 social_features_1h.v2.csv
+-rw-r--r--@ 1 carlaherrera  staff   1.5K Feb 23 11:38 social_features_1h.v2.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   1.2K Feb 23 11:36 unknown_demo.normalized.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   610B Feb 23 11:36 unknown_demo.raw.jsonl
+Generating candidates CSV from user_data/tmp/social_test/social_features_1h.csv
+wrote_candidates=user_data/research/out/candidates_latest.csv rows=23
+[2026-02-23T19:04:37Z] research_refresh done
+research_log=user_data/logs/research_refresh_20260223T190437Z.log
+candidates_csv=user_data/research/out/candidates_latest.csv
+[2026-02-23T19:04:37Z] backtest_batch_1h start
+base_cfg=user_data/configs/config.bt_spot_1h_top10_mr1h_effective.json
+strategy=Strat03RSIBBMeanReversion_v3c
+timerange=20250101-20260201
+candidates=user_data/research/out/candidates_latest.csv
+runtime_cfg=user_data/configs/runtime.config.bt_spot_1h_from_research.json
+strict_backtest=0
+{"status": "ok", "pairs_count": 8, "output_config": "user_data/configs/runtime.config.bt_spot_1h_from_research.json", "quote": "USDT", "top_n": 10}
+2026-02-23 16:04:38,019 - freqtrade - INFO - freqtrade 2026.1
+2026-02-23 16:04:38,412 - numexpr.utils - INFO - NumExpr defaulting to 8 threads.
+2026-02-23 16:04:39,410 - freqtrade.configuration.load_config - INFO - Using config: user_data/configs/runtime.config.bt_spot_1h_from_research.json ...
+2026-02-23 16:04:39,413 - freqtrade.loggers - INFO - Enabling colorized output.
+2026-02-23 16:04:39,413 - freqtrade.loggers - INFO - Logfile configured
+2026-02-23 16:04:39,413 - freqtrade.loggers - INFO - Verbosity set to 0
+2026-02-23 16:04:39,414 - freqtrade.configuration.configuration - INFO - Using max_open_trades: 3 ...
+2026-02-23 16:04:39,414 - freqtrade.configuration.configuration - INFO - Parameter --timerange detected: 20250101-20260201 ...
+2026-02-23 16:04:39,414 - freqtrade.configuration.configuration - INFO - Using user-data directory: /Users/carlaherrera/Desktop/market-sentiment-lab/user_data ...
+2026-02-23 16:04:39,415 - freqtrade.configuration.configuration - INFO - Using data directory: /Users/carlaherrera/Desktop/market-sentiment-lab/user_data/data/binance ...
+2026-02-23 16:04:39,415 - freqtrade.configuration.configuration - INFO - Parameter --cache=day detected ...
+2026-02-23 16:04:39,415 - freqtrade.configuration.configuration - INFO - Filter trades by timerange: 20250101-20260201
+2026-02-23 16:04:39,416 - freqtrade.exchange.check_exchange - INFO - Checking exchange...
+2026-02-23 16:04:39,424 - freqtrade.exchange.check_exchange - INFO - Exchange "binance" is officially supported by the Freqtrade development team.
+2026-02-23 16:04:39,425 - freqtrade.configuration.configuration - INFO - Using pairlist from configuration.
+2026-02-23 16:04:39,425 - freqtrade.configuration.config_validation - INFO - Validating configuration ...
+2026-02-23 16:04:39,427 - freqtrade.commands.optimize_commands - INFO - Starting freqtrade in Backtesting mode
+2026-02-23 16:04:39,427 - freqtrade.exchange.exchange - INFO - Instance is running with dry_run enabled
+2026-02-23 16:04:39,428 - freqtrade.exchange.exchange - INFO - Using CCXT 4.5.38
+2026-02-23 16:04:39,435 - freqtrade.exchange.exchange - INFO - Using Exchange "Binance"
+2026-02-23 16:04:39,458 - freqtrade.exchange.common - WARNING - _load_async_markets() returned exception: "Error in reload_markets due to ExchangeNotAvailable. Message: binance GET 
+https://api.binance.com/api/v3/exchangeInfo". Retrying still for 3 times.
+2026-02-23 16:04:39,745 - freqtrade.exchange.common - WARNING - _load_async_markets() returned exception: "Error in reload_markets due to ExchangeNotAvailable. Message: binance GET 
+https://api.binance.com/api/v3/exchangeInfo". Retrying still for 2 times.
+2026-02-23 16:04:40,046 - freqtrade.exchange.common - WARNING - _load_async_markets() returned exception: "Error in reload_markets due to ExchangeNotAvailable. Message: binance GET 
+https://api.binance.com/api/v3/exchangeInfo". Retrying still for 1 times.
+2026-02-23 16:04:40,342 - freqtrade.exchange.common - WARNING - _load_async_markets() returned exception: "Error in reload_markets due to ExchangeNotAvailable. Message: binance GET 
+https://api.binance.com/api/v3/exchangeInfo". Giving up.
+2026-02-23 16:04:40,343 - freqtrade.exchange.exchange - ERROR - Could not load markets.
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/resolver.py", line 117, in resolve
+    resp = await self._resolver.getaddrinfo(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+aiodns.error.DNSError: (11, 'Could not contact DNS servers')
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/connector.py", line 1562, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/connector.py", line 1178, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/connector.py", line 1209, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/resolver.py", line 126, in resolve
+    raise OSError(None, msg) from exc
+OSError: [Errno None] Could not contact DNS servers
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/base/exchange.py", line 217, in fetch
+    async with session_method(yarl.URL(url, encoded=True),
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/client.py", line 1510, in __aenter__
+    self._resp: _RetType = await self._coro
+                           ^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/connector.py", line 672, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/connector.py", line 1239, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/aiohttp/connector.py", line 1568, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host api.binance.com:443 ssl:default [Could not contact DNS servers]
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/exchange.py", line 669, in _api_reload_markets
+    await self._api_async.load_markets(reload=reload, params={})
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/base/exchange.py", line 341, in load_markets
+    raise e
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/base/exchange.py", line 333, in load_markets
+    result = await self.markets_loading
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/base/exchange.py", line 300, in load_markets_helper
+    markets = await self.fetch_markets(params)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/binance.py", line 3130, in fetch_markets
+    results = await asyncio.gather(*promisesRaw)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/binance.py", line 11587, in request
+    response = await self.fetch2(path, api, method, params, headers, body, config)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/base/exchange.py", line 989, in fetch2
+    raise e
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/base/exchange.py", line 979, in fetch2
+    return await self.fetch(request['url'], request['method'], request['headers'], request['body'])
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/ccxt/async_support/base/exchange.py", line 257, in fetch
+    raise ExchangeNotAvailable(details) from e
+ccxt.base.errors.ExchangeNotAvailable: binance GET https://api.binance.com/api/v3/exchangeInfo
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/exchange.py", line 709, in reload_markets
+    retrier(self._load_async_markets, retries=retries)(reload=True)
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/common.py", line 191, in wrapper
+    return wrapper(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/common.py", line 191, in wrapper
+    return wrapper(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/common.py", line 191, in wrapper
+    return wrapper(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/common.py", line 194, in wrapper
+    raise ex
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/common.py", line 179, in wrapper
+    return f(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/exchange.py", line 682, in _load_async_markets
+    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py", line 654, in run_until_complete
+    return future.result()
+           ^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/.env/lib/python3.11/site-packages/freqtrade/exchange/exchange.py", line 673, in _api_reload_markets
+    raise TemporaryError(
+freqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo
+2026-02-23 16:04:40,356 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.
+user_data/scripts/run_backtest_batch_1h.sh: line 24: import json
+from datetime import datetime, timezone
+from pathlib import Path
+
+payload = {
+    "status": ${status@Q},
+    "stage": ${stage@Q},
+    "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+    "error_type": ${error_type@Q},
+    "message": ${message@Q},
+    "runtime_config": ${RUNTIME_CFG@Q},
+    "log_path": ${LOG_PATH@Q},
+}
+path = Path(${STATUS_JSON@Q})
+path.parent.mkdir(parents=True, exist_ok=True)
+path.write_text(json.dumps(payload, indent=2, ensure_ascii=True) + "\\n", encoding="utf-8")
+: bad substitution
+{"status": "ok", "no_new_backtest": false, "meta_file": "/Users/carlaherrera/Desktop/market-sentiment-lab/user_data/backtest_results/backtest-result-2026-02-23_15-41-50.meta.json", "strategy": "Strat03RSIBBMeanReversion_v3c", "timerange": "20250101-20260201", "total_profit_pct": 0.07906382399999995, "total_profit_usdt": 0.7906382399999996, "profit_factor": 1.1863489625050743, "drawdown": 0.3395007950000035, "trades": 22, "backtest_status": null}
+research_status=ok
+backtest_status=error
+summary_status=ok
+[2026-02-23T19:04:40Z] daily_pipeline done
+daily_pipeline_exit=ok
+log_path=user_data/logs/daily_pipeline_20260223T190437Z.log
+runtime_config=user_data/configs/runtime.config.bt_spot_1h_from_research.json
+status_json=user_data/reports/backtest_last_status.json
+summary_json=user_data/reports/backtest_last_summary.json
+summary_md=user_data/reports/backtest_last_summary.md

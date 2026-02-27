@@ -1,0 +1,26 @@
+2026-02-23 21:27:29,031 INFO rss_fetch_start sources_config=user_data/configs/reddit_rss_sources.json output_json=user_data/research/out/reddit_rss_latest.json
+2026-02-23 21:27:29,053 WARNING feed_error id=solana url=https://www.reddit.com/r/solana/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,059 WARNING feed_error id=ethtrader url=https://www.reddit.com/r/ethtrader/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,064 WARNING feed_error id=ethfinance url=https://www.reddit.com/r/ethfinance/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,070 WARNING feed_error id=ethereum url=https://www.reddit.com/r/ethereum/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,075 WARNING feed_error id=defi url=https://www.reddit.com/r/defi/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,080 WARNING feed_error id=cryptotechnology url=https://www.reddit.com/r/CryptoTechnology/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,086 WARNING feed_error id=cryptomarkets url=https://www.reddit.com/r/CryptoMarkets/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,092 WARNING feed_error id=cryptocurrency url=https://www.reddit.com/r/CryptoCurrency/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,097 WARNING feed_error id=bitcoin url=https://www.reddit.com/r/Bitcoin/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,102 WARNING feed_error id=altcoin url=https://www.reddit.com/r/altcoin/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,107 WARNING feed_error id=solanamemecoins url=https://www.reddit.com/r/solanamemecoins/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,113 WARNING feed_error id=satoshistreetbets url=https://www.reddit.com/r/SatoshiStreetBets/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,118 WARNING feed_error id=memecoins url=https://www.reddit.com/r/memecoins/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,123 WARNING feed_error id=cryptomoonshots url=https://www.reddit.com/r/CryptoMoonShots/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,129 WARNING feed_error id=trading url=https://www.reddit.com/r/Trading/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,134 WARNING feed_error id=stocks url=https://www.reddit.com/r/stocks/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,140 WARNING feed_error id=quant url=https://www.reddit.com/r/quant/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,145 WARNING feed_error id=options url=https://www.reddit.com/r/options/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,151 WARNING feed_error id=algotrading url=https://www.reddit.com/r/algotrading/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,156 WARNING feed_error id=singularity url=https://www.reddit.com/r/singularity/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,162 WARNING feed_error id=openai url=https://www.reddit.com/r/OpenAI/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,168 WARNING feed_error id=machinelearning url=https://www.reddit.com/r/MachineLearning/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,173 WARNING feed_error id=localllama url=https://www.reddit.com/r/LocalLLaMA/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,178 WARNING feed_error id=artificial url=https://www.reddit.com/r/artificial/.rss error=<urlopen error [Errno 8] nodename nor servname provided, or not known>
+2026-02-23 21:27:29,180 INFO rss_fetch_done sources_ok=0 sources_failed=24 rows_out=0 output_json=user_data/research/out/reddit_rss_latest.json log_path=user_data/logs/reddit_rss_fetch_20260224T002729Z.log

@@ -1,0 +1,334 @@
+{
+  "run_id": "ridge_20260226-192002_527cf975",
+  "created_at": "2026-02-26T19:20:02.445821+00:00",
+  "created_at_utc": "2026-02-26T19:20:02.445821+00:00",
+  "started_at_utc": "2026-02-26T19:20:02.445821+00:00",
+  "completed_at_utc": "2026-02-26T19:20:03.268331+00:00",
+  "schema_version": "1.0",
+  "kind": "forecast",
+  "status": "complete",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/.demo_data/synthetic_research_ready.parquet",
+  "dataset_hash": "65b836ce3a4303d907305753ea701d94cb170261965ecb3e09ab878c0b8c6748",
+  "model_name": "ridge",
+  "seed": 42,
+  "version": "0.1.0",
+  "command": "forecast train (run_demo.py)",
+  "python": "3.11.14 | packaged by conda-forge | (main, Jan 27 2026, 00:01:01) [Clang 19.1.7 ]",
+  "dataset": {
+    "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/.demo_data/synthetic_research_ready.parquet",
+    "hash": "65b836ce3a4303d907305753ea701d94cb170261965ecb3e09ab878c0b8c6748",
+    "rows": 1200
+  },
+  "target": "returns_1d",
+  "features": [
+    "close",
+    "feat_a",
+    "feat_b"
+  ],
+  "imputation": {
+    "config": {
+      "strategy": "zero+coverage",
+      "coverage_floor": 0.0,
+      "max_fill_gap": 1
+    },
+    "report": {
+      "strategy": "zero+coverage",
+      "coverage_floor": 0.0,
+      "max_fill_gap": 1,
+      "rows": {
+        "total": 1200,
+        "kept": 1200,
+        "dropped": 0,
+        "kept_after_coverage": 1200
+      },
+      "coverage": {
+        "min": 1.0,
+        "max": 1.0,
+        "mean": 1.0
+      }
+    }
+  },
+  "split": {
+    "train_window_days": 730,
+    "test_window_days": 92,
+    "step_days": 92,
+    "min_train_rows": 260,
+    "min_test_rows": 30
+  },
+  "split_params": {
+    "train_window_days": 730,
+    "test_window_days": 92,
+    "step_days": 92,
+    "min_train_rows": 260,
+    "min_test_rows": 30
+  },
+  "model": {
+    "type": "ridge",
+    "info": {
+      "type": "ridge",
+      "params": {
+        "alpha": 1.0
+      }
+    },
+    "artifact": {
+      "path": "artifacts/model.joblib",
+      "hash": "e23315176bf777ed50200ff4ad1104cf6484db2900f89a5b3451326266b51004"
+    }
+  },
+  "config": {
+    "dataset": {
+      "path": "/Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest/.demo_data/synthetic_research_ready.parquet"
+    },
+    "target": "returns_1d",
+    "features": null,
+    "model": {
+      "name": "ridge",
+      "params": {
+        "alpha": 1.0
+      }
+    },
+    "walk_forward": {
+      "train_window_days": 730,
+      "test_window_days": 92,
+      "step_days": 92,
+      "min_train_rows": 260,
+      "min_test_rows": 30
+    },
+    "imputation": {
+      "strategy": "zero+coverage",
+      "coverage_floor": 0.0,
+      "max_fill_gap": 1
+    },
+    "backtest": {
+      "threshold": 0.0,
+      "transaction_cost": 0.0004,
+      "slippage": 0.0002,
+      "initial_capital": 1.0
+    },
+    "random_state": 42,
+    "run_id": null,
+    "config_hash": "012c98f588728035206610bbd95529e5edf440dcd7f78ac27f4dc1decdcefb64"
+  },
+  "config_hash": "012c98f588728035206610bbd95529e5edf440dcd7f78ac27f4dc1decdcefb64",
+  "folds": 5,
+  "sweep": [
+    {
+      "fold": 0,
+      "train_start": "2019-01-01 00:00:00",
+      "train_end": "2020-12-31 00:00:00",
+      "test_start": "2021-01-02 00:00:00",
+      "test_end": "2021-04-03 00:00:00",
+      "train_rows": 731,
+      "test_rows": 92,
+      "regression": {
+        "mae": 0.007566409309986243,
+        "rmse": 0.00962437021433864,
+        "corr": 0.011851992143781938
+      },
+      "classification": {
+        "accuracy": 0.5434782608695652,
+        "precision": 1.0,
+        "recall": 0.023255813953488372,
+        "auc": 0.5106786900806835
+      },
+      "information": {
+        "hit_rate": 0.5384615384615384,
+        "average_return_conditional": 0.000936424241787358,
+        "trades": 91
+      }
+    },
+    {
+      "fold": 1,
+      "train_start": "2019-04-03 00:00:00",
+      "train_end": "2021-04-02 00:00:00",
+      "test_start": "2021-04-04 00:00:00",
+      "test_end": "2021-07-04 00:00:00",
+      "train_rows": 731,
+      "test_rows": 92,
+      "regression": {
+        "mae": 0.008097280526572475,
+        "rmse": 0.01008482147367645,
+        "corr": 0.2787114985244667
+      },
+      "classification": {
+        "accuracy": 0.5543478260869565,
+        "precision": 0.6666666666666666,
+        "recall": 0.13636363636363635,
+        "auc": 0.6666666666666666
+      },
+      "information": {
+        "hit_rate": 0.5494505494505495,
+        "average_return_conditional": 0.0013120654221563692,
+        "trades": 91
+      }
+    },
+    {
+      "fold": 2,
+      "train_start": "2019-07-04 00:00:00",
+      "train_end": "2021-07-03 00:00:00",
+      "test_start": "2021-07-05 00:00:00",
+      "test_end": "2021-10-04 00:00:00",
+      "train_rows": 731,
+      "test_rows": 92,
+      "regression": {
+        "mae": 0.007488750900415903,
+        "rmse": 0.009877949989914448,
+        "corr": 0.07553116508026342
+      },
+      "classification": {
+        "accuracy": 0.532608695652174,
+        "precision": 0.6470588235294118,
+        "recall": 0.22916666666666666,
+        "auc": 0.534564393939394
+      },
+      "information": {
+        "hit_rate": 0.4725274725274725,
+        "average_return_conditional": -0.0005229355892101544,
+        "trades": 91
+      }
+    },
+    {
+      "fold": 3,
+      "train_start": "2019-10-04 00:00:00",
+      "train_end": "2021-10-03 00:00:00",
+      "test_start": "2021-10-05 00:00:00",
+      "test_end": "2022-01-04 00:00:00",
+      "train_rows": 731,
+      "test_rows": 92,
+      "regression": {
+        "mae": 0.008855315126323768,
+        "rmse": 0.011121922191007246,
+        "corr": -0.026015792392060085
+      },
+      "classification": {
+        "accuracy": 0.4891304347826087,
+        "precision": 0.5416666666666666,
+        "recall": 0.2653061224489796,
+        "auc": 0.4513526340768866
+      },
+      "information": {
+        "hit_rate": 0.4835164835164835,
+        "average_return_conditional": 0.00023940850264731966,
+        "trades": 91
+      }
+    },
+    {
+      "fold": 4,
+      "train_start": "2020-01-04 00:00:00",
+      "train_end": "2022-01-03 00:00:00",
+      "test_start": "2022-01-05 00:00:00",
+      "test_end": "2022-04-06 00:00:00",
+      "train_rows": 731,
+      "test_rows": 92,
+      "regression": {
+        "mae": 0.009123740410304658,
+        "rmse": 0.011588599632051517,
+        "corr": 0.08021669809388618
+      },
+      "classification": {
+        "accuracy": 0.44565217391304346,
+        "precision": 0.5714285714285714,
+        "recall": 0.2222222222222222,
+        "auc": 0.546783625730994
+      },
+      "information": {
+        "hit_rate": 0.4725274725274725,
+        "average_return_conditional": -0.0001169673195041824,
+        "trades": 91
+      }
+    }
+  ],
+  "metrics": {
+    "regression": {
+      "mae": 0.00822629925472061,
+      "rmse": 0.010487123693717255,
+      "corr": 0.11160728586580644
+    },
+    "classification": {
+      "accuracy": 0.5130434782608696,
+      "precision": 0.5972222222222222,
+      "recall": 0.18067226890756302,
+      "auc": 0.5630441365735483
+    },
+    "information": {
+      "hit_rate": 0.5010893246187363,
+      "average_return_conditional": 0.00038410572621767176,
+      "trades": 459
+    },
+    "trading": {
+      "n_rows": 1200,
+      "trades": 460,
+      "hit_rate": 0.5,
+      "avg_conditional_return": 0.00038327071376937255,
+      "total_return": 0.07252281522219883,
+      "cagr": 0.021557247749335984,
+      "sharpe": 0.19462557554237908,
+      "max_drawdown": -0.20655526269594193,
+      "gross_return_sum": 0.16222442644718085,
+      "cost_sum": 0.06720000000000001
+    },
+    "backtest": {
+      "n_rows": 1200,
+      "trades": 460,
+      "hit_rate": 0.5,
+      "avg_conditional_return": 0.00038327071376937255,
+      "total_return": 0.07252281522219883,
+      "cagr": 0.021557247749335984,
+      "sharpe": 0.19462557554237908,
+      "max_drawdown": -0.20655526269594193,
+      "gross_return_sum": 0.16222442644718085,
+      "cost_sum": 0.06720000000000001
+    }
+  },
+  "artifacts": [
+    {
+      "type": "table",
+      "name": "predictions",
+      "path": "tables/predictions.parquet"
+    },
+    {
+      "type": "table",
+      "name": "equity",
+      "path": "tables/equity.parquet"
+    },
+    {
+      "type": "table",
+      "name": "backtest_equity",
+      "path": "tables/backtest_equity.parquet"
+    },
+    {
+      "type": "plot",
+      "name": "equity_curve",
+      "path": "equity_curve.png"
+    },
+    {
+      "type": "plot",
+      "name": "pred_vs_true",
+      "path": "pred_vs_true.png"
+    },
+    {
+      "type": "model",
+      "name": "ridge",
+      "path": "artifacts/model.joblib"
+    },
+    {
+      "type": "plot",
+      "name": "feature_importance",
+      "path": "feature_importance.png"
+    },
+    {
+      "type": "table",
+      "name": "feature_importance",
+      "path": "feature_importance.parquet"
+    }
+  ],
+  "files": {
+    "predictions": "tables/predictions.parquet",
+    "equity_table": "tables/equity.parquet",
+    "equity_table_legacy": "tables/backtest_equity.parquet",
+    "equity_curve": "equity_curve.png",
+    "pred_vs_true": "pred_vs_true.png",
+    "model": "artifacts/model.joblib",
+    "feature_importance": "feature_importance.png"
+  }
+}

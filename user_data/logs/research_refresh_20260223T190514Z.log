@@ -1,0 +1,28 @@
+[2026-02-23T19:05:14Z] research_refresh start
+Running user_data/scripts/run_social_merge_1h.sh user_data/tmp/social_test
+INFO stage=features_1h rows_in=430 rows_out=23 output=user_data/tmp/social_test/social_features_1h.csv
+{"status": "ok", "timeframe": "1h", "rows_in": 430, "rows_out": 23, "output_jsonl": "user_data/tmp/social_test/social_features_1h.jsonl", "output_csv": "user_data/tmp/social_test/social_features_1h.csv"}
+INFO stage=merge_with_candles rows_in=4 rows_out=4 output=user_data/tmp/social_test/candles_1h.social_merged.csv
+{"status": "ok", "rows_in": 4, "rows_out": 4, "filled_zeros": 1, "include_unknown": false, "social_rows_loaded": 21, "social_rows_skipped_unknown": 1, "output_csv": "user_data/tmp/social_test/candles_1h.social_merged.csv"}
+timestamp,symbol,close,social_mentions_count_1h,social_avg_engagement_score_1h,social_bucket_start_utc
+2026-02-23T12:15:00Z,BNB/USDT,300,14,3.0,2026-02-23T12:00:00+00:00
+2026-02-23T12:20:00Z,XRP/USDT,1.2,14,2.0,2026-02-23T12:00:00+00:00
+total 808
+-rw-r--r--@ 1 carlaherrera  staff   162B Feb 23 11:31 candles_1h.csv
+-rw-r--r--@ 1 carlaherrera  staff   392B Feb 23 16:05 candles_1h.social_merged.csv
+-rw-r--r--@ 1 carlaherrera  staff   391B Feb 23 11:38 candles_1h.social_merged.v2.csv
+-rw-r--r--@ 1 carlaherrera  staff    93B Feb 23 11:20 ext.jsonl
+-rw-r--r--@ 1 carlaherrera  staff    13K Feb 23 11:20 new_flags.raw.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   3.4K Feb 23 11:20 old_flags.raw.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   158K Feb 23 11:50 social_events.normalized.jsonl
+-rw-r--r--@ 1 carlaherrera  staff    35K Feb 23 11:36 social_events.normalized.v2.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   146K Feb 23 11:50 social_events.raw.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   961B Feb 23 16:05 social_features_1h.csv
+-rw-r--r--@ 1 carlaherrera  staff   2.6K Feb 23 16:05 social_features_1h.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   567B Feb 23 11:38 social_features_1h.v2.csv
+-rw-r--r--@ 1 carlaherrera  staff   1.5K Feb 23 11:38 social_features_1h.v2.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   1.2K Feb 23 11:36 unknown_demo.normalized.jsonl
+-rw-r--r--@ 1 carlaherrera  staff   610B Feb 23 11:36 unknown_demo.raw.jsonl
+Generating candidates CSV from user_data/tmp/social_test/social_features_1h.csv
+wrote_candidates=user_data/research/out/candidates_latest.csv rows=23
+[2026-02-23T19:05:14Z] research_refresh done

@@ -1,0 +1,108 @@
+# marketlab-core
+
+Core utilities for quantitative research (`polars` + `duckdb`) with a reusable
+layout under `src/`.
+
+## What is included
+
+- `marketlab_core.timeseries`
+  - `parse_timestamps` / `normalize_timezone`
+  - `resample_series`
+  - `resample_ohlcv`
+  - `align`
+  - `compute_returns`
+  - `rolling_zscore` y `rolling_rank`
+- `marketlab_core.storage`
+  - `Cache.get`, `Cache.set`
+  - DuckDB metadata index for local cache entries
+  - parquet cache for DataFrames, pickle for generic objects
+- `marketlab_core.io`
+  - `read_parquet` / `write_parquet`
+  - `read_csv` / `write_csv`
+  - `DataCatalog` con rutas + metadatos
+- `marketlab_core.cli` con subcomandos
+  - `validate`
+  - `cache-info`
+  - `smoke-test`
+
+## Quickstart
+
+```bash
+cd marketlab-core
+bash ../tools/bootstrap_venv.sh . --editable
+```
+
+Run tests:
+
+```bash
+pytest
+```
+
+Run lint + typing + tests:
+
+```bash
+ruff check .
+mypy .
+pytest
+```
+
+Run CLI:
+
+```bash
+marketlab-core --help
+```
+
+## Example end-to-end
+
+`examples/smoke_pipeline.py` create dos series sintéticas con frecuencias distintas,
+calcula retornos, hace align y usa cache en parquet.
+
+```python
+from pathlib import Path
+from datetime import datetime, timedelta, timezone
+import numpy as np
+import polars as pl
+
+from marketlab_core.timeseries import align, compute_returns
+from marketlab_core.storage import Cache
+from marketlab_core.io import read_parquet, write_parquet
+
+t1 = [datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc) + timedelta(minutes=i) for i in range(120)]
+t2 = [datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc) + timedelta(minutes=2 * i) for i in range(60)]
+
+series_a = pl.DataFrame({"timestamp": t1, "value": np.linspace(1.0, 2.0, 120)})
+series_b = pl.DataFrame({"timestamp": t2, "value": np.linspace(100.0, 130.0, 60)})
+
+series_a_returns = compute_returns(series_a, value_col="value", method="log", horizon=1)
+aligned = align([series_a, series_b], how="outer", freq="1m", method="ffill")
+
+cache = Cache(root="/tmp/marketlab-core-example-cache")
+cache.set("aligned_example", aligned, ttl=60 * 60)
+loaded = cache.get("aligned_example")
+
+out_path = Path("examples/out/aligned.parquet")
+write_parquet(loaded, out_path)
+reloaded = read_parquet(out_path)
+print(reloaded.head())
+```
+
+## Notes and explicit decisions
+
+- Se asumió que los timestamps llegan en formato parseable por `polars` o como
+  `datetime`/`int` epoch y se normalizan a timezone UTC.
+- En `align` con `freq` se construye una rejilla temporal común (la “línea de verdad”),
+  y se alinean todas las series contra esa rejilla antes de aplicar relleno.
+  Esto evita que queden saltos silenciosos cuando una serie tiene menos ticks que otra.
+- `align` aplica distintos modos de relleno luego del join:
+  - `ffill`: forward-fill
+  - `bfill`: backward-fill
+  - `interpolate`: interpolación lineal para columnas numéricas
+- El `DataCatalog` almacena metadata append-only en `catalog.jsonl`.
+- El `Cache` usa DuckDB para el índice y archivos parquet/pickle para payloads.
+
+TODO:
+
+- Soporte de join por keys multi-asset (hoy sólo timestamp único).
+- Agregar soporte de más formatos de almacenamiento (`feather`, `iceberg`).
+- Exponer funciones SQL para operaciones avanzadas.
+- Añadir benchmarks en CI para detectar regresiones de performance.

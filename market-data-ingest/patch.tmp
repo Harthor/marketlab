@@ -1,0 +1,69 @@
+*** Begin Patch
+*** Update File: /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/tests/test_warehouse_upsert.py
+@@
+-class TestWarehouseUpsert(unittest.TestCase):
+-    def _run_with_fake_dk(self, frames: list[pd.DataFrame]) -> dict[str, int]:
+-        with TemporaryDirectory() as tmp:
+-            fake_dk = _build_fake_duckdb()
+-            paths = Paths.default(tmp)
+-            paths.create()
+-
+-            original_duck = sys.modules.get("duckdb")
+-            sys.modules["duckdb"] = fake_dk
+-
+-            try:
+-                from market_data_ingest import warehouse
+-
+-                fake_dk._set_incoming(str(paths.warehouse_path), frames)
+-                original_collect = warehouse._collect_parquet_files
+-                warehouse._collect_parquet_files = lambda _path: [Path("dummy")]
+-
+-                try:
+-                    summary = warehouse.build_warehouse(paths)
+-                finally:
+-                    warehouse._collect_parquet_files = original_collect
+-                return summary
+-            finally:
+-                if original_duck is None:
+-                    sys.modules.pop("duckdb", None)
+-                else:
+-                    sys.modules["duckdb"] = original_duck
++class TestWarehouseUpsert(unittest.TestCase):
++    def _run_two_builds_with_fake_dk(
++        self,
++        frames: list[pd.DataFrame],
++    ) -> tuple[dict[str, int], dict[str, int]]:
++        with TemporaryDirectory() as tmp:
++            fake_dk = _build_fake_duckdb()
++            paths = Paths.default(tmp)
++            paths.create()
++
++            original_duck = sys.modules.get("duckdb")
++            sys.modules["duckdb"] = fake_dk
++
++            try:
++                from market_data_ingest import warehouse
++
++                fake_dk._set_incoming(str(paths.warehouse_path), frames)
++                original_collect = warehouse._collect_parquet_files
++                warehouse._collect_parquet_files = lambda _path: [Path("dummy")]
++
++                try:
++                    first = warehouse.build_warehouse(paths)
++                    second = warehouse.build_warehouse(paths)
++                finally:
++                    warehouse._collect_parquet_files = original_collect
++                return first, second
++            finally:
++                if original_duck is None:
++                    sys.modules.pop("duckdb", None)
++                else:
++                    sys.modules["duckdb"] = original_duck
+@@
+     def test_build_warehouse_is_idempotent_for_duplicates(self) -> None:
+-        first = self._run_with_fake_dk([_sample_frame("AAPL")])
+-        second = self._run_with_fake_dk([_sample_frame("AAPL")])
++        first, second = self._run_two_builds_with_fake_dk([_sample_frame("AAPL")])
+*** End Patch
+
+apply_patch < /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/patch.tmp
