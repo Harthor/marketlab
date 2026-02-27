@@ -1,0 +1,109 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  marketlab-core:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: marketlab-core
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e .[dev]
+      - run: ruff check src/ tests/
+      - run: pytest -v
+
+  market-data-ingest:
+    runs-on: ubuntu-latest
+    needs: marketlab-core
+    defaults:
+      run:
+        working-directory: market-data-ingest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ../marketlab-core
+      - run: pip install -e .[dev]
+      - run: ruff check src/ tests/
+      - run: mypy src/
+      - run: pytest -v
+
+  altdata-web-signals:
+    runs-on: ubuntu-latest
+    needs: marketlab-core
+    defaults:
+      run:
+        working-directory: altdata-web-signals
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ../marketlab-core
+      - run: pip install -e .[dev,trends]
+      - run: ruff check src/ tests/
+      - run: mypy src/
+      - run: pytest -v
+
+  correlation-engine:
+    runs-on: ubuntu-latest
+    needs: marketlab-core
+    defaults:
+      run:
+        working-directory: correlation-engine
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ../marketlab-core
+      - run: pip install -e .[dev]
+      - run: ruff check src/ tests/
+      - run: mypy src/
+      - run: pytest -v
+
+  forecasting-backtest:
+    runs-on: ubuntu-latest
+    needs: marketlab-core
+    defaults:
+      run:
+        working-directory: forecasting-backtest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -e ../marketlab-core
+      - run: pip install -e .[dev]
+      - run: ruff check src/ tests/
+      - run: mypy src/
+      - run: pytest -v
+
+  market-research-dashboard:
+    runs-on: ubuntu-latest
+    needs: marketlab-core
+    defaults:
+      run:
+        working-directory: market-research-dashboard/backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - run: pip install -r requirements.txt
+      - run: pip install ruff mypy
+      - run: ruff check api/
+      - run: mypy api/
+      - run: python manage.py test api --verbosity=2
+        env:
+          DJANGO_SETTINGS_MODULE: backend.settings
