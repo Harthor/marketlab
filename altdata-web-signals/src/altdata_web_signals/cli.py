@@ -7,8 +7,11 @@ from argparse import ArgumentDefaultsHelpFormatter
 
 from .config import PathConfig
 from .dataset import build_research_dataset
+from .fetchers.fear_greed import fetch_fng_signals
 from .fetchers.rss import fetch_rss_signals
+from .fetchers.rss_crypto import fetch_rss_crypto_signals
 from .fetchers.trends import fetch_trend_series
+from .fetchers.trends_btc import fetch_trends_btc_signals
 from .fetchers.wikipedia import fetch_wiki_series
 
 
@@ -92,6 +95,54 @@ def cmd_trends(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_fng(args: argparse.Namespace) -> int:
+    paths = fetch_fng_signals(
+        start=args.start,
+        end=args.end,
+        signals_root=args.signals_root,
+        freq=args.freq,
+        cache_dir=args.cache_dir,
+        limit=args.limit,
+    )
+    for out in paths:
+        print(f"saved={out}")
+    return 0
+
+
+def cmd_rss_crypto(args: argparse.Namespace) -> int:
+    paths = fetch_rss_crypto_signals(
+        start=args.start,
+        end=args.end,
+        signals_root=args.signals_root,
+        freq=args.freq,
+        cache_dir=args.cache_dir,
+    )
+    for out in paths:
+        print(f"saved={out}")
+    return 0
+
+
+def cmd_trends_btc(args: argparse.Namespace) -> int:
+    keywords = _split_csv(args.keywords) if args.keywords else None
+    try:
+        paths = fetch_trends_btc_signals(
+            keywords=keywords,
+            start=args.start,
+            end=args.end,
+            country=args.country,
+            signals_root=args.signals_root,
+            freq=args.freq,
+            cache_dir=args.cache_dir,
+        )
+    except Exception as exc:
+        print(f"trends_btc_skip: {exc}")
+        return 0
+
+    for out in paths:
+        print(f"saved={out}")
+    return 0
+
+
 def cmd_build_dataset(args: argparse.Namespace) -> int:
     out = build_research_dataset(
         symbol=args.symbol,
@@ -136,6 +187,27 @@ def main(argv: list[str] | None = None) -> int:
     rss.add_argument("--use-regex", action="store_true", help="Interpretar keywords como regex")
     _add_common(rss, config=cfg)
     rss.set_defaults(func=cmd_rss)
+
+    fng = sub.add_parser("fng", help="Fear & Greed Index (Alternative.me)")
+    fng.add_argument("--start", default=None, help="YYYY-MM-DD (default: all history)")
+    fng.add_argument("--end", default=None, help="YYYY-MM-DD (default: today)")
+    fng.add_argument("--limit", type=int, default=0, help="API limit param (0 = all)")
+    _add_common(fng, config=cfg)
+    fng.set_defaults(func=cmd_fng)
+
+    rss_crypto = sub.add_parser("rss-crypto", help="RSS crypto media + VADER sentiment")
+    rss_crypto.add_argument("--start", default=None, help="YYYY-MM-DD (default: 1 year ago)")
+    rss_crypto.add_argument("--end", default=None, help="YYYY-MM-DD (default: today)")
+    _add_common(rss_crypto, config=cfg)
+    rss_crypto.set_defaults(func=cmd_rss_crypto)
+
+    trends_btc = sub.add_parser("trends-btc", help="Google Trends for BTC keywords")
+    trends_btc.add_argument("--keywords", default=None, help='CSV (default: bitcoin,buy bitcoin,bitcoin crash,crypto)')
+    trends_btc.add_argument("--start", default=None, help="YYYY-MM-DD (default: 5 years ago)")
+    trends_btc.add_argument("--end", default=None, help="YYYY-MM-DD (default: today)")
+    trends_btc.add_argument("--country", default="US")
+    _add_common(trends_btc, config=cfg)
+    trends_btc.set_defaults(func=cmd_trends_btc)
 
     trends = sub.add_parser("trends", help="Best-effort Google Trends (opcional)")
     trends.add_argument("--keywords", required=True)

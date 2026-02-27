@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Crypto News Feed</title>
+    <item>
+      <title>Bitcoin surges past $50k as market recovers</title>
+      <description>The cryptocurrency market is showing signs of recovery.</description>
+      <pubDate>Mon, 10 Jan 2022 09:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Ethereum upgrade brings new features</title>
+      <description>The latest Ethereum update improves transaction speeds.</description>
+      <pubDate>Mon, 10 Jan 2022 14:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>BTC mining difficulty reaches all-time high</title>
+      <description>Bitcoin network hashrate continues to climb.</description>
+      <pubDate>Tue, 11 Jan 2022 10:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Regulatory concerns mount for crypto exchanges</title>
+      <description>Global regulators are tightening rules on cryptocurrency trading.</description>
+      <pubDate>Tue, 11 Jan 2022 16:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Bitcoin adoption grows in developing nations</title>
+      <description>More countries are exploring Bitcoin as legal tender.</description>
+      <pubDate>Wed, 12 Jan 2022 08:00:00 +0000</pubDate>
+    </item>
+  </channel>
+</rss>
