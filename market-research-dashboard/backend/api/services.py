@@ -1141,4 +1141,4 @@ def _read_parquet_table(path: Path, max_rows: Optional[int] = None) -> List[Dict
         frame = frame.head(max_rows)
 
     rows = frame.to_dict(orient='records')
-    return [dict(row) for row in rows]
+    return [json_sanitize(dict(row)) for row in rows]

@@ -13,6 +13,10 @@ def sanitize_for_json(obj: Any) -> Any:
     if isinstance(obj, (str, int, bool)):
         return obj
 
+    # pd.NaT inherits from datetime so must be checked before the datetime branch
+    if type(obj).__name__ == 'NaTType':
+        return None
+
     if isinstance(obj, datetime):
         return obj.isoformat()
 
@@ -29,6 +33,16 @@ def sanitize_for_json(obj: Any) -> Any:
             return None if not np.isfinite(obj) else float(obj)
         if isinstance(obj, np.integer):
             return int(obj)
+    except Exception:
+        pass
+
+    try:
+        import pandas as pd  # type: ignore
+
+        if type(obj).__name__ == 'NAType':
+            return None
+        if isinstance(obj, pd.Timestamp):
+            return obj.isoformat()
     except Exception:
         pass
 
