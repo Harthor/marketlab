@@ -4,12 +4,11 @@ from __future__ import annotations
 
 import hashlib
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import TypedDict
 
 import polars as pl
-
 
 TIMESTAMP_COL = "ts_utc"
 TARGET_RETURNS_1D = "returns_1d"
@@ -37,7 +36,7 @@ def compute_sha256_file(path: str | Path) -> str:
 
 def now_utc_iso() -> str:
     """Return current UTC timestamp in ISO-8601 format."""
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat().replace("+00:00", "Z")
+    return datetime.now(UTC).replace(microsecond=0).isoformat().replace("+00:00", "Z")
 
 
 class MissingArtifact(TypedDict):
@@ -58,7 +57,7 @@ class ManifestContract:
         warnings: list[str] | None = None,
         errors: list[str] | None = None,
         missing_artifacts: list[MissingArtifact] | None = None,
-    ) -> "ManifestContract":
+    ) -> ManifestContract:
         return cls(
             warnings=list(warnings or []),
             errors=list(errors or []),
@@ -78,7 +77,7 @@ def _as_report_ok(
     rows: int,
     errors: list[str] | None = None,
     warnings: list[str] | None = None,
-) -> "ContractValidation":
+) -> ContractValidation:
     return ContractValidation(
         table=table,
         rows=rows,
@@ -108,7 +107,11 @@ def _timestamp_report(df: pl.DataFrame) -> tuple[list[str], list[str], str | Non
     errors: list[str] = []
     warnings: list[str] = []
 
-    ts_column = TIMESTAMP_COL if TIMESTAMP_COL in df.columns else "timestamp" if "timestamp" in df.columns else None
+    ts_column = (
+        TIMESTAMP_COL if TIMESTAMP_COL in df.columns
+        else "timestamp" if "timestamp" in df.columns
+        else None
+    )
     if ts_column is None:
         errors.append(f"missing column: {TIMESTAMP_COL} (or timestamp)")
         return errors, warnings, None
@@ -130,7 +133,13 @@ def _timestamp_report(df: pl.DataFrame) -> tuple[list[str], list[str], str | Non
     return errors, warnings, ts_column
 
 
-def _require_numeric(df: pl.DataFrame, cols: list[str], table: str, *, min_non_negative: bool = False) -> list[str]:
+def _require_numeric(
+    df: pl.DataFrame,
+    cols: list[str],
+    table: str,
+    *,
+    min_non_negative: bool = False,
+) -> list[str]:
     errors: list[str] = []
     for col in cols:
         if col not in df.columns:
@@ -171,7 +180,10 @@ def validate_prices_df(df: pl.DataFrame) -> ContractValidation:
     errors.extend(timestamp_errors)
     warnings.extend(timestamp_warnings)
 
-    numeric_errors = _require_numeric(df, ["open", "high", "low", "close", "volume"], table, min_non_negative=True)
+    numeric_errors = _require_numeric(
+        df, ["open", "high", "low", "close", "volume"],
+        table, min_non_negative=True,
+    )
     errors.extend(numeric_errors)
 
     if "high" in df.columns and "low" in df.columns:
@@ -263,9 +275,8 @@ def validate_dataset_df(df: pl.DataFrame) -> ContractValidation:
     if not feature_candidates:
         warnings.append("research_dataset has no columns prefixed with feature_")
 
-    if "split" in df.columns:
-        if not str(df["split"].dtype).startswith("Utf8"):
-            errors.append("split must be string (e.g. train/val/test)")
+    if "split" in df.columns and not str(df["split"].dtype).startswith("Utf8"):
+        errors.append("split must be string (e.g. train/val/test)")
 
     if "dataset_id" not in df.columns:
         warnings.append("research_dataset missing optional column: dataset_id")

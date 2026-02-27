@@ -4,8 +4,8 @@ from __future__ import annotations
 
 import argparse
 import json
+from collections.abc import Sequence
 from pathlib import Path
-from typing import Sequence
 
 import polars as pl
 
@@ -55,7 +55,11 @@ def cmd_smoke_test(args: argparse.Namespace) -> int:
     )
     second = pl.DataFrame(
         {
-            "timestamp": parse_timestamps(["2024-01-01T00:00:30Z", "2024-01-01T00:02:30Z", "2024-01-01T00:04:30Z"]),
+            "timestamp": parse_timestamps([
+                "2024-01-01T00:00:30Z",
+                "2024-01-01T00:02:30Z",
+                "2024-01-01T00:04:30Z",
+            ]),
             "value": [10, 11, 12],
         }
     )
@@ -73,12 +77,18 @@ def cmd_smoke_test(args: argparse.Namespace) -> int:
 
 def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="marketlab-core")
-    parser.add_argument("--cache-dir", default=str(Path.home() / ".cache" / "marketlab-core"), help="Cache directory")
+    default_cache = str(Path.home() / ".cache" / "marketlab-core")
+    parser.add_argument(
+        "--cache-dir", default=default_cache, help="Cache directory",
+    )
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     parser_validate = subparsers.add_parser("validate", help="Validate timestamped dataframe")
     parser_validate.add_argument("path", help="Path to input file (.csv or .parquet)")
-    parser_validate.add_argument("--timestamp-column", default="timestamp", help="Timestamp column name")
+    parser_validate.add_argument(
+        "--timestamp-column", default="timestamp",
+        help="Timestamp column name",
+    )
     parser_validate.set_defaults(func=cmd_validate)
 
     parser_cache = subparsers.add_parser("cache-info", help="Show cache index metadata")

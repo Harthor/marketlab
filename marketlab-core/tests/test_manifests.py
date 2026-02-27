@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from marketlab_core.manifests import (
@@ -12,7 +12,11 @@ from marketlab_core.manifests import (
 )
 
 
-def _base_manifest(created_at: str, started_at: str, artifacts: list[dict[str, str]]) -> dict[str, object]:
+def _base_manifest(
+    created_at: str,
+    started_at: str,
+    artifacts: list[dict[str, str]],
+) -> dict[str, object]:
     return {
         "schema_version": "1.0",
         "status": "complete",
@@ -29,7 +33,7 @@ def _base_manifest(created_at: str, started_at: str, artifacts: list[dict[str, s
 
 
 def test_validate_manifest_correlation_ok() -> None:
-    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=timezone.utc).isoformat()
+    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=UTC).isoformat()
     manifest = _base_manifest(created_at, created_at, [])
     manifest["kind"] = "correlation"
     manifest["top_features"] = {"BTCUSDT": {"ETHUSDT": 0.91}}
@@ -39,7 +43,7 @@ def test_validate_manifest_correlation_ok() -> None:
 
 
 def test_validate_manifest_forecast_ok() -> None:
-    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=timezone.utc).isoformat()
+    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=UTC).isoformat()
     manifest = _base_manifest(created_at, created_at, [])
     manifest["kind"] = "forecast"
     manifest["model_name"] = "xgboost-v1"
@@ -50,7 +54,7 @@ def test_validate_manifest_forecast_ok() -> None:
 
 
 def test_validate_manifest_rejects_unknown_kind() -> None:
-    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=timezone.utc).isoformat()
+    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=UTC).isoformat()
     manifest = _base_manifest(created_at, created_at, [])
     manifest["kind"] = "other"
     manifest["top_features"] = {}
@@ -61,7 +65,6 @@ def test_validate_manifest_rejects_unknown_kind() -> None:
 
 
 def test_validate_manifest_missing_required_key() -> None:
-    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=timezone.utc).isoformat()
     manifest = {
         "schema_version": "1.0",
         "kind": "forecast",
@@ -75,7 +78,7 @@ def test_validate_manifest_missing_required_key() -> None:
 
 
 def test_validate_artifacts_exist_checks_workspace_paths(tmp_path: Path) -> None:
-    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=timezone.utc).isoformat()
+    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=UTC).isoformat()
     present = tmp_path / "present.parquet"
     present.write_text("ok", encoding="utf-8")
 
@@ -104,7 +107,7 @@ def test_write_json_atomic_and_manifest_atomic(tmp_path: Path) -> None:
     loaded_payload = json.loads(payload_path.read_text(encoding="utf-8"))
     assert loaded_payload == payload
 
-    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=timezone.utc).isoformat()
+    created_at = datetime(2026, 2, 26, 12, 0, tzinfo=UTC).isoformat()
     manifest = _base_manifest(created_at, created_at, [])
     manifest["kind"] = "forecast"
     manifest["model_name"] = "xgboost-v1"

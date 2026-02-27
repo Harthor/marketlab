@@ -6,7 +6,7 @@ import hashlib
 import os
 import pickle
 from dataclasses import dataclass
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -52,7 +52,7 @@ class Cache:
 
     @staticmethod
     def _now() -> datetime:
-        return datetime.now(timezone.utc).replace(tzinfo=None)
+        return datetime.now(UTC).replace(tzinfo=None)
 
     def _path_for_key(self, key: str, artifact: str) -> Path:
         digest = hashlib.sha1(key.encode("utf-8")).hexdigest()
@@ -161,7 +161,11 @@ class Cache:
             return CacheInfo(entries=0, size_bytes=0, root=os.fspath(self.root))
 
         entries, size_bytes = row
-        return CacheInfo(entries=int(entries), size_bytes=int(size_bytes), root=os.fspath(self.root))
+        return CacheInfo(
+            entries=int(entries),
+            size_bytes=int(size_bytes),
+            root=os.fspath(self.root),
+        )
 
     def cleanup(self) -> int:
         """Remove expired entries and return removed count."""

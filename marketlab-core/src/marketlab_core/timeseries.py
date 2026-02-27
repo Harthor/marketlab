@@ -3,8 +3,9 @@
 from __future__ import annotations
 
 import re
+from collections.abc import Iterable, Sequence
 from datetime import timedelta
-from typing import Iterable, Literal, Sequence
+from typing import Literal
 
 import polars as pl
 
@@ -60,6 +61,16 @@ def normalize_timezone(
     return df.with_columns(normalized)
 
 
+_DURATION_UNIT_MAP: dict[str, str] = {
+    "ms": "milliseconds",
+    "s": "seconds",
+    "m": "minutes",
+    "h": "hours",
+    "d": "days",
+    "w": "weeks",
+}
+
+
 def _parse_duration(value: str | int | float | timedelta | None) -> timedelta | None:
     if value is None:
         return None
@@ -68,7 +79,9 @@ def _parse_duration(value: str | int | float | timedelta | None) -> timedelta | 
     if isinstance(value, (int, float)):
         return timedelta(seconds=float(value))
     if not isinstance(value, str):
-        raise TypeError("tolerance must be a duration string, number, timedelta or None")
+        raise TypeError(
+            "tolerance must be a duration string, number, timedelta or None"
+        )
 
     text = value.strip().lower()
     match = re.fullmatch(r"(\d+)\s*(ms|s|m|h|d|w)", text)
@@ -77,17 +90,7 @@ def _parse_duration(value: str | int | float | timedelta | None) -> timedelta | 
 
     amount = int(match.group(1))
     unit = match.group(2)
-    if unit == "ms":
-        return timedelta(milliseconds=amount)
-    if unit == "s":
-        return timedelta(seconds=amount)
-    if unit == "m":
-        return timedelta(minutes=amount)
-    if unit == "h":
-        return timedelta(hours=amount)
-    if unit == "d":
-        return timedelta(days=amount)
-    return timedelta(weeks=amount)
+    return timedelta(**{_DURATION_UNIT_MAP[unit]: amount})
 
 
 def _suffix_non_timestamp_columns(
@@ -137,6 +140,28 @@ def _apply_fill(
     return df
 
 
+_AGG_FUNCTIONS: dict[str, str] = {
+    "mean": "mean",
+    "sum": "sum",
+    "min": "min",
+    "max": "max",
+    "first": "first",
+    "last": "last",
+}
+
+
+def _build_agg_exprs(
+    agg: str, value_cols: Sequence[str],
+) -> list[pl.Expr]:
+    """Build polars aggregation expressions for the given method."""
+    if agg not in _AGG_FUNCTIONS:
+        raise ValueError("agg must be mean|sum|min|max|first|last|ohlcv")
+    return [
+        getattr(pl.col(col), _AGG_FUNCTIONS[agg])().alias(col)
+        for col in value_cols
+    ]
+
+
 def resample_series(
     df: pl.DataFrame,
     ts_col: str = "timestamp",
@@ -161,20 +186,7 @@ def resample_series(
     if not value_cols:
         raise ValueError("No value columns found for resampling")
 
-    if agg == "mean":
-        agg_expr = [pl.col(col).mean().alias(col) for col in value_cols]
-    elif agg == "sum":
-        agg_expr = [pl.col(col).sum().alias(col) for col in value_cols]
-    elif agg == "min":
-        agg_expr = [pl.col(col).min().alias(col) for col in value_cols]
-    elif agg == "max":
-        agg_expr = [pl.col(col).max().alias(col) for col in value_cols]
-    elif agg == "first":
-        agg_expr = [pl.col(col).first().alias(col) for col in value_cols]
-    elif agg == "last":
-        agg_expr = [pl.col(col).last().alias(col) for col in value_cols]
-    else:
-        raise ValueError("agg must be mean|sum|min|max|first|last|ohlcv")
+    agg_expr = _build_agg_exprs(agg, value_cols)
 
     return (
         work.with_columns(pl.col(ts_col).dt.truncate(freq).alias("__bucket"))
@@ -250,7 +262,12 @@ def compute_returns(
         ret = (pl.col(value_col) / prev - 1.0).alias(out_col)
     elif method == "log":
         valid = (pl.col(value_col) > 0) & (prev > 0)
-        ret = pl.when(valid).then(pl.col(value_col).log() - prev.log()).otherwise(None).alias(out_col)
+        ret = (
+            pl.when(valid)
+            .then(pl.col(value_col).log() - prev.log())
+            .otherwise(None)
+            .alias(out_col)
+        )
     else:
         raise ValueError("method must be simple or log")
 
@@ -310,7 +327,7 @@ def rolling_rank(
     values = list(ordered[value_col])
     ranks: list[float | None] = []
     for i, current in enumerate(values):
-        if current is None or (isinstance(current, float) and not (current == current)):
+        if current is None or (isinstance(current, float) and current != current):
             ranks.append(None)
             continue
 
@@ -318,7 +335,7 @@ def rolling_rank(
         window_values = [
             v
             for v in values[start : i + 1]
-            if v is not None and not (isinstance(v, float) and not (v == v))
+            if v is not None and not (isinstance(v, float) and v != v)
         ]
         if not window_values:
             ranks.append(None)
@@ -353,7 +370,7 @@ def _build_grid(
     )
 
 
-def align(
+def align(  # noqa: C901
     series_list: Sequence[pl.DataFrame],
     *,
     how: Literal["inner", "outer"] = "inner",
@@ -378,10 +395,20 @@ def align(
         return pl.DataFrame({ts_col: pl.Series([], dtype=pl.Datetime("us"))})
 
     normalized_frames = []
-    for index, frame in enumerate(series_list):
+    for frame in series_list:
         normalized = normalize_timezone(frame, ts_col=ts_col).sort(ts_col)
         normalized = normalized.unique(subset=[ts_col], keep="last").drop_nulls(subset=[ts_col])
-        normalized_frames.append(_suffix_non_timestamp_columns(normalized, ts_col=ts_col, suffix=str(index) if index else None))
+        normalized_frames.append(normalized)
+
+    # Only add column suffixes when there are name collisions
+    seen_cols: set[str] = set()
+    for i, frame in enumerate(normalized_frames):
+        data_cols = {c for c in frame.columns if c != ts_col}
+        if data_cols & seen_cols:
+            normalized_frames[i] = _suffix_non_timestamp_columns(
+                frame, ts_col=ts_col, suffix=str(i),
+            )
+        seen_cols |= data_cols
 
     if len(normalized_frames) == 1:
         return normalized_frames[0]
@@ -404,44 +431,35 @@ def align(
     if _parse_duration(freq) is None:
         raise ValueError(f"Unsupported frequency '{freq}'")
 
+    # Track original timestamps for accurate inner-join filtering
+    original_timestamps = [set(frame[ts_col].to_list()) for frame in normalized_frames]
+
     start = min(frame_min_ts)
     end = max(frame_max_ts)
     grid = _build_grid(start, end, freq, ts_col=ts_col)
 
     aligned_frames: list[pl.DataFrame] = []
-    present_columns: list[str] = []
-    for i, frame in enumerate(normalized_frames):
+    for frame in normalized_frames:
         if method == "interpolate":
-            aligned = grid.join(frame, on=ts_col, how="left")
+            joined = grid.join(frame, on=ts_col, how="left")
         else:
             strategy = "backward" if method == "ffill" else "forward"
-            aligned = grid.join_asof(
+            joined = grid.join_asof(
                 frame,
                 on=ts_col,
                 strategy=strategy,
                 tolerance=tolerance_duration,
             )
-
-        frame_columns = [col for col in aligned.columns if col != ts_col]
-        if frame_columns:
-            marker = f"__present_{i}"
-            present_columns.append(marker)
-            marker_expr = pl.any_horizontal([pl.col(col).is_not_null() for col in frame_columns]).alias(marker)
-            aligned_frames.append(aligned.with_columns(marker_expr))
-        else:
-            present_columns.append(f"__present_{i}")
-            aligned_frames.append(aligned.with_columns(pl.lit(True).alias(f"__present_{i}")))
+        aligned_frames.append(joined)
 
     aligned = aligned_frames[0]
     for frame in aligned_frames[1:]:
         aligned = aligned.join(frame, on=ts_col, how="full", coalesce=True)
 
     aligned = aligned.sort(ts_col).unique(subset=[ts_col], keep="last")
-    if how == "inner":
-        if present_columns:
-            aligned = aligned.filter(pl.all_horizontal([pl.col(marker) for marker in present_columns]))
-        else:
-            aligned = aligned.filter(False)
 
-    aligned = aligned.drop(present_columns)
+    if how == "inner":
+        common_ts = set.intersection(*original_timestamps) if original_timestamps else set()
+        aligned = aligned.filter(pl.col(ts_col).is_in(list(common_ts)))
+
     return _apply_fill(aligned, method=method, ts_col=ts_col).sort(ts_col)
