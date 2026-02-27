@@ -8,12 +8,14 @@ from pathlib import Path
 from .config import load_config, merge_cli_overrides
 from .pipeline import execute_backtest_only, execute_train
 
-
 try:
     from marketlab_core.contracts import TIMESTAMP_COL
 except Exception:
     TIMESTAMP_COL = "ts_utc"
-    warnings.warn("marketlab-core.contracts unavailable; using fallback timestamp default ts_utc")
+    warnings.warn(
+        "marketlab-core.contracts unavailable; using fallback timestamp default ts_utc",
+        stacklevel=2,
+    )
 
 
 def _format_metric_table(items: list[dict]) -> str:
@@ -22,7 +24,9 @@ def _format_metric_table(items: list[dict]) -> str:
 
     ordered = sorted(
         items,
-        key=lambda item: item.get("metrics", {}).get("trading", item.get("metrics", {}).get("backtest", {})).get("sharpe", float("-inf")),
+        key=lambda item: item.get("metrics", {}).get(
+            "trading", item.get("metrics", {}).get("backtest", {}),
+        ).get("sharpe", float("-inf")),
         reverse=True,
     )
     lines = ["RANK | RUN_ID | MODEL | SHARPE | CAGR | MAX_DD | HIT_RATE"]
@@ -32,7 +36,8 @@ def _format_metric_table(items: list[dict]) -> str:
         lines.append(
             f"{rank:>4} | {row.get('run_id', '')} | {row.get('model', {}).get('type', '')} "
             f"| {bt.get('sharpe', float('nan')):.4f} | {bt.get('cagr', float('nan')):.4f} "
-            f"| {bt.get('max_drawdown', float('nan')):.4f} | {row.get('metrics', {}).get('information', {}).get('hit_rate', float('nan')):.4f}"
+            f"| {bt.get('max_drawdown', float('nan')):.4f} "
+            f"| {row.get('metrics', {}).get('information', {}).get('hit_rate', float('nan')):.4f}"
         )
     return "\n".join(lines) + "\n"
 
@@ -119,7 +124,9 @@ def cmd_leaderboard(args: argparse.Namespace) -> None:
     runs = _load_runs(runs_root)
     runs = sorted(
         runs,
-        key=lambda item: item.get("metrics", {}).get("trading", item.get("metrics", {}).get("backtest", {})).get("sharpe", float("-inf")),
+        key=lambda item: item.get("metrics", {}).get(
+            "trading", item.get("metrics", {}).get("backtest", {}),
+        ).get("sharpe", float("-inf")),
         reverse=True,
     )
     limit = int(args.limit)

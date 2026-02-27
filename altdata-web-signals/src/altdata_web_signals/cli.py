@@ -2,15 +2,14 @@
 
 from __future__ import annotations
 
-from argparse import ArgumentDefaultsHelpFormatter
 import argparse
-from typing import List
+from argparse import ArgumentDefaultsHelpFormatter
 
 from .config import PathConfig
 from .dataset import build_research_dataset
-from .fetchers.wikipedia import fetch_wiki_series
 from .fetchers.rss import fetch_rss_signals
 from .fetchers.trends import fetch_trend_series
+from .fetchers.wikipedia import fetch_wiki_series
 
 
 def _split_csv(value: str) -> list[str]:
@@ -36,7 +35,7 @@ def _add_common(parser: argparse.ArgumentParser, *, config: PathConfig) -> None:
 
 
 def cmd_wiki(args: argparse.Namespace) -> int:
-    topics: List[str] = _split_csv(args.topics)
+    topics: list[str] = _split_csv(args.topics)
     if not topics:
         raise SystemExit("--topics no puede estar vacío")
 

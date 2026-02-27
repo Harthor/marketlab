@@ -6,15 +6,15 @@ import sys
 import traceback
 import uuid
 from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import cast
 
-import yaml
 import joblib
 import numpy as np
-import polars as pl
 import pandas as pd
+import polars as pl
+import yaml
 
 from . import __version__
 from .backtest import run_simple_backtest
@@ -37,7 +37,7 @@ RUN_SCHEMA_VERSION = "1.0"
 
 
 def _new_run_id(model_name: str) -> str:
-    now = datetime.now(timezone.utc).strftime("%Y%m%d-%H%M%S")
+    now = datetime.now(UTC).strftime("%Y%m%d-%H%M%S")
     return f"{model_name}_{now}_{uuid.uuid4().hex[:8]}"
 
 
@@ -66,7 +66,13 @@ def _align_series(values: np.ndarray, length: int, *, fill_value: float | int | 
     return out
 
 
-def _find_artifact(summary: dict[str, object], *, name: str | None = None, artifact_type: str | None = None, fallback_key: str | None = None) -> Path | None:
+def _find_artifact(
+    summary: dict[str, object],
+    *,
+    name: str | None = None,
+    artifact_type: str | None = None,
+    fallback_key: str | None = None,
+) -> Path | None:
     files = summary.get("files")
     if isinstance(files, dict) and fallback_key and fallback_key in files:
         return Path(files[fallback_key])  # type: ignore[arg-type]
@@ -146,11 +152,9 @@ def _flatten_metrics(metrics: object) -> dict[str, float]:
 
 def _build_marketlab_payload(summary: dict[str, object], *, status: str) -> dict[str, object]:
     seed_value = summary.get("seed", 0)
-    if isinstance(seed_value, bool):
-        seed = int(seed_value)
-    elif isinstance(seed_value, (int, np.integer)):
-        seed = int(seed_value)
-    elif isinstance(seed_value, (float, np.floating)):
+    if isinstance(
+        seed_value, (bool, int, np.integer, float, np.floating),
+    ):
         seed = int(seed_value)
     elif isinstance(seed_value, str):
         try:
@@ -275,7 +279,7 @@ def execute_train(
     resolved_config_hash = config_fingerprint(resolved_config)
     resolved_config["config_hash"] = resolved_config_hash
 
-    created_at = datetime.now(timezone.utc)
+    created_at = datetime.now(UTC)
     manifest_path = _manifest_output_path(run_dir)
     run_summary: dict[str, object] = {
         "run_id": resolved_id,
@@ -400,8 +404,12 @@ def execute_train(
                     "train_rows": int(len(split.train_idx)),
                     "test_rows": int(len(split.test_idx)),
                     "regression": regression_scores(y_test, y_pred),
-                    "classification": classification_scores(y_test, y_pred, threshold=float(base_config["backtest"]["threshold"])),
-                    "information": information_scores(y_test, y_pred, threshold=float(base_config["backtest"]["threshold"])),
+                    "classification": classification_scores(
+                        y_test, y_pred, threshold=float(base_config["backtest"]["threshold"]),
+                    ),
+                    "information": information_scores(
+                        y_test, y_pred, threshold=float(base_config["backtest"]["threshold"]),
+                    ),
                 }
             )
 
@@ -410,8 +418,12 @@ def execute_train(
         y_pred_scored = all_predictions[valid]
 
         regression = regression_scores(y_true_scored, y_pred_scored)
-        classification = classification_scores(y_true_scored, y_pred_scored, threshold=float(base_config["backtest"]["threshold"]))
-        information = information_scores(y_true_scored, y_pred_scored, threshold=float(base_config["backtest"]["threshold"]))
+        classification = classification_scores(
+            y_true_scored, y_pred_scored, threshold=float(base_config["backtest"]["threshold"]),
+        )
+        information = information_scores(
+            y_true_scored, y_pred_scored, threshold=float(base_config["backtest"]["threshold"]),
+        )
 
         predictions_for_backtest = np.where(np.isnan(all_predictions), 0.0, all_predictions)
         backtest = run_simple_backtest(
@@ -441,8 +453,14 @@ def execute_train(
             artifact_dir = staging_dir / "artifacts"
             artifact_dir.mkdir(parents=True, exist_ok=True)
             baseline_path = artifact_dir / "baseline.json"
-            baseline_path.write_text(json.dumps({"type": model_info.get("type", "baseline")}, indent=2), encoding="utf-8")
-            model_artifact = {"path": str(baseline_path.relative_to(staging_dir)), "hash": dataset_checksum(baseline_path)}
+            baseline_path.write_text(
+                json.dumps({"type": model_info.get("type", "baseline")}, indent=2),
+                encoding="utf-8",
+            )
+            model_artifact = {
+                "path": str(baseline_path.relative_to(staging_dir)),
+                "hash": dataset_checksum(baseline_path),
+            }
             model_info["type"] = model_info.get("type", "baseline")
 
         tables_dir = staging_dir / "tables"
@@ -502,7 +520,10 @@ def execute_train(
         artifacts: list[dict[str, str]] = [
             {"type": "table", "name": "predictions", "path": str(predictions_path.relative_to(staging_dir))},
             {"type": "table", "name": "equity", "path": str(equity_table_path.relative_to(staging_dir))},
-            {"type": "table", "name": "backtest_equity", "path": str(equity_table_legacy_path.relative_to(staging_dir))},
+            {
+                "type": "table", "name": "backtest_equity",
+                "path": str(equity_table_legacy_path.relative_to(staging_dir)),
+            },
             {"type": "plot", "name": "equity_curve", "path": str(equity_plot_path.relative_to(staging_dir))},
             {"type": "table", "name": "equity_curve", "path": str(equity_curve_csv_path.relative_to(staging_dir))},
             {"type": "plot", "name": "pred_vs_true", "path": str(pred_true_path.relative_to(staging_dir))},
@@ -519,7 +540,7 @@ def execute_train(
             "created_at": created_at.isoformat(),
             "created_at_utc": created_at.isoformat(),
             "started_at_utc": created_at.isoformat(),
-            "completed_at_utc": datetime.now(timezone.utc).isoformat(),
+            "completed_at_utc": datetime.now(UTC).isoformat(),
             "schema_version": RUN_SCHEMA_VERSION,
             "kind": "forecast",
             "status": "complete",
@@ -602,7 +623,7 @@ def execute_train(
         _finalize_staged_run(run_dir)
         return completed_summary
     except Exception as exc:  # noqa: BLE001
-        failure_time = datetime.now(timezone.utc)
+        failure_time = datetime.now(UTC)
         error_path = staging_dir / "error_traceback.log"
         error_path.parent.mkdir(parents=True, exist_ok=True)
         error_path.write_text(traceback.format_exc(), encoding="utf-8")
@@ -688,11 +709,17 @@ def execute_backtest_only(run_id: str, runs_root: str | Path = "runs") -> dict:
                 artifact_entries[idx] = {"type": "table", "name": "equity", "path": "tables/equity.parquet"}
                 replaced = True
             if artifact.get("name") == "backtest_equity" and artifact.get("type") == "table":
-                artifact_entries[idx] = {"type": "table", "name": "backtest_equity", "path": "tables/backtest_equity.parquet"}
+                artifact_entries[idx] = {
+                    "type": "table", "name": "backtest_equity",
+                    "path": "tables/backtest_equity.parquet",
+                }
                 replaced = True
         if not replaced:
             artifact_entries.append({"type": "table", "name": "equity", "path": "tables/equity.parquet"})
-            artifact_entries.append({"type": "table", "name": "backtest_equity", "path": "tables/backtest_equity.parquet"})
+            artifact_entries.append({
+                "type": "table", "name": "backtest_equity",
+                "path": "tables/backtest_equity.parquet",
+            })
     else:
         summary["artifacts"] = [
             {"type": "table", "name": "equity", "path": "tables/equity.parquet"},

@@ -8,7 +8,6 @@ from sklearn.linear_model import Lasso, Ridge
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
-
 MODEL_ALIASES = {
     "ridge": "ridge",
     "lasso": "lasso",
@@ -116,6 +115,6 @@ def feature_importance(model: Any, feature_names: list[str]) -> tuple[list[str],
 
     if len(values) != len(feature_names):
         return feature_names, values.tolist()
-    pairs = sorted(zip(feature_names, values), key=lambda item: float(abs(item[1])), reverse=True)
-    names, scores = zip(*pairs) if pairs else ([], [])
+    pairs = sorted(zip(feature_names, values, strict=False), key=lambda item: float(abs(item[1])), reverse=True)
+    names, scores = zip(*pairs, strict=False) if pairs else ([], [])
     return list(names), list(map(float, scores))

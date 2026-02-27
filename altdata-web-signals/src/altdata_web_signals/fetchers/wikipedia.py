@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-from datetime import date, datetime, timedelta, timezone
+import urllib.parse
+from datetime import UTC, date, datetime, timedelta
 from pathlib import Path
 from typing import Any
 
 import polars as pl
-import urllib.parse
 
 from ..config import slugify_topic
 from ..core import normalize_timezone
@@ -19,9 +19,9 @@ WIKI_ENDPOINT = "https://wikimedia.org/api/rest_v1/metrics/pageviews/per-article
 
 def _to_wiki_timestamp(value: date | str) -> str:
     if isinstance(value, str):
-        dt = datetime.fromisoformat(value).replace(tzinfo=timezone.utc)
+        dt = datetime.fromisoformat(value).replace(tzinfo=UTC)
     else:
-        dt = datetime.combine(value, datetime.min.time(), tzinfo=timezone.utc)
+        dt = datetime.combine(value, datetime.min.time(), tzinfo=UTC)
     return dt.strftime("%Y%m%d00")
 
 
@@ -45,7 +45,7 @@ def parse_wikipedia_payload(
     for item in payload["items"]:
         ts_raw = str(item.get("timestamp", "")).strip()
         if len(ts_raw) >= 8:
-            dt = datetime.strptime(ts_raw[:8], "%Y%m%d").replace(tzinfo=timezone.utc)
+            dt = datetime.strptime(ts_raw[:8], "%Y%m%d").replace(tzinfo=UTC)
         else:
             continue
         values.append((dt, int(item.get("views", 0))))
@@ -55,13 +55,19 @@ def parse_wikipedia_payload(
         raw = raw.with_columns(pl.col("ts_utc").dt.truncate(freq).alias("ts_utc"))
         raw = raw.group_by("ts_utc").agg(pl.col("value").sum().alias("value"))
     else:
-        raw = pl.DataFrame({"ts_utc": pl.Series([], dtype=pl.Datetime("us", "UTC")), "value": pl.Series([], dtype=pl.Int64)})
+        raw = pl.DataFrame({
+            "ts_utc": pl.Series([], dtype=pl.Datetime("us", "UTC")),
+            "value": pl.Series([], dtype=pl.Int64),
+        })
 
     column = f"{signal_prefix}_{slugify_topic(topic)}"
 
     # completar malla completa de fechas del rango para dejar NA->0
     days = int((end - start).days)
-    grid = [datetime.combine(start + timedelta(days=offset), datetime.min.time(), tzinfo=timezone.utc) for offset in range(days + 1)]
+    grid = [
+        datetime.combine(start + timedelta(days=offset), datetime.min.time(), tzinfo=UTC)
+        for offset in range(days + 1)
+    ]
     all_days = pl.DataFrame({"ts_utc": grid})
 
     out = all_days.join(raw, on="ts_utc", how="left")
@@ -102,6 +108,9 @@ def fetch_wiki_series(
             freq=freq,
             signal_prefix="signal_wiki",
         )
-        outputs.append(write_signal_frame(frame=frame, signals_root=signals_root, source="wiki", topic=topic, freq=freq))
+        out_path = write_signal_frame(
+            frame=frame, signals_root=signals_root, source="wiki", topic=topic, freq=freq,
+        )
+        outputs.append(out_path)
 
     return outputs

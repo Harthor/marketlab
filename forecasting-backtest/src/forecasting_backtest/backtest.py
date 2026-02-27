@@ -52,7 +52,11 @@ def run_simple_backtest(
         sharpe = float("nan")
     else:
         sigma = np.nanstd(net)
-        sharpe = float(np.nanmean(net) / sigma * np.sqrt(annualize_sharpe_days)) if sigma and sigma > 0 else float("nan")
+        sharpe = (
+            float(np.nanmean(net) / sigma * np.sqrt(annualize_sharpe_days))
+            if sigma and sigma > 0
+            else float("nan")
+        )
 
     total_return = float(equity_arr[-1] / initial_capital - 1.0)
     if len(equity_arr) > 1:

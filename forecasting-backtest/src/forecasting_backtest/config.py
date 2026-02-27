@@ -8,7 +8,6 @@ from typing import Any
 
 import yaml
 
-
 DEFAULT_CONFIG: dict[str, Any] = {
     "dataset": {"path": None},
     "target": "returns_1d",

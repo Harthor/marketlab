@@ -2,18 +2,18 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
 import hashlib
 import json
+from datetime import UTC, datetime, timedelta
+from importlib.metadata import PackageNotFoundError
+from importlib.metadata import version as _pkg_version
 from pathlib import Path
-from importlib.metadata import PackageNotFoundError, version as _pkg_version
 
 import polars as pl
 
 from .config import PathConfig, slugify_topic
 from .core import align_frames, compute_returns
 from .storage import list_signal_frames
-
 
 SCHEMA_VERSION = "2.0.0"
 
@@ -70,7 +70,7 @@ def _parse_datetime(value: str | None, *, end: bool = False) -> datetime | None:
 
     parsed = datetime.fromisoformat(value)
     if parsed.tzinfo is None:
-        parsed = parsed.replace(tzinfo=timezone.utc)
+        parsed = parsed.replace(tzinfo=UTC)
     if end and "T" not in value:
         parsed = (parsed + timedelta(days=1)).replace(microsecond=0) - timedelta(microseconds=1)
     return parsed
@@ -101,7 +101,13 @@ def _normalize_signal_frame(
     return frame.select(["ts_utc"] + signal_cols)
 
 
-def _read_signal_frames(paths: list[Path], *, freq: str, start: datetime | None, end: datetime | None) -> tuple[list[pl.DataFrame], dict[str, list[str]], set[str]]:
+def _read_signal_frames(
+    paths: list[Path],
+    *,
+    freq: str,
+    start: datetime | None,
+    end: datetime | None,
+) -> tuple[list[pl.DataFrame], dict[str, list[str]], set[str]]:
     frames: list[pl.DataFrame] = []
     topics_by_source: dict[str, list[str]] = {}
     signal_sources: set[str] = set()
@@ -161,7 +167,7 @@ def build_research_dataset(
     datasets_root: str | Path = "data/datasets",
     start: str | None = None,
     end: str | None = None,
-):
+) -> Path:
     fill_method = fill_method.lower().strip()
     if fill_method not in {"none", "forward", "backward"}:
         raise ValueError("fill_method inválido: use none|forward|backward")
@@ -218,7 +224,7 @@ def build_research_dataset(
             frames,
             how=join,
             freq=freq,
-            method="none" if fill_method == "none" else fill_method,
+            method="none",
             ts_col="ts_utc",
         )
 

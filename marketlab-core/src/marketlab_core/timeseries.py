@@ -334,13 +334,14 @@ def _build_grid(
     start,
     end,
     freq: str,
+    ts_col: str = "timestamp",
 ) -> pl.DataFrame:
     if start > end:
         raise ValueError("start timestamp must be lower than end timestamp")
 
     return pl.DataFrame(
         {
-            "timestamp": pl.datetime_range(
+            ts_col: pl.datetime_range(
                 start=start,
                 end=end,
                 interval=freq,
@@ -405,7 +406,7 @@ def align(
 
     start = min(frame_min_ts)
     end = max(frame_max_ts)
-    grid = _build_grid(start, end, freq)
+    grid = _build_grid(start, end, freq, ts_col=ts_col)
 
     aligned_frames: list[pl.DataFrame] = []
     present_columns: list[str] = []
@@ -433,7 +434,7 @@ def align(
 
     aligned = aligned_frames[0]
     for frame in aligned_frames[1:]:
-        aligned = aligned.join(frame, on=ts_col, how="outer")
+        aligned = aligned.join(frame, on=ts_col, how="full", coalesce=True)
 
     aligned = aligned.sort(ts_col).unique(subset=[ts_col], keep="last")
     if how == "inner":

@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import contextlib
 import hashlib
 import json
 import time
@@ -79,10 +80,8 @@ class ApiClient:
                     "status_code": int(resp.status_code),
                     "content": resp.text,
                 }
-                try:
+                with contextlib.suppress(Exception):
                     self.cache.set(key, payload)
-                except Exception:
-                    pass
                 return resp
 
             should_retry = resp.status_code >= 500 or resp.status_code == 429

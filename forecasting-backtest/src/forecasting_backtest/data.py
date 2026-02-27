@@ -1,16 +1,13 @@
 from __future__ import annotations
 
 import hashlib
+from collections.abc import Mapping, Sequence
 from pathlib import Path
-from typing import Sequence
-from collections.abc import Mapping
 
 import numpy as np
 import polars as pl
-
 from marketlab_core.io import read_csv, read_parquet
 from marketlab_core.timeseries import parse_timestamps
-
 
 TS_ALIASES = ("ts", "timestamp")
 
@@ -69,7 +66,7 @@ def normalize_dataset(df: pl.DataFrame, target: str, timestamp_col: str | None =
             raise ValueError(f"missing timestamp column: expected '{timestamp_col}'")
         ts_col = timestamp_col
     else:
-        ts_col = next((c for c in TS_ALIASES if c in df.columns), None)
+        ts_col = next((c for c in TS_ALIASES if c in df.columns), None)  # type: ignore[assignment]
     if ts_col is None:
         raise ValueError("missing timestamp column: expected 'ts' or 'timestamp'")
 
@@ -90,7 +87,7 @@ def ensure_features(df: pl.DataFrame, target: str, features: Sequence[str] | Non
         return list(features)
 
     numeric = {name: dtype for name, dtype in df.schema.items() if dtype.is_numeric()}
-    feature_candidates = [c for c in numeric.keys() if c not in {"ts", target}]
+    feature_candidates = [c for c in numeric if c not in {"ts", target}]
     if not feature_candidates:
         raise ValueError("no numeric feature columns found")
     return feature_candidates

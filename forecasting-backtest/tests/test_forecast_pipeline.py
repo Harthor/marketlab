@@ -57,7 +57,7 @@ def test_walk_forward_splits_do_not_leak_temporally() -> None:
         train_end = dates.iloc[split.train_idx].max()
         test_start = dates.iloc[split.test_idx].min()
         assert pd.Timestamp(train_end) < pd.Timestamp(test_start)
-    for left, right in zip(splits[:-1], splits[1:]):
+    for left, right in zip(splits[:-1], splits[1:], strict=False):
         assert right.train_idx.min() > left.train_idx.min()
         assert right.test_idx.min() > left.test_idx.max()
 
@@ -220,7 +220,10 @@ def test_pipeline_smoke(tmp_path: Path, model_name: str) -> None:
     assert bool(np.isnan(np.asarray(pred_df.filter(pl.col("fold") == -1)["y_pred"])).all())
 
     y_pred = np.asarray(pred_df["y_pred"], dtype=float)
-    expected_positions = np.r_[0.0, np.where(np.nan_to_num(y_pred[:-1], nan=0.0) > 0.0001, 1.0, np.where(np.nan_to_num(y_pred[:-1], nan=0.0) < -0.0001, -1.0, 0.0))]
+    y_pred_clean = np.nan_to_num(y_pred[:-1], nan=0.0)
+    expected_positions = np.r_[
+        0.0, np.where(y_pred_clean > 0.0001, 1.0, np.where(y_pred_clean < -0.0001, -1.0, 0.0)),
+    ]
     np.testing.assert_array_equal(np.asarray(pred_df["position"], dtype=float), expected_positions)
 
     equity_df = pl.read_parquet(run_dir / "tables" / "backtest_equity.parquet")

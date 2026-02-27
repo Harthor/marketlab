@@ -2,8 +2,8 @@
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import os
+from dataclasses import dataclass
 from pathlib import Path
 
 
@@ -18,7 +18,7 @@ class PathConfig:
     market_data_root: Path
 
     @classmethod
-    def default(cls, root: str | Path = ".") -> "PathConfig":
+    def default(cls, root: str | Path = ".") -> PathConfig:
         root_path = Path(root).expanduser().resolve()
         # Soporte de workspace central:
         # - MARKETLAB_WORKSPACE: raíz del monorepo de proyecto

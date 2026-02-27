@@ -545,12 +545,12 @@ def _gather_artifact_values(
                 artifact_id = None
             return [(value.get('name') or value.get('artifact_name') or fallback_name, artifact_id, path_value)]
 
-        entries: List[Tuple[Optional[str], Optional[str], Any]] = []
+        dict_entries: List[Tuple[Optional[str], Optional[str], Any]] = []
         for key, item in value.items():
             if not isinstance(item, (str, Path, list, tuple, set, dict)):
                 continue
-            entries.extend(_gather_artifact_values(item, fallback_name=str(key)))
-        return entries
+            dict_entries.extend(_gather_artifact_values(item, fallback_name=str(key)))
+        return dict_entries
 
     return []
 
@@ -671,7 +671,6 @@ def _collect_artifacts(payload: Dict[str, Any], run_dir: Path, kind: str) -> Lis
         except ValueError:
             continue
 
-        raw_name = (declared_name or "").strip() or raw_path
         candidate_path = Path(raw_path).as_posix()
         if '/' in candidate_path:
             display_name = candidate_path

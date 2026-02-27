@@ -43,3 +43,18 @@ where = ["src"]
 
 [tool.ruff]
 line-length = 120
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "SIM"]
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+disable_error_code = "import-untyped"
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_redundant_casts = true
+show_error_codes = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

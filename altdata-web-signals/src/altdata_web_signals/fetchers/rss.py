@@ -2,10 +2,10 @@
 
 from __future__ import annotations
 
-from datetime import datetime, timedelta, timezone
+import re
+from datetime import UTC, datetime, timedelta
 from pathlib import Path
 from typing import Any
-import re
 
 import feedparser
 import polars as pl
@@ -47,10 +47,7 @@ def _parse_entry_time(entry: dict[str, Any]) -> datetime | None:
             dt = date_parser.parse(raw)
         except Exception:
             continue
-        if dt.tzinfo is None:
-            dt = dt.replace(tzinfo=timezone.utc)
-        else:
-            dt = dt.astimezone(timezone.utc)
+        dt = dt.replace(tzinfo=UTC) if dt.tzinfo is None else dt.astimezone(UTC)
         return dt
     return None
 
@@ -86,9 +83,9 @@ def parse_rss_counts(
     signal_prefix: str = "signal_rss",
 ) -> dict[str, pl.DataFrame]:
     if start.tzinfo is None:
-        start = start.replace(tzinfo=timezone.utc)
+        start = start.replace(tzinfo=UTC)
     if end.tzinfo is None:
-        end = end.replace(tzinfo=timezone.utc)
+        end = end.replace(tzinfo=UTC)
 
     parsed = feedparser.parse(feed_payload)
     if parsed.bozo and parsed.bozo_exception is not None:
@@ -113,20 +110,16 @@ def parse_rss_counts(
         text = " ".join([title, summary]).lower()
 
         for kw, matcher in matchers:
-            key = kw
-            if isinstance(matcher, re.Pattern):
-                is_match = bool(matcher.search(text))
-            else:
-                is_match = matcher(text)
-            if is_match and day in counts[key]:
-                counts[key][day] += 1
+            is_match = bool(matcher.search(text)) if isinstance(matcher, re.Pattern) else matcher(text)
+            if is_match and day in counts[kw]:
+                counts[kw][day] += 1
 
     result: dict[str, pl.DataFrame] = {}
     for kw in [k for k, _ in matchers]:
         slug = slugify_topic(kw)
         col = f"{signal_prefix}_{slug}"
         rows = [
-            (datetime.combine(day, datetime.min.time(), tzinfo=timezone.utc), counts[kw][day])
+            (datetime.combine(day, datetime.min.time(), tzinfo=UTC), counts[kw][day])
             for day in day_values
         ]
         df = pl.DataFrame({"ts_utc": [r[0] for r in rows], col: [r[1] for r in rows]})
@@ -148,12 +141,13 @@ def fetch_rss_signals(
     cache_dir: str | Path = ".cache/altdata-web-signals",
 ) -> list[Path]:
     urls = read_feeds_file(feeds_file)
-    start_dt = datetime.fromisoformat(start).replace(tzinfo=timezone.utc)
-    end_dt = datetime.fromisoformat(end).replace(tzinfo=timezone.utc)
+    start_dt = datetime.fromisoformat(start).replace(tzinfo=UTC)
+    end_dt = datetime.fromisoformat(end).replace(tzinfo=UTC)
     keyword_slugs = {kw: slugify_topic(kw) for kw in keywords}
-    normalized_days = [start_dt.date() + timedelta(days=offset) for offset in range(int((end_dt.date() - start_dt.date()).days) + 1)]
+    total_days = int((end_dt.date() - start_dt.date()).days) + 1
+    normalized_days = [start_dt.date() + timedelta(days=offset) for offset in range(total_days)]
     totals: dict[str, dict[datetime, int]] = {
-        kw: {datetime.combine(day, datetime.min.time(), tzinfo=timezone.utc): 0 for day in normalized_days}
+        kw: {datetime.combine(day, datetime.min.time(), tzinfo=UTC): 0 for day in normalized_days}
         for kw in keywords
     }
 

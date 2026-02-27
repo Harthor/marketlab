@@ -50,11 +50,11 @@ def plot_feature_importance(
 ) -> None:
     out_path = Path(out_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
-    pairs = sorted(zip(features, scores), key=lambda x: abs(x[1]), reverse=True)[:top_n]
+    pairs = sorted(zip(features, scores, strict=False), key=lambda x: abs(x[1]), reverse=True)[:top_n]
     if not pairs:
         return
 
-    labels, values = zip(*pairs)
+    labels, values = zip(*pairs, strict=False)
     fig, ax = plt.subplots(figsize=(10, 5))
     ax.barh(range(len(labels)), values)
     ax.set_yticks(range(len(labels)))

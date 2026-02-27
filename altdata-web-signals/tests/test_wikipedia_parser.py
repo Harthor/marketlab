@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 import polars as pl
@@ -14,8 +14,8 @@ def test_parse_wikipedia_payload_builds_daily_signal_series() -> None:
     frame = parse_wikipedia_payload(
         payload=fixture,
         topic="Bitcoin",
-        start=datetime(2022, 1, 1, tzinfo=timezone.utc).date(),
-        end=datetime(2022, 1, 3, tzinfo=timezone.utc).date(),
+        start=datetime(2022, 1, 1, tzinfo=UTC).date(),
+        end=datetime(2022, 1, 3, tzinfo=UTC).date(),
     )
 
     assert frame.shape == (3, 2)

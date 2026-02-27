@@ -1,7 +1,7 @@
 from __future__ import annotations
 
+from collections.abc import Iterator
 from dataclasses import dataclass
-from typing import Iterator
 
 import numpy as np
 import pandas as pd
@@ -73,9 +73,17 @@ def iter_time_splits(
             train_idx=np.arange(start_pos, train_end_pos, dtype=int),
             test_idx=np.arange(test_start_pos, test_end_pos, dtype=int),
             train_start=train_start.to_pydatetime(),
-            train_end=times.iloc[min(train_end_pos - 1, n - 1)].to_pydatetime() if train_end_pos <= n else times.iloc[-1].to_pydatetime(),
+            train_end=(
+                times.iloc[min(train_end_pos - 1, n - 1)].to_pydatetime()
+                if train_end_pos <= n
+                else times.iloc[-1].to_pydatetime()
+            ),
             test_start=times.iloc[test_start_pos].to_pydatetime(),
-            test_end=times.iloc[min(test_end_pos - 1, n - 1)].to_pydatetime() if test_end_pos <= n else times.iloc[-1].to_pydatetime(),
+            test_end=(
+                times.iloc[min(test_end_pos - 1, n - 1)].to_pydatetime()
+                if test_end_pos <= n
+                else times.iloc[-1].to_pydatetime()
+            ),
         )
         yield split
 

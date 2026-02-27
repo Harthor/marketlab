@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 
 from altdata_web_signals.fetchers.rss import parse_rss_counts
@@ -11,8 +11,8 @@ def test_parse_rss_counts_keyword_counts_per_day() -> None:
     frames = parse_rss_counts(
         feed_payload=xml,
         keywords=["bitcoin", "apple", "nvidia"],
-        start=datetime(2021, 1, 1, tzinfo=timezone.utc),
-        end=datetime(2021, 1, 3, tzinfo=timezone.utc),
+        start=datetime(2021, 1, 1, tzinfo=UTC),
+        end=datetime(2021, 1, 3, tzinfo=UTC),
     )
 
     assert set(frames) == {"bitcoin", "apple", "nvidia"}

@@ -4,10 +4,9 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from datetime import timedelta
-from pathlib import Path
-from typing import Any
-
 from hashlib import sha1
+from pathlib import Path
+from typing import Any, cast
 
 import polars as pl
 
@@ -38,7 +37,7 @@ class FallbackCache:
         if not self.index.exists():
             self.index.touch()
 
-    def _paths(self):
+    def _paths(self) -> Path:
         return self.data_root
 
     def _safe_key(self, key: str) -> str:
@@ -96,9 +95,6 @@ def align_frames(
     method: str = "none",
     ts_col: str = "ts_utc",
 ) -> pl.DataFrame:
-    if _align is not None:
-        return _align(frames, how=how, freq=freq, method=method, ts_col=ts_col)
-
     if not frames:
         return pl.DataFrame()
     base = frames[0]
@@ -112,7 +108,7 @@ def align_frames(
             right,
             left_on=ts_col,
             right_on=f"{ts_col}_right",
-            how=join_how,
+            how=cast(Any, join_how),
         )
         if f"{ts_col}_right" in aligned.columns:
             aligned = aligned.with_columns(pl.col(f"{ts_col}_right").alias(ts_col)).drop(f"{ts_col}_right")

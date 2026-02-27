@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from datetime import datetime, timezone
 import json
+from datetime import UTC, datetime
 
 import polars as pl
 
@@ -16,7 +16,7 @@ except Exception:  # pragma: no cover
 
 def _build_prices(path):
     rows = [
-        {"ts_utc": datetime(2022, 1, day, tzinfo=timezone.utc), "close": float(100 + day)}
+        {"ts_utc": datetime(2022, 1, day, tzinfo=UTC), "close": float(100 + day)}
         for day in range(1, 8)
     ]
     frame = pl.DataFrame(rows)
@@ -28,7 +28,7 @@ def _build_signals(signals_root):
     # RSS: columna no canonical para validar normalización.
     rss_frame = pl.DataFrame(
         {
-            "ts_utc": [datetime(2022, 1, day, tzinfo=timezone.utc) for day in range(1, 8)],
+            "ts_utc": [datetime(2022, 1, day, tzinfo=UTC) for day in range(1, 8)],
             "raw_count": [1, 2, None, 2, 1, 3, 0],
         }
     )
@@ -36,7 +36,7 @@ def _build_signals(signals_root):
 
     wiki_frame = pl.DataFrame(
         {
-            "ts_utc": [datetime(2022, 1, day, tzinfo=timezone.utc) for day in range(1, 8)],
+            "ts_utc": [datetime(2022, 1, day, tzinfo=UTC) for day in range(1, 8)],
             "signal_wiki_bitcoin": [5, 4, 6, 7, 4, 3, 6],
         }
     )
