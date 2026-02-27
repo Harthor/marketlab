@@ -43,9 +43,10 @@ def _load_summary(reports_dir: Path, run_id: str | None) -> tuple[str, dict]:
     if run_id is not None:
         run_dir = reports_dir / run_id
     else:
-        run_dir = find_latest_run(reports_dir)
-        if run_dir is None:
+        _latest = find_latest_run(reports_dir)
+        if _latest is None:
             raise FileNotFoundError(f"No hay runs en {reports_dir}")
+        run_dir = _latest
     summary_path = run_dir / "summary.json"
     if not summary_path.exists():
         raise FileNotFoundError(f"No existe summary en {run_dir}")

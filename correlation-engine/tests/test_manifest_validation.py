@@ -101,7 +101,7 @@ def test_manifest_is_json_strict_and_has_required_fields() -> None:
     assert manifest["kind"] == "correlation"
     assert manifest["status"] == "complete"
     assert manifest["run_id"] == "manifest-test"
-    assert manifest["dataset_path"] == "/tmp/fake.parquet"
+    assert Path(manifest["dataset_path"]).resolve() == Path("/tmp/fake.parquet").resolve()
     assert manifest["dataset_hash"] == "abcdef123456"
     assert manifest["completed_at_utc"] == "2026-02-27T00:00:05+00:00"
     assert manifest["artifacts"]
@@ -227,7 +227,7 @@ def test_run_correlation_complete_includes_top_correlations_and_top_features(tmp
     noise = np.random.RandomState(42).normal(0.0, 0.1, periods)
     feature_signal = np.sin(x) + noise
     feature_noise = np.random.RandomState(7).normal(0.0, 1.0, periods)
-    target = pd.Series(feature_signal).shift(3).fillna(method="bfill").to_numpy()
+    target = pd.Series(feature_signal).shift(3).bfill().to_numpy()
 
     df = pl.DataFrame(
         {

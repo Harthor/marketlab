@@ -138,7 +138,7 @@ def _coerce_timestamp_column(frame: pl.DataFrame, timestamp: str) -> pl.DataFram
         raise ValueError(f"Falta columna timestamp '{timestamp}' en dataset")
     dtype = frame[timestamp].dtype
     if getattr(dtype, "is_temporal", lambda: False)():
-        if frame[timestamp].dtype.time_zone is None:
+        if getattr(frame[timestamp].dtype, "time_zone", None) is None:
             return frame.with_columns(pl.col(timestamp).dt.replace_time_zone("UTC"))
         return frame
     return frame.with_columns(pl.col(timestamp).cast(pl.Utf8, strict=False).str.strptime(pl.Datetime("us"), strict=False).dt.replace_time_zone("UTC"))
@@ -434,7 +434,8 @@ def _collect_global_warnings(
                 warnings.append(f"feature={row.get('feature')}|distance_correlation|{warning}")
     if bootstrap_table is not None:
         for row in bootstrap_table.to_dicts():
-            if "n_effective" in row and _safe_int(row.get("n_effective")) is not None and row.get("n_effective") < min_effective:
+            _n_eff = _safe_int(row.get("n_effective"))
+            if "n_effective" in row and _n_eff is not None and _n_eff < min_effective:
                 warnings.append(f"feature={row.get('feature')}|bootstrap|low_n_effective:{row.get('n_effective')}<{min_effective}")
 
     return sorted(set(warnings))
