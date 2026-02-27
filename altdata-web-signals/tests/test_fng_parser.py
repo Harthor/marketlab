@@ -69,6 +69,7 @@ def test_fng_transforms_columns_exist() -> None:
         "signal_fng_value_pct_change",
         "signal_fng_value_zscore_30d",
         "signal_fng_regime",
+        "asof_utc",
     ]
     for col in expected:
         assert col in df.columns, f"Missing column: {col}"
@@ -106,3 +107,15 @@ def test_fng_transforms_first_row_null() -> None:
 
     assert df["signal_fng_value_delta"][0] is None
     assert df["signal_fng_value_pct_change"][0] is None
+
+
+def test_fng_asof_utc_is_next_day() -> None:
+    """asof_utc should be ts_utc + 1 day."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    from datetime import timedelta
+
+    for i in range(df.shape[0]):
+        assert df["asof_utc"][i] == df["ts_utc"][i] + timedelta(days=1)

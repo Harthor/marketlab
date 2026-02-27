@@ -10,7 +10,7 @@ import polars as pl
 
 from ..config import slugify_topic
 from ..storage import write_signal_frame
-from ..transforms import add_delta_and_pct
+from ..transforms import add_asof_utc, add_delta_and_pct
 
 DEFAULT_BTC_KEYWORDS: list[str] = ["bitcoin", "buy bitcoin", "bitcoin crash", "crypto"]
 
@@ -47,11 +47,28 @@ def _fetch_raw_trends(
             frame = pl.from_pandas(ser[[ts_col_name, kw_norm]].rename(columns={ts_col_name: "ts_utc"}))
             signal_col = f"signal_trends_{slugify_topic(kw_norm)}"
             frame = frame.rename({kw_norm: signal_col})
+            frame = _add_period_bounds(frame)
             frames[kw_norm] = frame
         except Exception:
             continue
 
     return frames
+
+
+def _add_period_bounds(df: pl.DataFrame) -> pl.DataFrame:
+    """Add weekly period columns and re-anchor ts_utc to period end.
+
+    pytrends returns the week-start date.  We add ``period_start_utc``,
+    ``period_end_utc`` (start + 6 days), then move ``ts_utc`` to the end
+    of the period so correlations align with when the data is "complete".
+    """
+    df = df.with_columns(
+        pl.col("ts_utc").alias("period_start_utc"),
+        (pl.col("ts_utc") + pl.duration(weeks=1) - pl.duration(days=1))
+        .alias("period_end_utc"),
+    )
+    df = df.with_columns(pl.col("period_end_utc").alias("ts_utc"))
+    return df
 
 
 def parse_trends_payload(
@@ -63,7 +80,8 @@ def parse_trends_payload(
     """Parse pre-fetched trends data (for testing without pytrends).
 
     Expects ``{keyword: [{date: ISO, value: int}, ...]}``.
-    Returns ``{keyword: DataFrame}`` with ``ts_utc`` and ``signal_trends_{slug}`` columns.
+    Returns ``{keyword: DataFrame}`` with ``ts_utc`` (period end),
+    ``period_start_utc``, ``period_end_utc``, and ``signal_trends_{slug}``.
     """
     frames: dict[str, pl.DataFrame] = {}
     for kw, items in raw_data.items():
@@ -73,6 +91,7 @@ def parse_trends_payload(
         values = [int(r["value"]) for r in items]
         signal_col = f"signal_trends_{slugify_topic(kw)}"
         df = pl.DataFrame({"ts_utc": dates, signal_col: values}).sort("ts_utc")
+        df = _add_period_bounds(df)
 
         if start is not None:
             df = df.filter(pl.col("ts_utc") >= start)
@@ -86,12 +105,14 @@ def parse_trends_payload(
 def add_trends_transforms(frames: dict[str, pl.DataFrame]) -> dict[str, pl.DataFrame]:
     """Add delta/pct_change transforms per keyword + cross-keyword fear_ratio.
 
+    Also adds ``asof_utc`` (period_end + 1 day) to every frame.
     Modifies frames in-place and may add a ``__fear_ratio`` key.
     """
     for kw, df in frames.items():
         signal_col = f"signal_trends_{slugify_topic(kw)}"
         if signal_col in df.columns:
             df = add_delta_and_pct(df, signal_col)
+            df = add_asof_utc(df)
             frames[kw] = df
 
     # Cross-keyword: fear_ratio = bitcoin_crash / (bitcoin + 1)
@@ -102,13 +123,19 @@ def add_trends_transforms(frames: dict[str, pl.DataFrame]) -> dict[str, pl.DataF
         btc_df = frames[btc_key]
         crash_col = f"signal_trends_{slugify_topic(crash_key)}"
         btc_col = f"signal_trends_{slugify_topic(btc_key)}"
-        merged = crash_df.select(["ts_utc", crash_col]).join(
+
+        # Keep period metadata in the fear_ratio frame
+        meta_cols = [c for c in ["ts_utc", "period_start_utc", "period_end_utc"] if c in crash_df.columns]
+        merged = crash_df.select(meta_cols + [crash_col]).join(
             btc_df.select(["ts_utc", btc_col]), on="ts_utc", how="inner",
         )
         merged = merged.with_columns(
             (pl.col(crash_col).cast(pl.Float64) / (pl.col(btc_col).cast(pl.Float64) + 1.0))
             .alias("signal_trends_fear_ratio")
-        ).select(["ts_utc", "signal_trends_fear_ratio"])
+        )
+        keep = [c for c in meta_cols if c in merged.columns] + ["signal_trends_fear_ratio"]
+        merged = merged.select(keep)
+        merged = add_asof_utc(merged)
         frames["__fear_ratio"] = merged
 
     return frames
@@ -145,10 +172,11 @@ def fetch_trends_btc_signals(
 
     outputs: list[Path] = []
     for _kw, frame in frames.items():
-        # Write one parquet per signal column (skip ts_utc)
+        meta = [c for c in ["ts_utc", "period_start_utc", "period_end_utc", "asof_utc"]
+                if c in frame.columns]
         for col in [c for c in frame.columns if c.startswith("signal_")]:
             topic = col.removeprefix("signal_trends_")
-            single = frame.select(["ts_utc", col])
+            single = frame.select(meta + [col])
             outputs.append(
                 write_signal_frame(
                     frame=single,

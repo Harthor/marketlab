@@ -9,7 +9,7 @@ import polars as pl
 
 from ..http import ApiClient
 from ..storage import write_signal_frame
-from ..transforms import add_delta_and_pct, add_zscore_rolling
+from ..transforms import add_asof_utc, add_delta_and_pct, add_zscore_rolling
 
 FNG_API_URL = "https://api.alternative.me/fng/"
 
@@ -74,6 +74,10 @@ def add_fng_transforms(df: pl.DataFrame, signal_prefix: str = "signal_fng") -> p
         .otherwise(pl.lit("extreme_greed"))
         .alias(f"{signal_prefix}_regime")
     )
+
+    # asof_utc: day T FGI available at T+1 00:00 UTC
+    df = add_asof_utc(df)
+
     return df
 
 
@@ -107,12 +111,13 @@ def fetch_fng_signals(
     df = parse_fng_payload(data, start=start_dt, end=end_dt)
     df = add_fng_transforms(df)
 
+    meta_cols = [c for c in ["ts_utc", "asof_utc"] if c in df.columns]
     outputs: list[Path] = []
 
     signal_cols = [c for c in df.columns if c.startswith("signal_fng_")]
     for col in signal_cols:
         topic = col.removeprefix("signal_fng_")
-        frame = df.select(["ts_utc", col])
+        frame = df.select(meta_cols + [col])
         outputs.append(
             write_signal_frame(
                 frame=frame,

@@ -23,10 +23,14 @@ def test_parse_trends_payload_basic() -> None:
         assert kw in frames
         df = frames[kw]
         assert "ts_utc" in df.columns
+        assert "period_start_utc" in df.columns
+        assert "period_end_utc" in df.columns
         assert df.shape[0] == 5
         # Sorted ascending
         ts_list = df["ts_utc"].to_list()
         assert ts_list == sorted(ts_list)
+        # ts_utc should equal period_end_utc (re-anchored)
+        assert df["ts_utc"].to_list() == df["period_end_utc"].to_list()
 
 
 def test_parse_trends_payload_signal_column_names() -> None:
@@ -41,8 +45,10 @@ def test_parse_trends_payload_signal_column_names() -> None:
 
 def test_parse_trends_payload_date_filter() -> None:
     raw = json.loads((FIXTURES / "trends_btc_sample.json").read_text())
-    start = datetime(2022, 1, 10, tzinfo=UTC)
-    end = datetime(2022, 1, 25, tzinfo=UTC)
+    # ts_utc is now period_end (+6 days from raw date)
+    # Raw dates: 01-02,09,16,23,30 → period_end: 01-08,15,22,29,02-05
+    start = datetime(2022, 1, 14, tzinfo=UTC)
+    end = datetime(2022, 1, 30, tzinfo=UTC)
     frames = parse_trends_payload(raw, start=start, end=end)
 
     for df in frames.values():
@@ -106,3 +112,45 @@ def test_trends_transforms_pct_change_winsorized() -> None:
         for col in pct_cols:
             vals = df[col].drop_nulls().to_list()
             assert all(-1.0 <= v <= 1.0 for v in vals)
+
+
+def test_trends_transforms_asof_utc() -> None:
+    """asof_utc should be ts_utc + 1 day on all keyword frames."""
+    raw = json.loads((FIXTURES / "trends_btc_sample.json").read_text())
+    frames = parse_trends_payload(raw)
+    frames = add_trends_transforms(frames)
+
+    from datetime import timedelta
+
+    for kw in ["bitcoin", "buy bitcoin", "bitcoin crash", "crypto", "__fear_ratio"]:
+        df = frames[kw]
+        assert "asof_utc" in df.columns, f"Missing asof_utc in '{kw}'"
+        for i in range(df.shape[0]):
+            assert df["asof_utc"][i] == df["ts_utc"][i] + timedelta(days=1)
+
+
+def test_trends_period_bounds_consistent() -> None:
+    """period_end = period_start + 6 days, ts_utc = period_end."""
+    raw = json.loads((FIXTURES / "trends_btc_sample.json").read_text())
+    frames = parse_trends_payload(raw)
+
+    from datetime import timedelta
+
+    for df in frames.values():
+        for i in range(df.shape[0]):
+            start = df["period_start_utc"][i]
+            end = df["period_end_utc"][i]
+            assert end == start + timedelta(days=6)
+            assert df["ts_utc"][i] == end
+
+
+def test_trends_fear_ratio_has_period_columns() -> None:
+    """fear_ratio frame should also carry period metadata."""
+    raw = json.loads((FIXTURES / "trends_btc_sample.json").read_text())
+    frames = parse_trends_payload(raw)
+    frames = add_trends_transforms(frames)
+
+    fr_df = frames["__fear_ratio"]
+    assert "period_start_utc" in fr_df.columns
+    assert "period_end_utc" in fr_df.columns
+    assert "asof_utc" in fr_df.columns

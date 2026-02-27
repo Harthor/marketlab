@@ -12,7 +12,7 @@ from dateutil import parser as date_parser
 
 from ..http import ApiClient
 from ..storage import write_signal_frame
-from ..transforms import add_delta, add_zscore_rolling
+from ..transforms import add_asof_utc, add_delta, add_delta_log1p, add_zscore_rolling
 
 # Default crypto RSS feeds
 DEFAULT_CRYPTO_FEEDS: list[str] = [
@@ -118,21 +118,31 @@ def aggregate_crypto_entries(
     rows_ts: list[datetime] = []
     rows_articles: list[int] = []
     rows_btc: list[int] = []
-    rows_sentiment: list[float] = []
+    rows_sentiment: list[float | None] = []
 
     for day in sorted(day_range):
         rows_ts.append(day)
         rows_articles.append(article_counts[day])
         rows_btc.append(btc_counts[day])
         n = sentiment_n[day]
-        rows_sentiment.append(sentiment_sums[day] / n if n > 0 else 0.0)
+        # Fix 3: NaN (not 0) when no articles — 0 would mean "neutral"
+        rows_sentiment.append(sentiment_sums[day] / n if n > 0 else None)
 
-    return pl.DataFrame({
+    df = pl.DataFrame({
         "ts_utc": rows_ts,
         "signal_rss_crypto_article_count": rows_articles,
         "signal_rss_crypto_btc_mention_count": rows_btc,
         "signal_rss_crypto_title_sentiment": rows_sentiment,
     })
+
+    # Definedness flag: 1 when we have actual sentiment data
+    df = df.with_columns(
+        (pl.col("signal_rss_crypto_article_count") > 0)
+        .cast(pl.Int8)
+        .alias("signal_rss_crypto_sentiment_defined"),
+    )
+
+    return df
 
 
 def add_rss_crypto_transforms(df: pl.DataFrame) -> pl.DataFrame:
@@ -141,28 +151,42 @@ def add_rss_crypto_transforms(df: pl.DataFrame) -> pl.DataFrame:
     New columns:
     - signal_rss_crypto_article_count_delta
     - signal_rss_crypto_article_count_zscore_7d
+    - signal_rss_crypto_article_count_delta_log1p (+ _log1p intermediate)
     - signal_rss_crypto_sentiment_delta (from title_sentiment)
     - signal_rss_crypto_btc_mention_delta (from btc_mention_count)
+    - signal_rss_crypto_btc_mention_count_delta_log1p (+ _log1p intermediate)
     - signal_rss_crypto_neg_sentiment_flag (1 if sentiment < -0.2)
+    - asof_utc (ts_utc + 1 day)
     """
     df = add_delta(df, "signal_rss_crypto_article_count")
     df = add_zscore_rolling(df, "signal_rss_crypto_article_count", window=7)
+    df = add_delta_log1p(df, "signal_rss_crypto_article_count")
+
     df = add_delta(df, "signal_rss_crypto_title_sentiment")
     # Rename to match spec: sentiment_delta (not title_sentiment_delta)
     if "signal_rss_crypto_title_sentiment_delta" in df.columns:
         df = df.rename({"signal_rss_crypto_title_sentiment_delta": "signal_rss_crypto_sentiment_delta"})
+
     df = add_delta(df, "signal_rss_crypto_btc_mention_count")
     # Rename: btc_mention_delta
     if "signal_rss_crypto_btc_mention_count_delta" in df.columns:
         df = df.rename({"signal_rss_crypto_btc_mention_count_delta": "signal_rss_crypto_btc_mention_delta"})
+    df = add_delta_log1p(df, "signal_rss_crypto_btc_mention_count")
 
-    # Negative sentiment flag
+    # Negative sentiment flag (null sentiment → 0, not flagged)
     df = df.with_columns(
-        pl.when(pl.col("signal_rss_crypto_title_sentiment") < -0.2)
+        pl.when(
+            pl.col("signal_rss_crypto_title_sentiment").is_not_null()
+            & (pl.col("signal_rss_crypto_title_sentiment") < -0.2)
+        )
         .then(1)
         .otherwise(0)
         .alias("signal_rss_crypto_neg_sentiment_flag")
     )
+
+    # asof_utc: day T data available at T+1 00:00 UTC
+    df = add_asof_utc(df)
+
     return df
 
 
@@ -209,10 +233,11 @@ def fetch_rss_crypto_signals(
     df = aggregate_crypto_entries(all_entries, start=start_dt, end=end_dt)
     df = add_rss_crypto_transforms(df)
 
+    meta_cols = [c for c in ["ts_utc", "asof_utc"] if c in df.columns]
     outputs: list[Path] = []
     for col in [c for c in df.columns if c.startswith("signal_rss_crypto_")]:
         topic = col.removeprefix("signal_rss_crypto_")
-        frame = df.select(["ts_utc", col])
+        frame = df.select(meta_cols + [col])
         outputs.append(
             write_signal_frame(
                 frame=frame,

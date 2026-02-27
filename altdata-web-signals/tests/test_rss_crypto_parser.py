@@ -71,7 +71,10 @@ def test_aggregate_empty_entries_returns_zero_filled() -> None:
     assert df.shape[0] == 3
     assert all(v == 0 for v in df["signal_rss_crypto_article_count"].to_list())
     assert all(v == 0 for v in df["signal_rss_crypto_btc_mention_count"].to_list())
-    assert all(v == 0.0 for v in df["signal_rss_crypto_title_sentiment"].to_list())
+    # Fix 3: sentiment is NaN (not 0) when no articles
+    assert all(v is None for v in df["signal_rss_crypto_title_sentiment"].to_list())
+    # sentiment_defined flag = 0 for days without articles
+    assert all(v == 0 for v in df["signal_rss_crypto_sentiment_defined"].to_list())
 
 
 def test_rss_crypto_transforms_columns_exist() -> None:
@@ -87,9 +90,13 @@ def test_rss_crypto_transforms_columns_exist() -> None:
     expected = [
         "signal_rss_crypto_article_count_delta",
         "signal_rss_crypto_article_count_zscore_7d",
+        "signal_rss_crypto_article_count_delta_log1p",
         "signal_rss_crypto_sentiment_delta",
         "signal_rss_crypto_btc_mention_delta",
+        "signal_rss_crypto_btc_mention_count_delta_log1p",
         "signal_rss_crypto_neg_sentiment_flag",
+        "signal_rss_crypto_sentiment_defined",
+        "asof_utc",
     ]
     for col in expected:
         assert col in df.columns, f"Missing column: {col}"
@@ -110,3 +117,38 @@ def test_rss_crypto_neg_sentiment_flag_values() -> None:
 
     flags = df["signal_rss_crypto_neg_sentiment_flag"].to_list()
     assert all(v in (0, 1) for v in flags)
+
+
+def test_rss_crypto_sentiment_nan_when_no_articles() -> None:
+    """Sentiment should be NaN when article_count = 0."""
+    start = datetime(2022, 1, 1, tzinfo=UTC)
+    end = datetime(2022, 1, 3, tzinfo=UTC)
+
+    df = aggregate_crypto_entries([], start=start, end=end)
+    df = add_rss_crypto_transforms(df)
+
+    # All days have 0 articles → sentiment should be null
+    sentiments = df["signal_rss_crypto_title_sentiment"].to_list()
+    assert all(v is None for v in sentiments)
+    # sentiment_defined should be 0 everywhere
+    defined = df["signal_rss_crypto_sentiment_defined"].to_list()
+    assert all(v == 0 for v in defined)
+    # neg_sentiment_flag should be 0 (not flagged) when sentiment is null
+    flags = df["signal_rss_crypto_neg_sentiment_flag"].to_list()
+    assert all(v == 0 for v in flags)
+
+
+def test_rss_crypto_asof_utc_is_next_day() -> None:
+    """asof_utc should be ts_utc + 1 day."""
+    payload = (FIXTURES / "rss_crypto_sample.xml").read_text()
+    start = datetime(2022, 1, 10, tzinfo=UTC)
+    end = datetime(2022, 1, 12, tzinfo=UTC)
+
+    entries = parse_crypto_feed(payload, start=start, end=end)
+    df = aggregate_crypto_entries(entries, start=start, end=end)
+    df = add_rss_crypto_transforms(df)
+
+    from datetime import timedelta
+
+    for i in range(df.shape[0]):
+        assert df["asof_utc"][i] == df["ts_utc"][i] + timedelta(days=1)
