@@ -1,0 +1,27 @@
+{
+  "schema_version": "1.0",
+  "provider": "builder",
+  "source_path": "data/datasets/BTC-USD/1d.parquet",
+  "source_sha256": "5c0607654ed68db392e6061047e61b2bc950e46e577b37d8891c74888a8423f7",
+  "out_sha256": "2b7f03145cae06aca391abdfeca89b584810875df09cbaf5a04499bcf8be76ce",
+  "rows": 2979,
+  "min_ts_utc": "2018-01-01 00:00:00+00:00",
+  "max_ts_utc": "2026-02-26 00:00:00+00:00",
+  "target_spec": {
+    "name": "returns_1d",
+    "horizon_days": 1,
+    "direction": "forward",
+    "formula": "close.shift(-horizon_days)/close - 1",
+    "kind": "arithmetic"
+  },
+  "feature_spec": {
+    "log_returns_1d": {
+      "source": "close",
+      "horizon_days": 1,
+      "direction": "forward",
+      "kind": "log",
+      "formula": "np.log(close.shift(-horizon_days)/close)"
+    }
+  },
+  "generated_at_utc": "2026-02-27T15:53:43.966241+00:00"
+}

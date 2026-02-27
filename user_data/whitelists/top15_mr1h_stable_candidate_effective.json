@@ -1,0 +1,29 @@
+{
+  "generated_at_utc": "2026-02-20T18:26:12.142397Z",
+  "generated_by": "ensure_data.py",
+  "exchange": "binance",
+  "market": "spot",
+  "timerange_requested": "20250101-20260201",
+  "timerange_checked": "20241215-20260201",
+  "timeframes": [
+    "1h",
+    "1d"
+  ],
+  "require_full_range": true,
+  "pair_whitelist": [
+    "ETH/USDT",
+    "XRP/USDT",
+    "SOL/USDT",
+    "BNB/USDT",
+    "PAXG/USDT",
+    "ARB/USDT",
+    "AAVE/USDT",
+    "LTC/USDT",
+    "UNI/USDT",
+    "SNX/USDT",
+    "OP/USDT",
+    "ADA/USDT",
+    "BCH/USDT"
+  ],
+  "excluded_count": 0
+}

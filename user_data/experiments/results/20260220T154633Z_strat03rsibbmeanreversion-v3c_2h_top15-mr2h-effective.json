@@ -1,0 +1,139 @@
+{
+  "experiment_id": "20260220T154633Z_strat03rsibbmeanreversion-v3c_2h_top15-mr2h-effective",
+  "created_at": "2026-02-20T15:46:33+00:00",
+  "status": "success",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "strategy_family": "mean_reversion",
+  "config_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_2h_top15_mr_effective.json",
+  "timeframe": "2h",
+  "timerange": "20250101-20260201",
+  "universe_label": "top15_mr2h_effective",
+  "pairs_count": 14,
+  "market_mode": "spot",
+  "split_label": null,
+  "metrics": {
+    "trades": 19,
+    "trades_per_day": 0.05,
+    "profit_total_pct": -0.38678508600000006,
+    "winrate_pct": 31.57894736842105,
+    "profit_factor": 0.4050918234648534,
+    "max_drawdown_pct": 0.4667582390000007
+  },
+  "robustness": {
+    "oos": null,
+    "fee_sensitivity_tested": false,
+    "fee_delta_pct": null
+  },
+  "artifacts": {
+    "backtest_meta_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/stress_mr_2h4h_20260220/v3c_2h_top15_mr_effective.meta.json",
+    "backtest_export_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T154633Z_strat03rsibbmeanreversion-v3c_2h_top15-mr2h-effective.backtest_export.json",
+    "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T154633Z_strat03rsibbmeanreversion-v3c_2h_top15-mr2h-effective.md",
+    "extra_files": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/stress_mr_2h4h_20260220/v3c_2h_top15_mr_effective.zip"
+    ]
+  },
+  "notes": {
+    "warnings": [],
+    "observations": [
+      "PF < 1 en este experimento."
+    ],
+    "top_pairs_by_profit_pct": [
+      [
+        "LTC/USDT",
+        0.1
+      ],
+      [
+        "DOGE/USDT",
+        0.06
+      ],
+      [
+        "TRX/USDT",
+        0.02
+      ],
+      [
+        "PAXG/USDT",
+        0.0
+      ],
+      [
+        "BNB/USDT",
+        0.0
+      ],
+      [
+        "BCH/USDT",
+        0.0
+      ],
+      [
+        "BTC/USDT",
+        -0.01
+      ],
+      [
+        "ETH/USDT",
+        -0.01
+      ],
+      [
+        "XRP/USDT",
+        -0.05
+      ],
+      [
+        "ADA/USDT",
+        -0.05
+      ]
+    ],
+    "bottom_pairs_by_profit_pct": [
+      [
+        "SOL/USDT",
+        -0.23
+      ],
+      [
+        "AAVE/USDT",
+        -0.09
+      ],
+      [
+        "AVAX/USDT",
+        -0.06
+      ],
+      [
+        "LINK/USDT",
+        -0.06
+      ],
+      [
+        "ADA/USDT",
+        -0.05
+      ],
+      [
+        "XRP/USDT",
+        -0.05
+      ],
+      [
+        "ETH/USDT",
+        -0.01
+      ],
+      [
+        "BTC/USDT",
+        -0.01
+      ],
+      [
+        "BCH/USDT",
+        0.0
+      ],
+      [
+        "BNB/USDT",
+        0.0
+      ]
+    ]
+  },
+  "provenance": {
+    "command_run": "",
+    "git_commit": "797ea46bb3b62ba8d0ca39b038610d82eea5be28"
+  },
+  "robustness_validation": {
+    "robustness_score": 46.0,
+    "flags": [
+      "TOO_CONCENTRATED_TOP1",
+      "TOO_CONCENTRATED_TOP3",
+      "PAIR_DEPENDENCY_RISK",
+      "LOW_SAMPLE"
+    ],
+    "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T154633Z_strat03rsibbmeanreversion-v3c_2h_top15-mr2h-effective.robustness.json"
+  }
+}

@@ -1,0 +1,20 @@
+dataset:
+  path: /path/to/research_ready.parquet
+target: returns_1d
+features: null
+model:
+  name: ridge
+  params:
+    alpha: 1.0
+walk_forward:
+  train_window_days: 730
+  test_window_days: 92
+  step_days: 92
+  min_train_rows: 260
+  min_test_rows: 30
+backtest:
+  threshold: 0.0
+  transaction_cost: 0.0004
+  slippage: 0.0002
+  initial_capital: 1.0
+random_state: 42

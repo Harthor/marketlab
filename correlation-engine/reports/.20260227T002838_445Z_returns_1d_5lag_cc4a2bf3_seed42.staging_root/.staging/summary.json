@@ -1,0 +1,37 @@
+{
+  "run_id": "20260227T002838_445Z_returns_1d_5lag_cc4a2bf3_seed42",
+  "schema_version": "1.0",
+  "kind": "correlation",
+  "status": "running",
+  "created_at_utc": "2026-02-27T00:28:38.447001+00:00",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+  "dataset_hash": "cc4a2bf3feda19c30b0f05c7a98803592de96d0a44b61ab5462691315ad7c0f8",
+  "dataset_rows": 600,
+  "config_file": null,
+  "config": {
+    "dataset": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "max_lag": 5,
+    "windows": [
+      10,
+      20
+    ],
+    "seed": 42,
+    "bootstrap": 0,
+    "top": 10,
+    "distance_corr": false,
+    "output_root": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports",
+    "cache_root": null,
+    "min_effective_obs": 10
+  },
+  "config_hash": "99e82e95da59214c46a92f37bf70f042ff55eab254b7c1b54f1c8aef827fb805",
+  "seed": 42,
+  "top_features": {
+    "pearson": [],
+    "spearman": [],
+    "mi": [],
+    "best_lag": []
+  },
+  "artifacts": []
+}

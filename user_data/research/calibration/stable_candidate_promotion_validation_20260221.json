@@ -1,0 +1,740 @@
+{
+  "generated_at": "2026-02-21T00:33:39.161753+00:00",
+  "setup": {
+    "strategy": "Strat03RSIBBMeanReversion_v3c",
+    "timeframe": "1h",
+    "market": "spot",
+    "stable_candidate_universe": "top15_mr1h_stable_candidate (13 effective)",
+    "benchmark_universe": "top15_mr1h_effective"
+  },
+  "sanity": {
+    "stable_candidate": {
+      "experiment_id": "20260220T181736Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-sanity",
+      "metrics": {
+        "trades": 20,
+        "trades_per_day": 0.05,
+        "profit_total_pct": 0.273555753,
+        "winrate_pct": 50.0,
+        "profit_factor": 2.1250078575139217,
+        "max_drawdown_pct": 0.2109815219999973
+      }
+    },
+    "benchmark_top15": {
+      "experiment_id": "20260220T165606Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective",
+      "metrics": {
+        "trades": 27,
+        "trades_per_day": 0.07,
+        "profit_total_pct": 0.18315285199999998,
+        "winrate_pct": 37.03703703703704,
+        "profit_factor": 1.5490820965293062,
+        "max_drawdown_pct": 0.24595993499999624
+      }
+    }
+  },
+  "wf": {
+    "stable_candidate_rows": [
+      {
+        "split": "WF_A_TEST",
+        "timerange": "20250601-20250930",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-a",
+        "trades": 3,
+        "trades_per_day": 0.02,
+        "profit_pct": 0.179915516,
+        "winrate_pct": 100.0,
+        "pf": 0.0,
+        "max_dd_pct": 0.0
+      },
+      {
+        "split": "WF_B_TEST",
+        "timerange": "20250901-20251231",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-b",
+        "trades": 5,
+        "trades_per_day": 0.04,
+        "profit_pct": 0.16124438000000002,
+        "winrate_pct": 80.0,
+        "pf": 8.58190529928998,
+        "max_dd_pct": 0.02125138114696654
+      },
+      {
+        "split": "WF_C_TEST",
+        "timerange": "20251101-20260201",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-c",
+        "trades": 2,
+        "trades_per_day": 0.02,
+        "profit_pct": 0.11905208599999999,
+        "winrate_pct": 100.0,
+        "pf": 0.0,
+        "max_dd_pct": 0.0
+      },
+      {
+        "split": "WF_D_TEST",
+        "timerange": "20250101-20250430",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-d",
+        "trades": 9,
+        "trades_per_day": 0.08,
+        "profit_pct": -0.17645731000000003,
+        "winrate_pct": 11.11111111111111,
+        "pf": 0.16363618800702365,
+        "max_dd_pct": 0.2109815219999973
+      },
+      {
+        "split": "WF_E_TEST",
+        "timerange": "20250401-20250731",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-e",
+        "trades": 7,
+        "trades_per_day": 0.06,
+        "profit_pct": 0.151918527,
+        "winrate_pct": 57.14285714285714,
+        "pf": 3.4404100057073577,
+        "max_dd_pct": 0.05134078199999976
+      },
+      {
+        "split": "WF_F_TEST",
+        "timerange": "20250701-20251031",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-f",
+        "trades": 7,
+        "trades_per_day": 0.06,
+        "profit_pct": 0.173742431,
+        "winrate_pct": 71.42857142857143,
+        "pf": 3.4907168337287713,
+        "max_dd_pct": 0.048488995000002436
+      },
+      {
+        "split": "WF_G_TEST",
+        "timerange": "20250115-20250515",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-g",
+        "trades": 8,
+        "trades_per_day": 0.07,
+        "profit_pct": -0.136719928,
+        "winrate_pct": 12.5,
+        "pf": 0.20160813678062212,
+        "max_dd_pct": 0.17124413999999888
+      },
+      {
+        "split": "WF_H_TEST",
+        "timerange": "20250215-20250615",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-h",
+        "trades": 8,
+        "trades_per_day": 0.07,
+        "profit_pct": 0.03570015,
+        "winrate_pct": 37.5,
+        "pf": 1.301358482878968,
+        "max_dd_pct": 0.10755361300000459
+      },
+      {
+        "split": "WF_I_TEST",
+        "timerange": "20250315-20250715",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-i",
+        "trades": 6,
+        "trades_per_day": 0.05,
+        "profit_pct": 0.091912981,
+        "winrate_pct": 50.0,
+        "pf": 2.476484553373732,
+        "max_dd_pct": 0.05134078199999976
+      },
+      {
+        "split": "WF_J_TEST",
+        "timerange": "20250415-20250815",
+        "experiment_id": "20260220T182843Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-j",
+        "trades": 8,
+        "trades_per_day": 0.07,
+        "profit_pct": 0.13487166299999997,
+        "winrate_pct": 50.0,
+        "pf": 2.70081844967398,
+        "max_dd_pct": 0.06838764599999649
+      },
+      {
+        "split": "WF_K_TEST",
+        "timerange": "20250515-20250915",
+        "experiment_id": "20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-k",
+        "trades": 5,
+        "trades_per_day": 0.04,
+        "profit_pct": 0.228711133,
+        "winrate_pct": 80.0,
+        "pf": 21.962577525452897,
+        "max_dd_pct": 0.010903902735564219
+      },
+      {
+        "split": "WF_L_TEST",
+        "timerange": "20250615-20251015",
+        "experiment_id": "20260220T182844Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-l",
+        "trades": 6,
+        "trades_per_day": 0.05,
+        "profit_pct": 0.222231426,
+        "winrate_pct": 83.33333333333334,
+        "pf": 11.449589786993936,
+        "max_dd_pct": 0.02122593264074973
+      },
+      {
+        "split": "WF_M_TEST",
+        "timerange": "20250715-20251115",
+        "experiment_id": "20260221T002935Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-m-ext",
+        "trades": 6,
+        "trades_per_day": 0.05,
+        "profit_pct": 0.222231426,
+        "winrate_pct": 83.33333333333334,
+        "pf": 11.449589786993936,
+        "max_dd_pct": 0.02122593264074973
+      },
+      {
+        "split": "WF_N_TEST",
+        "timerange": "20250815-20251215",
+        "experiment_id": "20260221T002935Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-n-ext",
+        "trades": 5,
+        "trades_per_day": 0.04,
+        "profit_pct": 0.16222588000000002,
+        "winrate_pct": 80.0,
+        "pf": 8.628056613532705,
+        "max_dd_pct": 0.021238652400239585
+      },
+      {
+        "split": "WF_O_TEST",
+        "timerange": "20250915-20260115",
+        "experiment_id": "20260221T002935Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-wf-o-ext",
+        "trades": 5,
+        "trades_per_day": 0.04,
+        "profit_pct": 0.16124438000000002,
+        "winrate_pct": 80.0,
+        "pf": 8.58190529928998,
+        "max_dd_pct": 0.02125138114696654
+      }
+    ],
+    "stable_candidate_summary": {
+      "splits": 15,
+      "trades_total": 90,
+      "pf_avg": 5.62857713078026,
+      "pf_median": 3.4404100057073577,
+      "splits_pf_gt_1": 11,
+      "max_dd_worst": 0.2109815219999973,
+      "profit_pct_avg": 0.11545498273333334
+    },
+    "benchmark_rows": [
+      {
+        "split": "WF_A_TEST",
+        "timerange": "20250601-20250930",
+        "experiment_id": "20260220T171810Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-a-ext",
+        "trades": 5,
+        "trades_per_day": 0.04,
+        "profit_pct": 0.134363751,
+        "winrate_pct": 60.0,
+        "pf": 3.949693628775965,
+        "max_dd_pct": 0.045551765000004706
+      },
+      {
+        "split": "WF_B_TEST",
+        "timerange": "20250901-20251231",
+        "experiment_id": "20260220T171810Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-b-ext",
+        "trades": 5,
+        "trades_per_day": 0.04,
+        "profit_pct": 0.16124438000000002,
+        "winrate_pct": 80.0,
+        "pf": 8.58190529928998,
+        "max_dd_pct": 0.02125138114696654
+      },
+      {
+        "split": "WF_C_TEST",
+        "timerange": "20251101-20260201",
+        "experiment_id": "20260220T171810Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-c-ext",
+        "trades": 2,
+        "trades_per_day": 0.02,
+        "profit_pct": 0.11905208599999999,
+        "winrate_pct": 100.0,
+        "pf": 0.0,
+        "max_dd_pct": 0.0
+      },
+      {
+        "split": "WF_D_TEST",
+        "timerange": "20250101-20250430",
+        "experiment_id": "20260220T173616Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-d-ext",
+        "trades": 13,
+        "trades_per_day": 0.11,
+        "profit_pct": -0.21143572300000002,
+        "winrate_pct": 7.6923076923076925,
+        "pf": 0.1403651858990774,
+        "max_dd_pct": 0.24595993499999624
+      },
+      {
+        "split": "WF_E_TEST",
+        "timerange": "20250401-20250731",
+        "experiment_id": "20260220T173616Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-e-ext",
+        "trades": 12,
+        "trades_per_day": 0.1,
+        "profit_pct": 0.073494751,
+        "winrate_pct": 33.33333333333333,
+        "pf": 1.5224435567293062,
+        "max_dd_pct": 0.0743400700000052
+      },
+      {
+        "split": "WF_F_TEST",
+        "timerange": "20250701-20251031",
+        "experiment_id": "20260220T173616Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-f-ext",
+        "trades": 8,
+        "trades_per_day": 0.07,
+        "profit_pct": 0.149674919,
+        "winrate_pct": 62.5,
+        "pf": 2.595281649405836,
+        "max_dd_pct": 0.0725565070000016
+      },
+      {
+        "split": "WF_G_TEST",
+        "timerange": "20250115-20250515",
+        "experiment_id": "20260220T175456Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-g-ext",
+        "trades": 13,
+        "trades_per_day": 0.11,
+        "profit_pct": -0.181571064,
+        "winrate_pct": 7.6923076923076925,
+        "pf": 0.1597638441665888,
+        "max_dd_pct": 0.20622255299999778
+      },
+      {
+        "split": "WF_H_TEST",
+        "timerange": "20250215-20250615",
+        "experiment_id": "20260220T175457Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-h-ext",
+        "trades": 12,
+        "trades_per_day": 0.1,
+        "profit_pct": -0.018656114000000005,
+        "winrate_pct": 25.0,
+        "pf": 0.89204907529222,
+        "max_dd_pct": 0.13055290099999864
+      },
+      {
+        "split": "WF_I_TEST",
+        "timerange": "20250315-20250715",
+        "experiment_id": "20260220T175457Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-i-ext",
+        "trades": 10,
+        "trades_per_day": 0.08,
+        "profit_pct": 0.03755671700000001,
+        "winrate_pct": 30.0,
+        "pf": 1.3220780705391193,
+        "max_dd_pct": 0.0743400700000052
+      },
+      {
+        "split": "WF_J_TEST",
+        "timerange": "20250415-20250815",
+        "experiment_id": "20260220T175457Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-j-ext",
+        "trades": 12,
+        "trades_per_day": 0.1,
+        "profit_pct": 0.064986465,
+        "winrate_pct": 33.33333333333333,
+        "pf": 1.4356148982446717,
+        "max_dd_pct": 0.08284835599999951
+      },
+      {
+        "split": "WF_K_TEST",
+        "timerange": "20250515-20250915",
+        "experiment_id": "20260220T175457Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-k-ext",
+        "trades": 7,
+        "trades_per_day": 0.06,
+        "profit_pct": 0.18315936800000002,
+        "winrate_pct": 57.14285714285714,
+        "pf": 4.243928195943574,
+        "max_dd_pct": 0.04550229056376864
+      },
+      {
+        "split": "WF_L_TEST",
+        "timerange": "20250615-20251015",
+        "experiment_id": "20260220T175457Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-l-ext",
+        "trades": 7,
+        "trades_per_day": 0.06,
+        "profit_pct": 0.19816391400000002,
+        "winrate_pct": 71.42857142857143,
+        "pf": 5.371149158945397,
+        "max_dd_pct": 0.02406751199999917
+      }
+    ],
+    "benchmark_summary": {
+      "splits": 12,
+      "trades_total": 106,
+      "pf_avg": 2.5178560469359783,
+      "pf_median": 1.479029227486989,
+      "splits_pf_gt_1": 8,
+      "max_dd_worst": 0.24595993499999624,
+      "profit_pct_avg": 0.05916945416666666
+    },
+    "new_splits_added": [
+      "WF_M_TEST",
+      "WF_N_TEST",
+      "WF_O_TEST"
+    ]
+  },
+  "lopo": {
+    "rows": [
+      {
+        "pair_removed": "ETH/USDT",
+        "experiment_id": "20260221T003050Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-eth-usdt",
+        "trades": 17,
+        "profit_pct": 0.312694372,
+        "winrate_pct": 52.94117647058824,
+        "pf": 2.844846567007367,
+        "max_dd_pct": 0.13731869099999586,
+        "delta_pf_vs_stable_baseline": 0.7198387094934451,
+        "delta_profit_pct_vs_stable_baseline": 0.039138618999999986,
+        "delta_dd_pp_vs_stable_baseline": -0.07366283100000146
+      },
+      {
+        "pair_removed": "XRP/USDT",
+        "experiment_id": "20260221T003055Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-xrp-usdt",
+        "trades": 19,
+        "profit_pct": 0.284466202,
+        "winrate_pct": 52.63157894736842,
+        "pf": 2.2248353597703407,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": 0.09982750225641901,
+        "delta_profit_pct_vs_stable_baseline": 0.010910448999999989,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "SOL/USDT",
+        "experiment_id": "20260221T003059Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-sol-usdt",
+        "trades": 18,
+        "profit_pct": 0.22846637699999997,
+        "winrate_pct": 50.0,
+        "pf": 2.0006655909191324,
+        "max_dd_pct": 0.19613696400000435,
+        "delta_pf_vs_stable_baseline": -0.12434226659478931,
+        "delta_profit_pct_vs_stable_baseline": -0.04508937600000004,
+        "delta_dd_pp_vs_stable_baseline": -0.014844557999992958
+      },
+      {
+        "pair_removed": "BNB/USDT",
+        "experiment_id": "20260221T003104Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-bnb-usdt",
+        "trades": 19,
+        "profit_pct": 0.22353461700000002,
+        "winrate_pct": 47.368421052631575,
+        "pf": 1.9192941394705931,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": -0.2057137180433286,
+        "delta_profit_pct_vs_stable_baseline": -0.050021135999999994,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "PAXG/USDT",
+        "experiment_id": "20260221T003108Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-paxg-usdt",
+        "trades": 17,
+        "profit_pct": 0.27992274400000006,
+        "winrate_pct": 52.94117647058824,
+        "pf": 2.2539644567635255,
+        "max_dd_pct": 0.19105275699999993,
+        "delta_pf_vs_stable_baseline": 0.1289565992496038,
+        "delta_profit_pct_vs_stable_baseline": 0.006366991000000044,
+        "delta_dd_pp_vs_stable_baseline": -0.019928764999997378
+      },
+      {
+        "pair_removed": "ARB/USDT",
+        "experiment_id": "20260221T003113Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-arb-usdt",
+        "trades": 18,
+        "profit_pct": 0.15357417099999998,
+        "winrate_pct": 44.44444444444444,
+        "pf": 1.6315792930378865,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": -0.4934285644760352,
+        "delta_profit_pct_vs_stable_baseline": -0.11998158200000003,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "AAVE/USDT",
+        "experiment_id": "20260221T003118Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-aave-usdt",
+        "trades": 18,
+        "profit_pct": 0.25771349099999996,
+        "winrate_pct": 50.0,
+        "pf": 2.2924628799593676,
+        "max_dd_pct": 0.1672197600000004,
+        "delta_pf_vs_stable_baseline": 0.16745502244544586,
+        "delta_profit_pct_vs_stable_baseline": -0.01584226200000005,
+        "delta_dd_pp_vs_stable_baseline": -0.0437617619999969
+      },
+      {
+        "pair_removed": "LTC/USDT",
+        "experiment_id": "20260221T003122Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-ltc-usdt",
+        "trades": 20,
+        "profit_pct": 0.273555753,
+        "winrate_pct": 50.0,
+        "pf": 2.1250078575139217,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": 0.0,
+        "delta_profit_pct_vs_stable_baseline": 0.0,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "UNI/USDT",
+        "experiment_id": "20260221T003126Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-uni-usdt",
+        "trades": 20,
+        "profit_pct": 0.273555753,
+        "winrate_pct": 50.0,
+        "pf": 2.1250078575139217,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": 0.0,
+        "delta_profit_pct_vs_stable_baseline": 0.0,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "SNX/USDT",
+        "experiment_id": "20260221T003131Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-snx-usdt",
+        "trades": 18,
+        "profit_pct": 0.234786777,
+        "winrate_pct": 50.0,
+        "pf": 2.0581129904876097,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": -0.06689486702631209,
+        "delta_profit_pct_vs_stable_baseline": -0.03876897600000001,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "OP/USDT",
+        "experiment_id": "20260221T003135Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-op-usdt",
+        "trades": 18,
+        "profit_pct": 0.249994427,
+        "winrate_pct": 50.0,
+        "pf": 2.2096733960475223,
+        "max_dd_pct": 0.17448529800000187,
+        "delta_pf_vs_stable_baseline": 0.08466553853360059,
+        "delta_profit_pct_vs_stable_baseline": -0.02356132600000002,
+        "delta_dd_pp_vs_stable_baseline": -0.03649622399999544
+      },
+      {
+        "pair_removed": "ADA/USDT",
+        "experiment_id": "20260221T003139Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-ada-usdt",
+        "trades": 20,
+        "profit_pct": 0.273555753,
+        "winrate_pct": 50.0,
+        "pf": 2.1250078575139217,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": 0.0,
+        "delta_profit_pct_vs_stable_baseline": 0.0,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "BCH/USDT",
+        "experiment_id": "20260221T003144Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-bch-usdt",
+        "trades": 18,
+        "profit_pct": 0.236848599,
+        "winrate_pct": 50.0,
+        "pf": 2.07233619349748,
+        "max_dd_pct": 0.1886941399999955,
+        "delta_pf_vs_stable_baseline": -0.05267166401644152,
+        "delta_profit_pct_vs_stable_baseline": -0.03670715400000002,
+        "delta_dd_pp_vs_stable_baseline": -0.0222873820000018
+      }
+    ],
+    "top_improvers_by_delta_pf": [
+      {
+        "pair_removed": "ETH/USDT",
+        "experiment_id": "20260221T003050Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-eth-usdt",
+        "trades": 17,
+        "profit_pct": 0.312694372,
+        "winrate_pct": 52.94117647058824,
+        "pf": 2.844846567007367,
+        "max_dd_pct": 0.13731869099999586,
+        "delta_pf_vs_stable_baseline": 0.7198387094934451,
+        "delta_profit_pct_vs_stable_baseline": 0.039138618999999986,
+        "delta_dd_pp_vs_stable_baseline": -0.07366283100000146
+      },
+      {
+        "pair_removed": "AAVE/USDT",
+        "experiment_id": "20260221T003118Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-aave-usdt",
+        "trades": 18,
+        "profit_pct": 0.25771349099999996,
+        "winrate_pct": 50.0,
+        "pf": 2.2924628799593676,
+        "max_dd_pct": 0.1672197600000004,
+        "delta_pf_vs_stable_baseline": 0.16745502244544586,
+        "delta_profit_pct_vs_stable_baseline": -0.01584226200000005,
+        "delta_dd_pp_vs_stable_baseline": -0.0437617619999969
+      },
+      {
+        "pair_removed": "PAXG/USDT",
+        "experiment_id": "20260221T003108Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-paxg-usdt",
+        "trades": 17,
+        "profit_pct": 0.27992274400000006,
+        "winrate_pct": 52.94117647058824,
+        "pf": 2.2539644567635255,
+        "max_dd_pct": 0.19105275699999993,
+        "delta_pf_vs_stable_baseline": 0.1289565992496038,
+        "delta_profit_pct_vs_stable_baseline": 0.006366991000000044,
+        "delta_dd_pp_vs_stable_baseline": -0.019928764999997378
+      },
+      {
+        "pair_removed": "XRP/USDT",
+        "experiment_id": "20260221T003055Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-xrp-usdt",
+        "trades": 19,
+        "profit_pct": 0.284466202,
+        "winrate_pct": 52.63157894736842,
+        "pf": 2.2248353597703407,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": 0.09982750225641901,
+        "delta_profit_pct_vs_stable_baseline": 0.010910448999999989,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "OP/USDT",
+        "experiment_id": "20260221T003135Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-op-usdt",
+        "trades": 18,
+        "profit_pct": 0.249994427,
+        "winrate_pct": 50.0,
+        "pf": 2.2096733960475223,
+        "max_dd_pct": 0.17448529800000187,
+        "delta_pf_vs_stable_baseline": 0.08466553853360059,
+        "delta_profit_pct_vs_stable_baseline": -0.02356132600000002,
+        "delta_dd_pp_vs_stable_baseline": -0.03649622399999544
+      }
+    ],
+    "top_damagers_by_delta_pf": [
+      {
+        "pair_removed": "ARB/USDT",
+        "experiment_id": "20260221T003113Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-arb-usdt",
+        "trades": 18,
+        "profit_pct": 0.15357417099999998,
+        "winrate_pct": 44.44444444444444,
+        "pf": 1.6315792930378865,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": -0.4934285644760352,
+        "delta_profit_pct_vs_stable_baseline": -0.11998158200000003,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "BNB/USDT",
+        "experiment_id": "20260221T003104Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-bnb-usdt",
+        "trades": 19,
+        "profit_pct": 0.22353461700000002,
+        "winrate_pct": 47.368421052631575,
+        "pf": 1.9192941394705931,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": -0.2057137180433286,
+        "delta_profit_pct_vs_stable_baseline": -0.050021135999999994,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "SOL/USDT",
+        "experiment_id": "20260221T003059Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-sol-usdt",
+        "trades": 18,
+        "profit_pct": 0.22846637699999997,
+        "winrate_pct": 50.0,
+        "pf": 2.0006655909191324,
+        "max_dd_pct": 0.19613696400000435,
+        "delta_pf_vs_stable_baseline": -0.12434226659478931,
+        "delta_profit_pct_vs_stable_baseline": -0.04508937600000004,
+        "delta_dd_pp_vs_stable_baseline": -0.014844557999992958
+      },
+      {
+        "pair_removed": "SNX/USDT",
+        "experiment_id": "20260221T003131Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-snx-usdt",
+        "trades": 18,
+        "profit_pct": 0.234786777,
+        "winrate_pct": 50.0,
+        "pf": 2.0581129904876097,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_pf_vs_stable_baseline": -0.06689486702631209,
+        "delta_profit_pct_vs_stable_baseline": -0.03876897600000001,
+        "delta_dd_pp_vs_stable_baseline": 0.0
+      },
+      {
+        "pair_removed": "BCH/USDT",
+        "experiment_id": "20260221T003144Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-lopo-rm-bch-usdt",
+        "trades": 18,
+        "profit_pct": 0.236848599,
+        "winrate_pct": 50.0,
+        "pf": 2.07233619349748,
+        "max_dd_pct": 0.1886941399999955,
+        "delta_pf_vs_stable_baseline": -0.05267166401644152,
+        "delta_profit_pct_vs_stable_baseline": -0.03670715400000002,
+        "delta_dd_pp_vs_stable_baseline": -0.0222873820000018
+      }
+    ]
+  },
+  "fee_sensitivity": {
+    "rows": [
+      {
+        "scenario": "base",
+        "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-base-20260220",
+        "trades": 20,
+        "profit_pct": 0.273555753,
+        "winrate_pct": 50.0,
+        "pf": 2.1250078575139217,
+        "max_dd_pct": 0.2109815219999973,
+        "delta_profit_vs_base": 0.0,
+        "delta_pf_vs_base": 0.0,
+        "delta_dd_pp_vs_base": 0.0
+      },
+      {
+        "scenario": "p25",
+        "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p25-20260220",
+        "trades": 20,
+        "profit_pct": 0.25427737300000003,
+        "winrate_pct": 50.0,
+        "pf": 1.9854504038340202,
+        "max_dd_pct": 0.2228750679999962,
+        "delta_profit_vs_base": -0.019278379999999984,
+        "delta_pf_vs_base": -0.13955745367990158,
+        "delta_dd_pp_vs_base": 0.011893545999998895
+      },
+      {
+        "scenario": "p50",
+        "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p50-20260220",
+        "trades": 20,
+        "profit_pct": 0.13634133299999998,
+        "winrate_pct": 45.0,
+        "pf": 1.4945666648089464,
+        "max_dd_pct": 0.23476861399999507,
+        "delta_profit_vs_base": -0.13721442000000003,
+        "delta_pf_vs_base": -0.6304411927049753,
+        "delta_dd_pp_vs_base": 0.02378709199999776
+      },
+      {
+        "scenario": "p75",
+        "experiment_id": "20260221T003215Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p75-20260220",
+        "trades": 20,
+        "profit_pct": 0.114050303,
+        "winrate_pct": 45.0,
+        "pf": 1.390512978574481,
+        "max_dd_pct": 0.24666216000000532,
+        "delta_profit_vs_base": -0.15950545,
+        "delta_pf_vs_base": -0.7344948789394408,
+        "delta_dd_pp_vs_base": 0.03568063800000801
+      },
+      {
+        "scenario": "p100",
+        "experiment_id": "20260221T003215Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p100-20260220",
+        "trades": 20,
+        "profit_pct": 0.091759271,
+        "winrate_pct": 45.0,
+        "pf": 1.2975075616430527,
+        "max_dd_pct": 0.258555707000005,
+        "delta_profit_vs_base": -0.181796482,
+        "delta_pf_vs_base": -0.827500295870869,
+        "delta_dd_pp_vs_base": 0.04757418500000771
+      }
+    ],
+    "pf_breakpoint": "not_reached_up_to_+100%"
+  },
+  "anti_smoke": {
+    "sanity_real": {
+      "report_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T181736Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-sanity.robustness.json",
+      "robustness_score": 100.0,
+      "flags": [],
+      "lookahead_status": "ok",
+      "recursive_status": "ok"
+    },
+    "fee_base_dry": {
+      "report_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-base-20260220.robustness.json",
+      "robustness_score": 85.0,
+      "flags": [
+        "COST_FRAGILE"
+      ],
+      "lookahead_status": "dry_run",
+      "recursive_status": "dry_run"
+    },
+    "fee_p100_dry": {
+      "report_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260221T003215Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p100-20260220.robustness.json",
+      "robustness_score": 51.0,
+      "flags": [
+        "TOO_CONCENTRATED_TOP1",
+        "TOO_CONCENTRATED_TOP3",
+        "PAIR_DEPENDENCY_RISK",
+        "COST_FRAGILE"
+      ],
+      "lookahead_status": "dry_run",
+      "recursive_status": "dry_run"
+    }
+  },
+  "recommendation": "promote confirmed"
+}

@@ -1,0 +1,4 @@
+window_name,timerange,strategy,trades,total_profit_pct,total_profit_usdt,profit_factor,max_drawdown_pct,status
+A,20250101-20250601,Strat03RSIBBMeanReversion_v3c,,,,,,error
+B,20250601-20251001,Strat03RSIBBMeanReversion_v3c,,,,,,error
+C,20251001-20260201,Strat03RSIBBMeanReversion_v3c,,,,,,error

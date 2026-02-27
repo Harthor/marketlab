@@ -1,0 +1,48 @@
+{
+  "artifacts": [],
+  "completed_at_utc": "2026-02-27T01:06:08.720633+00:00",
+  "config": {
+    "bootstrap": 0,
+    "cache_root": "/tmp/.cache/correlation-engine",
+    "dataset": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+    "distance_corr": false,
+    "max_lag": 5,
+    "min_effective_obs": 10,
+    "output_root": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports",
+    "seed": 42,
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "top": 10,
+    "windows": [
+      10,
+      20,
+      40
+    ]
+  },
+  "config_file": null,
+  "config_hash": "33ad0eff0a7f9d4760b724df5198ecb0916620658fb09a1c6bc27d21128f50cc",
+  "created_at_utc": "2026-02-27T01:06:08.720495+00:00",
+  "created_utc": "2026-02-27T01:06:08.720501+00:00",
+  "dataset_hash": "87a1e24e01a84e75cc2885fbd9ab63dbad3fd8457123960d3a66c3ab99024f54",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+  "dataset_rows": 600,
+  "error": {
+    "message": "cannot cast 'Object' type",
+    "traceback_path": ".staging/traceback.txt",
+    "type": "ComputeError"
+  },
+  "kind": "correlation",
+  "notes": [
+    "run failed"
+  ],
+  "run_id": "20260227T010608_676Z_returns_1d_5lag_87a1e24e",
+  "schema_version": "1.0",
+  "seed": 42,
+  "status": "failed",
+  "top_features": {
+    "best_lag": [],
+    "mi": [],
+    "pearson": [],
+    "spearman": []
+  }
+}

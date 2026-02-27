@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "symbol": "BTC-USD",
+  "interval": "1d",
+  "provider": "yfinance",
+  "rows": 2980,
+  "min_ts_utc": "2018-01-01 00:00:00+00:00",
+  "max_ts_utc": "2026-02-27 00:00:00+00:00",
+  "sha256": "5c0607654ed68db392e6061047e61b2bc950e46e577b37d8891c74888a8423f7",
+  "generated_at_utc": "2026-02-27T14:45:57.366402+00:00",
+  "max_staleness_days": 10,
+  "min_rows": 365
+}

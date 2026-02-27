@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/runner.py", line 962, in run_correlation
+    artifacts = _stable_artifacts(staging_dir, result)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/runner.py", line 708, in _stable_artifacts
+    add("readme", "run_readme", Path("README.md"))
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/runner.py", line 689, in add
+    artifacts.append({"type": type_, "name": name, "path": str(path.relative_to(run_root).as_posix())})
+                                                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.11/3.11.14_3/Frameworks/Python.framework/Versions/3.11/lib/python3.11/pathlib.py", line 730, in relative_to
+    raise ValueError("{!r} is not in the subpath of {!r}"
+ValueError: 'README.md' is not in the subpath of 'reports/20260227T010912_698Z_returns_1d_5lag_fc718f9a/.staging' OR one path is relative and the other is absolute.

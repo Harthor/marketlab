@@ -1,0 +1,35 @@
+[
+  {
+    "window_name": "A",
+    "timerange": "20250101-20250601",
+    "strategy": "Strat03RSIBBMeanReversion_v3c",
+    "trades": null,
+    "total_profit_pct": null,
+    "total_profit_usdt": null,
+    "profit_factor": null,
+    "max_drawdown_pct": null,
+    "status": "error"
+  },
+  {
+    "window_name": "B",
+    "timerange": "20250601-20251001",
+    "strategy": "Strat03RSIBBMeanReversion_v3c",
+    "trades": null,
+    "total_profit_pct": null,
+    "total_profit_usdt": null,
+    "profit_factor": null,
+    "max_drawdown_pct": null,
+    "status": "error"
+  },
+  {
+    "window_name": "C",
+    "timerange": "20251001-20260201",
+    "strategy": "Strat03RSIBBMeanReversion_v3c",
+    "trades": null,
+    "total_profit_pct": null,
+    "total_profit_usdt": null,
+    "profit_factor": null,
+    "max_drawdown_pct": null,
+    "status": "error"
+  }
+]

@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Market Research Refresh Daily
+
+[Timer]
+OnCalendar=*-*-* 06:00:00 UTC
+Persistent=true
+RandomizedDelaySec=120
+Unit=market_research.service
+
+[Install]
+WantedBy=timers.target

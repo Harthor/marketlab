@@ -1,0 +1,410 @@
+{
+  "artifacts": [
+    {
+      "name": "feature_summary",
+      "path": "tables/feature_summary.parquet",
+      "type": "table"
+    },
+    {
+      "name": "correlations",
+      "path": "tables/correlations.parquet",
+      "type": "table"
+    },
+    {
+      "name": "rolling_corr",
+      "path": "tables/rolling_corr.parquet",
+      "type": "table"
+    },
+    {
+      "name": "lag",
+      "path": "tables/lag.parquet",
+      "type": "table"
+    },
+    {
+      "name": "lag_profile",
+      "path": "tables/lag_profile.parquet",
+      "type": "table"
+    },
+    {
+      "name": "lag_summary",
+      "path": "tables/lag_summary.parquet",
+      "type": "table"
+    },
+    {
+      "name": "mutual_information",
+      "path": "tables/mi.parquet",
+      "type": "table"
+    },
+    {
+      "name": "rolling_corr",
+      "path": "plots/rolling_corr.png",
+      "type": "plot"
+    },
+    {
+      "name": "lag_profiles",
+      "path": "plots/lag_profiles.png",
+      "type": "plot"
+    },
+    {
+      "name": "run_readme",
+      "path": "README.md",
+      "type": "readme"
+    },
+    {
+      "name": "summary",
+      "path": "summary.json",
+      "type": "manifest"
+    }
+  ],
+  "completed_at_utc": "2026-02-27T01:09:35.292889+00:00",
+  "config": {
+    "bootstrap": 0,
+    "cache_root": "/tmp/.cache/correlation-engine",
+    "dataset": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+    "distance_corr": false,
+    "max_lag": 5,
+    "min_effective_obs": 10,
+    "output_root": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports",
+    "seed": 7,
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "top": 10,
+    "windows": [
+      10,
+      20,
+      40
+    ]
+  },
+  "config_file": null,
+  "config_hash": "b7251f2a533bc1a0e597ab905d17719557a00488da7fca1268c0daaa779c2a47",
+  "created_at_utc": "2026-02-27T01:09:35.292908+00:00",
+  "created_utc": "2026-02-27T01:09:35.292911+00:00",
+  "dataset_hash": "87a1e24e01a84e75cc2885fbd9ab63dbad3fd8457123960d3a66c3ab99024f54",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+  "dataset_rows": 600,
+  "feature_summary_preview": [
+    {
+      "best_lag": null,
+      "feature": "close",
+      "metric": "pearson",
+      "n_effective": 600,
+      "p_value": 0.3387678190262635,
+      "score": -0.0391197699115102
+    },
+    {
+      "best_lag": null,
+      "feature": "close",
+      "metric": "spearman",
+      "n_effective": 600,
+      "p_value": 0.47925503515140133,
+      "score": -0.028937913716426986
+    },
+    {
+      "best_lag": -5,
+      "feature": "close",
+      "metric": "best_lag",
+      "n_effective": 595,
+      "p_value": 0.0022389414568137842,
+      "score": 0.1250772748364749
+    },
+    {
+      "best_lag": null,
+      "feature": "close",
+      "metric": "mutual_information",
+      "n_effective": 600,
+      "p_value": null,
+      "score": 0.0
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_macro",
+      "metric": "pearson",
+      "n_effective": 600,
+      "p_value": 0.7119418005006651,
+      "score": 0.015105184951037633
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_macro",
+      "metric": "spearman",
+      "n_effective": 600,
+      "p_value": 0.7029018453501709,
+      "score": -0.015602432228978414
+    },
+    {
+      "best_lag": -3,
+      "feature": "signal_macro",
+      "metric": "best_lag",
+      "n_effective": 597,
+      "p_value": 0.3570289708848277,
+      "score": -0.037761398608164805
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_macro",
+      "metric": "mutual_information",
+      "n_effective": 600,
+      "p_value": null,
+      "score": 0.004772153809077029
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_sentiment",
+      "metric": "pearson",
+      "n_effective": 600,
+      "p_value": 0.6668281932028672,
+      "score": -0.017610661832914213
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_sentiment",
+      "metric": "spearman",
+      "n_effective": 600,
+      "p_value": 0.8238319275924214,
+      "score": -0.009107191964422123
+    },
+    {
+      "best_lag": 1,
+      "feature": "signal_sentiment",
+      "metric": "best_lag",
+      "n_effective": 599,
+      "p_value": 0.21697083737675202,
+      "score": 0.050518639008061375
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_sentiment",
+      "metric": "mutual_information",
+      "n_effective": 600,
+      "p_value": null,
+      "score": 0.013983160798977767
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_web",
+      "metric": "pearson",
+      "n_effective": 600,
+      "p_value": 0.7441439601978126,
+      "score": 0.013351272909428072
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_web",
+      "metric": "spearman",
+      "n_effective": 600,
+      "p_value": 0.88293902875924,
+      "score": 0.006023738954830429
+    },
+    {
+      "best_lag": 3,
+      "feature": "signal_web",
+      "metric": "best_lag",
+      "n_effective": 597,
+      "p_value": 0.0,
+      "score": 0.9708749888635192
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_web",
+      "metric": "mutual_information",
+      "n_effective": 600,
+      "p_value": null,
+      "score": 0.034411962777200156
+    }
+  ],
+  "kind": "correlation",
+  "run_id": "20260227T010934_862Z_returns_1d_5lag_87a1e24e",
+  "schema_version": "1.0",
+  "seed": 7,
+  "status": "complete",
+  "top_features": {
+    "best_lag": [
+      {
+        "best_abs_corr": 0.9708749888635192,
+        "best_corr": 0.9708749888635192,
+        "best_lag": 3,
+        "best_p": 0.0,
+        "feature": "signal_web",
+        "lead_lag": "feature_leads",
+        "n_effective": 597
+      },
+      {
+        "best_abs_corr": 0.1250772748364749,
+        "best_corr": 0.1250772748364749,
+        "best_lag": -5,
+        "best_p": 0.0022389414568137842,
+        "feature": "close",
+        "lead_lag": "target_leads",
+        "n_effective": 595
+      },
+      {
+        "best_abs_corr": 0.050518639008061375,
+        "best_corr": 0.050518639008061375,
+        "best_lag": 1,
+        "best_p": 0.21697083737675202,
+        "feature": "signal_sentiment",
+        "lead_lag": "feature_leads",
+        "n_effective": 599
+      },
+      {
+        "best_abs_corr": 0.037761398608164805,
+        "best_corr": -0.037761398608164805,
+        "best_lag": -3,
+        "best_p": 0.3570289708848277,
+        "feature": "signal_macro",
+        "lead_lag": "target_leads",
+        "n_effective": 597
+      }
+    ],
+    "distance_correlation": [],
+    "mi": [
+      {
+        "feature": "signal_web",
+        "mutual_information": 0.034411962777200156,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_sentiment",
+        "mutual_information": 0.013983160798977767,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_macro",
+        "mutual_information": 0.004772153809077029,
+        "n_effective": 600
+      },
+      {
+        "feature": "close",
+        "mutual_information": 0.0,
+        "n_effective": 600
+      }
+    ],
+    "mutual_information": [
+      {
+        "feature": "signal_web",
+        "mutual_information": 0.034411962777200156,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_sentiment",
+        "mutual_information": 0.013983160798977767,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_macro",
+        "mutual_information": 0.004772153809077029,
+        "n_effective": 600
+      },
+      {
+        "feature": "close",
+        "mutual_information": 0.0,
+        "n_effective": 600
+      }
+    ],
+    "pearson": [
+      {
+        "feature": "close",
+        "n_effective": 600,
+        "p_value": 0.3387678190262635,
+        "pearson": -0.0391197699115102
+      },
+      {
+        "feature": "signal_sentiment",
+        "n_effective": 600,
+        "p_value": 0.6668281932028672,
+        "pearson": -0.017610661832914213
+      },
+      {
+        "feature": "signal_macro",
+        "n_effective": 600,
+        "p_value": 0.7119418005006651,
+        "pearson": 0.015105184951037633
+      },
+      {
+        "feature": "signal_web",
+        "n_effective": 600,
+        "p_value": 0.7441439601978126,
+        "pearson": 0.013351272909428072
+      }
+    ],
+    "pearson_abs": [
+      {
+        "feature": "close",
+        "n_effective": 600,
+        "p_value": 0.3387678190262635,
+        "pearson": -0.0391197699115102
+      },
+      {
+        "feature": "signal_sentiment",
+        "n_effective": 600,
+        "p_value": 0.6668281932028672,
+        "pearson": -0.017610661832914213
+      },
+      {
+        "feature": "signal_macro",
+        "n_effective": 600,
+        "p_value": 0.7119418005006651,
+        "pearson": 0.015105184951037633
+      },
+      {
+        "feature": "signal_web",
+        "n_effective": 600,
+        "p_value": 0.7441439601978126,
+        "pearson": 0.013351272909428072
+      }
+    ],
+    "spearman": [
+      {
+        "feature": "close",
+        "n_effective": 600,
+        "p_value": 0.47925503515140133,
+        "spearman": -0.028937913716426986
+      },
+      {
+        "feature": "signal_macro",
+        "n_effective": 600,
+        "p_value": 0.7029018453501709,
+        "spearman": -0.015602432228978414
+      },
+      {
+        "feature": "signal_sentiment",
+        "n_effective": 600,
+        "p_value": 0.8238319275924214,
+        "spearman": -0.009107191964422123
+      },
+      {
+        "feature": "signal_web",
+        "n_effective": 600,
+        "p_value": 0.88293902875924,
+        "spearman": 0.006023738954830429
+      }
+    ],
+    "spearman_abs": [
+      {
+        "feature": "close",
+        "n_effective": 600,
+        "p_value": 0.47925503515140133,
+        "spearman": -0.028937913716426986
+      },
+      {
+        "feature": "signal_macro",
+        "n_effective": 600,
+        "p_value": 0.7029018453501709,
+        "spearman": -0.015602432228978414
+      },
+      {
+        "feature": "signal_sentiment",
+        "n_effective": 600,
+        "p_value": 0.8238319275924214,
+        "spearman": -0.009107191964422123
+      },
+      {
+        "feature": "signal_web",
+        "n_effective": 600,
+        "p_value": 0.88293902875924,
+        "spearman": 0.006023738954830429
+      }
+    ]
+  },
+  "warnings": []
+}

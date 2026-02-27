@@ -1,0 +1,17 @@
+*** Begin Patch
+*** Update File: /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/tests/test_warehouse_upsert.py
+@@
+ import sys
+ import types
++import importlib
+ from pathlib import Path
+@@
+             original_duck = sys.modules.get("duckdb")
+             sys.modules["duckdb"] = fake_dk
++            sys.modules.pop("market_data_ingest.warehouse", None)
+ 
+             try:
+-                sys.modules.pop("market_data_ingest.warehouse", None)
+                 from market_data_ingest import warehouse
++                warehouse = importlib.reload(warehouse)
+*** End Patch

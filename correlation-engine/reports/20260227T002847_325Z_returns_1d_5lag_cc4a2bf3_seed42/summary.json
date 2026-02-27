@@ -1,0 +1,314 @@
+{
+  "run_id": "20260227T002847_325Z_returns_1d_5lag_cc4a2bf3_seed42",
+  "schema_version": "1.0",
+  "kind": "correlation",
+  "status": "complete",
+  "created_at_utc": "2026-02-27T00:28:47.384196+00:00",
+  "created_utc": "2026-02-27T00:28:47.384207+00:00",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+  "dataset_hash": "cc4a2bf3feda19c30b0f05c7a98803592de96d0a44b61ab5462691315ad7c0f8",
+  "dataset_rows": 600,
+  "config_file": null,
+  "config": {
+    "dataset": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports/run_smoke_dataset.parquet",
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "max_lag": 5,
+    "windows": [
+      10,
+      20
+    ],
+    "seed": 42,
+    "bootstrap": 0,
+    "top": 10,
+    "distance_corr": false,
+    "output_root": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports",
+    "cache_root": null,
+    "min_effective_obs": 10
+  },
+  "config_hash": "99e82e95da59214c46a92f37bf70f042ff55eab254b7c1b54f1c8aef827fb805",
+  "seed": 42,
+  "top_features": {
+    "pearson": [
+      {
+        "feature": "close",
+        "pearson": -0.0391197699115102,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_sentiment",
+        "pearson": -0.017610661832914213,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_macro",
+        "pearson": 0.015105184951037633,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_web",
+        "pearson": 0.013351272909428072,
+        "n_effective": 600
+      }
+    ],
+    "spearman": [
+      {
+        "feature": "close",
+        "spearman": -0.028937913716426986,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_macro",
+        "spearman": -0.015602432228978414,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_sentiment",
+        "spearman": -0.009107191964422123,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_web",
+        "spearman": 0.006023738954830429,
+        "n_effective": 600
+      }
+    ],
+    "mi": [
+      {
+        "feature": "close",
+        "mutual_information": null,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_macro",
+        "mutual_information": null,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_sentiment",
+        "mutual_information": null,
+        "n_effective": 600
+      },
+      {
+        "feature": "signal_web",
+        "mutual_information": null,
+        "n_effective": 600
+      }
+    ],
+    "best_lag": [
+      {
+        "feature": "signal_web",
+        "best_abs_corr": 0.9708749888635192,
+        "n_effective": 597,
+        "best_lag": 3
+      },
+      {
+        "feature": "close",
+        "best_abs_corr": 0.1250772748364749,
+        "n_effective": 595,
+        "best_lag": -5
+      },
+      {
+        "feature": "signal_sentiment",
+        "best_abs_corr": 0.050518639008061375,
+        "n_effective": 599,
+        "best_lag": 1
+      },
+      {
+        "feature": "signal_macro",
+        "best_abs_corr": 0.037761398608164805,
+        "n_effective": 597,
+        "best_lag": -3
+      }
+    ]
+  },
+  "artifacts": [
+    {
+      "type": "table",
+      "name": "feature_summary",
+      "path": "tables/feature_summary.parquet"
+    },
+    {
+      "type": "table",
+      "name": "correlations",
+      "path": "tables/correlations.parquet"
+    },
+    {
+      "type": "table",
+      "name": "rolling_corr",
+      "path": "tables/rolling_corr.parquet"
+    },
+    {
+      "type": "table",
+      "name": "lag",
+      "path": "tables/lag.parquet"
+    },
+    {
+      "type": "table",
+      "name": "lag_profile",
+      "path": "tables/lag_profile.parquet"
+    },
+    {
+      "type": "table",
+      "name": "lag_summary",
+      "path": "tables/lag_summary.parquet"
+    },
+    {
+      "type": "table",
+      "name": "mutual_information",
+      "path": "tables/mi.parquet"
+    },
+    {
+      "type": "plot",
+      "name": "rolling_corr",
+      "path": "plots/rolling_corr.png"
+    },
+    {
+      "type": "plot",
+      "name": "lag_profiles",
+      "path": "plots/lag_profiles.png"
+    },
+    {
+      "type": "readme",
+      "name": "run_readme",
+      "path": "README.md"
+    },
+    {
+      "type": "manifest",
+      "name": "summary",
+      "path": "summary.json"
+    }
+  ],
+  "warnings": [],
+  "completed_at_utc": "2026-02-27T00:28:47.384283+00:00",
+  "feature_summary_preview": [
+    {
+      "feature": "close",
+      "metric": "pearson",
+      "score": -0.0391197699115102,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "close",
+      "metric": "spearman",
+      "score": -0.028937913716426986,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "close",
+      "metric": "best_lag",
+      "score": 0.1250772748364749,
+      "p_value": null,
+      "n_effective": 595,
+      "best_lag": -5.0
+    },
+    {
+      "feature": "close",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_macro",
+      "metric": "pearson",
+      "score": 0.015105184951037633,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_macro",
+      "metric": "spearman",
+      "score": -0.015602432228978414,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_macro",
+      "metric": "best_lag",
+      "score": -0.037761398608164805,
+      "p_value": null,
+      "n_effective": 597,
+      "best_lag": -3.0
+    },
+    {
+      "feature": "signal_macro",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_sentiment",
+      "metric": "pearson",
+      "score": -0.017610661832914213,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_sentiment",
+      "metric": "spearman",
+      "score": -0.009107191964422123,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_sentiment",
+      "metric": "best_lag",
+      "score": 0.050518639008061375,
+      "p_value": null,
+      "n_effective": 599,
+      "best_lag": 1.0
+    },
+    {
+      "feature": "signal_sentiment",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_web",
+      "metric": "pearson",
+      "score": 0.013351272909428072,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_web",
+      "metric": "spearman",
+      "score": 0.006023738954830429,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_web",
+      "metric": "best_lag",
+      "score": 0.9708749888635192,
+      "p_value": null,
+      "n_effective": 597,
+      "best_lag": 3.0
+    },
+    {
+      "feature": "signal_web",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 600,
+      "best_lag": null
+    }
+  ]
+}

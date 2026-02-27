@@ -1,0 +1,50 @@
+[build-system]
+requires = ["setuptools>=69", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "forecasting-backtest"
+version = "0.1.0"
+description = "Baselines for time-series return/direction forecasting with walk-forward and simple backtest."
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+  "numpy>=1.26",
+  "pandas>=2.2",
+  "polars>=0.20",
+  "PyYAML>=6.0",
+  "matplotlib>=3.8",
+  "scikit-learn>=1.4",
+  "joblib>=1.4",
+  "marketlab-core>=0.1.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "ruff>=0.6",
+  "mypy>=1.10",
+  "pytest>=7.4",
+]
+boosting = [
+  "xgboost>=1.7",
+  "lightgbm>=4.1",
+]
+
+[project.scripts]
+forecast = "forecasting_backtest.cli:main"
+
+[tool.mypy]
+python_version = "3.11"
+ignore_missing_imports = true
+disable_error_code = "import-untyped"
+disallow_untyped_defs = true
+disallow_incomplete_defs = true
+warn_redundant_casts = true
+warn_unused_configs = false
+show_error_codes = true
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]

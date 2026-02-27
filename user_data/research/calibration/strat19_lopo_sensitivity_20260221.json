@@ -1,0 +1,588 @@
+{
+  "baseline": {
+    "pf": 1.2663356817810072,
+    "profit_pct": 0.011785968269999997,
+    "maxDD_pct": 0.9430846514807856
+  },
+  "rows": [
+    {
+      "pair_removed": "XRP/USDT",
+      "status": "ok",
+      "trades": 136,
+      "profit_pct": 0.01626906757,
+      "PF": 1.4090307237311046,
+      "maxDD_pct": 0.9529893136613762,
+      "delta_PF_vs_baseline": 0.1426950419500974,
+      "delta_profit_pct_vs_baseline": 0.004483099300000003,
+      "delta_maxDD_pp_vs_baseline": 0.009904662180590607,
+      "meta_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_strat19_4h_20260221/strat19_4h_top15_lopo_rm_xrp-usdt.meta.json",
+      "retry_status": "skipped",
+      "retry_count": 0
+    },
+    {
+      "pair_removed": "BTC/USDT",
+      "status": "ok",
+      "trades": 129,
+      "profit_pct": 0.016063136379999995,
+      "PF": 1.4044184519300102,
+      "maxDD_pct": 0.6810157907798157,
+      "delta_PF_vs_baseline": 0.13808277014900305,
+      "delta_profit_pct_vs_baseline": 0.004277168109999998,
+      "delta_maxDD_pp_vs_baseline": -0.2620688607009699,
+      "meta_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_strat19_4h_20260221/strat19_4h_top15_lopo_rm_btc-usdt.meta.json",
+      "retry_status": "skipped",
+      "retry_count": 0
+    },
+    {
+      "pair_removed": "TRX/USDT",
+      "status": "ok",
+      "trades": 135,
+      "profit_pct": 0.01280758739,
+      "PF": 1.306978243291065,
+      "maxDD_pct": 0.8517666394349411,
+      "delta_PF_vs_baseline": 0.04064256151005785,
+      "delta_profit_pct_vs_baseline": 0.0010216191200000026,
+      "delta_maxDD_pp_vs_baseline": -0.09131801204584444,
+      "meta_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_strat19_4h_20260221/strat19_4h_top15_lopo_rm_trx-usdt.meta.json",
+      "retry_status": "skipped",
+      "retry_count": 0
+    },
+    {
+      "pair_removed": "PAXG/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "BNB/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "ETH/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "SNX/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "SOL/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "ARB/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "OP/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "LTC/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "DOGE/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    },
+    {
+      "pair_removed": "ZEC/USDT",
+      "status": "missing_due_infra",
+      "trades": null,
+      "profit_pct": null,
+      "PF": null,
+      "maxDD_pct": null,
+      "delta_PF_vs_baseline": null,
+      "delta_profit_pct_vs_baseline": null,
+      "delta_maxDD_pp_vs_baseline": null,
+      "meta_path": null,
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "retry_status": "infra_fail"
+    }
+  ],
+  "completed_count": 3,
+  "missing_count": 10,
+  "raw_fail_log": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/lopo_strat19_4h_20260221/lopo_summary_raw_20260221.json",
+  "updated_at_utc": "2026-02-21T06:30:24+00:00",
+  "run_log": [
+    {
+      "pair_removed": "XRP/USDT",
+      "action": "skip_existing_ok"
+    },
+    {
+      "pair_removed": "BTC/USDT",
+      "action": "skip_existing_ok"
+    },
+    {
+      "pair_removed": "TRX/USDT",
+      "action": "skip_existing_ok"
+    },
+    {
+      "pair_removed": "PAXG/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "PAXG/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "PAXG/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "PAXG/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:50:44,003 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "BNB/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "BNB/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "BNB/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "BNB/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:51:05,419 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "ETH/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ETH/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ETH/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ETH/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:51:26,773 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "SNX/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "SNX/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "SNX/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "SNX/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:51:47,767 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "SOL/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "SOL/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "SOL/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "SOL/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:52:08,755 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "ARB/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ARB/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ARB/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ARB/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:52:30,012 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "OP/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "OP/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "OP/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "OP/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:52:51,021 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "LTC/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "LTC/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "LTC/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "LTC/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:53:12,168 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "DOGE/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "DOGE/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "DOGE/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "DOGE/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:53:33,237 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    },
+    {
+      "pair_removed": "ZEC/USDT",
+      "action": "retry",
+      "attempt": 1,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ZEC/USDT",
+      "action": "retry",
+      "attempt": 2,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ZEC/USDT",
+      "action": "retry",
+      "attempt": 3,
+      "infra": true,
+      "rc": 2
+    },
+    {
+      "pair_removed": "ZEC/USDT",
+      "action": "failed_after_retries",
+      "tail": "ile \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 194, in wrapper\n    raise ex\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/common.py\", line 179, in wrapper\n    return f(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 690, in _load_async_markets\n    markets = self.loop.run_until_complete(self._api_reload_markets(reload=reload))\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/miniforge3/envs/ft311/lib/python3.11/asyncio/base_events.py\", line 654, in run_until_complete\n    return future.result()\n           ^^^^^^^^^^^^^^^\n  File \"/Users/carlaherrera/Desktop/codex/freqtrade/freqtrade/exchange/exchange.py\", line 681, in _api_reload_markets\n    raise TemporaryError(\nfreqtrade.exceptions.TemporaryError: Error in reload_markets due to ExchangeNotAvailable. Message: binance GET https://api.binance.com/api/v3/exchangeInfo\n2026-02-20 22:53:54,283 - freqtrade - ERROR - Could not load markets, therefore cannot start. Please investigate the above error for more details.\n"
+    }
+  ],
+  "missing_due_infra": [
+    "PAXG/USDT",
+    "BNB/USDT",
+    "ETH/USDT",
+    "SNX/USDT",
+    "SOL/USDT",
+    "ARB/USDT",
+    "OP/USDT",
+    "LTC/USDT",
+    "DOGE/USDT",
+    "ZEC/USDT"
+  ],
+  "retry_run_events": [
+    {
+      "pair_removed": "XRP/USDT",
+      "status": "skipped",
+      "reason": "already_ok"
+    },
+    {
+      "pair_removed": "BTC/USDT",
+      "status": "skipped",
+      "reason": "already_ok"
+    },
+    {
+      "pair_removed": "TRX/USDT",
+      "status": "skipped",
+      "reason": "already_ok"
+    },
+    {
+      "pair_removed": "PAXG/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "BNB/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "ETH/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "SNX/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "SOL/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "ARB/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "OP/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "LTC/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "DOGE/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    },
+    {
+      "pair_removed": "ZEC/USDT",
+      "status": "missing_due_infra",
+      "retry_status": "infra_fail",
+      "retry_count": 3,
+      "infra_reason": "dns_unreachable",
+      "final_returncode": 2
+    }
+  ]
+}

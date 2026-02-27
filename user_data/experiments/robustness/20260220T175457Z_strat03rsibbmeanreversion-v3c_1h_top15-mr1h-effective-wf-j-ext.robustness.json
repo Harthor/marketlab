@@ -1,0 +1,104 @@
+{
+  "experiment_id": "20260220T175457Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-j-ext",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "timeframe": "1h",
+  "universe_label": "top15_mr1h_effective_WF_J_EXT",
+  "robustness_score": 58.0,
+  "flags": [
+    "TOO_CONCENTRATED_TOP3",
+    "PAIR_DEPENDENCY_RISK",
+    "LOW_SAMPLE"
+  ],
+  "thresholds_used": {
+    "min_trades_for_confidence": 80,
+    "low_sample_trades": 20,
+    "concentration_top1_pct": 45.0,
+    "concentration_top3_pct": 75.0,
+    "pair_dependency_topn": 5,
+    "pair_dependency_topn_pct": 90.0,
+    "cost_fragile_pf_drop_threshold": 0.35,
+    "cost_fragile_fee50_below_pf": 1.0,
+    "robust_candidate_min_score": 80.0
+  },
+  "checks": {
+    "lookahead": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade lookahead-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250415-20250815"
+        }
+      ]
+    },
+    "recursive": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade recursive-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250415-20250815"
+        }
+      ]
+    },
+    "pair_concentration": {
+      "top1_share_pct": 28.031957714590128,
+      "top3_share_pct": 83.87997804993552,
+      "topn_share_pct": 100.0,
+      "top_n": 5,
+      "top_pairs": [
+        [
+          "SNX/USDT",
+          0.06
+        ],
+        [
+          "ARB/USDT",
+          0.06
+        ],
+        [
+          "AAVE/USDT",
+          0.06
+        ],
+        [
+          "ETH/USDT",
+          0.03
+        ],
+        [
+          "BNB/USDT",
+          0.0
+        ]
+      ],
+      "bottom_pairs": [
+        [
+          "OP/USDT",
+          -0.04
+        ],
+        [
+          "TRX/USDT",
+          -0.04
+        ],
+        [
+          "XRP/USDT",
+          -0.03
+        ],
+        [
+          "BTC/USDT",
+          -0.03
+        ],
+        [
+          "SOL/USDT",
+          -0.01
+        ]
+      ],
+      "flags": [
+        "TOO_CONCENTRATED_TOP3",
+        "PAIR_DEPENDENCY_RISK"
+      ],
+      "note": "ok"
+    },
+    "fee_sensitivity_rows": [],
+    "sample_check": {
+      "trades": 12,
+      "min_trades": 20
+    }
+  },
+  "notes": [
+    "Trades below threshold: 12 < 20"
+  ]
+}

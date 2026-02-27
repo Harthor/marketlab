@@ -1,0 +1,5 @@
+feature,mutual_information,n_obs,n_effective
+close,0.0,600,600
+signal_macro,0.004772153809077029,600,600
+signal_sentiment,0.013983160798977767,600,600
+signal_web,0.034411962777200156,600,600

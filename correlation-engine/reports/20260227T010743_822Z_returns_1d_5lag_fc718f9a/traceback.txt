@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/runner.py", line 891, in run_correlation
+    rolling_table = compute_rolling_correlations(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/statistics.py", line 115, in compute_rolling_correlations
+    ts = pl.Series(pdf[timestamp].to_numpy()).cast(pl.Datetime("us", time_zone="UTC")).to_list()
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/.venv/lib/python3.11/site-packages/polars/series/series.py", line 4587, in cast
+    return self._from_pyseries(self._s.cast(dtype, strict, wrap_numerical))
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+polars.exceptions.ComputeError: cannot cast 'Object' type

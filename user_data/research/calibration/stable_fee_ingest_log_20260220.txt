@@ -1,0 +1,30 @@
+===== fee_base =====
+{
+  "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-base-20260220",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-base-20260220.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-base-20260220.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T183544Z.md",
+  "recommendation_code": "MORE_WALKFORWARD",
+  "recommendation_text": "PF>1 con muestra razonable. Ejecutar m\u00e1s splits walk-forward y/o sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.938 y en DD por -0.129pp."
+}
+===== fee_p25 =====
+{
+  "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p25-20260220",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p25-20260220.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p25-20260220.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T183544Z.md",
+  "recommendation_code": "MORE_WALKFORWARD",
+  "recommendation_text": "PF>1 con muestra razonable. Ejecutar m\u00e1s splits walk-forward y/o sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.798 y en DD por -0.117pp."
+}
+===== fee_p50 =====
+{
+  "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p50-20260220",
+  "status": "success",
+  "result_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p50-20260220.json",
+  "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p50-20260220.md",
+  "prompt_file": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/prompts/next_prompt_20260220T183544Z.md",
+  "recommendation_code": "MORE_WALKFORWARD",
+  "recommendation_text": "PF>1 con muestra razonable. Ejecutar m\u00e1s splits walk-forward y/o sensibilidad a fees. Comparado con baseline (20260220T110343Z_strat03rsibbmeanreversion-v3c_1h_top10), este experimento es mejor en PF por +0.307 y en DD por -0.105pp."
+}

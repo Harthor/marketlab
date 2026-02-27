@@ -1,0 +1,397 @@
+{
+  "run_id": "20260226T192506_786Z_returns_1d_30lag_71ff8b4a_seed42",
+  "schema_version": "1.0",
+  "kind": "correlation",
+  "status": "complete",
+  "created_at_utc": "2026-02-26T19:25:06.815572+00:00",
+  "created_utc": "2026-02-26T19:25:06.815579+00:00",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/altdata-web-signals/data/datasets/BTC-USD/1d.parquet",
+  "dataset_hash": "71ff8b4aa623d9f3282b207354eab94de4ddbc5d8a5ebf2106a8ef27da47e9f8",
+  "dataset_rows": 2,
+  "config_file": null,
+  "config": {
+    "dataset": "/Users/carlaherrera/Desktop/market-sentiment-lab/altdata-web-signals/data/datasets/BTC-USD/1d.parquet",
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "max_lag": 30,
+    "windows": [
+      30,
+      90,
+      180
+    ],
+    "seed": 42,
+    "bootstrap": 0,
+    "top": 50,
+    "distance_corr": false,
+    "output_root": "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/reports",
+    "cache_root": null,
+    "min_effective_obs": 10
+  },
+  "config_hash": "b30436ff3d7186ab8b73026324bde749b575ae1cc635aa9835e856d12ab84870",
+  "seed": 42,
+  "top_features": {
+    "pearson": [],
+    "spearman": [],
+    "mi": [],
+    "best_lag": []
+  },
+  "artifacts": [
+    {
+      "type": "table",
+      "name": "feature_summary",
+      "path": "tables/feature_summary.parquet"
+    },
+    {
+      "type": "table",
+      "name": "correlations",
+      "path": "tables/correlations.parquet"
+    },
+    {
+      "type": "table",
+      "name": "rolling_corr",
+      "path": "tables/rolling_corr.parquet"
+    },
+    {
+      "type": "table",
+      "name": "lag",
+      "path": "tables/lag.parquet"
+    },
+    {
+      "type": "table",
+      "name": "lag_profile",
+      "path": "tables/lag_profile.parquet"
+    },
+    {
+      "type": "table",
+      "name": "lag_summary",
+      "path": "tables/lag_summary.parquet"
+    },
+    {
+      "type": "table",
+      "name": "mutual_information",
+      "path": "tables/mi.parquet"
+    },
+    {
+      "type": "plot",
+      "name": "rolling_corr",
+      "path": "plots/rolling_corr.png"
+    },
+    {
+      "type": "plot",
+      "name": "lag_profiles",
+      "path": "plots/lag_profiles.png"
+    },
+    {
+      "type": "readme",
+      "name": "run_readme",
+      "path": "README.md"
+    },
+    {
+      "type": "manifest",
+      "name": "summary",
+      "path": "summary.json"
+    }
+  ],
+  "warnings": [
+    "feature=close|n_effective:2<10",
+    "feature=signal_rss_apple|n_effective:2<10",
+    "feature=signal_rss_bitcoin|n_effective:2<10",
+    "feature=signal_rss_nvidia|n_effective:2<10",
+    "feature=signal_wiki_bitcoin|n_effective:2<10",
+    "feature=coverage_signal_rss_apple|n_effective:2<10",
+    "feature=coverage_signal_rss_bitcoin|n_effective:2<10",
+    "feature=coverage_signal_rss_nvidia|n_effective:2<10",
+    "feature=coverage_signal_wiki_bitcoin|n_effective:2<10"
+  ],
+  "completed_at_utc": "2026-02-26T19:25:06.815654+00:00",
+  "feature_summary_preview": [
+    {
+      "feature": "close",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "close",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "close",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "close",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_apple",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_apple",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_apple",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_apple",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_bitcoin",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_bitcoin",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_bitcoin",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_bitcoin",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_nvidia",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_nvidia",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_nvidia",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_rss_nvidia",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_wiki_bitcoin",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_wiki_bitcoin",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_wiki_bitcoin",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "coverage_signal_wiki_bitcoin",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_apple",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_apple",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_apple",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_apple",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_bitcoin",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_bitcoin",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_bitcoin",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_bitcoin",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_nvidia",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_nvidia",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_nvidia",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_rss_nvidia",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_wiki_bitcoin",
+      "metric": "pearson",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_wiki_bitcoin",
+      "metric": "best_lag",
+      "score": null,
+      "p_value": null,
+      "n_effective": NaN,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_wiki_bitcoin",
+      "metric": "mutual_information",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    },
+    {
+      "feature": "signal_wiki_bitcoin",
+      "metric": "spearman",
+      "score": null,
+      "p_value": null,
+      "n_effective": 2.0,
+      "best_lag": null
+    }
+  ]
+}

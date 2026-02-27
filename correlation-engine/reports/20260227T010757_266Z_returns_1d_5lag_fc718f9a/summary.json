@@ -1,0 +1,48 @@
+{
+  "artifacts": [],
+  "completed_at_utc": "2026-02-27T01:07:57.311846+00:00",
+  "config": {
+    "bootstrap": 0,
+    "cache_root": "/tmp/.cache/correlation-engine",
+    "dataset": "/tmp/synthetic_corr.parquet",
+    "distance_corr": false,
+    "max_lag": 5,
+    "min_effective_obs": 10,
+    "output_root": "reports",
+    "seed": 42,
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "top": 10,
+    "windows": [
+      3,
+      5,
+      8
+    ]
+  },
+  "config_file": null,
+  "config_hash": "5711f12660be4d381c7e546e22d85fc4b9d688cec5a4d29ef97197869d01cc93",
+  "created_at_utc": "2026-02-27T01:07:57.311734+00:00",
+  "created_utc": "2026-02-27T01:07:57.311740+00:00",
+  "dataset_hash": "fc718f9a44a5d599d74432ec1e844239de388eea94e5b4e7b6125ba511cb14f3",
+  "dataset_path": "/private/tmp/synthetic_corr.parquet",
+  "dataset_rows": 50,
+  "error": {
+    "message": "Series.to_numpy() got an unexpected keyword argument 'dtype'",
+    "traceback_path": ".staging/traceback.txt",
+    "type": "TypeError"
+  },
+  "kind": "correlation",
+  "notes": [
+    "run failed"
+  ],
+  "run_id": "20260227T010757_266Z_returns_1d_5lag_fc718f9a",
+  "schema_version": "1.0",
+  "seed": 42,
+  "status": "failed",
+  "top_features": {
+    "best_lag": [],
+    "mi": [],
+    "pearson": [],
+    "spearman": []
+  }
+}

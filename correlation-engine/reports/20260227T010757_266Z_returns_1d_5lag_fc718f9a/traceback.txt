@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/runner.py", line 899, in run_correlation
+    lag_table, lag_summary = compute_lag_analysis(
+                             ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/statistics.py", line 148, in compute_lag_analysis
+    target_values = data[target].to_numpy(dtype=float)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: Series.to_numpy() got an unexpected keyword argument 'dtype'

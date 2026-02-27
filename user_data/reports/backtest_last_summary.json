@@ -1,0 +1,21 @@
+{
+  "status": "backtest_error",
+  "no_new_backtest": true,
+  "meta_file": "/Users/carlaherrera/Desktop/market-sentiment-lab/user_data/backtest_results/backtest-result-2026-02-23_16-11-34.meta.json",
+  "strategy": null,
+  "timerange": null,
+  "total_profit_pct": null,
+  "total_profit_usdt": null,
+  "profit_factor": null,
+  "drawdown": null,
+  "trades": null,
+  "backtest_status": {
+    "status": "error",
+    "stage": "backtest",
+    "timestamp_utc": "2026-02-23T22:07:00.972324+00:00",
+    "error_type": "network_or_exchange",
+    "message": "freqtrade_backtesting_failed_check_log",
+    "runtime_config": "user_data/configs/runtime.config.bt_spot_1h_from_research.json",
+    "log_path": "user_data/logs/backtest_1h_20260223T220658Z.log"
+  }
+}

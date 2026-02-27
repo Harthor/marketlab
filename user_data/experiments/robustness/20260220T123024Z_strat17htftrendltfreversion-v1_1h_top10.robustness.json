@@ -1,0 +1,103 @@
+{
+  "experiment_id": "20260220T123024Z_strat17htftrendltfreversion-v1_1h_top10",
+  "strategy_name": "Strat17HTFTrendLTFReversion_v1",
+  "timeframe": "1h",
+  "universe_label": "top10",
+  "robustness_score": 66.0,
+  "flags": [
+    "TOO_CONCENTRATED_TOP1",
+    "TOO_CONCENTRATED_TOP3",
+    "PAIR_DEPENDENCY_RISK"
+  ],
+  "thresholds_used": {
+    "min_trades_for_confidence": 80,
+    "low_sample_trades": 30,
+    "concentration_top1_pct": 45.0,
+    "concentration_top3_pct": 75.0,
+    "pair_dependency_topn": 5,
+    "pair_dependency_topn_pct": 90.0,
+    "cost_fragile_pf_drop_threshold": 0.2,
+    "cost_fragile_fee50_below_pf": 1.0,
+    "robust_candidate_min_score": 70.0
+  },
+  "checks": {
+    "lookahead": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "freqtrade lookahead-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top10.json -s Strat17HTFTrendLTFReversion_v1 --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "recursive": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "freqtrade recursive-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top10.json -s Strat17HTFTrendLTFReversion_v1 --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "pair_concentration": {
+      "top1_share_pct": 100.0,
+      "top3_share_pct": 100.0,
+      "topn_share_pct": 100.0,
+      "top_n": 5,
+      "top_pairs": [
+        [
+          "DOGE/USDT",
+          0.34
+        ],
+        [
+          "OP/USDT",
+          0.0
+        ],
+        [
+          "AWE/USDT",
+          0.0
+        ],
+        [
+          "SUI/USDT",
+          -0.39
+        ],
+        [
+          "ZEC/USDT",
+          -0.62
+        ]
+      ],
+      "bottom_pairs": [
+        [
+          "BNB/USDT",
+          -2.28
+        ],
+        [
+          "BTC/USDT",
+          -1.63
+        ],
+        [
+          "SOL/USDT",
+          -0.83
+        ],
+        [
+          "ETH/USDT",
+          -0.79
+        ],
+        [
+          "XRP/USDT",
+          -0.67
+        ]
+      ],
+      "flags": [
+        "TOO_CONCENTRATED_TOP1",
+        "TOO_CONCENTRATED_TOP3",
+        "PAIR_DEPENDENCY_RISK"
+      ],
+      "note": "ok"
+    },
+    "fee_sensitivity_rows": [],
+    "sample_check": {
+      "trades": 809,
+      "min_trades": 30
+    }
+  },
+  "notes": []
+}

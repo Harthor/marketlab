@@ -1,0 +1,135 @@
+{
+  "experiment_id": "20260220T175456Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-g-ext",
+  "created_at": "2026-02-20T17:54:56+00:00",
+  "status": "success",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "strategy_family": "mean_reversion",
+  "config_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json",
+  "timeframe": "1h",
+  "timerange": "20250115-20250515",
+  "universe_label": "top15_mr1h_effective_WF_G_EXT",
+  "pairs_count": 15,
+  "market_mode": "spot",
+  "split_label": "WF_G_TEST",
+  "idea_spec_id": null,
+  "metrics": {
+    "trades": 13,
+    "trades_per_day": 0.11,
+    "profit_total_pct": -0.181571064,
+    "winrate_pct": 7.6923076923076925,
+    "profit_factor": 0.1597638441665888,
+    "max_drawdown_pct": 0.20622255299999778
+  },
+  "robustness": {
+    "oos": true,
+    "fee_sensitivity_tested": false,
+    "fee_delta_pct": null
+  },
+  "robustness_validation": {
+    "robustness_score": null,
+    "flags": [],
+    "report_json": null
+  },
+  "artifacts": {
+    "backtest_meta_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/wf_extension_20260220/v3c_1h_top15_wf_g.meta.json",
+    "backtest_export_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T175456Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-g-ext.backtest_export.json",
+    "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T175456Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-wf-g-ext.md",
+    "extra_files": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/wf_extension_20260220/v3c_1h_top15_wf_g.zip"
+    ]
+  },
+  "notes": {
+    "warnings": [],
+    "observations": [
+      "PF < 1 en este experimento."
+    ],
+    "top_pairs_by_profit_pct": [
+      [
+        "ETH/USDT",
+        0.0
+      ],
+      [
+        "XRP/USDT",
+        0.0
+      ],
+      [
+        "BNB/USDT",
+        0.0
+      ],
+      [
+        "ARB/USDT",
+        0.0
+      ],
+      [
+        "LTC/USDT",
+        0.0
+      ],
+      [
+        "UNI/USDT",
+        0.0
+      ],
+      [
+        "SNX/USDT",
+        0.0
+      ],
+      [
+        "ADA/USDT",
+        0.0
+      ],
+      [
+        "BTC/USDT",
+        -0.01
+      ],
+      [
+        "SOL/USDT",
+        -0.01
+      ]
+    ],
+    "bottom_pairs_by_profit_pct": [
+      [
+        "AAVE/USDT",
+        -0.04
+      ],
+      [
+        "OP/USDT",
+        -0.04
+      ],
+      [
+        "TRX/USDT",
+        -0.03
+      ],
+      [
+        "BCH/USDT",
+        -0.02
+      ],
+      [
+        "PAXG/USDT",
+        -0.02
+      ],
+      [
+        "SOL/USDT",
+        -0.01
+      ],
+      [
+        "BTC/USDT",
+        -0.01
+      ],
+      [
+        "ADA/USDT",
+        0.0
+      ],
+      [
+        "SNX/USDT",
+        0.0
+      ],
+      [
+        "UNI/USDT",
+        0.0
+      ]
+    ]
+  },
+  "provenance": {
+    "command_run": "",
+    "git_commit": "797ea46bb3b62ba8d0ca39b038610d82eea5be28"
+  }
+}

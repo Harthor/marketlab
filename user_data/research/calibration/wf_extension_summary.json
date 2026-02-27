@@ -1,0 +1,205 @@
+{
+  "after_recommendation_counts": {
+    "INCREASE_SAMPLE_SIZE": 31,
+    "MORE_WALKFORWARD": 6,
+    "DISCARD_OR_REDESIGN": 8,
+    "RERUN_OR_DEBUG": 4
+  },
+  "key_robustness": {
+    "20260220T165606Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective": {
+      "robustness_score": 85.0,
+      "flags": [
+        "COST_FRAGILE"
+      ],
+      "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T165606Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective.robustness.json"
+    },
+    "20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective": {
+      "robustness_score": 46.0,
+      "flags": [
+        "TOO_CONCENTRATED_TOP1",
+        "TOO_CONCENTRATED_TOP3",
+        "PAIR_DEPENDENCY_RISK",
+        "LOW_SAMPLE"
+      ],
+      "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T150811Z_strat03rsibbmeanreversion-v3c_1h_top20-mr1h-effective.robustness.json"
+    },
+    "20260220T161637Z_strat19volcompressionbreakout-4h-v1_4h_top10-mr4h-effective-refresh": {
+      "robustness_score": 90.0,
+      "flags": [
+        "PAIR_DEPENDENCY_RISK",
+        "ROBUST_CANDIDATE"
+      ],
+      "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T161637Z_strat19volcompressionbreakout-4h-v1_4h_top10-mr4h-effective-refresh.robustness.json"
+    },
+    "20260220T160214Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-effective": {
+      "robustness_score": 100.0,
+      "flags": [
+        "ROBUST_CANDIDATE"
+      ],
+      "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T160214Z_strat19volcompressionbreakout-4h-v1_4h_top15-mr4h-effective.robustness.json"
+    },
+    "20260220T161637Z_strat19volcompressionbreakout-4h-v1_4h_top20-mr4h-effective-refresh": {
+      "robustness_score": 100.0,
+      "flags": [
+        "ROBUST_CANDIDATE"
+      ],
+      "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T161637Z_strat19volcompressionbreakout-4h-v1_4h_top20-mr4h-effective-refresh.robustness.json"
+    }
+  },
+  "wf_detail": {
+    "v3c_1h_top15": [
+      {
+        "split": "WF_A_TEST",
+        "trades": 5,
+        "pf": 3.949693628775965,
+        "dd": 0.045551765000004706,
+        "profit": 0.134363751,
+        "wr": 60.0,
+        "tpd": 0.0
+      },
+      {
+        "split": "WF_B_TEST",
+        "trades": 5,
+        "pf": 8.58190529928998,
+        "dd": 0.02125138114696654,
+        "profit": 0.16124438000000002,
+        "wr": 80.0,
+        "tpd": 0.0
+      },
+      {
+        "split": "WF_C_TEST",
+        "trades": 2,
+        "pf": 0.0,
+        "dd": 0.0,
+        "profit": 0.11905208599999999,
+        "wr": 100.0,
+        "tpd": 0.0
+      }
+    ],
+    "v3c_1h_top20": [
+      {
+        "split": "WF_A_TEST",
+        "trades": 8,
+        "pf": 1.5448070819217712,
+        "dd": 0.08340514870044786,
+        "profit": 0.084542069,
+        "wr": 50.0,
+        "tpd": 0.07
+      },
+      {
+        "split": "WF_B_TEST",
+        "trades": 8,
+        "pf": 1.851248766294073,
+        "dd": 0.08346722700000554,
+        "profit": 0.11142269799999999,
+        "wr": 62.5,
+        "tpd": 0.07
+      },
+      {
+        "split": "WF_C_TEST",
+        "trades": 4,
+        "pf": 0.0,
+        "dd": 0.0,
+        "profit": 0.238996631,
+        "wr": 100.0,
+        "tpd": 0.04
+      }
+    ],
+    "strat19_4h_top10": [
+      {
+        "split": "WF_A_TEST",
+        "trades": 58,
+        "pf": 1.533201096230938,
+        "dd": 0.5221683220000045,
+        "profit": 0.7752974570000001,
+        "wr": 50.0,
+        "tpd": 0.0
+      },
+      {
+        "split": "WF_B_TEST",
+        "trades": 17,
+        "pf": 1.1027153293167204,
+        "dd": 0.152887439999995,
+        "profit": 0.040835252,
+        "wr": 41.17647058823529,
+        "tpd": 0.0
+      },
+      {
+        "split": "WF4_TEST",
+        "trades": 49,
+        "pf": 2.0161971154264338,
+        "dd": 0.2981537679402652,
+        "profit": 1.081958006,
+        "wr": 55.10204081632652,
+        "tpd": 0.4
+      }
+    ],
+    "strat19_4h_top15": [
+      {
+        "split": "WF_A_TEST",
+        "trades": 71,
+        "pf": 1.5820401865098959,
+        "dd": 0.432157030999997,
+        "profit": 1.151254972,
+        "wr": 54.929577464788736,
+        "tpd": 0.0
+      },
+      {
+        "split": "WF_B_TEST",
+        "trades": 31,
+        "pf": 1.8322003391645014,
+        "dd": 0.34069375111913525,
+        "profit": 0.688387593,
+        "wr": 61.29032258064516,
+        "tpd": 0.0
+      },
+      {
+        "split": "WF4_TEST",
+        "trades": 66,
+        "pf": 1.948988829234356,
+        "dd": 0.41718832155497443,
+        "profit": 1.6146716380000001,
+        "wr": 60.60606060606061,
+        "tpd": 0.54
+      }
+    ]
+  },
+  "wf_agg": [
+    {
+      "name": "v3c_1h_top15",
+      "splits": 3,
+      "pf_avg": 4.177199642688648,
+      "pf_med": 3.949693628775965,
+      "pf_gt1": 2,
+      "trades_total": 12,
+      "worst_dd": 0.045551765000004706
+    },
+    {
+      "name": "v3c_1h_top20",
+      "splits": 3,
+      "pf_avg": 1.132018616071948,
+      "pf_med": 1.5448070819217712,
+      "pf_gt1": 2,
+      "trades_total": 20,
+      "worst_dd": 0.08346722700000554
+    },
+    {
+      "name": "strat19_4h_top10",
+      "splits": 3,
+      "pf_avg": 1.5507045136580306,
+      "pf_med": 1.533201096230938,
+      "pf_gt1": 3,
+      "trades_total": 124,
+      "worst_dd": 0.5221683220000045
+    },
+    {
+      "name": "strat19_4h_top15",
+      "splits": 3,
+      "pf_avg": 1.7877431183029178,
+      "pf_med": 1.8322003391645014,
+      "pf_gt1": 3,
+      "trades_total": 168,
+      "worst_dd": 0.432157030999997
+    }
+  ]
+}

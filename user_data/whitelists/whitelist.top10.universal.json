@@ -1,0 +1,37 @@
+{
+  "generated_at_utc": "2026-02-20T14:26:29.963083+00:00",
+  "generated_by": "select_pairs.py",
+  "exchange": "binance",
+  "market": "spot",
+  "profile": "universal",
+  "timeframe": "1h",
+  "days_lookback": 60,
+  "min_age_days": 180,
+  "min_quote_volume": 3000000.0,
+  "exclude_stables": true,
+  "exclude_leveraged": true,
+  "score_formula": "score = volume_norm * atr_norm * data_completeness * (1 - wickiness_norm)",
+  "weights": {
+    "w_volume": 0.30000000000000004,
+    "w_atr_target": 0.20000000000000004,
+    "w_cleanliness": 0.20000000000000004,
+    "w_reversion": 0.20000000000000004,
+    "w_completeness": 0.10000000000000002
+  },
+  "atr_target": 0.01,
+  "atr_sigma": 0.006,
+  "reversion_horizon": 6,
+  "top_n": 10,
+  "pair_whitelist": [
+    "BTC/USDT",
+    "ETH/USDT",
+    "SOL/USDT",
+    "XRP/USDT",
+    "BNB/USDT",
+    "PAXG/USDT",
+    "BIO/USDT",
+    "DOGE/USDT",
+    "TRX/USDT",
+    "ZEC/USDT"
+  ]
+}

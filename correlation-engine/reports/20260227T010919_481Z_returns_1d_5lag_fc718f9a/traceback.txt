@@ -1,0 +1,6 @@
+Traceback (most recent call last):
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/runner.py", line 989, in run_correlation
+    _collect_artifact_paths(artifacts, staging_dir)
+  File "/Users/carlaherrera/Desktop/market-sentiment-lab/correlation-engine/src/correngine/runner.py", line 471, in _collect_artifact_paths
+    raise FileNotFoundError(f"Artifact no encontrado: {relative}")
+FileNotFoundError: Artifact no encontrado: README.md

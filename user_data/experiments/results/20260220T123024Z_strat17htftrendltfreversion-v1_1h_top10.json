@@ -1,0 +1,138 @@
+{
+  "experiment_id": "20260220T123024Z_strat17htftrendltfreversion-v1_1h_top10",
+  "created_at": "2026-02-20T12:30:24+00:00",
+  "status": "success",
+  "strategy_name": "Strat17HTFTrendLTFReversion_v1",
+  "strategy_family": "mtf_regime",
+  "config_path": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top10.json",
+  "timeframe": "1h",
+  "timerange": "20250101-20260201",
+  "universe_label": "top10",
+  "pairs_count": 10,
+  "market_mode": "spot",
+  "split_label": null,
+  "metrics": {
+    "trades": 809,
+    "trades_per_day": 2.04,
+    "profit_total_pct": -6.865219531999999,
+    "winrate_pct": 21.26081582200247,
+    "profit_factor": 0.530081391044602,
+    "max_drawdown_pct": 6.904643583000006
+  },
+  "robustness": {
+    "oos": null,
+    "fee_sensitivity_tested": false,
+    "fee_delta_pct": null
+  },
+  "artifacts": {
+    "backtest_meta_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/sanity_research_20260220/Strat17HTFTrendLTFReversion_v1.meta.json",
+    "backtest_export_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/results/20260220T123024Z_strat17htftrendltfreversion-v1_1h_top10.backtest_export.json",
+    "summary_md": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/summaries/20260220T123024Z_strat17htftrendltfreversion-v1_1h_top10.md",
+    "extra_files": [
+      "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/backtest_results/sanity_research_20260220/Strat17HTFTrendLTFReversion_v1.zip"
+    ]
+  },
+  "notes": {
+    "warnings": [],
+    "observations": [
+      "PF < 1 en este experimento."
+    ],
+    "top_pairs_by_profit_pct": [
+      [
+        "DOGE/USDT",
+        0.34
+      ],
+      [
+        "OP/USDT",
+        0.0
+      ],
+      [
+        "AWE/USDT",
+        0.0
+      ],
+      [
+        "SUI/USDT",
+        -0.39
+      ],
+      [
+        "ZEC/USDT",
+        -0.62
+      ],
+      [
+        "XRP/USDT",
+        -0.67
+      ],
+      [
+        "ETH/USDT",
+        -0.79
+      ],
+      [
+        "SOL/USDT",
+        -0.83
+      ],
+      [
+        "BTC/USDT",
+        -1.63
+      ],
+      [
+        "BNB/USDT",
+        -2.28
+      ]
+    ],
+    "bottom_pairs_by_profit_pct": [
+      [
+        "BNB/USDT",
+        -2.28
+      ],
+      [
+        "BTC/USDT",
+        -1.63
+      ],
+      [
+        "SOL/USDT",
+        -0.83
+      ],
+      [
+        "ETH/USDT",
+        -0.79
+      ],
+      [
+        "XRP/USDT",
+        -0.67
+      ],
+      [
+        "ZEC/USDT",
+        -0.62
+      ],
+      [
+        "SUI/USDT",
+        -0.39
+      ],
+      [
+        "AWE/USDT",
+        0.0
+      ],
+      [
+        "OP/USDT",
+        0.0
+      ],
+      [
+        "DOGE/USDT",
+        0.34
+      ]
+    ]
+  },
+  "provenance": {
+    "command_run": "",
+    "git_commit": "797ea46bb3b62ba8d0ca39b038610d82eea5be28"
+  },
+  "robustness_validation": {
+    "robustness_score": 66.0,
+    "flags": [
+      "TOO_CONCENTRATED_TOP1",
+      "TOO_CONCENTRATED_TOP3",
+      "PAIR_DEPENDENCY_RISK"
+    ],
+    "report_json": "/Users/carlaherrera/Desktop/codex/freqtrade/user_data/experiments/robustness/20260220T123024Z_strat17htftrendltfreversion-v1_1h_top10.robustness.json"
+  }
+}

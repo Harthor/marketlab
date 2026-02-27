@@ -1,0 +1,11 @@
+*** Begin Patch
+*** Update File: /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/tests/test_warehouse_upsert.py
+@@
+-            try:
+-                from market_data_ingest import warehouse
++            try:
++                # Make sure the module resolves `duckdb` from the current sys.modules state.
++                sys.modules.pop("market_data_ingest.warehouse", None)
++                from market_data_ingest import warehouse
+*** End Patch
+apply_patch < /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/patch2.diff

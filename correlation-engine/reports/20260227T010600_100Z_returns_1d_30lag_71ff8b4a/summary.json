@@ -1,0 +1,52 @@
+{
+  "artifacts": [],
+  "completed_at_utc": "2026-02-27T01:06:00.110407+00:00",
+  "config": {
+    "bootstrap": 0,
+    "cache_root": "/tmp/corr_cache",
+    "dataset": "../altdata-web-signals/data/datasets/BTC-USD/1d.parquet",
+    "distance_corr": false,
+    "max_lag": 30,
+    "min_effective_obs": 10,
+    "output_root": "reports",
+    "seed": 42,
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "top": 50,
+    "windows": [
+      10,
+      20,
+      30
+    ]
+  },
+  "config_file": null,
+  "config_hash": "e85e97ce80e62b34cd26f071f661cf5ddaae0fa489db348cacdb87f567bff439",
+  "created_at_utc": "2026-02-27T01:06:00.110315+00:00",
+  "created_utc": "2026-02-27T01:06:00.110318+00:00",
+  "dataset_hash": "71ff8b4aa623d9f3282b207354eab94de4ddbc5d8a5ebf2106a8ef27da47e9f8",
+  "dataset_path": "/Users/carlaherrera/Desktop/market-sentiment-lab/altdata-web-signals/data/datasets/BTC-USD/1d.parquet",
+  "dataset_rows": 2,
+  "errors": [
+    "insufficient_data"
+  ],
+  "kind": "correlation",
+  "run_id": "20260227T010600_100Z_returns_1d_30lag_71ff8b4a",
+  "schema_version": "1.0",
+  "seed": 42,
+  "status": "skipped",
+  "top_features": {
+    "best_lag": [],
+    "distance_correlation": [],
+    "mi": [],
+    "mutual_information": [],
+    "pearson": [],
+    "pearson_abs": [],
+    "spearman": [],
+    "spearman_abs": []
+  },
+  "warnings": [
+    "insufficient_data: dataset_rows < min_effective_obs",
+    "dataset_rows=2",
+    "min_effective_obs=10"
+  ]
+}

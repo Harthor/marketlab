@@ -1,0 +1,260 @@
+{
+  "artifacts": [
+    {
+      "name": "feature_summary",
+      "path": "tables/feature_summary.parquet",
+      "type": "table"
+    },
+    {
+      "name": "correlations",
+      "path": "tables/correlations.parquet",
+      "type": "table"
+    },
+    {
+      "name": "rolling_corr",
+      "path": "tables/rolling_corr.parquet",
+      "type": "table"
+    },
+    {
+      "name": "lag",
+      "path": "tables/lag.parquet",
+      "type": "table"
+    },
+    {
+      "name": "lag_profile",
+      "path": "tables/lag_profile.parquet",
+      "type": "table"
+    },
+    {
+      "name": "lag_summary",
+      "path": "tables/lag_summary.parquet",
+      "type": "table"
+    },
+    {
+      "name": "mutual_information",
+      "path": "tables/mi.parquet",
+      "type": "table"
+    },
+    {
+      "name": "rolling_corr",
+      "path": "plots/rolling_corr.png",
+      "type": "plot"
+    },
+    {
+      "name": "lag_profiles",
+      "path": "plots/lag_profiles.png",
+      "type": "plot"
+    },
+    {
+      "name": "run_readme",
+      "path": "README.md",
+      "type": "readme"
+    },
+    {
+      "name": "summary",
+      "path": "summary.json",
+      "type": "manifest"
+    }
+  ],
+  "completed_at_utc": "2026-02-27T01:09:28.223343+00:00",
+  "config": {
+    "bootstrap": 0,
+    "cache_root": "/tmp/.cache/correlation-engine",
+    "dataset": "/tmp/synthetic_corr.parquet",
+    "distance_corr": false,
+    "max_lag": 5,
+    "min_effective_obs": 10,
+    "output_root": "reports",
+    "seed": 42,
+    "target": "returns_1d",
+    "timestamp": "ts_utc",
+    "top": 10,
+    "windows": [
+      3,
+      5,
+      8
+    ]
+  },
+  "config_file": null,
+  "config_hash": "5711f12660be4d381c7e546e22d85fc4b9d688cec5a4d29ef97197869d01cc93",
+  "created_at_utc": "2026-02-27T01:09:28.223351+00:00",
+  "created_utc": "2026-02-27T01:09:28.223353+00:00",
+  "dataset_hash": "fc718f9a44a5d599d74432ec1e844239de388eea94e5b4e7b6125ba511cb14f3",
+  "dataset_path": "/private/tmp/synthetic_corr.parquet",
+  "dataset_rows": 50,
+  "feature_summary_preview": [
+    {
+      "best_lag": null,
+      "feature": "feature_signal",
+      "metric": "pearson",
+      "n_effective": 50,
+      "p_value": 0.16490200130229019,
+      "score": -0.1994671018702055
+    },
+    {
+      "best_lag": null,
+      "feature": "feature_signal",
+      "metric": "spearman",
+      "n_effective": 50,
+      "p_value": 0.1484078754614621,
+      "score": -0.20739495798319327
+    },
+    {
+      "best_lag": 3,
+      "feature": "feature_signal",
+      "metric": "best_lag",
+      "n_effective": 47,
+      "p_value": 4.326980577059853e-27,
+      "score": 0.9623298041865629
+    },
+    {
+      "best_lag": null,
+      "feature": "feature_signal",
+      "metric": "mutual_information",
+      "n_effective": 50,
+      "p_value": null,
+      "score": 0.0911061094968364
+    },
+    {
+      "best_lag": null,
+      "feature": "noise",
+      "metric": "pearson",
+      "n_effective": 50,
+      "p_value": 0.7810883187354546,
+      "score": -0.04030459406721082
+    },
+    {
+      "best_lag": null,
+      "feature": "noise",
+      "metric": "spearman",
+      "n_effective": 50,
+      "p_value": 0.942218356661114,
+      "score": 0.010516206482593037
+    },
+    {
+      "best_lag": 3,
+      "feature": "noise",
+      "metric": "best_lag",
+      "n_effective": 47,
+      "p_value": 0.12323330993864509,
+      "score": 0.2279946911213173
+    },
+    {
+      "best_lag": null,
+      "feature": "noise",
+      "metric": "mutual_information",
+      "n_effective": 50,
+      "p_value": null,
+      "score": 0.0
+    }
+  ],
+  "kind": "correlation",
+  "run_id": "20260227T010927_971Z_returns_1d_5lag_fc718f9a",
+  "schema_version": "1.0",
+  "seed": 42,
+  "status": "complete",
+  "top_features": {
+    "best_lag": [
+      {
+        "best_abs_corr": 0.9623298041865629,
+        "best_corr": 0.9623298041865629,
+        "best_lag": 3,
+        "best_p": 4.326980577059853e-27,
+        "feature": "feature_signal",
+        "lead_lag": "feature_leads",
+        "n_effective": 47
+      },
+      {
+        "best_abs_corr": 0.2279946911213173,
+        "best_corr": 0.2279946911213173,
+        "best_lag": 3,
+        "best_p": 0.12323330993864509,
+        "feature": "noise",
+        "lead_lag": "feature_leads",
+        "n_effective": 47
+      }
+    ],
+    "distance_correlation": [],
+    "mi": [
+      {
+        "feature": "feature_signal",
+        "mutual_information": 0.0911061094968364,
+        "n_effective": 50
+      },
+      {
+        "feature": "noise",
+        "mutual_information": 0.0,
+        "n_effective": 50
+      }
+    ],
+    "mutual_information": [
+      {
+        "feature": "feature_signal",
+        "mutual_information": 0.0911061094968364,
+        "n_effective": 50
+      },
+      {
+        "feature": "noise",
+        "mutual_information": 0.0,
+        "n_effective": 50
+      }
+    ],
+    "pearson": [
+      {
+        "feature": "feature_signal",
+        "n_effective": 50,
+        "p_value": 0.16490200130229019,
+        "pearson": -0.1994671018702055
+      },
+      {
+        "feature": "noise",
+        "n_effective": 50,
+        "p_value": 0.7810883187354546,
+        "pearson": -0.04030459406721082
+      }
+    ],
+    "pearson_abs": [
+      {
+        "feature": "feature_signal",
+        "n_effective": 50,
+        "p_value": 0.16490200130229019,
+        "pearson": -0.1994671018702055
+      },
+      {
+        "feature": "noise",
+        "n_effective": 50,
+        "p_value": 0.7810883187354546,
+        "pearson": -0.04030459406721082
+      }
+    ],
+    "spearman": [
+      {
+        "feature": "feature_signal",
+        "n_effective": 50,
+        "p_value": 0.1484078754614621,
+        "spearman": -0.20739495798319327
+      },
+      {
+        "feature": "noise",
+        "n_effective": 50,
+        "p_value": 0.942218356661114,
+        "spearman": 0.010516206482593037
+      }
+    ],
+    "spearman_abs": [
+      {
+        "feature": "feature_signal",
+        "n_effective": 50,
+        "p_value": 0.1484078754614621,
+        "spearman": -0.20739495798319327
+      },
+      {
+        "feature": "noise",
+        "n_effective": 50,
+        "p_value": 0.942218356661114,
+        "spearman": 0.010516206482593037
+      }
+    ]
+  },
+  "warnings": []
+}

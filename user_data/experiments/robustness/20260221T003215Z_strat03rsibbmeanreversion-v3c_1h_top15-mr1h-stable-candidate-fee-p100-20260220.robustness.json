@@ -1,0 +1,140 @@
+{
+  "experiment_id": "20260221T003215Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p100-20260220",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "timeframe": "1h",
+  "universe_label": "top15_mr1h_stable_candidate_fee_p100_20260220",
+  "robustness_score": 51.0,
+  "flags": [
+    "TOO_CONCENTRATED_TOP1",
+    "TOO_CONCENTRATED_TOP3",
+    "PAIR_DEPENDENCY_RISK",
+    "COST_FRAGILE"
+  ],
+  "thresholds_used": {
+    "min_trades_for_confidence": 80,
+    "low_sample_trades": 20,
+    "concentration_top1_pct": 45.0,
+    "concentration_top3_pct": 75.0,
+    "pair_dependency_topn": 5,
+    "pair_dependency_topn_pct": 90.0,
+    "cost_fragile_pf_drop_threshold": 0.35,
+    "cost_fragile_fee50_below_pf": 1.0,
+    "robust_candidate_min_score": 80.0
+  },
+  "checks": {
+    "lookahead": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade lookahead-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_stable_candidate.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "recursive": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade recursive-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_stable_candidate.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "pair_concentration": {
+      "top1_share_pct": 48.789383385488186,
+      "top3_share_pct": 82.58804809826306,
+      "topn_share_pct": 100.0,
+      "top_n": 5,
+      "top_pairs": [
+        [
+          "ARB/USDT",
+          0.12
+        ],
+        [
+          "BNB/USDT",
+          0.04
+        ],
+        [
+          "SOL/USDT",
+          0.04
+        ],
+        [
+          "SNX/USDT",
+          0.03
+        ],
+        [
+          "AAVE/USDT",
+          0.01
+        ]
+      ],
+      "bottom_pairs": [
+        [
+          "ETH/USDT",
+          -0.06
+        ],
+        [
+          "OP/USDT",
+          -0.05
+        ],
+        [
+          "XRP/USDT",
+          -0.02
+        ],
+        [
+          "PAXG/USDT",
+          -0.02
+        ],
+        [
+          "BCH/USDT",
+          -0.01
+        ]
+      ],
+      "flags": [
+        "TOO_CONCENTRATED_TOP1",
+        "TOO_CONCENTRATED_TOP3",
+        "PAIR_DEPENDENCY_RISK"
+      ],
+      "note": "ok"
+    },
+    "fee_sensitivity_rows": [
+      {
+        "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-base-20260220",
+        "fee_delta_pct": 0.0,
+        "profit_factor": 2.1250078575139217,
+        "profit_total_pct": 0.273555753,
+        "max_drawdown_pct": 0.2109815219999973
+      },
+      {
+        "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p25-20260220",
+        "fee_delta_pct": 25.0,
+        "profit_factor": 1.9854504038340202,
+        "profit_total_pct": 0.25427737300000003,
+        "max_drawdown_pct": 0.2228750679999962
+      },
+      {
+        "experiment_id": "20260220T183544Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p50-20260220",
+        "fee_delta_pct": 50.0,
+        "profit_factor": 1.4945666648089464,
+        "profit_total_pct": 0.13634133299999998,
+        "max_drawdown_pct": 0.23476861399999507
+      },
+      {
+        "experiment_id": "20260221T003215Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p75-20260220",
+        "fee_delta_pct": 75.0,
+        "profit_factor": 1.390512978574481,
+        "profit_total_pct": 0.114050303,
+        "max_drawdown_pct": 0.24666216000000532
+      },
+      {
+        "experiment_id": "20260221T003215Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-stable-candidate-fee-p100-20260220",
+        "fee_delta_pct": 100.0,
+        "profit_factor": 1.2975075616430527,
+        "profit_total_pct": 0.091759271,
+        "max_drawdown_pct": 0.258555707000005
+      }
+    ],
+    "sample_check": {
+      "trades": 20,
+      "min_trades": 20
+    }
+  },
+  "notes": []
+}

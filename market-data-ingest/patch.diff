@@ -1,0 +1,33 @@
+*** Begin Patch
+*** Update File: /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/tests/test_connectors_cli_quality.py
+@@
+         with TemporaryDirectory() as tmp_root:
+             paths = Paths.default(tmp_root)
+             paths.create()
+ 
+             ingestion.get_connector = lambda source, exchange=None: connector
+-            storage.write_raw_dump = lambda *args, **kwargs: Path(tmp_root) / "raw.csv"
+-            storage.write_processed_parquet = lambda *args, **kwargs: Path(tmp_root) / "processed.parquet"
++            ingestion.write_raw_dump = lambda *args, **kwargs: Path(tmp_root) / "raw.csv"
++            ingestion.write_processed_parquet = lambda *args, **kwargs: Path(tmp_root) / "processed.parquet"
+@@
+-                storage.write_raw_dump = original_raw
+-                storage.write_processed_parquet = original_processed
++                ingestion.write_raw_dump = original_raw
++                ingestion.write_processed_parquet = original_processed
+@@
+         fake_ccxt = types.ModuleType("ccxt")
+@@
+         class _FakeExchange:
+             def __init__(self, *_args, **_kwargs):
+                 pass
+ 
+             def fetch_ohlcv(self, symbol, timeframe, since, params):
+                 return [
+-                    [1_700_000_000_000, 100.0, 101.0, 99.0, 100.5, 123.0, 1],
+-                    [1_700_000_086_400_000, 100.5, 101.5, 100.0, 101.0, 150.0, 2],
++                    [1_700_000_000_000, 100.0, 101.0, 99.0, 100.5, 123.0, 1],
++                    [1_700_000_003_600_000, 100.5, 101.5, 100.0, 101.0, 150.0, 2],
+                 ]
+*** End Patch
+apply_patch < /Users/carlaherrera/Desktop/market-sentiment-lab/market-data-ingest/patch.diff

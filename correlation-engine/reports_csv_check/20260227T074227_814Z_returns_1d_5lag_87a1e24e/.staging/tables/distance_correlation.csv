@@ -1,0 +1,5 @@
+feature,distance_correlation,n_obs,n_effective
+close,0.05460572125073868,600,600
+signal_macro,0.07544344468491176,600,600
+signal_sentiment,0.05830006422312249,600,600
+signal_web,0.07102062789717412,600,600

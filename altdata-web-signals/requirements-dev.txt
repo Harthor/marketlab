@@ -1,0 +1,15 @@
+# Testing
+pytest>=8.3.0
+
+# Runtime de proyecto
+polars>=0.20.31,<2
+PyYAML>=6.0.1
+requests>=2.31.0
+feedparser>=6.0.11
+python-dateutil>=2.9.0
+pyarrow>=14.0.0
+
+# Análisis / visualización
+pandas>=2.1
+numpy>=1.26
+matplotlib>=3.8

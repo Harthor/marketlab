@@ -1,0 +1,154 @@
+{
+  "experiment_id": "20260220T174750Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-p100-20260220",
+  "strategy_name": "Strat03RSIBBMeanReversion_v3c",
+  "timeframe": "1h",
+  "universe_label": "top15_mr1h_effective_fee_p100_20260220",
+  "robustness_score": 51.0,
+  "flags": [
+    "TOO_CONCENTRATED_TOP1",
+    "TOO_CONCENTRATED_TOP3",
+    "PAIR_DEPENDENCY_RISK",
+    "COST_FRAGILE"
+  ],
+  "thresholds_used": {
+    "min_trades_for_confidence": 80,
+    "low_sample_trades": 20,
+    "concentration_top1_pct": 45.0,
+    "concentration_top3_pct": 75.0,
+    "pair_dependency_topn": 5,
+    "pair_dependency_topn_pct": 90.0,
+    "cost_fragile_pf_drop_threshold": 0.35,
+    "cost_fragile_fee50_below_pf": 1.0,
+    "robust_candidate_min_score": 80.0
+  },
+  "checks": {
+    "lookahead": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade lookahead-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "recursive": {
+      "status": "dry_run",
+      "details": [
+        {
+          "cmd": "/Users/carlaherrera/Desktop/codex/freqtrade/.env/bin/freqtrade recursive-analysis -c /Users/carlaherrera/Desktop/codex/freqtrade/user_data/configs/config.bt_spot_1h_top15_mr1h_effective.json -s Strat03RSIBBMeanReversion_v3c --timerange 20250101-20260201"
+        }
+      ]
+    },
+    "pair_concentration": {
+      "top1_share_pct": 48.789383385488186,
+      "top3_share_pct": 82.58804809826306,
+      "topn_share_pct": 100.0,
+      "top_n": 5,
+      "top_pairs": [
+        [
+          "ARB/USDT",
+          0.12
+        ],
+        [
+          "BNB/USDT",
+          0.04
+        ],
+        [
+          "SOL/USDT",
+          0.04
+        ],
+        [
+          "SNX/USDT",
+          0.03
+        ],
+        [
+          "AAVE/USDT",
+          0.01
+        ]
+      ],
+      "bottom_pairs": [
+        [
+          "TRX/USDT",
+          -0.09
+        ],
+        [
+          "ETH/USDT",
+          -0.06
+        ],
+        [
+          "OP/USDT",
+          -0.05
+        ],
+        [
+          "BTC/USDT",
+          -0.04
+        ],
+        [
+          "XRP/USDT",
+          -0.02
+        ]
+      ],
+      "flags": [
+        "TOO_CONCENTRATED_TOP1",
+        "TOO_CONCENTRATED_TOP3",
+        "PAIR_DEPENDENCY_RISK"
+      ],
+      "note": "ok"
+    },
+    "fee_sensitivity_rows": [
+      {
+        "experiment_id": "20260220T150749Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-base",
+        "fee_delta_pct": 0.0,
+        "profit_factor": 1.5490820965293062,
+        "profit_total_pct": 0.18315285199999998,
+        "max_drawdown_pct": 0.24595993499999624
+      },
+      {
+        "experiment_id": "20260220T174750Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-base-20260220",
+        "fee_delta_pct": 0.0,
+        "profit_factor": 1.5490820965293062,
+        "profit_total_pct": 0.18315285199999998,
+        "max_drawdown_pct": 0.24595993499999624
+      },
+      {
+        "experiment_id": "20260220T174750Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-p25-20260220",
+        "fee_delta_pct": 25.0,
+        "profit_factor": 1.4275834249224542,
+        "profit_total_pct": 0.15344450899999998,
+        "max_drawdown_pct": 0.2638488339999981
+      },
+      {
+        "experiment_id": "20260220T150749Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-p50",
+        "fee_delta_pct": 50.0,
+        "profit_factor": 1.0648121831823227,
+        "profit_total_pct": 0.025078504,
+        "max_drawdown_pct": 0.28173773400000074
+      },
+      {
+        "experiment_id": "20260220T174750Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-p50-20260220",
+        "fee_delta_pct": 50.0,
+        "profit_factor": 1.0648121831823227,
+        "profit_total_pct": 0.025078504,
+        "max_drawdown_pct": 0.28173773400000074
+      },
+      {
+        "experiment_id": "20260220T174750Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-p75-20260220",
+        "fee_delta_pct": 75.0,
+        "profit_factor": 0.9815285186028728,
+        "profit_total_pct": -0.007642489000000002,
+        "max_drawdown_pct": 0.2996266340000034
+      },
+      {
+        "experiment_id": "20260220T174750Z_strat03rsibbmeanreversion-v3c_1h_top15-mr1h-effective-fee-p100-20260220",
+        "fee_delta_pct": 100.0,
+        "profit_factor": 0.9083792184595672,
+        "profit_total_pct": -0.040363484000000005,
+        "max_drawdown_pct": 0.31751553300000523
+      }
+    ],
+    "sample_check": {
+      "trades": 27,
+      "min_trades": 20
+    }
+  },
+  "notes": []
+}

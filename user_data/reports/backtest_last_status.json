@@ -1,0 +1,9 @@
+{
+  "status": "error",
+  "stage": "backtest",
+  "timestamp_utc": "2026-02-23T22:07:00.972324+00:00",
+  "error_type": "network_or_exchange",
+  "message": "freqtrade_backtesting_failed_check_log",
+  "runtime_config": "user_data/configs/runtime.config.bt_spot_1h_from_research.json",
+  "log_path": "user_data/logs/backtest_1h_20260223T220658Z.log"
+}
