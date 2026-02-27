@@ -9,6 +9,7 @@ import polars as pl
 
 from ..http import ApiClient
 from ..storage import write_signal_frame
+from ..transforms import add_delta_and_pct, add_zscore_rolling
 
 FNG_API_URL = "https://api.alternative.me/fng/"
 
@@ -51,6 +52,31 @@ def parse_fng_payload(
     return df
 
 
+def add_fng_transforms(df: pl.DataFrame, signal_prefix: str = "signal_fng") -> pl.DataFrame:
+    """Add stationarity transforms to FNG DataFrame.
+
+    New columns:
+    - {prefix}_delta: absolute day-to-day change
+    - {prefix}_pct_change: percent change (winsorized to [-1, 1])
+    - {prefix}_regime: categorical fear/greed bucket
+    - {prefix}_zscore_30d: 30-day rolling z-score
+    """
+    val = f"{signal_prefix}_value"
+    df = add_delta_and_pct(df, val)
+    df = add_zscore_rolling(df, val, window=30)
+
+    # Regime classification from raw value
+    df = df.with_columns(
+        pl.when(pl.col(val) <= 25).then(pl.lit("extreme_fear"))
+        .when(pl.col(val) <= 45).then(pl.lit("fear"))
+        .when(pl.col(val) <= 55).then(pl.lit("neutral"))
+        .when(pl.col(val) <= 75).then(pl.lit("greed"))
+        .otherwise(pl.lit("extreme_greed"))
+        .alias(f"{signal_prefix}_regime")
+    )
+    return df
+
+
 def fetch_fng_signals(
     *,
     start: str | None = None,
@@ -79,31 +105,22 @@ def fetch_fng_signals(
     )
 
     df = parse_fng_payload(data, start=start_dt, end=end_dt)
+    df = add_fng_transforms(df)
 
     outputs: list[Path] = []
 
-    # Write value signal (numeric, suitable for correlation)
-    value_frame = df.select(["ts_utc", "signal_fng_value"])
-    outputs.append(
-        write_signal_frame(
-            frame=value_frame,
-            signals_root=signals_root,
-            source="fng",
-            topic="value",
-            freq=freq,
+    signal_cols = [c for c in df.columns if c.startswith("signal_fng_")]
+    for col in signal_cols:
+        topic = col.removeprefix("signal_fng_")
+        frame = df.select(["ts_utc", col])
+        outputs.append(
+            write_signal_frame(
+                frame=frame,
+                signals_root=signals_root,
+                source="fng",
+                topic=topic,
+                freq=freq,
+            )
         )
-    )
-
-    # Write classification signal (categorical, for reference)
-    class_frame = df.select(["ts_utc", "signal_fng_classification"])
-    outputs.append(
-        write_signal_frame(
-            frame=class_frame,
-            signals_root=signals_root,
-            source="fng",
-            topic="classification",
-            freq=freq,
-        )
-    )
 
     return outputs

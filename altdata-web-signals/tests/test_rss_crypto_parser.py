@@ -1,4 +1,4 @@
-"""Tests for RSS crypto fetcher (parse + aggregate + VADER sentiment)."""
+"""Tests for RSS crypto fetcher (parse + aggregate + transforms + VADER sentiment)."""
 
 from __future__ import annotations
 
@@ -6,6 +6,7 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 from altdata_web_signals.fetchers.rss_crypto import (
+    add_rss_crypto_transforms,
     aggregate_crypto_entries,
     parse_crypto_feed,
 )
@@ -71,3 +72,41 @@ def test_aggregate_empty_entries_returns_zero_filled() -> None:
     assert all(v == 0 for v in df["signal_rss_crypto_article_count"].to_list())
     assert all(v == 0 for v in df["signal_rss_crypto_btc_mention_count"].to_list())
     assert all(v == 0.0 for v in df["signal_rss_crypto_title_sentiment"].to_list())
+
+
+def test_rss_crypto_transforms_columns_exist() -> None:
+    """Verify all derived columns are present after transforms."""
+    payload = (FIXTURES / "rss_crypto_sample.xml").read_text()
+    start = datetime(2022, 1, 10, tzinfo=UTC)
+    end = datetime(2022, 1, 12, tzinfo=UTC)
+
+    entries = parse_crypto_feed(payload, start=start, end=end)
+    df = aggregate_crypto_entries(entries, start=start, end=end)
+    df = add_rss_crypto_transforms(df)
+
+    expected = [
+        "signal_rss_crypto_article_count_delta",
+        "signal_rss_crypto_article_count_zscore_7d",
+        "signal_rss_crypto_sentiment_delta",
+        "signal_rss_crypto_btc_mention_delta",
+        "signal_rss_crypto_neg_sentiment_flag",
+    ]
+    for col in expected:
+        assert col in df.columns, f"Missing column: {col}"
+
+    # Row count unchanged
+    assert df.shape[0] == 3
+
+
+def test_rss_crypto_neg_sentiment_flag_values() -> None:
+    """neg_sentiment_flag should be 0 or 1."""
+    payload = (FIXTURES / "rss_crypto_sample.xml").read_text()
+    start = datetime(2022, 1, 10, tzinfo=UTC)
+    end = datetime(2022, 1, 12, tzinfo=UTC)
+
+    entries = parse_crypto_feed(payload, start=start, end=end)
+    df = aggregate_crypto_entries(entries, start=start, end=end)
+    df = add_rss_crypto_transforms(df)
+
+    flags = df["signal_rss_crypto_neg_sentiment_flag"].to_list()
+    assert all(v in (0, 1) for v in flags)

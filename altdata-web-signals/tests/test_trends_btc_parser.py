@@ -1,4 +1,4 @@
-"""Tests for Google Trends BTC parser (offline, no pytrends needed)."""
+"""Tests for Google Trends BTC parser and transforms (offline, no pytrends needed)."""
 
 from __future__ import annotations
 
@@ -6,7 +6,10 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from altdata_web_signals.fetchers.trends_btc import parse_trends_payload
+from altdata_web_signals.fetchers.trends_btc import (
+    add_trends_transforms,
+    parse_trends_payload,
+)
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -58,3 +61,48 @@ def test_parse_trends_payload_values_in_range() -> None:
         for col in signal_cols:
             values = df[col].to_list()
             assert all(0 <= v <= 100 for v in values)
+
+
+def test_trends_transforms_delta_pct_columns() -> None:
+    """Each keyword should get _delta and _pct_change columns."""
+    raw = json.loads((FIXTURES / "trends_btc_sample.json").read_text())
+    frames = parse_trends_payload(raw)
+    frames = add_trends_transforms(frames)
+
+    for kw in ["bitcoin", "buy bitcoin", "bitcoin crash", "crypto"]:
+        df = frames[kw]
+        signal_cols = [c for c in df.columns if c.startswith("signal_")]
+        base_found = any(c.endswith("_delta") for c in signal_cols)
+        pct_found = any(c.endswith("_pct_change") for c in signal_cols)
+        assert base_found, f"Missing _delta column for '{kw}'"
+        assert pct_found, f"Missing _pct_change column for '{kw}'"
+
+
+def test_trends_transforms_fear_ratio() -> None:
+    """fear_ratio = bitcoin_crash / (bitcoin + 1) should be computed."""
+    raw = json.loads((FIXTURES / "trends_btc_sample.json").read_text())
+    frames = parse_trends_payload(raw)
+    frames = add_trends_transforms(frames)
+
+    assert "__fear_ratio" in frames
+    fr_df = frames["__fear_ratio"]
+    assert "signal_trends_fear_ratio" in fr_df.columns
+    assert fr_df.shape[0] == 5
+
+    # fear_ratio should be non-negative
+    values = fr_df["signal_trends_fear_ratio"].to_list()
+    assert all(v >= 0 for v in values)
+
+
+def test_trends_transforms_pct_change_winsorized() -> None:
+    """pct_change should be winsorized to [-1, 1]."""
+    raw = json.loads((FIXTURES / "trends_btc_sample.json").read_text())
+    frames = parse_trends_payload(raw)
+    frames = add_trends_transforms(frames)
+
+    for kw in ["bitcoin", "buy bitcoin", "bitcoin crash", "crypto"]:
+        df = frames[kw]
+        pct_cols = [c for c in df.columns if c.endswith("_pct_change")]
+        for col in pct_cols:
+            vals = df[col].drop_nulls().to_list()
+            assert all(-1.0 <= v <= 1.0 for v in vals)

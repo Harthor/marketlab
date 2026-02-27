@@ -12,6 +12,7 @@ from dateutil import parser as date_parser
 
 from ..http import ApiClient
 from ..storage import write_signal_frame
+from ..transforms import add_delta, add_zscore_rolling
 
 # Default crypto RSS feeds
 DEFAULT_CRYPTO_FEEDS: list[str] = [
@@ -134,6 +135,37 @@ def aggregate_crypto_entries(
     })
 
 
+def add_rss_crypto_transforms(df: pl.DataFrame) -> pl.DataFrame:
+    """Add stationarity transforms to RSS crypto DataFrame.
+
+    New columns:
+    - signal_rss_crypto_article_count_delta
+    - signal_rss_crypto_article_count_zscore_7d
+    - signal_rss_crypto_sentiment_delta (from title_sentiment)
+    - signal_rss_crypto_btc_mention_delta (from btc_mention_count)
+    - signal_rss_crypto_neg_sentiment_flag (1 if sentiment < -0.2)
+    """
+    df = add_delta(df, "signal_rss_crypto_article_count")
+    df = add_zscore_rolling(df, "signal_rss_crypto_article_count", window=7)
+    df = add_delta(df, "signal_rss_crypto_title_sentiment")
+    # Rename to match spec: sentiment_delta (not title_sentiment_delta)
+    if "signal_rss_crypto_title_sentiment_delta" in df.columns:
+        df = df.rename({"signal_rss_crypto_title_sentiment_delta": "signal_rss_crypto_sentiment_delta"})
+    df = add_delta(df, "signal_rss_crypto_btc_mention_count")
+    # Rename: btc_mention_delta
+    if "signal_rss_crypto_btc_mention_count_delta" in df.columns:
+        df = df.rename({"signal_rss_crypto_btc_mention_count_delta": "signal_rss_crypto_btc_mention_delta"})
+
+    # Negative sentiment flag
+    df = df.with_columns(
+        pl.when(pl.col("signal_rss_crypto_title_sentiment") < -0.2)
+        .then(1)
+        .otherwise(0)
+        .alias("signal_rss_crypto_neg_sentiment_flag")
+    )
+    return df
+
+
 def fetch_rss_crypto_signals(
     *,
     feeds: list[str] | None = None,
@@ -175,13 +207,11 @@ def fetch_rss_crypto_signals(
         all_entries.extend(entries)
 
     df = aggregate_crypto_entries(all_entries, start=start_dt, end=end_dt)
+    df = add_rss_crypto_transforms(df)
 
     outputs: list[Path] = []
-    for col, topic in [
-        ("signal_rss_crypto_article_count", "article_count"),
-        ("signal_rss_crypto_btc_mention_count", "btc_mention_count"),
-        ("signal_rss_crypto_title_sentiment", "title_sentiment"),
-    ]:
+    for col in [c for c in df.columns if c.startswith("signal_rss_crypto_")]:
+        topic = col.removeprefix("signal_rss_crypto_")
         frame = df.select(["ts_utc", col])
         outputs.append(
             write_signal_frame(

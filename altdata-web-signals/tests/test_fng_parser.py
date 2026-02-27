@@ -1,4 +1,4 @@
-"""Tests for Fear & Greed Index parser."""
+"""Tests for Fear & Greed Index parser and transforms."""
 
 from __future__ import annotations
 
@@ -6,7 +6,7 @@ import json
 from datetime import UTC, datetime
 from pathlib import Path
 
-from altdata_web_signals.fetchers.fear_greed import parse_fng_payload
+from altdata_web_signals.fetchers.fear_greed import add_fng_transforms, parse_fng_payload
 
 FIXTURES = Path(__file__).parent / "fixtures"
 
@@ -56,3 +56,53 @@ def test_parse_fng_payload_custom_prefix() -> None:
 
     assert "signal_custom_value" in df.columns
     assert "signal_custom_classification" in df.columns
+
+
+def test_fng_transforms_columns_exist() -> None:
+    """Verify all derived columns are present after transforms."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    expected = [
+        "signal_fng_value_delta",
+        "signal_fng_value_pct_change",
+        "signal_fng_value_zscore_30d",
+        "signal_fng_regime",
+    ]
+    for col in expected:
+        assert col in df.columns, f"Missing column: {col}"
+
+    # Row count unchanged
+    assert df.shape[0] == 5
+
+
+def test_fng_transforms_regime_values() -> None:
+    """Regime column should only contain valid bucket labels."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    valid = {"extreme_fear", "fear", "neutral", "greed", "extreme_greed"}
+    regimes = set(df["signal_fng_regime"].to_list())
+    assert regimes <= valid
+
+
+def test_fng_transforms_pct_change_winsorized() -> None:
+    """pct_change should be winsorized to [-1, 1]."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    pct = df["signal_fng_value_pct_change"].drop_nulls().to_list()
+    assert all(-1.0 <= v <= 1.0 for v in pct)
+
+
+def test_fng_transforms_first_row_null() -> None:
+    """Delta and pct_change should be null for the first row."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    assert df["signal_fng_value_delta"][0] is None
+    assert df["signal_fng_value_pct_change"][0] is None

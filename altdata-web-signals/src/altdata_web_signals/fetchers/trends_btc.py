@@ -10,6 +10,7 @@ import polars as pl
 
 from ..config import slugify_topic
 from ..storage import write_signal_frame
+from ..transforms import add_delta_and_pct
 
 DEFAULT_BTC_KEYWORDS: list[str] = ["bitcoin", "buy bitcoin", "bitcoin crash", "crypto"]
 
@@ -82,6 +83,37 @@ def parse_trends_payload(
     return frames
 
 
+def add_trends_transforms(frames: dict[str, pl.DataFrame]) -> dict[str, pl.DataFrame]:
+    """Add delta/pct_change transforms per keyword + cross-keyword fear_ratio.
+
+    Modifies frames in-place and may add a ``__fear_ratio`` key.
+    """
+    for kw, df in frames.items():
+        signal_col = f"signal_trends_{slugify_topic(kw)}"
+        if signal_col in df.columns:
+            df = add_delta_and_pct(df, signal_col)
+            frames[kw] = df
+
+    # Cross-keyword: fear_ratio = bitcoin_crash / (bitcoin + 1)
+    crash_key = next((k for k in frames if slugify_topic(k) == "bitcoin_crash"), None)
+    btc_key = next((k for k in frames if slugify_topic(k) == "bitcoin"), None)
+    if crash_key and btc_key:
+        crash_df = frames[crash_key]
+        btc_df = frames[btc_key]
+        crash_col = f"signal_trends_{slugify_topic(crash_key)}"
+        btc_col = f"signal_trends_{slugify_topic(btc_key)}"
+        merged = crash_df.select(["ts_utc", crash_col]).join(
+            btc_df.select(["ts_utc", btc_col]), on="ts_utc", how="inner",
+        )
+        merged = merged.with_columns(
+            (pl.col(crash_col).cast(pl.Float64) / (pl.col(btc_col).cast(pl.Float64) + 1.0))
+            .alias("signal_trends_fear_ratio")
+        ).select(["ts_utc", "signal_trends_fear_ratio"])
+        frames["__fear_ratio"] = merged
+
+    return frames
+
+
 def fetch_trends_btc_signals(
     *,
     keywords: list[str] | None = None,
@@ -109,17 +141,22 @@ def fetch_trends_btc_signals(
     if not frames:
         raise RuntimeError(f"No trends data returned for keywords={kws}")
 
+    frames = add_trends_transforms(frames)
+
     outputs: list[Path] = []
-    for kw, frame in frames.items():
-        slug = slugify_topic(kw)
-        outputs.append(
-            write_signal_frame(
-                frame=frame,
-                signals_root=signals_root,
-                source="trends_btc",
-                topic=slug,
-                freq=freq,
+    for _kw, frame in frames.items():
+        # Write one parquet per signal column (skip ts_utc)
+        for col in [c for c in frame.columns if c.startswith("signal_")]:
+            topic = col.removeprefix("signal_trends_")
+            single = frame.select(["ts_utc", col])
+            outputs.append(
+                write_signal_frame(
+                    frame=single,
+                    signals_root=signals_root,
+                    source="trends_btc",
+                    topic=topic,
+                    freq=freq,
+                )
             )
-        )
 
     return outputs
