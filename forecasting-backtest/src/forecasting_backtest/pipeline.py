@@ -463,9 +463,17 @@ def execute_train(
         equity_df = pl.DataFrame({"ts_utc": np.asarray(pdf["ts"]), "equity": equity_curve, "drawdown": drawdown_curve})
         equity_df.write_parquet(equity_table_path)
         equity_df.write_parquet(equity_table_legacy_path)
+        equity_curve_csv_path = tables_dir / "equity_curve.csv"
+        equity_df.select(["ts_utc", "equity"]).write_csv(equity_curve_csv_path)
 
-        equity_plot_path = staging_dir / "equity_curve.png"
+        plots_dir = staging_dir / "plots"
+        plots_dir.mkdir(parents=True, exist_ok=True)
+        equity_plot_path = plots_dir / "equity_curve.png"
+        legacy_equity_plot_path = staging_dir / "equity_curve.png"
         plot_equity_curve(np.asarray(pdf["ts"]), np.asarray(backtest["equity_curve"])[1:], equity_plot_path)
+        if not equity_plot_path.exists():
+            raise RuntimeError("equity_curve plot generation failed: file missing")
+        shutil.copy2(equity_plot_path, legacy_equity_plot_path)
         pred_true_path = staging_dir / "pred_vs_true.png"
         plot_pred_vs_true(
             y_true=y_true_scored,
@@ -489,6 +497,7 @@ def execute_train(
             {"type": "table", "name": "equity", "path": str(equity_table_path.relative_to(staging_dir))},
             {"type": "table", "name": "backtest_equity", "path": str(equity_table_legacy_path.relative_to(staging_dir))},
             {"type": "plot", "name": "equity_curve", "path": str(equity_plot_path.relative_to(staging_dir))},
+            {"type": "table", "name": "equity_curve", "path": str(equity_curve_csv_path.relative_to(staging_dir))},
             {"type": "plot", "name": "pred_vs_true", "path": str(pred_true_path.relative_to(staging_dir))},
             *model_artifacts,
         ]
@@ -554,6 +563,7 @@ def execute_train(
                 "equity_curve": str(equity_plot_path.relative_to(staging_dir)),
                 "pred_vs_true": str(pred_true_path.relative_to(staging_dir)),
             },
+            "plots": [str(equity_plot_path.relative_to(staging_dir))],
         }
         files_section = cast(dict[str, str], completed_summary["files"])
         if isinstance(model_artifact, dict) and model_artifact.get("path"):
@@ -634,7 +644,20 @@ def execute_backtest_only(run_id: str, runs_root: str | Path = "runs") -> dict:
     summary["metrics"]["trading"] = bt["stats"]
 
     files_section = summary.setdefault("files", {})
-    files_section["equity_curve"] = "equity_curve.png"
+    if "equity_curve" not in files_section or not files_section.get("equity_curve"):
+        files_section["equity_curve"] = "plots/equity_curve.png"
+    existing_equity_curve_path = files_section.get("equity_curve", "plots/equity_curve.png")
+    if not isinstance(existing_equity_curve_path, str):
+        existing_equity_curve_path = "plots/equity_curve.png"
+    files_section["equity_curve"] = existing_equity_curve_path
+    candidate = run_dir / existing_equity_curve_path
+    if not candidate.exists():
+        fallback = run_dir / "equity_curve.png"
+        if fallback.exists():
+            files_section["equity_curve"] = str(fallback.relative_to(run_dir))
+        elif not isinstance(summary.get("warnings"), list):
+            summary["warnings"] = []
+            summary["warnings"].append("missing_equity_curve_plot")
     files_section["pred_vs_true"] = files_section.get("pred_vs_true", "pred_vs_true.png")
     files_section["equity_table"] = str((run_dir / "tables/equity.parquet").relative_to(run_dir))
     files_section["equity_table_legacy"] = str((run_dir / "tables/backtest_equity.parquet").relative_to(run_dir))
@@ -669,6 +692,7 @@ def execute_backtest_only(run_id: str, runs_root: str | Path = "runs") -> dict:
         ]
 
     run_equity_path = run_dir / files_section["equity_curve"]
+    run_equity_path.parent.mkdir(parents=True, exist_ok=True)
     plot_equity_curve(
         np.asarray(pred_df[timestamp_key]),
         np.asarray(bt["equity_curve"])[1:],
