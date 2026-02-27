@@ -218,7 +218,6 @@ const BacktestsPage = () => {
                     className={
                       getArtifactCounts(run).total > 0 ? 'run-option-has-artifacts' : 'run-option-empty'
                     }
-                    disabled={getArtifactCounts(run).total === 0}
                   >
                     {run.name} ({run.dataset}) · {run.status || 'unknown'} · T:{getArtifactCounts(run).tableCount} P:{getArtifactCounts(run).plotCount}
                   </option>
