@@ -37,3 +37,9 @@ user_data/research/eval/
 
 # Vendor blobs
 altdata-web-signals/vendor/
+
+# Claude Code worktrees / session data
+.claude/
+
+# Python build artifacts
+*.egg-info/

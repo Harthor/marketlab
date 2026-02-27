@@ -1,4 +1,0 @@
-- correlation-engine checklist desalineado (hasta cerrar)
-- artifact_id unicidad / rolling_corr duplicado (hasta fix)
-- market-data-ingest quality gate + manifest (hasta fix)
-- provider meta mismatch (si aplica)

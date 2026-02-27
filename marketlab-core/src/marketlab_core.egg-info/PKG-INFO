@@ -52,9 +52,7 @@ layout under `src/`.
 
 ```bash
 cd marketlab-core
-python -m venv .venv
-source .venv/bin/activate
-pip install -e .[dev]
+bash ../tools/bootstrap_venv.sh . --editable
 ```
 
 Run tests:

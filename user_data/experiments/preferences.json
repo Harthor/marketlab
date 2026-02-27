@@ -1,6 +1,0 @@
-{
-  "default_timeframe": "1h",
-  "prioritize_universe_expansion": true,
-  "avoid_lower_timeframes": true,
-  "prefer_scoring_pure": true
-}
