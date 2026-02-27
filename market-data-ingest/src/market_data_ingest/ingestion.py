@@ -5,7 +5,7 @@ from __future__ import annotations
 import json
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Final
+from typing import Any, Final
 from uuid import uuid4
 
 import pandas as pd
@@ -67,7 +67,7 @@ def run_download(
     results: list[dict[str, object]] = []
 
     manifest_path = paths.processed_dir / _MANIFEST_FILENAME
-    manifest = {
+    manifest: dict[str, Any] = {
         "kind": "ingest",
         "status": "complete",
         "run_id": run_id,
@@ -81,8 +81,8 @@ def run_download(
     }
 
     for symbol in parsed:
-        symbol_venue = (venue or getattr(connector, "venue", "unknown"))
-        artifact: dict[str, object] = {
+        symbol_venue: str = str(venue or getattr(connector, "venue", None) or "unknown")
+        artifact: dict[str, Any] = {
             "symbol": symbol,
             "timeframe": timeframe,
             "provider": source,
@@ -95,7 +95,7 @@ def run_download(
             "errors": [],
         }
 
-        report_row: dict[str, object] = {
+        report_row: dict[str, Any] = {
             "symbol": symbol,
             "rows": 0,
             "raw_path": None,

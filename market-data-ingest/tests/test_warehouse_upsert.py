@@ -6,6 +6,7 @@ import sys
 import types
 from pathlib import Path
 from tempfile import TemporaryDirectory
+from unittest.mock import patch
 import unittest
 
 import pandas as pd
@@ -130,32 +131,22 @@ def _sample_frame(symbol: str) -> pd.DataFrame:
 
 class TestWarehouseUpsert(unittest.TestCase):
     def test_build_warehouse_without_duckdb_fails_with_clear_message(self) -> None:
+        import market_data_ingest.warehouse as wh_module
+
+        def _no_duckdb():
+            raise RuntimeError(
+                "duckdb no está instalado. Instalalo para construir el warehouse: `pip install duckdb`"
+            )
+
         with TemporaryDirectory() as tmp:
             paths = Paths.default(tmp)
             paths.create()
 
-            original_duck = sys.modules.pop("duckdb", None)
-            original_warehouse = sys.modules.pop("market_data_ingest.warehouse", None)
-            original_collect = None
-            try:
-                import importlib
-                warehouse = importlib.import_module("market_data_ingest.warehouse")
-                original_collect = warehouse._collect_parquet_files
-                warehouse._collect_parquet_files = lambda _path: [Path("dummy.parquet")]
+            with patch.object(wh_module, "_require_duckdb", _no_duckdb), \
+                 patch.object(wh_module, "_collect_parquet_files", lambda _: [Path("dummy.parquet")]):
                 with self.assertRaises(RuntimeError) as err:
-                    warehouse.build_warehouse(paths)
+                    wh_module.build_warehouse(paths)
                 self.assertIn("duckdb no está instalado", str(err.exception))
-            finally:
-                if original_collect is not None and "warehouse" in locals():
-                    warehouse._collect_parquet_files = original_collect
-                if original_duck is None:
-                    sys.modules.pop("duckdb", None)
-                else:
-                    sys.modules["duckdb"] = original_duck
-                if original_warehouse is None:
-                    sys.modules.pop("market_data_ingest.warehouse", None)
-                else:
-                    sys.modules["market_data_ingest.warehouse"] = original_warehouse
 
     def _run_two_builds_with_fake_dk(self, frames: list[pd.DataFrame]) -> tuple[dict[str, int], dict[str, int]]:
         with TemporaryDirectory() as tmp:

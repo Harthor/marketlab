@@ -51,7 +51,12 @@ def _to_timedelta(timeframe: str) -> timedelta | None:
     freq = _expected_freq(timeframe)
     if not freq:
         return None
-    return pd.to_timedelta(pd.tseries.frequencies.to_offset(freq))
+    offset = pd.tseries.frequencies.to_offset(freq)
+    if offset is None:
+        return None
+    # pd.to_timedelta(offset) fails for DateOffset subclasses in pandas 2.x;
+    # use nanos attribute which works for all fixed-frequency offsets.
+    return pd.Timedelta(offset.nanos)
 
 
 def _calendar_expected_times(start: pd.Timestamp, end: pd.Timestamp, timeframe: str, venue: str) -> pd.DatetimeIndex | None:

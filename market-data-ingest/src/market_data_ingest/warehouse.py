@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from pathlib import Path
+from typing import Any
 
 from .config import Paths
 from .logging_utils import get_logger
@@ -32,7 +33,7 @@ def _collect_parquet_files(processed_dir: Path) -> list[Path]:
     return [p for p in processed_dir.glob("**/*.parquet") if p.is_file()]
 
 
-def _require_duckdb() -> object:
+def _require_duckdb() -> Any:
     try:
         import duckdb
 

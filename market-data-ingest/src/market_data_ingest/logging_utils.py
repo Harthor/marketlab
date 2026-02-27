@@ -75,5 +75,5 @@ def configure_logging(level: str = "INFO") -> None:
         handler.setFormatter(StructuredJSONFormatter())
 
 
-def get_logger(name: str) -> logging.Logger:
+def get_logger(name: str) -> StructuredLogger:
     return StructuredLogger(logging.getLogger(name))

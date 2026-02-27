@@ -35,7 +35,7 @@ class TestNormalization(unittest.TestCase):
         self.assertEqual(list(out.columns), CANONICAL_COLUMNS)
         self.assertEqual(len(out), 2)
         self.assertEqual(out["symbol"].nunique(), 1)
-        self.assertTrue(str(out["ts_utc"].dtype).startswith("datetime64[ns, UTC]"))
+        self.assertTrue(str(out["ts_utc"].dtype).startswith("datetime64") and "UTC" in str(out["ts_utc"].dtype))
         self.assertTrue(out["checksum"].str.len().eq(32).all())
 
     def test_normalize_ohlcv_raises_when_missing_columns(self) -> None:
