@@ -15,11 +15,13 @@ from .views import (
     RunPlotView,
     RunsView,
     RunTableView,
+    TriggerFetchView,
 )
 
 urlpatterns = [
     path('dashboard', DashboardView.as_view()),
     path('health', HealthView.as_view()),
+    path('trigger-fetch/', TriggerFetchView.as_view()),
     path('datasets', DatasetsView.as_view()),
     path('runs', RunsView.as_view()),
     path('runs/<str:run_id>', RunDetailView.as_view()),

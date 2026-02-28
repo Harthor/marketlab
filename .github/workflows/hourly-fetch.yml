@@ -1,0 +1,24 @@
+name: Hourly Data Fetch
+
+on:
+  schedule:
+    - cron: '5 * * * *'
+  workflow_dispatch:
+
+jobs:
+  trigger-fetch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Wake up Fly.io service
+        run: |
+          curl -sf https://marketlab-api.fly.dev/api/health/ || echo "Waking up..."
+
+      - name: Wait for service
+        run: sleep 30
+
+      - name: Trigger data fetch
+        run: |
+          curl -sf -X POST \
+            -H "Authorization: Bearer ${{ secrets.API_ACCESS_TOKEN }}" \
+            https://marketlab-api.fly.dev/api/trigger-fetch/ || echo "Fetch trigger sent"

@@ -1,10 +1,11 @@
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { apiFetch, API_BASE_URL } from '../api/client';
 import DegenFilters from '../components/degen/DegenFilters';
 import DegenTable from '../components/degen/DegenTable';
 import DegenTokenDetail from '../components/degen/DegenTokenDetail';
 import '../styles/degen.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8001/api';
+const API_BASE = API_BASE_URL;
 
 function riskLevel(score) {
   if (score >= 75) return 'extreme';
@@ -30,7 +31,7 @@ const DegenScannerPage = () => {
   useEffect(() => {
     const fetchWatchlist = async () => {
       try {
-        const res = await fetch(`${API_BASE}/degen/watchlist`, {
+        const res = await apiFetch(`${API_BASE}/degen/watchlist`, {
           signal: AbortSignal.timeout(8000),
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);

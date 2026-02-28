@@ -5,6 +5,7 @@ import type { DashboardRunData } from '@/types/dashboard';
 import { mockDashboardRun } from '@/data/mockData';
 
 const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8001/api';
+const API_TOKEN = import.meta.env.VITE_API_TOKEN ?? '';
 
 /**
  * Fetch dashboard run data.
@@ -13,8 +14,12 @@ const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8001/api
  */
 export async function fetchDashboardRun(): Promise<DashboardRunData> {
   try {
+    const headers: Record<string, string> = {};
+    if (API_TOKEN) headers['Authorization'] = `Bearer ${API_TOKEN}`;
+
     const res = await fetch(`${API_BASE}/dashboard`, {
       signal: AbortSignal.timeout(8000),
+      headers,
     });
     if (res.ok) {
       const data = await res.json();

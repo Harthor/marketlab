@@ -1,13 +1,35 @@
 import axios from 'axios';
 import { DEMO_DATA } from './mockData';
 
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000/api';
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8001/api';
+const API_TOKEN = import.meta.env.VITE_API_TOKEN || '';
 const DEMO_MODE = import.meta.env.VITE_DEMO_MODE === '1';
 
 const api = axios.create({
   baseURL: API_BASE_URL,
   timeout: 30000,
 });
+
+// Add Bearer token to all requests when configured
+if (API_TOKEN) {
+  api.interceptors.request.use((config) => {
+    config.headers.Authorization = `Bearer ${API_TOKEN}`;
+    return config;
+  });
+}
+
+export { API_BASE_URL, API_TOKEN };
+
+/**
+ * Fetch helper that includes the API token for direct fetch() calls.
+ */
+export async function apiFetch(url, options = {}) {
+  const headers = {
+    ...(API_TOKEN ? { Authorization: `Bearer ${API_TOKEN}` } : {}),
+    ...options.headers,
+  };
+  return fetch(url, { ...options, headers });
+}
 
 const pause = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 

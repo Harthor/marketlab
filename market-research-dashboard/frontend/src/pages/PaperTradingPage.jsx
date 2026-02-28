@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { apiFetch, API_BASE_URL } from '../api/client';
 import '../styles/paper.css';
 
-const API_BASE = import.meta.env.VITE_API_BASE_URL ?? 'http://127.0.0.1:8001/api';
+const API_BASE = API_BASE_URL;
 
 function fmtUsd(val) {
   if (val == null) return '-';
@@ -45,7 +46,7 @@ const PaperTradingPage = () => {
   useEffect(() => {
     const fetchPortfolios = async () => {
       try {
-        const res = await fetch(`${API_BASE}/paper/portfolios/`, {
+        const res = await apiFetch(`${API_BASE}/paper/portfolios/`, {
           signal: AbortSignal.timeout(8000),
         });
         if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -60,7 +61,7 @@ const PaperTradingPage = () => {
     };
     const fetchRegime = async () => {
       try {
-        const res = await fetch(`${API_BASE}/paper/regime/current/`, {
+        const res = await apiFetch(`${API_BASE}/paper/regime/current/`, {
           signal: AbortSignal.timeout(5000),
         });
         if (res.ok) setRegime(await res.json());
@@ -77,9 +78,9 @@ const PaperTradingPage = () => {
     const fetchDetail = async () => {
       try {
         const [dRes, tRes, sRes] = await Promise.all([
-          fetch(`${API_BASE}/paper/portfolios/${selectedSlug}/`),
-          fetch(`${API_BASE}/paper/portfolios/${selectedSlug}/trades/?limit=20`),
-          fetch(`${API_BASE}/paper/portfolios/${selectedSlug}/scorecards/`),
+          apiFetch(`${API_BASE}/paper/portfolios/${selectedSlug}/`),
+          apiFetch(`${API_BASE}/paper/portfolios/${selectedSlug}/trades/?limit=20`),
+          apiFetch(`${API_BASE}/paper/portfolios/${selectedSlug}/scorecards/`),
         ]);
         if (dRes.ok) setDetail(await dRes.json());
         if (tRes.ok) setTrades(await tRes.json());

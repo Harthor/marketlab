@@ -441,3 +441,42 @@ class DegenWatchlistView(APIView):
                 status=status.HTTP_500_INTERNAL_SERVER_ERROR,
             )
         return Response(data)
+
+
+# ---------------------------------------------------------------------------
+# Trigger fetch — manual pipeline kick (protected by APITokenMiddleware)
+# ---------------------------------------------------------------------------
+
+class TriggerFetchView(APIView):
+    """POST /api/trigger-fetch/ — trigger data pipeline (sync, no Celery)."""
+
+    def post(self, request):
+        import logging
+        import threading
+
+        from django.utils import timezone
+
+        logger = logging.getLogger(__name__)
+
+        def _run_pipeline():
+            try:
+                from .tasks import (
+                    compute_build_dataset,
+                    ingest_fng,
+                    ingest_rss_crypto,
+                )
+
+                logger.info("trigger-fetch: starting pipeline")
+                ingest_fng()
+                ingest_rss_crypto()
+                compute_build_dataset()
+                logger.info("trigger-fetch: pipeline complete")
+            except Exception as exc:
+                logger.error("trigger-fetch: pipeline error: %s", exc)
+
+        threading.Thread(target=_run_pipeline, daemon=True).start()
+
+        return Response({
+            'status': 'triggered',
+            'ts': timezone.now().isoformat(),
+        })

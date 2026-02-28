@@ -13,7 +13,7 @@ import os
 
 from celery import Celery
 
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "marketlab_backend.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "marketlab_backend.settings.local")
 
 app = Celery("marketlab")
 
