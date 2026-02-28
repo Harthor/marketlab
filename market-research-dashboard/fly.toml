@@ -1,4 +1,4 @@
-app = "marketlab-api"
+app = "marketlab-api-gh"
 primary_region = "mia"
 
 [build]

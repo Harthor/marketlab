@@ -12,7 +12,7 @@ jobs:
     steps:
       - name: Wake up Fly.io service
         run: |
-          curl -sf https://marketlab-api.fly.dev/api/health/ || echo "Waking up..."
+          curl -sf https://marketlab-api-gh.fly.dev/api/health/ || echo "Waking up..."
 
       - name: Wait for service
         run: sleep 30
@@ -21,4 +21,4 @@ jobs:
         run: |
           curl -sf -X POST \
             -H "Authorization: Bearer ${{ secrets.API_ACCESS_TOKEN }}" \
-            https://marketlab-api.fly.dev/api/trigger-fetch/ || echo "Fetch trigger sent"
+            https://marketlab-api-gh.fly.dev/api/trigger-fetch/ || echo "Fetch trigger sent"
