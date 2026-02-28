@@ -1,12 +1,15 @@
-// MarketLab Dashboard v2 — DashboardApp (spec §4.2)
+// MarketLab Dashboard v2 — DashboardApp (table layout like Degen Scanner)
+
+import '@/styles/dashboard-table.css';
 
 import { useState, lazy, Suspense } from 'react';
 import type { DashboardMode, SignalCardKey } from '@/types/dashboard';
 import { useDashboardRun } from './hooks/useDashboardRun';
 import DashboardShell from './DashboardShell';
 import DashboardHeader from './DashboardHeader';
-import SignalGrid from './SignalGrid';
-import { SkeletonCard, SkeletonChart } from './Skeleton';
+import SignalTable from './SignalTable';
+import SignalSummaryChips from './SignalSummaryChips';
+import { SkeletonChart } from './Skeleton';
 
 const DetailPanel = lazy(() => import('./DetailPanel'));
 const ForecastPanel = lazy(() => import('./ForecastPanel'));
@@ -22,15 +25,8 @@ export default function DashboardApp() {
 
   if (loading && !run.signals.length) {
     return (
-      <div className="min-h-screen bg-ml-bg-canvas text-ml-text-primary font-sans">
-        <div className="mx-auto max-w-[1440px] px-4 md:px-6 xl:px-8 py-4 md:py-6">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-            <SkeletonCard />
-          </div>
-        </div>
+      <div className="dashboard-page">
+        <div className="degen-loading">Cargando señales...</div>
       </div>
     );
   }
@@ -41,14 +37,16 @@ export default function DashboardApp() {
         <DashboardHeader
           asset={run.asset}
           generatedAt={run.generatedAt}
+          signalCount={run.signals.length}
           mode={mode}
           onModeChange={setMode}
         />
       }
-      grid={
-        <SignalGrid
+      chips={<SignalSummaryChips signals={run.signals} />}
+      table={
+        <SignalTable
           signals={run.signals}
-          selectedSignal={selectedSignal}
+          selected={selectedSignal}
           onSelect={setSelectedSignal}
           mode={mode}
         />
@@ -56,7 +54,9 @@ export default function DashboardApp() {
       detail={
         <Suspense fallback={<div className="space-y-4"><SkeletonChart /><SkeletonChart /></div>}>
           {selectedSignalData && (
-            <DetailPanel signal={selectedSignalData} mode={mode} />
+            <div className="signal-detail-section">
+              <DetailPanel signal={selectedSignalData} mode={mode} />
+            </div>
           )}
         </Suspense>
       }

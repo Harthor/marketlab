@@ -1,0 +1,187 @@
+/* ===================================================================
+   Dashboard Signal Table — scoped styles
+   Mirrors degen.css patterns using the same CSS custom properties
+   =================================================================== */
+
+/* Page layout --------------------------------------------------------- */
+.dashboard-page {
+  padding: 0 0 2rem;
+}
+
+/* Summary chips ------------------------------------------------------- */
+.signal-summary-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.signal-summary-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border, var(--ml-border-default));
+  background: rgba(22, 27, 34, 0.7);
+  font-size: 0.78rem;
+}
+
+.signal-summary-chip__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.signal-summary-chip__count {
+  font-weight: 700;
+  color: var(--accent, var(--ml-green-text));
+}
+
+/* Table --------------------------------------------------------------- */
+.signal-table-wrap {
+  overflow-x: auto;
+  margin-bottom: 1.25rem;
+}
+
+.signal-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.signal-table th {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  color: var(--muted, var(--ml-text-muted));
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border, var(--ml-border-default));
+  white-space: nowrap;
+}
+
+.signal-table__row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.signal-table__row:hover {
+  background: rgba(88, 166, 255, 0.06);
+}
+
+.signal-table__row--selected {
+  background: rgba(88, 166, 255, 0.12);
+}
+
+.signal-table__row td {
+  padding: 0.6rem 0.6rem;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+  white-space: nowrap;
+}
+
+.signal-table__rank {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.8rem;
+  width: 2rem;
+}
+
+/* Signal cell (icon + name + subtitle) */
+.signal-table__signal {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.signal-table__signal-name {
+  font-weight: 600;
+}
+
+.signal-table__signal-sub {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.78rem;
+}
+
+/* Frequency badge */
+.signal-table__freq {
+  display: inline-block;
+  padding: 0.1rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  border: 1px solid var(--border, var(--ml-border-default));
+  background: rgba(22, 27, 34, 0.5);
+  color: var(--muted, var(--ml-text-secondary));
+}
+
+/* Monospace values */
+.signal-table__mono {
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-size: 0.82rem;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Confidence bar (inline) */
+.signal-table__confidence {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 90px;
+}
+
+.signal-table__conf-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(48, 54, 61, 0.6);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.signal-table__conf-fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+/* Color by state */
+.signal-table__conf-fill[data-state="green"] {
+  background: var(--ml-green-500, #22C55E);
+}
+.signal-table__conf-fill[data-state="yellow"] {
+  background: var(--ml-yellow-500, #EAB308);
+}
+.signal-table__conf-fill[data-state="orange"] {
+  background: var(--ml-orange-500, #F97316);
+}
+.signal-table__conf-fill[data-state="red"] {
+  background: var(--ml-red-500, #EF4444);
+}
+.signal-table__conf-fill[data-state="blocked"] {
+  background: var(--ml-blocked-500, #64748B);
+}
+
+.signal-table__conf-value {
+  font-size: 0.78rem;
+  font-weight: 600;
+  min-width: 2.2rem;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Detail section below table ------------------------------------------ */
+.signal-detail-section {
+  margin-top: 0.5rem;
+  border: 1px solid var(--border, var(--ml-border-default));
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(22, 27, 34, 0.95), rgba(22, 27, 34, 0.75));
+  padding: 1.25rem;
+}
+
+/* Responsive ---------------------------------------------------------- */
+@media (max-width: 640px) {
+  .signal-table__signal-sub {
+    display: none;
+  }
+}
