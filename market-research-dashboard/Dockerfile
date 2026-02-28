@@ -2,6 +2,7 @@ FROM python:3.11-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV DJANGO_SETTINGS_MODULE=marketlab_backend.settings.production
 
 WORKDIR /app
 
@@ -17,9 +18,10 @@ RUN pip install --no-cache-dir -r requirements.txt
 # Copy backend project
 COPY backend/ .
 
-# Collect static files
-RUN python manage.py collectstatic --noinput 2>/dev/null || true
+# Entrypoint (migrate + collectstatic + gunicorn)
+COPY entrypoint.sh .
+RUN chmod +x entrypoint.sh
 
 EXPOSE 8000
 
-CMD ["gunicorn", "marketlab_backend.wsgi:application", "--bind", "0.0.0.0:8000", "--workers", "2", "--timeout", "120"]
+CMD ["./entrypoint.sh"]
