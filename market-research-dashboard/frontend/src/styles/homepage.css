@@ -1,0 +1,181 @@
+/* ===================================================================
+   HomePage — Hub layout
+   =================================================================== */
+
+.home-page {
+  padding: 0 0 2rem;
+}
+
+/* Hero --------------------------------------------------------------- */
+.home-hero {
+  margin-bottom: 1.5rem;
+}
+
+.home-hero__title {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #60a5fa 0%, #38bdf8 50%, #22d3ee 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.home-hero__sub {
+  margin: 0.2rem 0 0;
+  font-size: 0.85rem;
+  color: var(--muted, var(--ml-text-muted));
+}
+
+/* Grid --------------------------------------------------------------- */
+.home-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+@media (max-width: 768px) {
+  .home-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Section card ------------------------------------------------------- */
+.home-section {
+  border: 1px solid var(--border, var(--ml-border-default));
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(22, 27, 34, 0.95), rgba(22, 27, 34, 0.75));
+  padding: 1rem 1.1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.home-section__header {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-bottom: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.home-section__title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.home-section__count {
+  font-size: 0.78rem;
+  color: var(--muted, var(--ml-text-muted));
+}
+
+.home-section__link {
+  margin-left: auto;
+  font-size: 0.78rem;
+  color: var(--accent, #58a6ff);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.home-section__link:hover {
+  text-decoration: underline;
+}
+
+.home-section__body {
+  flex: 1;
+}
+
+/* Mini table --------------------------------------------------------- */
+.home-mini-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.82rem;
+}
+
+.home-mini-table td {
+  padding: 0.4rem 0.4rem;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.4);
+  white-space: nowrap;
+}
+
+.home-mini-table tr:last-child td {
+  border-bottom: none;
+}
+
+.home-rank {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.75rem;
+  width: 1.5rem;
+}
+
+.home-mono {
+  font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, monospace;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.home-signal-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.home-muted {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.82rem;
+  margin: 0;
+}
+
+.home-muted-inline {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.75rem;
+}
+
+/* Health ------------------------------------------------------------- */
+.home-health {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.home-health__status {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.home-health__sources {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.home-health__source {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.78rem;
+  color: var(--muted, var(--ml-text-secondary));
+}
+
+.home-health__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.home-health__dot--healthy {
+  background: var(--ml-green-500, #22C55E);
+}
+
+.home-health__dot--degraded {
+  background: var(--ml-yellow-500, #EAB308);
+}
+
+.home-health__dot--unhealthy {
+  background: var(--ml-red-500, #EF4444);
+}

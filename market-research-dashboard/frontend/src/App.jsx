@@ -2,6 +2,7 @@ import React, { lazy, Suspense } from 'react';
 import { Navigate, Route, Routes } from 'react-router-dom';
 import AuthGate from './components/AuthGate';
 import Nav from './components/Nav';
+import HomePage from './pages/HomePage';
 import BacktestsPage from './pages/BacktestsPage';
 import CorrelationsPage from './pages/CorrelationsPage';
 import DatasetsPage from './pages/DatasetsPage';
@@ -17,8 +18,9 @@ const App = () => {
         <Nav />
         <main>
           <Routes>
+            <Route path="/" element={<HomePage />} />
             <Route
-              path="/"
+              path="/signals"
               element={
                 <Suspense fallback={<div style={{ minHeight: '100vh', background: '#0B1120' }} />}>
                   <DashboardApp />
