@@ -1,0 +1,80 @@
+# smart_dip_buy — Smart money buying into a dip
+name: Smart Dip Buy
+slug: smart_dip_buy
+description: >
+  Combines whale accumulation signals with price weakness.
+  Fires when smart money is actively buying while the
+  token price has pulled back significantly.
+version: "1.0"
+enabled: true
+
+required:
+  - field: smart_money.consensus_direction
+    operator: eq
+    value: "accumulate"
+  - field: smart_money.consensus_score
+    operator: gte
+    value: 60
+  - field: price_change_24h_pct
+    operator: lt
+    value: -10
+  - field: liquidity_usd
+    operator: gte
+    value: 30000
+
+confirmations:
+  - field: smart_money.tier_a_active
+    operator: eq
+    value: true
+  - field: smart_money.unique_wallets_buying
+    operator: gte
+    value: 3
+  - field: volume_24h_change_pct
+    operator: gte
+    value: 50
+
+vetos:
+  - field: risk_score
+    operator: gte
+    value: 65
+  - field: price_change_24h_pct
+    operator: lt
+    value: -70
+  - field: smart_money.consensus_score
+    operator: lt
+    value: 45
+
+base_confidence: 0.50
+confidence_components:
+  - field: smart_money.consensus_score
+    weight: 3.0
+    func: ramp
+    lo: 55
+    hi: 90
+  - field: smart_money.unique_wallets_buying
+    weight: 2.0
+    func: ramp
+    lo: 1
+    hi: 6
+  - field: smart_money.tier_a_active
+    weight: 1.5
+    func: boolf
+    lo: 0
+    hi: 1
+  - field: risk_score
+    weight: 1.5
+    func: inv_ramp
+    lo: 15
+    hi: 65
+
+edge_prior: 1.15
+
+regime_fit:
+  mania: 0.4
+  rotation: 0.7
+  low_activity: 0.5
+  flight_to_quality: 0.6
+  capitulation: 1.0
+
+min_liquidity_usd: 30000
+min_volume_24h_usd: 15000

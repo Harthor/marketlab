@@ -1,0 +1,43 @@
+schema_version: 1
+kind: chain_config
+
+chains:
+  solana:
+    enabled: true
+    chain_id: solana
+    # GeckoTerminal network ID
+    gecko_network: solana
+    # DexScreener chain ID
+    dexscreener_chain: solana
+    # Birdeye chain
+    birdeye_chain: solana
+    discovery_sources:
+      - dexscreener
+      - geckoterminal
+      - birdeye
+    quote_assets: [USDC, SOL]
+    is_evm: false
+
+  base:
+    enabled: true
+    chain_id: "8453"
+    gecko_network: base
+    dexscreener_chain: base
+    birdeye_chain: base
+    discovery_sources:
+      - dexscreener
+      - geckoterminal
+    quote_assets: [USDC, USDT, WETH]
+    is_evm: true
+
+  bsc:
+    enabled: true
+    chain_id: "56"
+    gecko_network: bsc
+    dexscreener_chain: bsc
+    birdeye_chain: bsc
+    discovery_sources:
+      - dexscreener
+      - geckoterminal
+    quote_assets: [USDC, USDT, WBNB]
+    is_evm: true

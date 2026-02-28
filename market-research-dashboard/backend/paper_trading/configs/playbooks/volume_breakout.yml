@@ -1,0 +1,73 @@
+# volume_breakout — Volume spike relative to baseline
+name: Volume Breakout
+slug: volume_breakout
+description: >
+  Fires when a token's 24h volume spikes significantly
+  relative to its historical baseline, often preceding price moves.
+version: "1.0"
+enabled: true
+
+required:
+  - field: volume_24h_change_pct
+    operator: gte
+    value: 150
+  - field: volume_24h_usd
+    operator: gte
+    value: 50000
+  - field: universe_score
+    operator: gte
+    value: 35
+
+confirmations:
+  - field: smart_money.consensus_direction
+    operator: eq
+    value: "accumulate"
+  - field: price_change_24h_pct
+    operator: gte
+    value: 10
+  - field: holder_count_change_pct
+    operator: gte
+    value: 5
+
+vetos:
+  - field: risk_score
+    operator: gte
+    value: 70
+  - field: volume_24h_change_pct
+    operator: lt
+    value: 80
+
+base_confidence: 0.45
+confidence_components:
+  - field: volume_24h_change_pct
+    weight: 3.0
+    func: ramp
+    lo: 100
+    hi: 500
+  - field: volume_24h_usd
+    weight: 2.0
+    func: ramp
+    lo: 30000
+    hi: 500000
+  - field: universe_score
+    weight: 1.5
+    func: ramp
+    lo: 30
+    hi: 75
+  - field: risk_score
+    weight: 1.0
+    func: inv_ramp
+    lo: 15
+    hi: 70
+
+edge_prior: 1.0
+
+regime_fit:
+  mania: 0.8
+  rotation: 0.7
+  low_activity: 0.5
+  flight_to_quality: 0.3
+  capitulation: 0.4
+
+min_liquidity_usd: 25000
+min_volume_24h_usd: 50000

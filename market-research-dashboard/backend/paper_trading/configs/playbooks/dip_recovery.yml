@@ -1,0 +1,77 @@
+# dip_recovery — Token dropped significantly but showing recovery signals
+name: Dip Recovery
+slug: dip_recovery
+description: >
+  Targets tokens that experienced a significant dip (>25%)
+  but are now showing recovery signals via score improvement,
+  smart money interest, or volume reversal.
+version: "1.0"
+enabled: true
+
+required:
+  - field: price_change_24h_pct
+    operator: between
+    value: [-60, -15]
+  - field: universe_score
+    operator: gte
+    value: 35
+  - field: liquidity_usd
+    operator: gte
+    value: 30000
+
+confirmations:
+  - field: smart_money.consensus_direction
+    operator: eq
+    value: "accumulate"
+  - field: volume_24h_change_pct
+    operator: gte
+    value: 30
+  - field: price_change_1h_pct
+    operator: gte
+    value: 3
+
+vetos:
+  - field: risk_score
+    operator: gte
+    value: 75
+  - field: price_change_24h_pct
+    operator: lt
+    value: -70
+  - field: liquidity_usd
+    operator: lt
+    value: 15000
+
+base_confidence: 0.40
+confidence_components:
+  - field: universe_score
+    weight: 2.0
+    func: ramp
+    lo: 30
+    hi: 70
+  - field: smart_money.consensus_score
+    weight: 2.0
+    func: ramp
+    lo: 30
+    hi: 80
+  - field: liquidity_usd
+    weight: 1.5
+    func: ramp
+    lo: 20000
+    hi: 300000
+  - field: risk_score
+    weight: 1.5
+    func: inv_ramp
+    lo: 20
+    hi: 75
+
+edge_prior: 1.1
+
+regime_fit:
+  mania: 0.5
+  rotation: 0.8
+  low_activity: 0.4
+  flight_to_quality: 0.6
+  capitulation: 0.9
+
+min_liquidity_usd: 30000
+min_volume_24h_usd: 15000

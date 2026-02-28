@@ -1,0 +1,378 @@
+/* ===================================================================
+   Degen Scanner Page — scoped styles
+   Uses the project's CSS custom properties from tokens.css / styles.css
+   =================================================================== */
+
+.degen-page {
+  padding: 0 0 2rem;
+}
+
+/* Header -------------------------------------------------------------- */
+.degen-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+
+.degen-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.degen-header__meta {
+  display: flex;
+  gap: 1rem;
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.85rem;
+}
+
+.degen-header__ts {
+  opacity: 0.7;
+}
+
+/* Summary chips ------------------------------------------------------- */
+.degen-summary-bar {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+
+.degen-summary-chip {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border, var(--ml-border-default));
+  background: rgba(22, 27, 34, 0.7);
+  font-size: 0.78rem;
+  text-transform: capitalize;
+}
+
+.degen-summary-chip__count {
+  font-weight: 700;
+  color: var(--accent, var(--ml-green-text));
+}
+
+/* Filters ------------------------------------------------------------- */
+.degen-filters {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.degen-filters label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  font-size: 0.8rem;
+  color: var(--muted, var(--ml-text-secondary));
+}
+
+.degen-filters select {
+  border: 1px solid var(--border, var(--ml-border-default));
+  background: var(--bg, var(--ml-bg-canvas));
+  color: var(--text, var(--ml-text-primary));
+  border-radius: 6px;
+  padding: 0.45rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+/* Content layout ------------------------------------------------------ */
+.degen-content {
+  display: flex;
+  gap: 1rem;
+}
+
+.degen-table-container {
+  flex: 1;
+  min-width: 0;
+  overflow-x: auto;
+}
+
+.degen-table-container--with-detail {
+  flex: 2;
+}
+
+/* Table --------------------------------------------------------------- */
+.degen-table-wrap {
+  overflow-x: auto;
+}
+
+.degen-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.degen-table th {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  color: var(--muted, var(--ml-text-muted));
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  border-bottom: 1px solid var(--border, var(--ml-border-default));
+  white-space: nowrap;
+}
+
+.degen-table__row {
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.degen-table__row:hover {
+  background: rgba(88, 166, 255, 0.06);
+}
+
+.degen-table__row--selected {
+  background: rgba(88, 166, 255, 0.12);
+}
+
+.degen-table__row td {
+  padding: 0.55rem 0.6rem;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+  white-space: nowrap;
+}
+
+.degen-table__rank {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.8rem;
+  width: 2rem;
+}
+
+.degen-table__token {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.degen-table__name {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.78rem;
+}
+
+/* Badge (shared by Risk / Category) ----------------------------------- */
+.degen-badge {
+  display: inline-block;
+  padding: 0.15rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* Chain icon ---------------------------------------------------------- */
+.degen-chain-icon {
+  display: inline-block;
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  border: 1px solid;
+}
+
+/* Score bar ----------------------------------------------------------- */
+.degen-score-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-width: 80px;
+}
+
+.degen-score-bar__track {
+  flex: 1;
+  height: 6px;
+  background: rgba(48, 54, 61, 0.6);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.degen-score-bar__fill {
+  height: 100%;
+  border-radius: 3px;
+  transition: width 0.3s;
+}
+
+.degen-score-bar__value {
+  font-size: 0.78rem;
+  font-weight: 600;
+  min-width: 2rem;
+  text-align: right;
+}
+
+/* Detail panel -------------------------------------------------------- */
+.degen-detail-panel {
+  flex: 1;
+  min-width: 280px;
+  max-width: 360px;
+  border: 1px solid var(--border, var(--ml-border-default));
+  border-radius: 10px;
+  background: linear-gradient(180deg, rgba(22, 27, 34, 0.95), rgba(22, 27, 34, 0.75));
+  padding: 1rem;
+  position: sticky;
+  top: 4rem;
+  max-height: calc(100vh - 5rem);
+  overflow-y: auto;
+}
+
+.degen-detail__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.75rem;
+}
+
+.degen-detail__title {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.degen-detail__title h3 {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.degen-detail__name {
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.85rem;
+}
+
+.degen-detail__close {
+  background: none;
+  border: 1px solid var(--border, var(--ml-border-default));
+  color: var(--muted, var(--ml-text-muted));
+  border-radius: 4px;
+  width: 26px;
+  height: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+}
+
+.degen-detail__close:hover {
+  color: var(--text, var(--ml-text-primary));
+  border-color: var(--accent, #58a6ff);
+}
+
+.degen-detail__badges {
+  display: flex;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.degen-detail__scores {
+  margin-bottom: 0.75rem;
+}
+
+.degen-detail__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.4rem;
+  margin-bottom: 0.75rem;
+}
+
+.degen-detail__row {
+  display: flex;
+  flex-direction: column;
+  padding: 0.35rem 0.5rem;
+  background: rgba(13, 17, 23, 0.5);
+  border-radius: 6px;
+}
+
+.degen-detail__label {
+  font-size: 0.72rem;
+  color: var(--muted, var(--ml-text-muted));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.degen-detail__value {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.degen-detail__section {
+  margin-bottom: 0.75rem;
+}
+
+.degen-detail__section h4 {
+  margin: 0 0 0.3rem;
+  font-size: 0.8rem;
+  color: var(--muted, var(--ml-text-muted));
+}
+
+.degen-detail__flags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+}
+
+.degen-flag {
+  display: inline-block;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  font-size: 0.7rem;
+}
+
+.degen-flag--attention {
+  background: var(--ml-yellow-soft, rgba(234,179,8,0.12));
+  color: var(--ml-yellow-text, #FDE68A);
+  border: 1px solid var(--ml-yellow-border, rgba(234,179,8,0.35));
+}
+
+.degen-flag--security {
+  background: var(--ml-red-soft, rgba(239,68,68,0.12));
+  color: var(--ml-red-text, #FCA5A5);
+  border: 1px solid var(--ml-red-border, rgba(239,68,68,0.35));
+}
+
+.degen-detail__address {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.degen-detail__address code {
+  font-size: 0.72rem;
+  word-break: break-all;
+  color: var(--muted, var(--ml-text-muted));
+  background: rgba(13, 17, 23, 0.5);
+  padding: 0.3rem 0.5rem;
+  border-radius: 4px;
+}
+
+/* Empty / loading / error states -------------------------------------- */
+.degen-empty,
+.degen-loading,
+.degen-error {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted, var(--ml-text-muted));
+  font-size: 0.9rem;
+}
+
+.degen-error {
+  color: var(--ml-red-text, #FCA5A5);
+}
+
+/* Responsive ---------------------------------------------------------- */
+@media (max-width: 900px) {
+  .degen-content {
+    flex-direction: column;
+  }
+
+  .degen-detail-panel {
+    max-width: 100%;
+    position: static;
+    max-height: none;
+  }
+}

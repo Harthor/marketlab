@@ -3,14 +3,14 @@
 from __future__ import annotations
 
 from datetime import timedelta
-from typing import Any, Dict
+from typing import Any
 
 import polars as pl
 
 from .timeseries import _parse_duration
 
 
-def validate_timestamp_series(df: pl.DataFrame, ts_col: str = "timestamp") -> Dict[str, Any]:
+def validate_timestamp_series(df: pl.DataFrame, ts_col: str = "timestamp") -> dict[str, Any]:
     """Validate timestamp column and return a compact validation report."""
 
     errors: list[str] = []

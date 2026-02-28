@@ -1,0 +1,73 @@
+# social_viral — Social metrics explosion
+name: Social Viral
+slug: social_viral
+description: >
+  Targets tokens with explosive social media activity —
+  high mention velocity, trending hashtags, or viral posts.
+version: "1.0"
+enabled: true
+
+required:
+  - field: social_score
+    operator: gte
+    value: 70
+  - field: universe_score
+    operator: gte
+    value: 45
+  - field: liquidity_usd
+    operator: gte
+    value: 20000
+
+confirmations:
+  - field: smart_money.unique_wallets_buying
+    operator: gte
+    value: 1
+  - field: volume_24h_change_pct
+    operator: gte
+    value: 100
+  - field: holder_count_change_pct
+    operator: gte
+    value: 20
+
+vetos:
+  - field: risk_score
+    operator: gte
+    value: 70
+  - field: social_score
+    operator: lt
+    value: 40
+
+base_confidence: 0.45
+confidence_components:
+  - field: social_score
+    weight: 3.0
+    func: ramp
+    lo: 60
+    hi: 95
+  - field: volume_24h_change_pct
+    weight: 2.0
+    func: ramp
+    lo: 50
+    hi: 300
+  - field: universe_score
+    weight: 1.5
+    func: ramp
+    lo: 40
+    hi: 80
+  - field: risk_score
+    weight: 1.0
+    func: inv_ramp
+    lo: 20
+    hi: 70
+
+edge_prior: 0.9
+
+regime_fit:
+  mania: 1.0
+  rotation: 0.6
+  low_activity: 0.3
+  flight_to_quality: 0.2
+  capitulation: 0.2
+
+min_liquidity_usd: 20000
+min_volume_24h_usd: 10000

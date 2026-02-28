@@ -1,0 +1,61 @@
+{
+  "kind": "Listing",
+  "data": {
+    "modhash": "",
+    "dist": 5,
+    "children": [
+      {
+        "kind": "t3",
+        "data": {
+          "title": "Bitcoin hits new ATH as institutional buying surges",
+          "score": 1520,
+          "num_comments": 340,
+          "created_utc": 1641808800,
+          "subreddit": "bitcoin"
+        }
+      },
+      {
+        "kind": "t3",
+        "data": {
+          "title": "Ethereum gas fees drop to 6-month low",
+          "score": 890,
+          "num_comments": 150,
+          "created_utc": 1641812400,
+          "subreddit": "cryptocurrency"
+        }
+      },
+      {
+        "kind": "t3",
+        "data": {
+          "title": "BTC whale accumulation continues despite market uncertainty",
+          "score": 620,
+          "num_comments": 89,
+          "created_utc": 1641895200,
+          "subreddit": "bitcoin"
+        }
+      },
+      {
+        "kind": "t3",
+        "data": {
+          "title": "Regulatory framework for crypto proposed in EU",
+          "score": 410,
+          "num_comments": 200,
+          "created_utc": 1641898800,
+          "subreddit": "cryptocurrency"
+        }
+      },
+      {
+        "kind": "t3",
+        "data": {
+          "title": "Bitcoin mining ban reversed in Kazakhstan",
+          "score": 950,
+          "num_comments": 175,
+          "created_utc": 1641981600,
+          "subreddit": "bitcoin"
+        }
+      }
+    ],
+    "after": null,
+    "before": null
+  }
+}

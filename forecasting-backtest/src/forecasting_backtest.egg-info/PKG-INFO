@@ -34,6 +34,13 @@ Repo minimal para baselines de forecasting de series temporales con validación 
 - Dependencia local de [`marketlab-core`](../marketlab-core)
 - Instalación editable de este repo desde el raíz de `forecasting-backtest`
 
+En entornos nuevos:
+
+```bash
+pip install -e ../marketlab-core
+pip install -e .
+```
+
 ## Instalación rápida (recomendada)
 
 ```bash
@@ -41,7 +48,8 @@ cd /Users/carlaherrera/Desktop/market-sentiment-lab/forecasting-backtest
 make bootstrap
 ```
 
-Si te aparece error de Python, revisá que `python3.11` esté en PATH. Si solo tenés Python 3.9/3.10, primero actualizalo (`brew install python@3.11`, `pyenv`, o `conda`) y reintentá.
+Si hay problemas de entorno de Python, revisá `tools/python_select.sh`
+para verificar que devuelve un intérprete >=3.11.
 
 Si querés usar `xgboost` o `lightgbm`:
 
@@ -77,10 +85,15 @@ El demo:
 2) entrena `ridge`,
 3) muestra `leaderboard` con el run nuevo.
 
+### Nota de timestamp
+
+El timestamp canónico del stack es `marketlab_core.contracts.TIMESTAMP_COL` (hoy `ts_utc`).
+`forecast train` lo usa como default vía ese contrato y conserva `dataset.timestamp_col` en el `run_summary` para trazabilidad.
+
 También podés correrlo directo:
 
 ```bash
-python3 scripts/run_demo.py
+python scripts/run_demo.py
 ```
 
 Comandos útiles:
@@ -107,6 +120,10 @@ forecast train --dataset data.parquet --target returns_1d --model ridge --config
 forecast backtest --run-id ridge_20260101-120000_abcd1234
 forecast leaderboard
 ```
+
+Nota de timestamp:
+- `forecast train` usa `--timestamp` con default `ts_utc` (desde `marketlab_core.contracts.TIMESTAMP_COL`, con fallback a `ts_utc`).
+- Si el dataset viene con `ts`/`timestamp`, se normaliza internamente a `ts_utc` en los artefactos.
 
 ### `forecast train`
 

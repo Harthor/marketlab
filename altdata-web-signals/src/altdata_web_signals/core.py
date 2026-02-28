@@ -111,7 +111,9 @@ def align_frames(
             how=cast(Any, join_how),
         )
         if f"{ts_col}_right" in aligned.columns:
-            aligned = aligned.with_columns(pl.col(f"{ts_col}_right").alias(ts_col)).drop(f"{ts_col}_right")
+            aligned = aligned.with_columns(
+                pl.coalesce(pl.col(ts_col), pl.col(f"{ts_col}_right")).alias(ts_col)
+            ).drop(f"{ts_col}_right")
     return aligned.sort(ts_col)
 
 

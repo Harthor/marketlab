@@ -95,3 +95,53 @@ def iter_time_splits(
         if next_pos >= n:
             break
         start_pos = next_pos
+
+
+def iter_expanding_splits(
+    df: pd.DataFrame,
+    *,
+    ts_col: str = "ts",
+    min_train_rows: int = 26,
+    test_rows: int = 1,
+    step_rows: int = 1,
+) -> Iterator[TimeSplit]:
+    """Expanding-window walk-forward splits (observation-index based).
+
+    Train always starts at index 0 and grows each fold.
+    Test is the next ``test_rows`` observations after the train window.
+    """
+    if df.empty:
+        return
+
+    if not df[ts_col].is_monotonic_increasing:
+        df = df.sort_values(ts_col).reset_index(drop=True)
+
+    times = pd.to_datetime(df[ts_col], utc=True)
+    if times.isna().any():
+        raise ValueError("timestamp column cannot be parsed")
+    times = times.dt.tz_localize(None)
+
+    n = len(times)
+    fold = 0
+    train_end_pos = min_train_rows  # exclusive upper bound of train
+
+    while train_end_pos + test_rows <= n:
+        test_start_pos = train_end_pos
+        test_end_pos = min(test_start_pos + test_rows, n)
+
+        if test_end_pos <= test_start_pos:
+            break
+
+        split = TimeSplit(
+            fold=fold,
+            train_idx=np.arange(0, train_end_pos, dtype=int),
+            test_idx=np.arange(test_start_pos, test_end_pos, dtype=int),
+            train_start=times.iloc[0].to_pydatetime(),
+            train_end=times.iloc[train_end_pos - 1].to_pydatetime(),
+            test_start=times.iloc[test_start_pos].to_pydatetime(),
+            test_end=times.iloc[test_end_pos - 1].to_pydatetime(),
+        )
+        yield split
+
+        fold += 1
+        train_end_pos += step_rows

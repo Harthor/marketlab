@@ -3,14 +3,14 @@ from __future__ import annotations
 import base64
 import binascii
 import csv
-import math
 import json
+import math
 import mimetypes
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Any
 from urllib.parse import unquote
-from typing import Any, Dict, List, Optional, Tuple
 
 from django.conf import settings
 from django.core.exceptions import BadRequest
@@ -119,7 +119,7 @@ RUN_ERROR_KEYS = (
 )
 
 
-def _extract_top_features_count(summary: Dict[str, Any]) -> Optional[int]:
+def _extract_top_features_count(summary: dict[str, Any]) -> int | None:
     value = summary.get("top_features")
     if isinstance(value, int) and not isinstance(value, bool):
         return value
@@ -144,7 +144,7 @@ def _extract_top_features_count(summary: Dict[str, Any]) -> Optional[int]:
     return None
 
 
-def _has_required_manifest_value(summary: Dict[str, Any], field: str) -> bool:
+def _has_required_manifest_value(summary: dict[str, Any], field: str) -> bool:
     if field == "dataset_hash":
         return _extract_string(summary, DATASET_HASH_KEYS) is not None
     if field == "top_features":
@@ -168,28 +168,28 @@ class RunSummary:
     kind: str
     name: str
     path: Path
-    created_at_utc: Optional[datetime]
+    created_at_utc: datetime | None
     dataset_hash: str
-    schema_version: Optional[str]
+    schema_version: str | None
     status: str
     status_ui: str
     is_stale: bool
-    error: Optional[str]
-    errors: Optional[List[str]]
+    error: str | None
+    errors: list[str] | None
     label: str
-    model_name: Optional[str]
-    top_features: Optional[int]
-    summary: Dict[str, Any]
-    tables: List[RunArtifact]
-    plots: List[RunArtifact]
+    model_name: str | None
+    top_features: int | None
+    summary: dict[str, Any]
+    tables: list[RunArtifact]
+    plots: list[RunArtifact]
 
 
 @dataclass(frozen=True)
 class DatasetSummary:
     name: str
     run_count: int
-    source_types: List[str]
-    last_seen: Optional[datetime]
+    source_types: list[str]
+    last_seen: datetime | None
     table_count: int
     plot_count: int
 
@@ -198,7 +198,7 @@ def _workspace_root() -> Path:
     return getattr(settings, 'MARKETLAB_WORKSPACE', Path(__file__).resolve().parents[2]).resolve()
 
 
-def _base_paths() -> List[Tuple[str, Path]]:
+def _base_paths() -> list[tuple[str, Path]]:
     workspace = _workspace_root()
     return [
         ('correlation', workspace / CORRELATION_ROOT_NAME / CORRELATION_SUBPATH),
@@ -211,7 +211,7 @@ def _run_id_from_path(run_type: str, path: Path) -> str:
     return f"{run_type}::{encoded}"
 
 
-def _decode_run_id(run_id: str) -> Tuple[str, str]:
+def _decode_run_id(run_id: str) -> tuple[str, str]:
     decoded_run_id = unquote(run_id)
 
     if '::' not in decoded_run_id:
@@ -234,16 +234,16 @@ def _manifest_for_kind(run_type: str) -> str:
     return CORRELATION_MANIFEST if run_type == 'correlation' else FORECAST_MANIFEST
 
 
-def _manifest_timestamp(path: Path) -> Optional[datetime]:
+def _manifest_timestamp(path: Path) -> datetime | None:
     try:
         return datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc)
     except OSError:
         return None
 
 
-def _read_json_if_possible(path: Path) -> Optional[Dict[str, Any]]:
+def _read_json_if_possible(path: Path) -> dict[str, Any] | None:
     try:
-        with open(path, 'r', encoding='utf-8') as handle:
+        with open(path, encoding='utf-8') as handle:
             payload = json.load(handle)
     except (OSError, json.JSONDecodeError):
         return None
@@ -251,7 +251,7 @@ def _read_json_if_possible(path: Path) -> Optional[Dict[str, Any]]:
     return payload if isinstance(payload, dict) else None
 
 
-def _lookup_nested(payload: Dict[str, Any], dotted_key: str) -> Any:
+def _lookup_nested(payload: dict[str, Any], dotted_key: str) -> Any:
     current: Any = payload
     for segment in dotted_key.split('.'):
         if not isinstance(current, dict):
@@ -262,7 +262,7 @@ def _lookup_nested(payload: Dict[str, Any], dotted_key: str) -> Any:
     return current
 
 
-def _extract_string(payload: Dict[str, Any], keys: Tuple[str, ...]) -> Optional[str]:
+def _extract_string(payload: dict[str, Any], keys: tuple[str, ...]) -> str | None:
     for key in keys:
         value = _lookup_nested(payload, key)
         if isinstance(value, str):
@@ -272,7 +272,7 @@ def _extract_string(payload: Dict[str, Any], keys: Tuple[str, ...]) -> Optional[
     return None
 
 
-def _extract_dataset_path(summary: Dict[str, Any], run_dir: Path) -> Optional[Path]:
+def _extract_dataset_path(summary: dict[str, Any], run_dir: Path) -> Path | None:
     raw_path = _extract_string(summary, DATASET_PATH_KEYS)
     if raw_path is None:
         dataset_payload = summary.get("dataset")
@@ -303,7 +303,7 @@ def _extract_dataset_path(summary: Dict[str, Any], run_dir: Path) -> Optional[Pa
     return (run_dir / dataset_path).resolve()
 
 
-def _extract_dataset_meta_hash(meta: Dict[str, Any]) -> Optional[str]:
+def _extract_dataset_meta_hash(meta: dict[str, Any]) -> str | None:
     for key in ("out_sha256", "sha256", "hash", "dataset_hash"):
         value = meta.get(key)
         if isinstance(value, str):
@@ -332,7 +332,7 @@ def _extract_dataset_meta_hash(meta: Dict[str, Any]) -> Optional[str]:
     return None
 
 
-def _is_dataset_stale(dataset_hash: str, summary: Dict[str, Any], run_dir: Path) -> bool:
+def _is_dataset_stale(dataset_hash: str, summary: dict[str, Any], run_dir: Path) -> bool:
     dataset_path = _extract_dataset_path(summary, run_dir)
     if not dataset_path or not dataset_hash:
         return False
@@ -352,7 +352,7 @@ def _is_dataset_stale(dataset_hash: str, summary: Dict[str, Any], run_dir: Path)
     return dataset_hash != current_hash
 
 
-def _extract_int(payload: Dict[str, Any], keys: Tuple[str, ...]) -> Optional[int]:
+def _extract_int(payload: dict[str, Any], keys: tuple[str, ...]) -> int | None:
     for key in keys:
         value = _lookup_nested(payload, key)
         if isinstance(value, bool):
@@ -387,7 +387,7 @@ def _contains_non_finite(obj: Any) -> bool:
     return False
 
 
-def _extract_status(summary: Dict[str, Any]) -> Optional[str]:
+def _extract_status(summary: dict[str, Any]) -> str | None:
     raw = _extract_string(summary, KNOWN_STATUS_KEYS)
     if raw is None:
         return None
@@ -404,11 +404,11 @@ def _extract_status(summary: Dict[str, Any]) -> Optional[str]:
     return None
 
 
-def _extract_schema_version(summary: Dict[str, Any]) -> Optional[str]:
+def _extract_schema_version(summary: dict[str, Any]) -> str | None:
     return _extract_string(summary, ("schema_version", "schema.version", "schemaVersion"))
 
 
-def _extract_error(summary: Dict[str, Any]) -> Optional[str]:
+def _extract_error(summary: dict[str, Any]) -> str | None:
     error_value = _extract_string(summary, RUN_ERROR_KEYS)
     if error_value:
         return error_value
@@ -420,7 +420,7 @@ def _extract_error(summary: Dict[str, Any]) -> Optional[str]:
     return None
 
 
-def _build_label(kind: str, model_name: Optional[str], top_features: Optional[int], summary: Dict[str, Any]) -> str:
+def _build_label(kind: str, model_name: str | None, top_features: int | None, summary: dict[str, Any]) -> str:
     if model_name:
         return model_name
     if top_features is not None:
@@ -473,7 +473,7 @@ def _build_label(kind: str, model_name: Optional[str], top_features: Optional[in
     return f"{kind} run"
 
 
-def _parse_datetime(value: Any) -> Optional[datetime]:
+def _parse_datetime(value: Any) -> datetime | None:
     if isinstance(value, datetime):
         return value.replace(tzinfo=value.tzinfo or timezone.utc)
 
@@ -501,7 +501,7 @@ def _parse_datetime(value: Any) -> Optional[datetime]:
     return parsed.astimezone(timezone.utc)
 
 
-def _extract_datetime(payload: Dict[str, Any]) -> Optional[datetime]:
+def _extract_datetime(payload: dict[str, Any]) -> datetime | None:
     for key in CREATED_AT_KEYS:
         value = _lookup_nested(payload, key)
         parsed = _parse_datetime(value)
@@ -510,7 +510,7 @@ def _extract_datetime(payload: Dict[str, Any]) -> Optional[datetime]:
     return None
 
 
-def _discover_run_manifests(base_dir: Path, run_type: str) -> List[Path]:
+def _discover_run_manifests(base_dir: Path, run_type: str) -> list[Path]:
     if not base_dir.exists():
         return []
     manifest_name = _manifest_for_kind(run_type)
@@ -519,8 +519,8 @@ def _discover_run_manifests(base_dir: Path, run_type: str) -> List[Path]:
 
 def _gather_artifact_values(
     value: Any,
-    fallback_name: Optional[str] = None,
-) -> List[Tuple[Optional[str], Optional[str], Any]]:
+    fallback_name: str | None = None,
+) -> list[tuple[str | None, str | None, Any]]:
     if value is None:
         return []
 
@@ -528,7 +528,7 @@ def _gather_artifact_values(
         return [(fallback_name, None, value)]
 
     if isinstance(value, (list, tuple, set)):
-        entries: List[Tuple[Optional[str], Optional[str], Any]] = []
+        entries: list[tuple[str | None, str | None, Any]] = []
         for item in value:
             entries.extend(_gather_artifact_values(item, fallback_name=fallback_name))
         return entries
@@ -545,7 +545,7 @@ def _gather_artifact_values(
                 artifact_id = None
             return [(value.get('name') or value.get('artifact_name') or fallback_name, artifact_id, path_value)]
 
-        dict_entries: List[Tuple[Optional[str], Optional[str], Any]] = []
+        dict_entries: list[tuple[str | None, str | None, Any]] = []
         for key, item in value.items():
             if not isinstance(item, (str, Path, list, tuple, set, dict)):
                 continue
@@ -557,12 +557,12 @@ def _gather_artifact_values(
 
 
 
-def _collect_artifacts_from_manifest_items(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Optional[str], Any]]:
+def _collect_artifacts_from_manifest_items(payload: dict[str, Any], kind: str) -> list[tuple[str | None, str | None, Any]]:
     raw_artifacts = payload.get("artifacts")
     if not isinstance(raw_artifacts, list):
         return []
 
-    entries: List[Tuple[Optional[str], Optional[str], Any]] = []
+    entries: list[tuple[str | None, str | None, Any]] = []
     target_kind = kind.lower()
     for item in raw_artifacts:
         if not isinstance(item, dict):
@@ -589,19 +589,19 @@ def _collect_artifacts_from_manifest_items(payload: Dict[str, Any], kind: str) -
     return entries
 
 
-def _collect_artifacts_from_manifest_sections(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Optional[str], Any]]:
+def _collect_artifacts_from_manifest_sections(payload: dict[str, Any], kind: str) -> list[tuple[str | None, str | None, Any]]:
     section = payload.get(f"{kind}s") if isinstance(payload, dict) else None
     if section is None:
         return []
     return _gather_artifact_values(section)
 
 
-def _collect_artifacts_from_files(payload: Dict[str, Any], kind: str) -> List[Tuple[Optional[str], Optional[str], Any]]:
+def _collect_artifacts_from_files(payload: dict[str, Any], kind: str) -> list[tuple[str | None, str | None, Any]]:
     raw_files = payload.get("files")
     if not isinstance(raw_files, dict):
         return []
 
-    entries: List[Tuple[Optional[str], Optional[str], Any]] = []
+    entries: list[tuple[str | None, str | None, Any]] = []
     for name, value in raw_files.items():
         if not isinstance(name, str):
             continue
@@ -621,9 +621,9 @@ def _collect_artifacts_from_files(payload: Dict[str, Any], kind: str) -> List[Tu
 
 def _artifact_key(
     kind: str,
-    artifact_id: Optional[str],
+    artifact_id: str | None,
     raw_path: Any,
-    declared_name: Optional[str],
+    declared_name: str | None,
     index: int,
 ) -> str:
     if artifact_id:
@@ -651,8 +651,8 @@ def _normalize_artifact_path(run_dir: Path, raw_path: Any) -> Path:
     return (run_dir / path).resolve()
 
 
-def _collect_artifacts(payload: Dict[str, Any], run_dir: Path, kind: str) -> List[RunArtifact]:
-    candidates: List[Tuple[Optional[str], Optional[str], Any]] = []
+def _collect_artifacts(payload: dict[str, Any], run_dir: Path, kind: str) -> list[RunArtifact]:
+    candidates: list[tuple[str | None, str | None, Any]] = []
     source_keys = TABLE_KEYS if kind == 'table' else PLOT_KEYS
     for key in source_keys:
         value = _lookup_nested(payload, key)
@@ -663,7 +663,7 @@ def _collect_artifacts(payload: Dict[str, Any], run_dir: Path, kind: str) -> Lis
     candidates.extend(_collect_artifacts_from_manifest_items(payload, kind))
     candidates.extend(_collect_artifacts_from_files(payload, kind))
 
-    artifacts: List[RunArtifact] = []
+    artifacts: list[RunArtifact] = []
     seen: set[str] = set()
     for index, (declared_name, artifact_id, raw_path) in enumerate(candidates):
         try:
@@ -708,9 +708,9 @@ def _collect_artifacts(payload: Dict[str, Any], run_dir: Path, kind: str) -> Lis
 RUN_STATUS_INVALID = "invalid"
 
 
-def _read_manifest(path: Path) -> Tuple[Dict[str, Any], Optional[str]]:
+def _read_manifest(path: Path) -> tuple[dict[str, Any], str | None]:
     try:
-        with open(path, 'r', encoding='utf-8') as handle:
+        with open(path, encoding='utf-8') as handle:
             payload = json.load(handle)
     except (OSError, json.JSONDecodeError) as exc:
         return {}, str(exc)
@@ -721,7 +721,7 @@ def _read_manifest(path: Path) -> Tuple[Dict[str, Any], Optional[str]]:
     return payload, None
 
 
-def _build_invalid_run_summary(run_type: str, manifest: Path, errors: List[str]) -> RunSummary:
+def _build_invalid_run_summary(run_type: str, manifest: Path, errors: list[str]) -> RunSummary:
     run_dir = manifest.parent
     try:
         run_id = _run_id_from_path(run_type, run_dir.relative_to(_workspace_root()))
@@ -752,11 +752,11 @@ def _build_invalid_run_summary(run_type: str, manifest: Path, errors: List[str])
 
 def _build_run_summary(run_type: str, manifest_path: Path) -> RunSummary:
     run_dir = manifest_path.parent
-    summary: Dict[str, Any]
-    parse_error: Optional[str]
+    summary: dict[str, Any]
+    parse_error: str | None
     summary, parse_error = _read_manifest(manifest_path)
 
-    errors: List[str] = []
+    errors: list[str] = []
     if parse_error:
         errors.append(parse_error)
         return _build_invalid_run_summary(run_type, manifest_path, errors)
@@ -816,22 +816,22 @@ def _build_run_summary(run_type: str, manifest_path: Path) -> RunSummary:
 
 
 def list_runs(
-    run_type: Optional[str] = None,
-    dataset: Optional[str] = None,
-) -> List[RunSummary]:
+    run_type: str | None = None,
+    dataset: str | None = None,
+) -> list[RunSummary]:
     runs, _ = list_runs_with_diagnostics(run_type=run_type, dataset=dataset)
     return runs
 
 
 def list_runs_with_diagnostics(
-    run_type: Optional[str] = None,
-    dataset: Optional[str] = None,
-) -> Tuple[List[RunSummary], List[Dict[str, str]]]:
+    run_type: str | None = None,
+    dataset: str | None = None,
+) -> tuple[list[RunSummary], list[dict[str, str]]]:
     if run_type is not None and run_type not in RUN_TYPES:
         raise BadRequest('run type must be correlation or forecast')
 
-    runs: List[RunSummary] = []
-    bad_manifests: List[Dict[str, str]] = []
+    runs: list[RunSummary] = []
+    bad_manifests: list[dict[str, str]] = []
     workspace_root = _workspace_root()
 
     for current_type, base_path in _base_paths():
@@ -883,8 +883,8 @@ def list_runs_with_diagnostics(
     runs.sort(key=lambda item: item.created_at_utc or datetime.fromtimestamp(0, tz=timezone.utc), reverse=True)
     return runs, bad_manifests
 
-def list_datasets() -> List[DatasetSummary]:
-    grouped: Dict[str, Dict[str, Any]] = {}
+def list_datasets() -> list[DatasetSummary]:
+    grouped: dict[str, dict[str, Any]] = {}
 
     for run in list_runs():
         bucket = grouped.setdefault(
@@ -908,7 +908,7 @@ def list_datasets() -> List[DatasetSummary]:
         ):
             bucket['last_seen'] = run.created_at_utc
 
-    result: List[DatasetSummary] = []
+    result: list[DatasetSummary] = []
     for bucket in grouped.values():
         result.append(
             DatasetSummary(
@@ -946,11 +946,11 @@ def get_run_summary(run_id: str) -> RunSummary:
     return _build_run_summary(run_type, manifest)
 
 
-def get_run_health(run_id: str) -> Dict[str, Any]:
+def get_run_health(run_id: str) -> dict[str, Any]:
     run = get_run_summary(run_id)
     schema_version = run.schema_version
-    warnings: List[str] = []
-    missing_artifacts: List[Dict[str, str]] = []
+    warnings: list[str] = []
+    missing_artifacts: list[dict[str, str]] = []
 
     if run.errors:
         warnings.extend(run.errors)
@@ -1006,7 +1006,7 @@ def get_run_health(run_id: str) -> Dict[str, Any]:
     }
 
 
-def _resolve_artifact_path(run: RunSummary, kind: str, name: Optional[str]) -> RunArtifact:
+def _resolve_artifact_path(run: RunSummary, kind: str, name: str | None) -> RunArtifact:
     artifacts = run.tables if kind == 'table' else run.plots
     if not artifacts:
         raise FileNotFoundError(f'No {kind} artifacts declared for this run')
@@ -1045,7 +1045,7 @@ def _resolve_artifact_path(run: RunSummary, kind: str, name: Optional[str]) -> R
     raise FileNotFoundError(f'No {kind} artifacts declared for this run')
 
 
-def get_run_table(run_id: str, name: Optional[str], page: int, page_size: int) -> Dict[str, Any]:
+def get_run_table(run_id: str, name: str | None, page: int, page_size: int) -> dict[str, Any]:
     run = get_run_summary(run_id)
     artifact = _resolve_artifact_path(run, 'table', name)
 
@@ -1075,14 +1075,14 @@ def get_run_table(run_id: str, name: Optional[str], page: int, page_size: int) -
     }
 
 
-def get_run_plot_file(run_id: str, name: Optional[str]) -> Tuple[Path, str]:
+def get_run_plot_file(run_id: str, name: str | None) -> tuple[Path, str]:
     run = get_run_summary(run_id)
     artifact = _resolve_artifact_path(run, 'plot', name)
     content_type = mimetypes.guess_type(str(artifact.path))[0] or 'application/octet-stream'
     return artifact.path, content_type
 
 
-def _read_table_file(path: Path, max_rows: Optional[int] = None) -> List[Dict[str, Any]]:
+def _read_table_file(path: Path, max_rows: int | None = None) -> list[dict[str, Any]]:
     suffix = path.suffix.lower()
     if suffix == '.csv':
         return _read_csv(path)
@@ -1093,16 +1093,16 @@ def _read_table_file(path: Path, max_rows: Optional[int] = None) -> List[Dict[st
     raise BadRequest('Unsupported table format')
 
 
-def _read_csv(path: Path) -> List[Dict[str, Any]]:
-    rows: List[Dict[str, Any]] = []
-    with open(path, 'r', encoding='utf-8', newline='') as handle:
+def _read_csv(path: Path) -> list[dict[str, Any]]:
+    rows: list[dict[str, Any]] = []
+    with open(path, encoding='utf-8', newline='') as handle:
         reader = csv.DictReader(handle)
         for row in reader:
             rows.append({key: (value if value != '' else None) for key, value in row.items()})
     return rows
 
 
-def _read_json_table(path: Path) -> List[Dict[str, Any]]:
+def _read_json_table(path: Path) -> list[dict[str, Any]]:
     payload = _read_json_if_possible(path)
     if payload is None:
         raise BadRequest('Invalid JSON table file')
@@ -1119,7 +1119,7 @@ def _read_json_table(path: Path) -> List[Dict[str, Any]]:
     raise BadRequest('Unsupported JSON table shape')
 
 
-def _read_parquet_table(path: Path, max_rows: Optional[int] = None) -> List[Dict[str, Any]]:
+def _read_parquet_table(path: Path, max_rows: int | None = None) -> list[dict[str, Any]]:
     try:
         import pandas as pd
     except Exception as exc:

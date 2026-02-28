@@ -65,3 +65,57 @@ def plot_feature_importance(
     fig.tight_layout()
     fig.savefig(out_path)
     plt.close(fig)
+
+
+def plot_rolling_ic(
+    timestamps: Any,
+    ic_values: Sequence[float | None],
+    out_path: str | Path,
+    *,
+    window: int = 26,
+) -> None:
+    """Line plot of rolling Information Coefficient with a zero-band."""
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    ts_arr = np.asarray(timestamps)
+    ic_arr = np.asarray(ic_values, dtype=float)
+    valid = ~np.isnan(ic_arr)
+
+    fig, ax = plt.subplots(figsize=(10, 4))
+    ax.plot(ts_arr[valid], ic_arr[valid], color="#ff7f0e", linewidth=1.2)
+    ax.axhline(0, color="black", linewidth=0.8, alpha=0.5)
+    ax.set_title(f"Rolling IC (window={window})")
+    ax.set_xlabel("timestamp")
+    ax.set_ylabel("IC (Pearson r)")
+    ax.set_ylim(-1.05, 1.05)
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    fig.savefig(out_path)
+    plt.close(fig)
+
+
+def plot_equity_comparison(
+    series_dict: dict[str, tuple[Any, Any]],
+    out_path: str | Path,
+) -> None:
+    """Overlay multiple equity curves.
+
+    *series_dict* maps model name → (timestamps, equity_array).
+    """
+    out_path = Path(out_path)
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+
+    colors = ["#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd", "#8c564b"]
+    fig, ax = plt.subplots(figsize=(10, 5))
+    for idx, (name, (ts, eq)) in enumerate(series_dict.items()):
+        color = colors[idx % len(colors)]
+        ax.plot(ts, eq, label=name, color=color, linewidth=1.4)
+    ax.set_title("Equity Curve Comparison")
+    ax.set_xlabel("timestamp")
+    ax.set_ylabel("equity")
+    ax.legend()
+    ax.grid(alpha=0.25)
+    fig.tight_layout()
+    fig.savefig(out_path)
+    plt.close(fig)

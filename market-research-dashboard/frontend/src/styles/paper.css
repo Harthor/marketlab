@@ -1,0 +1,141 @@
+/* Paper Trading Page */
+
+.paper-page {
+  padding: 0 0 2rem;
+}
+
+.paper-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.paper-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+}
+
+.paper-header select {
+  border: 1px solid var(--border, var(--ml-border-default));
+  background: var(--bg, var(--ml-bg-canvas));
+  color: var(--text, var(--ml-text-primary));
+  border-radius: 6px;
+  padding: 0.4rem 0.5rem;
+  font-size: 0.85rem;
+}
+
+.paper-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.paper-stat-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border, var(--ml-border-default));
+  border-radius: 8px;
+  background: rgba(13, 17, 23, 0.75);
+}
+
+.paper-stat-label {
+  font-size: 0.75rem;
+  color: var(--muted, var(--ml-text-muted));
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.paper-stat-value {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.paper-green { color: var(--ml-green-text, #86EFAC); }
+.paper-red { color: var(--ml-red-text, #FCA5A5); }
+
+.paper-section {
+  background: linear-gradient(180deg, rgba(22, 27, 34, 0.95), rgba(22, 27, 34, 0.75));
+  border: 1px solid var(--border, var(--ml-border-default));
+  border-radius: 10px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.paper-section h3 {
+  margin: 0 0 0.75rem;
+  font-size: 1rem;
+}
+
+.paper-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.85rem;
+}
+
+.paper-table th {
+  text-align: left;
+  padding: 0.5rem 0.6rem;
+  color: var(--muted, var(--ml-text-muted));
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border, var(--ml-border-default));
+}
+
+.paper-table td {
+  padding: 0.5rem 0.6rem;
+  border-bottom: 1px solid rgba(48, 54, 61, 0.5);
+}
+
+.paper-row-rejected {
+  opacity: 0.5;
+}
+
+.paper-empty,
+.paper-loading,
+.paper-error {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--muted, var(--ml-text-muted));
+}
+
+.paper-empty code {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.85rem;
+  color: var(--accent, #58a6ff);
+}
+
+.paper-error {
+  color: var(--ml-red-text, #FCA5A5);
+}
+
+/* Regime badge */
+.paper-regime-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.7rem;
+  border: 1px solid;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  background: rgba(13, 17, 23, 0.85);
+}
+
+.paper-regime-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.paper-regime-conf {
+  font-size: 0.7rem;
+  opacity: 0.7;
+  font-weight: 400;
+}

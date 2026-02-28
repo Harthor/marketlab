@@ -1,0 +1,76 @@
+# fresh_sniper — New token (<48h) with high score + reasonable liquidity
+name: Fresh Launch Sniper
+slug: fresh_sniper
+description: >
+  Targets newly launched tokens (< 48 hours old) with high
+  universe scores and adequate liquidity for a quick entry.
+version: "1.0"
+enabled: true
+
+required:
+  - field: age_hours
+    operator: lt
+    value: 48
+  - field: universe_score
+    operator: gte
+    value: 65
+  - field: liquidity_usd
+    operator: gte
+    value: 25000
+
+confirmations:
+  - field: smart_money.unique_wallets_buying
+    operator: gte
+    value: 1
+  - field: volume_24h_usd
+    operator: gte
+    value: 50000
+  - field: risk_score
+    operator: lt
+    value: 40
+
+vetos:
+  - field: risk_score
+    operator: gte
+    value: 60
+  - field: age_hours
+    operator: lt
+    value: 1
+  - field: liquidity_usd
+    operator: lt
+    value: 15000
+
+base_confidence: 0.45
+confidence_components:
+  - field: universe_score
+    weight: 3.0
+    func: ramp
+    lo: 60
+    hi: 95
+  - field: liquidity_usd
+    weight: 2.0
+    func: ramp
+    lo: 20000
+    hi: 200000
+  - field: age_hours
+    weight: 1.0
+    func: inv_ramp
+    lo: 2
+    hi: 48
+  - field: risk_score
+    weight: 1.5
+    func: inv_ramp
+    lo: 10
+    hi: 60
+
+edge_prior: 1.3
+
+regime_fit:
+  mania: 1.0
+  rotation: 0.5
+  low_activity: 0.3
+  flight_to_quality: 0.1
+  capitulation: 0.1
+
+max_age_hours: 48
+min_liquidity_usd: 25000

@@ -1,4 +1,4 @@
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 import numpy as np
 import polars as pl
@@ -8,7 +8,7 @@ from marketlab_core.timeseries import align
 
 def test_random_timestamp_alignment_has_expected_grid_size() -> None:
     rng = np.random.default_rng(42)
-    base = datetime(2024, 1, 1, tzinfo=timezone.utc)
+    base = datetime(2024, 1, 1, tzinfo=UTC)
     offsets_a = sorted(rng.integers(0, 3600, size=200))
     offsets_b = sorted(rng.integers(0, 3600, size=120))
 

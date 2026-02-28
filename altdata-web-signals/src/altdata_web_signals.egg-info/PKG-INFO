@@ -7,17 +7,18 @@ License: MIT
 Requires-Python: >=3.11
 Description-Content-Type: text/markdown
 Requires-Dist: polars<2,>=0.20.31
+Requires-Dist: pandas>=2.1
 Requires-Dist: PyYAML>=6.0.1
 Requires-Dist: requests>=2.31.0
 Requires-Dist: feedparser>=6.0.11
 Requires-Dist: python-dateutil>=2.9.0
 Requires-Dist: marketlab-core>=0.1.0
 Requires-Dist: pyarrow>=14.0.0
+Requires-Dist: yfinance>=0.2.55
 Provides-Extra: trends
 Requires-Dist: pytrends>=4.9.0; extra == "trends"
 Provides-Extra: analysis
 Requires-Dist: numpy>=1.26; extra == "analysis"
-Requires-Dist: pandas>=2.1; extra == "analysis"
 Provides-Extra: dev
 Requires-Dist: pytest>=8.3.0; extra == "dev"
 Requires-Dist: matplotlib>=3.8; extra == "dev"
@@ -101,7 +102,7 @@ signals rss \
 ### 3) Build dataset
 
 Por defecto busca precios en:
-`$MARKETDATA_PROCESSED_DIR` o (fallback) `$MARKETLAB_WORKSPACE/market-data-ingest/data/processed/<source>/<symbol>/<freq>/*.parquet`.
+`$MARKETDATA_PROCESSED_DIR` o (fallback) en `<root>/data/processed/<symbol>/<freq>/*.parquet` y el layout histórico `<source>/<symbol>/<freq>/*.parquet`.
 
 El dataset estable se guarda en:
 `data/datasets/<symbol>/<freq>.parquet`
@@ -118,8 +119,30 @@ También genera metadata en:
 - `dataset_hash` (sha256 del parquet generado)
 
 ```bash
-signals build-dataset --symbol BTC-USD --join how=inner --freq 1d
+signals build-dataset --symbol BTC-USD --join how=outer --freq 1d
 ```
+
+### BTC 1d dataset (yfinance)
+
+Script específico para resolver el caso de dataset muy corto (ej. filas `2`), con fetch incremental:
+
+```bash
+python3 tools/fetch_btc_1d_yfinance.py \
+  --symbol BTC-USD \
+  --start 2018-01-01 \
+  --min-rows 365 \
+  --max-staleness-days 3
+```
+
+Qué hace:
+- Descarga `BTC-USD` en `1d` desde `yfinance`.
+- Normaliza a columnas `ts_utc`, `open`, `high`, `low`, `close`, `volume`.
+- Si el parquet ya existe, hace append-only (buffer de 3 días y dedupe por fecha).
+- Gating duro:
+  - no escribe si filas finales `< 365`,
+  - no escribe si `max(ts_utc) < hoy_utc - 3 días`.
+- Escribe de forma atómica `data/datasets/BTC-USD/1d.parquet`.
+- Genera `data/datasets/BTC-USD/1d.meta.json` con `sha256`, `rows`, `rango fechas`, `provider`, etc.
 
 ### 4) (Opcional) Trends
 
@@ -181,18 +204,25 @@ Tests incluidos usan fixtures en `tests/fixtures/*` y no llaman red.
 ## Instalación y ejecución recomendada
 
 ### Requisitos
-- Python 3.11+
+- Python >= 3.11
 - Entorno con acceso a internet para descargar dependencias (opcional si instalás paquetes manualmente)
 
 ### Instalación local (editable)
 
 ```bash
 cd /Users/carlaherrera/Desktop/market-sentiment-lab/altdata-web-signals
-python3.11 -m venv .venv
+PYTHON_BIN="$(/Users/carlaherrera/Desktop/market-sentiment-lab/tools/python_select.sh)"
+"$PYTHON_BIN" -m venv .venv
 source .venv/bin/activate
 python -m pip install -U pip setuptools wheel
-python -m pip install -e .
 python -m pip install .[analysis]
+```
+
+Alternativa (bootstrap central con selector Python >= 3.11):
+
+```bash
+cd /Users/carlaherrera/Desktop/market-sentiment-lab
+bash tools/bootstrap_venv.sh altdata-web-signals --editable
 ```
 
 Opcional (Google Trends):

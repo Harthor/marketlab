@@ -27,6 +27,10 @@ dependencies = [
 [project.optional-dependencies]
 trends = ["pytrends>=4.9.0"]
 analysis = ["numpy>=1.26"]
+sentiment = [
+  "transformers>=4.36",
+  "torch>=2.1",
+]
 dev = [
   "pytest>=8.3.0",
   "matplotlib>=3.8",

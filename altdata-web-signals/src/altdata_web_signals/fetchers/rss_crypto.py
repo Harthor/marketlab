@@ -1,4 +1,4 @@
-"""RSS crypto media fetcher with VADER sentiment analysis."""
+"""RSS crypto media fetcher with FinBERT sentiment analysis."""
 
 from __future__ import annotations
 
@@ -14,13 +14,20 @@ from ..http import ApiClient
 from ..storage import write_signal_frame
 from ..transforms import add_asof_utc, add_delta, add_delta_log1p, add_zscore_rolling
 
-# Default crypto RSS feeds
+# 10 crypto RSS feeds (5 original + 5 new)
 DEFAULT_CRYPTO_FEEDS: list[str] = [
+    # Original 5
     "https://www.coindesk.com/arc/outboundfeeds/rss/",
     "https://cointelegraph.com/rss",
     "https://decrypt.co/feed",
     "https://bitcoinmagazine.com/.rss/full/",
     "https://www.theblock.co/rss.xml",
+    # New 5
+    "https://blockworks.co/feed",
+    "https://thedefiant.io/feed",
+    "https://unchainedcrypto.com/feed/",
+    "https://cryptoslate.com/feed/",
+    "https://www.newsbtc.com/feed/",
 ]
 
 
@@ -37,14 +44,6 @@ def _parse_entry_time(entry: dict[str, Any]) -> datetime | None:
     return None
 
 
-def _vader_score(text: str) -> float:
-    """Return VADER compound sentiment score for *text*."""
-    from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-
-    analyzer = SentimentIntensityAnalyzer()
-    return float(analyzer.polarity_scores(text)["compound"])
-
-
 def parse_crypto_feed(
     feed_payload: str,
     *,
@@ -53,7 +52,8 @@ def parse_crypto_feed(
 ) -> list[dict[str, Any]]:
     """Parse a single RSS feed into a list of entry dicts.
 
-    Each dict has keys: ``date``, ``title``, ``has_btc``, ``sentiment``.
+    Each dict has keys: ``date``, ``title``, ``has_btc``.
+    Sentiment is computed in batch at aggregation time (FinBERT).
     """
     parsed = feedparser.parse(feed_payload)
     entries: list[dict[str, Any]] = []
@@ -68,13 +68,11 @@ def parse_crypto_feed(
         title = str(entry.get("title", "") or "")
         day = published.replace(hour=0, minute=0, second=0, microsecond=0)
         has_btc = "bitcoin" in title.lower() or "btc" in title.lower()
-        sentiment = _vader_score(title) if title.strip() else 0.0
 
         entries.append({
             "date": day,
             "title": title,
             "has_btc": has_btc,
-            "sentiment": sentiment,
         })
 
     return entries
@@ -86,54 +84,68 @@ def aggregate_crypto_entries(
     start: datetime,
     end: datetime,
 ) -> pl.DataFrame:
-    """Aggregate parsed entries into a daily DataFrame with 3 signal columns.
+    """Aggregate parsed entries into a daily DataFrame.
 
     Columns:
     - ts_utc (Datetime UTC)
     - signal_rss_crypto_article_count (Int64)
     - signal_rss_crypto_btc_mention_count (Int64)
-    - signal_rss_crypto_title_sentiment (Float64, daily mean VADER compound)
+    - signal_rss_crypto_title_sentiment (Float64, FinBERT mean — backward compat)
+    - signal_rss_crypto_sentiment_finbert_mean (Float64)
+    - signal_rss_crypto_sentiment_finbert_std (Float64)
+    - signal_rss_crypto_positive_ratio (Float64)
+    - signal_rss_crypto_negative_ratio (Float64)
+    - signal_rss_crypto_neg_minus_pos (Float64)
+    - signal_rss_crypto_sentiment_defined (Int8)
     """
+    from ..sentiment import finbert_batch_stats
+
     total_days = int((end.date() - start.date()).days) + 1
     day_range = [
         start.replace(hour=0, minute=0, second=0, microsecond=0) + timedelta(days=i)
         for i in range(total_days)
     ]
 
-    article_counts: dict[datetime, int] = {d: 0 for d in day_range}
-    btc_counts: dict[datetime, int] = {d: 0 for d in day_range}
-    sentiment_sums: dict[datetime, float] = {d: 0.0 for d in day_range}
-    sentiment_n: dict[datetime, int] = {d: 0 for d in day_range}
-
+    # Group entries by day
+    day_entries: dict[datetime, list[dict[str, Any]]] = {d: [] for d in day_range}
     for entry in all_entries:
         day = entry["date"]
-        if day not in article_counts:
-            continue
-        article_counts[day] += 1
-        if entry["has_btc"]:
-            btc_counts[day] += 1
-        sentiment_sums[day] += entry["sentiment"]
-        sentiment_n[day] += 1
+        if day in day_entries:
+            day_entries[day].append(entry)
 
-    rows_ts: list[datetime] = []
-    rows_articles: list[int] = []
-    rows_btc: list[int] = []
-    rows_sentiment: list[float | None] = []
-
+    rows: list[dict[str, Any]] = []
     for day in sorted(day_range):
-        rows_ts.append(day)
-        rows_articles.append(article_counts[day])
-        rows_btc.append(btc_counts[day])
-        n = sentiment_n[day]
-        # Fix 3: NaN (not 0) when no articles — 0 would mean "neutral"
-        rows_sentiment.append(sentiment_sums[day] / n if n > 0 else None)
+        entries = day_entries[day]
+        article_count = len(entries)
+        btc_count = sum(1 for e in entries if e["has_btc"])
 
-    df = pl.DataFrame({
-        "ts_utc": rows_ts,
-        "signal_rss_crypto_article_count": rows_articles,
-        "signal_rss_crypto_btc_mention_count": rows_btc,
-        "signal_rss_crypto_title_sentiment": rows_sentiment,
-    })
+        titles = [e["title"] for e in entries if e["title"].strip()]
+        stats = finbert_batch_stats(titles)
+
+        rows.append({
+            "ts_utc": day,
+            "signal_rss_crypto_article_count": article_count,
+            "signal_rss_crypto_btc_mention_count": btc_count,
+            "signal_rss_crypto_title_sentiment": stats["mean"],
+            "signal_rss_crypto_sentiment_finbert_mean": stats["mean"],
+            "signal_rss_crypto_sentiment_finbert_std": stats["std"],
+            "signal_rss_crypto_positive_ratio": stats["positive_ratio"],
+            "signal_rss_crypto_negative_ratio": stats["negative_ratio"],
+            "signal_rss_crypto_neg_minus_pos": stats["neg_minus_pos"],
+        })
+
+    schema = {
+        "ts_utc": pl.Datetime("us", "UTC"),
+        "signal_rss_crypto_article_count": pl.Int64,
+        "signal_rss_crypto_btc_mention_count": pl.Int64,
+        "signal_rss_crypto_title_sentiment": pl.Float64,
+        "signal_rss_crypto_sentiment_finbert_mean": pl.Float64,
+        "signal_rss_crypto_sentiment_finbert_std": pl.Float64,
+        "signal_rss_crypto_positive_ratio": pl.Float64,
+        "signal_rss_crypto_negative_ratio": pl.Float64,
+        "signal_rss_crypto_neg_minus_pos": pl.Float64,
+    }
+    df = pl.DataFrame(rows, schema=schema)
 
     # Definedness flag: 1 when we have actual sentiment data
     df = df.with_columns(
@@ -199,13 +211,7 @@ def fetch_rss_crypto_signals(
     freq: str = "1d",
     cache_dir: str | Path = ".cache/altdata-web-signals",
 ) -> list[Path]:
-    """Fetch crypto RSS feeds, compute sentiment, and write signal parquets.
-
-    Writes three signal files:
-    - rss_crypto/article_count/{freq}.parquet
-    - rss_crypto/btc_mention_count/{freq}.parquet
-    - rss_crypto/title_sentiment/{freq}.parquet
-    """
+    """Fetch crypto RSS feeds, compute FinBERT sentiment, write signal parquets."""
     feed_urls = feeds or DEFAULT_CRYPTO_FEEDS
     end_dt = (
         datetime.fromisoformat(end).replace(tzinfo=UTC)

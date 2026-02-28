@@ -1,0 +1,72 @@
+# liquidity_surge — Sudden increase in pool liquidity (bullish)
+name: Liquidity Surge
+slug: liquidity_surge
+description: >
+  Fires when a token's liquidity increases significantly,
+  signaling new pool deposits or market maker activity.
+version: "1.0"
+enabled: true
+
+required:
+  - field: liquidity_change_pct
+    operator: gte
+    value: 50
+  - field: liquidity_usd
+    operator: gte
+    value: 50000
+  - field: universe_score
+    operator: gte
+    value: 30
+
+confirmations:
+  - field: smart_money.consensus_direction
+    operator: eq
+    value: "accumulate"
+  - field: volume_24h_usd
+    operator: gte
+    value: 100000
+  - field: risk_score
+    operator: lt
+    value: 40
+
+vetos:
+  - field: risk_score
+    operator: gte
+    value: 65
+  - field: liquidity_change_pct
+    operator: lt
+    value: 20
+
+base_confidence: 0.50
+confidence_components:
+  - field: liquidity_change_pct
+    weight: 3.0
+    func: ramp
+    lo: 30
+    hi: 200
+  - field: liquidity_usd
+    weight: 2.0
+    func: ramp
+    lo: 30000
+    hi: 500000
+  - field: universe_score
+    weight: 1.5
+    func: ramp
+    lo: 25
+    hi: 70
+  - field: risk_score
+    weight: 1.0
+    func: inv_ramp
+    lo: 15
+    hi: 65
+
+edge_prior: 1.0
+
+regime_fit:
+  mania: 0.7
+  rotation: 0.8
+  low_activity: 0.6
+  flight_to_quality: 0.5
+  capitulation: 0.3
+
+min_liquidity_usd: 50000

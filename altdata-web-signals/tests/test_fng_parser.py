@@ -119,3 +119,45 @@ def test_fng_asof_utc_is_next_day() -> None:
 
     for i in range(df.shape[0]):
         assert df["asof_utc"][i] == df["ts_utc"][i] + timedelta(days=1)
+
+
+def test_fng_extreme_fear_flag() -> None:
+    """is_extreme_fear should be 1 when value <= 25."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    assert "signal_fng_is_extreme_fear" in df.columns
+    values = df["signal_fng_value"].to_list()
+    flags = df["signal_fng_is_extreme_fear"].to_list()
+    for val, flag in zip(values, flags, strict=True):
+        expected = 1 if val <= 25 else 0
+        assert flag == expected, f"value={val} expected is_extreme_fear={expected}, got {flag}"
+
+
+def test_fng_extreme_greed_flag() -> None:
+    """is_extreme_greed should be 1 when value >= 75."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    assert "signal_fng_is_extreme_greed" in df.columns
+    values = df["signal_fng_value"].to_list()
+    flags = df["signal_fng_is_extreme_greed"].to_list()
+    for val, flag in zip(values, flags, strict=True):
+        expected = 1 if val >= 75 else 0
+        assert flag == expected, f"value={val} expected is_extreme_greed={expected}, got {flag}"
+
+
+def test_fng_extremeness() -> None:
+    """extremeness should be abs(value - 50)."""
+    raw = json.loads((FIXTURES / "fng_sample.json").read_text())
+    df = parse_fng_payload(raw)
+    df = add_fng_transforms(df)
+
+    assert "signal_fng_extremeness" in df.columns
+    values = df["signal_fng_value"].to_list()
+    extremeness = df["signal_fng_extremeness"].to_list()
+    for val, ext in zip(values, extremeness, strict=True):
+        expected = abs(float(val) - 50.0)
+        assert abs(ext - expected) < 1e-6, f"value={val} expected extremeness={expected}, got {ext}"

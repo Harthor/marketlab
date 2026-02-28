@@ -1,0 +1,78 @@
+schema_version: 1
+kind: wallet_registry
+
+# ---------------------------------------------------------------------------
+# Smart Money wallet registry
+#
+# Tiers control polling frequency:
+#   A  — 5 min   (top priority: proven alpha wallets)
+#   B  — 15 min  (moderate: consistent but less alpha)
+#   C  — 1 hour  (low priority: occasional signals)
+#
+# Tags help feature computation:
+#   early_buyer  — historically buys before major pumps
+#   whale        — consistently large positions (>$100k)
+#   mev_bot      — MEV / sandwich bot
+#   insider      — suspected team / insider wallet
+#   nft_flipper  — primarily NFT activity, secondary degen
+#   degen_farmer — farms new launches aggressively
+# ---------------------------------------------------------------------------
+
+wallets:
+  # -----------------------------------------------------------------------
+  # Solana wallets
+  # -----------------------------------------------------------------------
+  - address: "5Q544fKrFoe6tsEbD7S8EmxGTJYAKtTVhAW5Q5pge4j1"
+    chain: solana
+    label: "sol_whale_alpha_1"
+    tier: A
+    tags: [early_buyer, whale]
+    notes: "Known Solana whale — early in WIF, BONK"
+
+  - address: "DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6ZKUmG5CNSKK"
+    chain: solana
+    label: "sol_degen_farmer_1"
+    tier: B
+    tags: [degen_farmer, early_buyer]
+    notes: "Aggressive new-launch buyer"
+
+  - address: "7Ppgch9d4nCBKKmMhR9xY4zXhPmS4BXFKnTxsUgGz5ES"
+    chain: solana
+    label: "sol_insider_watch_1"
+    tier: C
+    tags: [insider]
+    notes: "Suspected team wallet — monitor only"
+
+  # -----------------------------------------------------------------------
+  # Base (EVM) wallets
+  # -----------------------------------------------------------------------
+  - address: "0x28C6c06298d514Db089934071355E5743bf21d60"
+    chain: base
+    label: "base_whale_1"
+    tier: A
+    tags: [whale, early_buyer]
+    notes: "Large Base chain meme buyer"
+
+  - address: "0x21a31Ee1afC51d94C2eFcCAa2092aD1028285549"
+    chain: base
+    label: "base_degen_1"
+    tier: B
+    tags: [degen_farmer]
+    notes: "Active BRETT / Base meme trader"
+
+  # -----------------------------------------------------------------------
+  # BSC wallets
+  # -----------------------------------------------------------------------
+  - address: "0xF977814e90dA44bFA03b6295A0616a897441aceC"
+    chain: bsc
+    label: "bsc_whale_1"
+    tier: B
+    tags: [whale]
+    notes: "Large BSC holder"
+
+  - address: "0xBE0eB53F46cd790Cd13851d5EFf43D12404d33E8"
+    chain: bsc
+    label: "bsc_accumulator_1"
+    tier: C
+    tags: [early_buyer]
+    notes: "Quiet accumulator"

@@ -1,0 +1,36 @@
+# Global configuration — vetos, filters, and portfolio risk limits.
+# These apply to ALL playbooks before individual playbook evaluation.
+
+vetos:
+  - field: risk_score
+    operator: gte
+    value: 85
+  - field: liquidity_usd
+    operator: lt
+    value: 5000
+  - field: security_flags
+    operator: in
+    value: ["honeypot", "proxy_contract"]
+  - field: smart_money.consensus_direction
+    operator: eq
+    value: "dump"
+
+filters:
+  - field: liquidity_usd
+    operator: gte
+    value: 10000
+  - field: volume_24h_usd
+    operator: gte
+    value: 5000
+  - field: risk_score
+    operator: lt
+    value: 80
+
+portfolio_risk:
+  max_positions: 10
+  max_per_chain: 5
+  max_per_bucket: 3
+  max_daily_trades: 20
+  circuit_breaker_drawdown_pct: 25.0
+  circuit_breaker_loss_streak: 5
+  max_correlated_exposure_pct: 30.0

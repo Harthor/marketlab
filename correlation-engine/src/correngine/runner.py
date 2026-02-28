@@ -25,13 +25,17 @@ from .manifest import SCHEMA_VERSION, build_corr_manifest, write_corr_manifest_a
 from .marketlab_bridge import align_frames, compute_returns_safe, get_cache, read_table, write_table
 from .statistics import (
     benjamini_hochberg,
+    compute_asymmetry,
     compute_bootstrap_ci,
     compute_correlations,
     compute_distance_correlation,
+    compute_granger_causality,
     compute_lag_analysis,
     compute_mutual_information,
+    compute_regime_correlations,
     compute_rolling_correlations,
 )
+from .stability import compute_stability_score
 from .plotting import plot_lag_profiles, plot_rolling_correlations
 
 
@@ -51,6 +55,10 @@ class RunResult:
     dcor_table: pl.DataFrame | None
     bootstrap_table: pl.DataFrame | None
     feature_summary_table: pl.DataFrame
+    regime_table: pl.DataFrame | None = None
+    granger_table: pl.DataFrame | None = None
+    asymmetry_table: pl.DataFrame | None = None
+    stability_table: pl.DataFrame | None = None
 
 
 def _is_nan(value: Any) -> bool:
@@ -358,7 +366,15 @@ def _build_feature_summary(
                 "best_lag": [],
             }
         )
-    return pl.DataFrame(rows)
+    schema = {
+        "feature": pl.Utf8,
+        "metric": pl.Utf8,
+        "score": pl.Float64,
+        "p_value": pl.Float64,
+        "n_effective": pl.Int64,
+        "best_lag": pl.Int64,
+    }
+    return pl.DataFrame(rows, schema=schema)
 
 
 def _write_readme(
@@ -550,6 +566,93 @@ def _empty_top_features() -> dict[str, list[dict[str, Any]]]:
         "mutual_information": [],
         "distance_correlation": [],
     }
+
+
+def _sanitize_value(v: Any) -> Any:
+    """Replace NaN/inf with None for JSON safety."""
+    if isinstance(v, (float, np.floating)):
+        if not np.isfinite(v):
+            return None
+        return float(v)
+    if isinstance(v, np.integer):
+        return int(v)
+    if isinstance(v, dict):
+        return {k: _sanitize_value(val) for k, val in v.items()}
+    if isinstance(v, list):
+        return [_sanitize_value(item) for item in v]
+    return v
+
+
+def _build_advanced_metrics(
+    regime_table: pl.DataFrame | None,
+    granger_table: pl.DataFrame | None,
+    asymmetry_table: pl.DataFrame | None,
+    stability_table: pl.DataFrame | None,
+    bootstrap_table: pl.DataFrame | None,
+) -> dict[str, Any]:
+    """Build the advanced_metrics dict for summary.json, keyed by feature."""
+    metrics: dict[str, Any] = {}
+
+    if regime_table is not None and not regime_table.is_empty():
+        regime_by_feature: dict[str, list[dict[str, Any]]] = {}
+        for row in regime_table.iter_rows(named=True):
+            f = row["feature"]
+            regime_by_feature.setdefault(f, []).append(
+                {"regime": row["regime"], "correlation": row["correlation"], "p_value": row["p_value"], "n": row["n"]}
+            )
+        metrics["regime"] = regime_by_feature
+
+    if granger_table is not None and not granger_table.is_empty():
+        granger_by_feature: dict[str, dict[str, Any]] = {}
+        for row in granger_table.iter_rows(named=True):
+            granger_by_feature[row["feature"]] = {
+                "direction": row["direction"],
+                "p_value_forward": row["p_value_forward"],
+                "p_value_reverse": row["p_value_reverse"],
+                "best_lag": row["best_lag"],
+            }
+        metrics["granger"] = granger_by_feature
+
+    if asymmetry_table is not None and not asymmetry_table.is_empty():
+        asym_by_feature: dict[str, dict[str, Any]] = {}
+        for row in asymmetry_table.iter_rows(named=True):
+            asym_by_feature[row["feature"]] = {
+                "negative_corr": row["negative_corr"],
+                "positive_corr": row["positive_corr"],
+                "delta": row["delta"],
+                "dominant_side": row["dominant_side"],
+            }
+        metrics["asymmetry"] = asym_by_feature
+
+    if stability_table is not None and not stability_table.is_empty():
+        stab_by_feature: dict[str, dict[str, Any]] = {}
+        for row in stability_table.iter_rows(named=True):
+            stab_by_feature[row["feature"]] = {
+                "total": row["total"],
+                "strength": row["strength"],
+                "consistency": row["consistency"],
+                "regimeRobustness": row["regimeRobustness"],
+                "significance": row["significance"],
+                "sampleSufficiency": row["sampleSufficiency"],
+                "directionality": row["directionality"],
+            }
+        metrics["stability"] = stab_by_feature
+
+    if bootstrap_table is not None and not bootstrap_table.is_empty():
+        boot_by_feature: dict[str, dict[str, Any]] = {}
+        for row in bootstrap_table.iter_rows(named=True):
+            entry: dict[str, Any] = {
+                "estimate": row["estimate"],
+                "lower": row["lower"],
+                "upper": row["upper"],
+                "n_boot": row["n_boot"],
+            }
+            if "p_value_max_stat" in row:
+                entry["p_value_max_stat"] = row["p_value_max_stat"]
+            boot_by_feature[row["feature"]] = entry
+        metrics["bootstrap"] = boot_by_feature
+
+    return _sanitize_value(metrics)
 
 
 def _build_summary(
@@ -923,6 +1026,18 @@ def _write_tables(run_root: Path, result: RunResult, *, top: int, min_effective_
     if result.bootstrap_table is not None and not result.bootstrap_table.is_empty():
         write_table(result.bootstrap_table, tables / "bootstrap_ci.parquet")
         result.bootstrap_table.write_csv(tables / "bootstrap_ci.csv")
+    if result.regime_table is not None and not result.regime_table.is_empty():
+        write_table(result.regime_table, tables / "regime_correlations.parquet")
+        result.regime_table.write_csv(tables / "regime_correlations.csv")
+    if result.granger_table is not None and not result.granger_table.is_empty():
+        write_table(result.granger_table, tables / "granger.parquet")
+        result.granger_table.write_csv(tables / "granger.csv")
+    if result.asymmetry_table is not None and not result.asymmetry_table.is_empty():
+        write_table(result.asymmetry_table, tables / "asymmetry.parquet")
+        result.asymmetry_table.write_csv(tables / "asymmetry.csv")
+    if result.stability_table is not None and not result.stability_table.is_empty():
+        write_table(result.stability_table, tables / "stability.parquet")
+        result.stability_table.write_csv(tables / "stability.csv")
 
 
 def _finalize_run(staging_dir: Path, run_dir: Path, *, run_dir_existed: bool) -> None:
@@ -1097,6 +1212,21 @@ def run_correlation(cfg: RunConfig) -> RunResult:
                 alpha=0.05,
             )
 
+        # Advanced metrics: regime, granger, asymmetry, stability
+        regime_table = compute_regime_correlations(
+            frame, features=features, target=cfg.target, seed=cfg.seed,
+        )
+        granger_table = compute_granger_causality(
+            frame, features=features, target=cfg.target, max_lag=cfg.max_lag, seed=cfg.seed,
+        )
+        asymmetry_table = compute_asymmetry(frame, features=features, target=cfg.target)
+        stability_table = compute_stability_score(
+            corr_df=correlation_table,
+            rolling_df=rolling_table,
+            regime_df=regime_table,
+            granger_df=granger_table,
+        )
+
         feature_summary_table = _build_feature_summary(
             correlation_table=correlation_table,
             lag_summary=lag_summary,
@@ -1117,6 +1247,10 @@ def run_correlation(cfg: RunConfig) -> RunResult:
             dcor_table=dcor_table,
             bootstrap_table=bootstrap_table,
             feature_summary_table=feature_summary_table,
+            regime_table=regime_table,
+            granger_table=granger_table,
+            asymmetry_table=asymmetry_table,
+            stability_table=stability_table,
         )
 
         _write_tables(
@@ -1161,6 +1295,13 @@ def run_correlation(cfg: RunConfig) -> RunResult:
             final_status = "skipped"
             warnings.append("no_artifacts_produced")
             warnings.append("reason:dataset too small")
+        advanced_metrics = _build_advanced_metrics(
+            regime_table=regime_table,
+            granger_table=granger_table,
+            asymmetry_table=asymmetry_table,
+            stability_table=stability_table,
+            bootstrap_table=bootstrap_table,
+        )
         summary = _build_summary(
             cfg=cfg,
             run_id=run_id,
@@ -1180,6 +1321,7 @@ def run_correlation(cfg: RunConfig) -> RunResult:
             warnings=warnings,
             completed_at_utc=_now(),
             run_created_at_utc=run_started_at,
+            extra_fields={"advanced_metrics": advanced_metrics},
         )
         if final_status == "skipped":
             summary["reason"] = "no usable outputs"

@@ -13,6 +13,11 @@ try:
 except Exception:  # pragma: no cover
     dcor_lib = None
 
+try:
+    from statsmodels.tsa.stattools import grangercausalitytests as _granger_tests
+except Exception:  # pragma: no cover
+    _granger_tests = None
+
 
 def benjamini_hochberg(p_values: Iterable[float]) -> np.ndarray:
     p = np.asarray(list(p_values), dtype=float)
@@ -209,7 +214,7 @@ def compute_bootstrap_ci(
     alpha: float = 0.05,
 ) -> pl.DataFrame:
     if n_boot <= 1:
-        return pl.DataFrame({"feature": [], "metric": [], "estimate": [], "lower": [], "upper": [], "n_boot": []})
+        return pl.DataFrame({"feature": [], "metric": [], "estimate": [], "lower": [], "upper": [], "p_value_max_stat": [], "n_boot": []})
     rng = np.random.default_rng(seed)
     target_values = np.asarray(data[target], dtype=float)
     rows = []
@@ -227,22 +232,46 @@ def compute_bootstrap_ci(
                     "estimate": np.nan,
                     "lower": np.nan,
                     "upper": np.nan,
+                    "p_value_max_stat": np.nan,
                     "n_boot": int(n_boot),
                     "n_effective": int(n),
                 }
             )
             continue
-        idx = rng.integers(0, n, size=(n_boot, n))
-        x_b = x[idx]
-        y_b = y[idx]
-        x_mu = x_b.mean(axis=1, keepdims=True)
-        y_mu = y_b.mean(axis=1, keepdims=True)
-        cov = np.sum((x_b - x_mu) * (y_b - y_mu), axis=1)
-        den = np.sqrt(np.sum((x_b - x_mu) ** 2, axis=1) * np.sum((y_b - y_mu) ** 2, axis=1))
-        corr = np.divide(cov, den, where=den != 0)
-        corr = np.where(np.isfinite(corr), corr, np.nan)
-        estimate = float(np.nanmean(corr))
-        lo, hi = np.nanquantile(corr, [alpha / 2, 1 - alpha / 2])
+        # Block bootstrap: non-overlapping blocks to preserve temporal autocorrelation
+        block_size = max(1, int(np.sqrt(n)))
+        n_blocks = max(1, n // block_size)
+        effective_n = n_blocks * block_size
+
+        boot_corrs = np.full(n_boot, np.nan)
+        for b in range(n_boot):
+            block_starts = rng.integers(0, n - block_size + 1, size=n_blocks)
+            indices = np.concatenate([np.arange(s, s + block_size) for s in block_starts])[:effective_n]
+            x_b = x[indices]
+            y_b = y[indices]
+            x_mu = x_b.mean()
+            y_mu = y_b.mean()
+            cov_val = np.sum((x_b - x_mu) * (y_b - y_mu))
+            den_val = np.sqrt(np.sum((x_b - x_mu) ** 2) * np.sum((y_b - y_mu) ** 2))
+            if den_val > 0:
+                boot_corrs[b] = cov_val / den_val
+
+        finite_corrs = boot_corrs[np.isfinite(boot_corrs)]
+        if finite_corrs.size == 0:
+            estimate = np.nan
+            lo = np.nan
+            hi = np.nan
+            p_max_stat = np.nan
+        else:
+            estimate = float(np.mean(finite_corrs))
+            lo, hi = np.quantile(finite_corrs, [alpha / 2, 1 - alpha / 2])
+            # p_value_max_stat: proportion of bootstrap samples where |corr| >= observed
+            observed_r, _ = _pearson_corr_with_p(x, y)
+            if np.isfinite(observed_r):
+                p_max_stat = float(np.mean(np.abs(finite_corrs) >= abs(observed_r)))
+            else:
+                p_max_stat = np.nan
+
         rows.append(
             {
                 "feature": feature,
@@ -250,6 +279,7 @@ def compute_bootstrap_ci(
                 "estimate": estimate,
                 "lower": float(lo),
                 "upper": float(hi),
+                "p_value_max_stat": p_max_stat,
                 "n_boot": int(n_boot),
                 "n_effective": int(n),
             }
@@ -296,6 +326,220 @@ def _distance_corr_naive(x: np.ndarray, y: np.ndarray) -> float:
     if dvar_x == 0 or dvar_y == 0:
         return np.nan
     return float(dcov / (np.sqrt(dvar_x * dvar_y) + 1e-12))
+
+
+def compute_regime_correlations(
+    data: pl.DataFrame,
+    features: list[str],
+    target: str,
+    *,
+    seed: int,
+) -> pl.DataFrame:
+    """Compute correlations conditioned on market regime (bull/bear).
+
+    Regimes are defined by the sign of the target variable:
+    - bull: target > 0
+    - bear: target <= 0
+    """
+    target_values = np.asarray(data[target], dtype=float)
+    rows: list[dict[str, object]] = []
+
+    bull_mask = target_values > 0
+    bear_mask = ~bull_mask & np.isfinite(target_values)
+
+    for feature in features:
+        feature_values = np.asarray(data[feature], dtype=float)
+        for regime_name, mask in [("bull", bull_mask), ("bear", bear_mask)]:
+            valid = mask & np.isfinite(feature_values) & np.isfinite(target_values)
+            n = int(valid.sum())
+            if n < 3:
+                rows.append(
+                    {"feature": feature, "regime": regime_name, "correlation": np.nan, "p_value": np.nan, "n": n}
+                )
+                continue
+            r, p = _pearson_corr_with_p(feature_values[valid], target_values[valid])
+            rows.append({"feature": feature, "regime": regime_name, "correlation": r, "p_value": p, "n": n})
+    if not rows:
+        return pl.DataFrame({"feature": [], "regime": [], "correlation": [], "p_value": [], "n": []})
+    return pl.DataFrame(rows)
+
+
+def compute_granger_causality(
+    data: pl.DataFrame,
+    features: list[str],
+    target: str,
+    max_lag: int,
+    *,
+    seed: int,
+) -> pl.DataFrame:
+    """Run pairwise Granger causality tests (both directions) for each feature.
+
+    Returns a DataFrame with columns:
+    feature, direction, p_value_forward, p_value_reverse, best_lag
+    """
+    if _granger_tests is None:
+        rows = [
+            {
+                "feature": f,
+                "direction": "pending",
+                "p_value_forward": np.nan,
+                "p_value_reverse": np.nan,
+                "best_lag": np.nan,
+            }
+            for f in features
+        ]
+        return pl.DataFrame(rows) if rows else pl.DataFrame(
+            {"feature": [], "direction": [], "p_value_forward": [], "p_value_reverse": [], "best_lag": []}
+        )
+
+    import warnings as _warnings
+
+    target_values = np.asarray(data[target], dtype=float)
+    rows: list[dict[str, object]] = []
+    test_lags = max(1, min(max_lag, 4))
+
+    for feature in features:
+        feature_values = np.asarray(data[feature], dtype=float)
+        valid = np.isfinite(feature_values) & np.isfinite(target_values)
+        x = feature_values[valid]
+        y = target_values[valid]
+        n = x.size
+
+        if n < test_lags + 5:
+            rows.append(
+                {
+                    "feature": feature,
+                    "direction": "none",
+                    "p_value_forward": np.nan,
+                    "p_value_reverse": np.nan,
+                    "best_lag": np.nan,
+                }
+            )
+            continue
+
+        p_forward = np.nan
+        p_reverse = np.nan
+        best_lag_val = np.nan
+
+        try:
+            with _warnings.catch_warnings():
+                _warnings.simplefilter("ignore")
+                pair_forward = np.column_stack([y, x])
+                result_fwd = _granger_tests(pair_forward, maxlag=test_lags, verbose=False)
+                min_p_fwd = 1.0
+                bl = 1
+                for lag_k, tests in result_fwd.items():
+                    p_ssr = tests[0]["ssr_ftest"][1]
+                    if p_ssr < min_p_fwd:
+                        min_p_fwd = p_ssr
+                        bl = lag_k
+                p_forward = float(min_p_fwd)
+                best_lag_val = int(bl)
+        except Exception:
+            pass
+
+        try:
+            with _warnings.catch_warnings():
+                _warnings.simplefilter("ignore")
+                pair_reverse = np.column_stack([x, y])
+                result_rev = _granger_tests(pair_reverse, maxlag=test_lags, verbose=False)
+                min_p_rev = 1.0
+                for _lag_k, tests in result_rev.items():
+                    p_ssr = tests[0]["ssr_ftest"][1]
+                    if p_ssr < min_p_rev:
+                        min_p_rev = p_ssr
+                p_reverse = float(min_p_rev)
+        except Exception:
+            pass
+
+        alpha = 0.05
+        fwd_sig = np.isfinite(p_forward) and p_forward < alpha
+        rev_sig = np.isfinite(p_reverse) and p_reverse < alpha
+        if fwd_sig and rev_sig:
+            direction = "bidirectional"
+        elif fwd_sig:
+            direction = "signal_to_price"
+        elif rev_sig:
+            direction = "price_to_signal"
+        else:
+            direction = "none"
+
+        rows.append(
+            {
+                "feature": feature,
+                "direction": direction,
+                "p_value_forward": p_forward,
+                "p_value_reverse": p_reverse,
+                "best_lag": best_lag_val,
+            }
+        )
+
+    if not rows:
+        return pl.DataFrame(
+            {"feature": [], "direction": [], "p_value_forward": [], "p_value_reverse": [], "best_lag": []}
+        )
+    return pl.DataFrame(rows)
+
+
+def compute_asymmetry(
+    data: pl.DataFrame,
+    features: list[str],
+    target: str,
+) -> pl.DataFrame:
+    """Compute asymmetric correlations: negative vs positive target regimes."""
+    target_values = np.asarray(data[target], dtype=float)
+    rows: list[dict[str, object]] = []
+
+    neg_mask = target_values < 0
+    pos_mask = target_values >= 0
+
+    for feature in features:
+        feature_values = np.asarray(data[feature], dtype=float)
+        valid_neg = neg_mask & np.isfinite(feature_values) & np.isfinite(target_values)
+        valid_pos = pos_mask & np.isfinite(feature_values) & np.isfinite(target_values)
+        n_neg = int(valid_neg.sum())
+        n_pos = int(valid_pos.sum())
+
+        neg_corr = np.nan
+        pos_corr = np.nan
+        if n_neg >= 3:
+            neg_corr, _ = _pearson_corr_with_p(feature_values[valid_neg], target_values[valid_neg])
+        if n_pos >= 3:
+            pos_corr, _ = _pearson_corr_with_p(feature_values[valid_pos], target_values[valid_pos])
+
+        delta = np.nan
+        dominant = "none"
+        if np.isfinite(neg_corr) and np.isfinite(pos_corr):
+            delta = float(abs(neg_corr) - abs(pos_corr))
+            if abs(neg_corr) > abs(pos_corr) + 0.05:
+                dominant = "negative"
+            elif abs(pos_corr) > abs(neg_corr) + 0.05:
+                dominant = "positive"
+
+        rows.append(
+            {
+                "feature": feature,
+                "negative_corr": neg_corr,
+                "positive_corr": pos_corr,
+                "delta": delta,
+                "dominant_side": dominant,
+                "n_negative": n_neg,
+                "n_positive": n_pos,
+            }
+        )
+    if not rows:
+        return pl.DataFrame(
+            {
+                "feature": [],
+                "negative_corr": [],
+                "positive_corr": [],
+                "delta": [],
+                "dominant_side": [],
+                "n_negative": [],
+                "n_positive": [],
+            }
+        )
+    return pl.DataFrame(rows)
 
 
 def compute_distance_correlation(

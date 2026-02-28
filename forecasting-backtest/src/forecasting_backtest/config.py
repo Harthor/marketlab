@@ -17,11 +17,14 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "params": {},
     },
     "walk_forward": {
+        "mode": "sliding",
         "train_window_days": 730,
         "test_window_days": 92,
         "step_days": 92,
         "min_train_rows": 260,
         "min_test_rows": 30,
+        "test_rows": 1,
+        "step_rows": 1,
     },
     "imputation": {
         "strategy": "zero+coverage",
@@ -33,6 +36,7 @@ DEFAULT_CONFIG: dict[str, Any] = {
         "transaction_cost": 0.0004,
         "slippage": 0.0002,
         "initial_capital": 1.0,
+        "annualize_sharpe_days": 252,
     },
     "random_state": 42,
 }

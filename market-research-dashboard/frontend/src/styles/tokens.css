@@ -1,0 +1,43 @@
+:root {
+  --ml-bg-canvas: #0B1120;
+  --ml-bg-surface: #111827;
+  --ml-bg-card: #0F172A;
+  --ml-bg-elevated: #152033;
+
+  --ml-border-default: #23314C;
+  --ml-border-strong: #314261;
+
+  --ml-text-primary: #E5EEF8;
+  --ml-text-secondary: #AAB8CF;
+  --ml-text-muted: #7D8BA7;
+
+  --ml-green-500: #22C55E;
+  --ml-green-soft: rgba(34,197,94,0.12);
+  --ml-green-border: rgba(34,197,94,0.35);
+  --ml-green-text: #86EFAC;
+
+  --ml-yellow-500: #EAB308;
+  --ml-yellow-soft: rgba(234,179,8,0.12);
+  --ml-yellow-border: rgba(234,179,8,0.35);
+  --ml-yellow-text: #FDE68A;
+
+  --ml-orange-500: #F97316;
+  --ml-orange-soft: rgba(249,115,22,0.12);
+  --ml-orange-border: rgba(249,115,22,0.35);
+  --ml-orange-text: #FDBA74;
+
+  --ml-red-500: #EF4444;
+  --ml-red-soft: rgba(239,68,68,0.12);
+  --ml-red-border: rgba(239,68,68,0.35);
+  --ml-red-text: #FCA5A5;
+
+  --ml-blocked-500: #64748B;
+  --ml-blocked-soft: rgba(100,116,139,0.14);
+  --ml-blocked-border: rgba(100,116,139,0.28);
+  --ml-blocked-text: #CBD5E1;
+
+  --ml-shadow-card: 0 8px 24px rgba(0,0,0,0.28);
+  --ml-shadow-card-hover: 0 14px 34px rgba(0,0,0,0.34);
+  --ml-radius-card: 20px;
+  --ml-radius-chip: 9999px;
+}

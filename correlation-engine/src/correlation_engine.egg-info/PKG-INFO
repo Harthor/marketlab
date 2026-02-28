@@ -17,9 +17,13 @@ Requires-Dist: marketlab-core>=0.1.0
 
 Motor reproducible de relaciones estadísticas entre señales (`features`) y `target` (ej. `returns_1d`) sobre datasets tabulares con `ts`.
 
+El timestamp canónico es `ts_utc`, definido por `marketlab_core.contracts.TIMESTAMP_COL` (con fallback a `ts_utc`).
+
 ## Instalación rápida
 
 ```bash
+cd ../marketlab-core && pip install -e .
+cd ../correlation-engine
 pip install -e .
 ```
 
@@ -35,6 +39,9 @@ corr run \
   --max-lag 30 \
   --windows 30,90,180
 ```
+
+Nota: el timestamp canónico del ecosistema se define en `marketlab_core.contracts.TIMESTAMP_COL` (valor por defecto `ts_utc`).  
+Se puede sobrescribir con `--timestamp` si el dataset usa otro nombre.
 
 ### 2) Ranking por métrica
 
@@ -56,6 +63,7 @@ Cada corrida guarda un run en `reports/<run_id>/`:
 
 - `summary.json`: métricas top por feature, ordenadas por métrica.
 - `tables/correlations.parquet`: Pearson/Spearman + p-values + corrección BH.
+- `tables/top_correlations.csv`: subset de `correlations` con top features por correlación absoluta.
 - `tables/rolling_corr.parquet`: rolling correlation por ventanas.
 - `tables/lag.parquet`: cross-correlation por lag (-max_lag .. +max_lag).
 - `tables/lag_summary.parquet`: mejor lag por feature.
@@ -82,10 +90,14 @@ Campos mínimos requeridos:
 - `seed`
 - `artifacts`: lista de objetos `{type, name, path}`
 - `top_features`: métricas `pearson`, `spearman`, `mi`, `best_lag`
+- `top_features`: en runs `complete`, siempre presente (puede venir vacío).
+
+Si el dataset tiene menos filas que `min_effective_obs`, el `status` puede ser `skipped` y `artifacts` puede quedar vacío (manifesto válido para consumo del dashboard).
 
 Nombres de artefactos estables:
 
 - `tables/correlations.parquet` (`name="correlations"`)
+- `tables/top_correlations.csv` (`name="top_correlations_csv"`)
 - `tables/rolling_corr.parquet` (`name="rolling_corr"`)
 - `tables/lag.parquet` (`name="lag"`)
 - `tables/lag_summary.parquet` (`name="lag_summary"`)

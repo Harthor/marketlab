@@ -1,0 +1,21 @@
+{
+  "id": "1",
+  "name": "Tether",
+  "symbol": "USDT",
+  "chainBalances": {
+    "Ethereum": {
+      "tokens": [
+        {"date": 1577836800, "circulating": {"peggedUSD": 20000000000.0}},
+        {"date": 1577923200, "circulating": {"peggedUSD": 20100000000.0}},
+        {"date": 1578009600, "circulating": {"peggedUSD": 20200000000.0}},
+        {"date": 1578096000, "circulating": {"peggedUSD": 20300000000.0}},
+        {"date": 1578182400, "circulating": {"peggedUSD": 20400000000.0}},
+        {"date": 1578268800, "circulating": {"peggedUSD": 20500000000.0}},
+        {"date": 1578355200, "circulating": {"peggedUSD": 20600000000.0}},
+        {"date": 1578441600, "circulating": {"peggedUSD": 20700000000.0}},
+        {"date": 1578528000, "circulating": {"peggedUSD": 20800000000.0}},
+        {"date": 1578614400, "circulating": {"peggedUSD": 20900000000.0}}
+      ]
+    }
+  }
+}

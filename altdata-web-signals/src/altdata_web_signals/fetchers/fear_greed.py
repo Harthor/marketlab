@@ -75,6 +75,13 @@ def add_fng_transforms(df: pl.DataFrame, signal_prefix: str = "signal_fng") -> p
         .alias(f"{signal_prefix}_regime")
     )
 
+    # Binary extreme flags and distance metric (for use as regime filters)
+    df = df.with_columns(
+        (pl.col(val) <= 25).cast(pl.Int8).alias(f"{signal_prefix}_is_extreme_fear"),
+        (pl.col(val) >= 75).cast(pl.Int8).alias(f"{signal_prefix}_is_extreme_greed"),
+        (pl.col(val).cast(pl.Float64) - 50.0).abs().alias(f"{signal_prefix}_extremeness"),
+    )
+
     # asof_utc: day T FGI available at T+1 00:00 UTC
     df = add_asof_utc(df)
 

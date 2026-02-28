@@ -10,8 +10,10 @@ src/correngine/__init__.py
 src/correngine/__main__.py
 src/correngine/cli.py
 src/correngine/config.py
+src/correngine/manifest.py
 src/correngine/marketlab_bridge.py
 src/correngine/plotting.py
 src/correngine/runner.py
 src/correngine/statistics.py
+tests/test_manifest_validation.py
 tests/test_synthetic_lag.py

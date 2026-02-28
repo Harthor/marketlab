@@ -1,4 +1,4 @@
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 import polars as pl
 
@@ -13,8 +13,8 @@ def test_validate_prices_df_ok() -> None:
     frame = pl.DataFrame(
         {
             "timestamp": [
-                datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc),
-                datetime(2024, 1, 1, 0, 1, tzinfo=timezone.utc),
+                datetime(2024, 1, 1, 0, 0, tzinfo=UTC),
+                datetime(2024, 1, 1, 0, 1, tzinfo=UTC),
             ],
             "symbol": ["BTC", "BTC"],
             "open": [100.0, 100.5],
@@ -33,7 +33,7 @@ def test_validate_prices_df_ok() -> None:
 def test_validate_prices_df_with_missing_required_columns() -> None:
     frame = pl.DataFrame(
         {
-            "timestamp": [datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc)],
+            "timestamp": [datetime(2024, 1, 1, 0, 0, tzinfo=UTC)],
             "symbol": ["BTC"],
             "open": [100.0],
             "high": [101.0],
@@ -49,8 +49,8 @@ def test_validate_signals_df_supports_aliases() -> None:
     frame = pl.DataFrame(
         {
             "timestamp": [
-                datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc),
-                datetime(2024, 1, 1, 0, 1, tzinfo=timezone.utc),
+                datetime(2024, 1, 1, 0, 0, tzinfo=UTC),
+                datetime(2024, 1, 1, 0, 1, tzinfo=UTC),
             ],
             "symbol": ["BTC", "BTC"],
             "signal_name": ["m", "m"],
@@ -66,7 +66,7 @@ def test_validate_signals_df_supports_aliases() -> None:
 def test_validate_signals_df_errors_when_signal_value_missing() -> None:
     frame = pl.DataFrame(
         {
-            "timestamp": [datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc)],
+            "timestamp": [datetime(2024, 1, 1, 0, 0, tzinfo=UTC)],
             "symbol": ["BTC"],
             "signal": ["momentum"],
         }
@@ -80,8 +80,8 @@ def test_validate_dataset_df_allows_optional_schema_and_requires_target() -> Non
     valid = pl.DataFrame(
         {
             "timestamp": [
-                datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc),
-                datetime(2024, 1, 1, 0, 1, tzinfo=timezone.utc),
+                datetime(2024, 1, 1, 0, 0, tzinfo=UTC),
+                datetime(2024, 1, 1, 0, 1, tzinfo=UTC),
             ],
             "symbol": ["BTC", "BTC"],
             "y": [0.01, -0.02],
@@ -97,7 +97,7 @@ def test_validate_dataset_df_allows_optional_schema_and_requires_target() -> Non
 def test_validate_dataset_df_requires_dataset_target() -> None:
     invalid = pl.DataFrame(
         {
-            "timestamp": [datetime(2024, 1, 1, 0, 0, tzinfo=timezone.utc)],
+            "timestamp": [datetime(2024, 1, 1, 0, 0, tzinfo=UTC)],
             "symbol": ["BTC"],
             "feature_momentum": [1.1],
         }

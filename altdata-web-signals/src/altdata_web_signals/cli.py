@@ -8,6 +8,8 @@ from argparse import ArgumentDefaultsHelpFormatter
 from .config import PathConfig
 from .dataset import build_research_dataset
 from .fetchers.fear_greed import fetch_fng_signals
+from .fetchers.onchain import fetch_onchain_signals
+from .fetchers.reddit import fetch_reddit_signals
 from .fetchers.rss import fetch_rss_signals
 from .fetchers.rss_crypto import fetch_rss_crypto_signals
 from .fetchers.trends import fetch_trend_series
@@ -122,6 +124,32 @@ def cmd_rss_crypto(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_reddit(args: argparse.Namespace) -> int:
+    paths = fetch_reddit_signals(
+        start=args.start,
+        end=args.end,
+        signals_root=args.signals_root,
+        freq=args.freq,
+        cache_dir=args.cache_dir,
+    )
+    for out in paths:
+        print(f"saved={out}")
+    return 0
+
+
+def cmd_onchain(args: argparse.Namespace) -> int:
+    paths = fetch_onchain_signals(
+        start=args.start,
+        end=args.end,
+        signals_root=args.signals_root,
+        freq=args.freq,
+        cache_dir=args.cache_dir,
+    )
+    for out in paths:
+        print(f"saved={out}")
+    return 0
+
+
 def cmd_trends_btc(args: argparse.Namespace) -> int:
     keywords = _split_csv(args.keywords) if args.keywords else None
     try:
@@ -195,11 +223,17 @@ def main(argv: list[str] | None = None) -> int:
     _add_common(fng, config=cfg)
     fng.set_defaults(func=cmd_fng)
 
-    rss_crypto = sub.add_parser("rss-crypto", help="RSS crypto media + VADER sentiment")
+    rss_crypto = sub.add_parser("rss-crypto", help="RSS crypto media + FinBERT sentiment")
     rss_crypto.add_argument("--start", default=None, help="YYYY-MM-DD (default: 1 year ago)")
     rss_crypto.add_argument("--end", default=None, help="YYYY-MM-DD (default: today)")
     _add_common(rss_crypto, config=cfg)
     rss_crypto.set_defaults(func=cmd_rss_crypto)
+
+    reddit = sub.add_parser("reddit", help="Reddit crypto subreddits + FinBERT sentiment")
+    reddit.add_argument("--start", default=None, help="YYYY-MM-DD (default: 60 days ago)")
+    reddit.add_argument("--end", default=None, help="YYYY-MM-DD (default: today)")
+    _add_common(reddit, config=cfg)
+    reddit.set_defaults(func=cmd_reddit)
 
     trends_btc = sub.add_parser("trends-btc", help="Google Trends for BTC keywords")
     trends_btc.add_argument("--keywords", default=None, help='CSV (default: bitcoin,buy bitcoin,bitcoin crash,crypto)')
@@ -208,6 +242,12 @@ def main(argv: list[str] | None = None) -> int:
     trends_btc.add_argument("--country", default="US")
     _add_common(trends_btc, config=cfg)
     trends_btc.set_defaults(func=cmd_trends_btc)
+
+    onchain = sub.add_parser("onchain", help="On-chain signals (Mempool.space + DeFiLlama)")
+    onchain.add_argument("--start", default=None, help="YYYY-MM-DD (default: 2020-01-01)")
+    onchain.add_argument("--end", default=None, help="YYYY-MM-DD (default: today)")
+    _add_common(onchain, config=cfg)
+    onchain.set_defaults(func=cmd_onchain)
 
     trends = sub.add_parser("trends", help="Best-effort Google Trends (opcional)")
     trends.add_argument("--keywords", required=True)

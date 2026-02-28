@@ -1,0 +1,43 @@
+{
+  "run_id": "onchain_build_20260228T140140Z",
+  "run_type": "onchain_builder",
+  "status": "success",
+  "signals": {
+    "eth_defi_tvl_total": {
+      "rows_written": 3,
+      "quality_status": "pass",
+      "quality_summary": {
+        "OC001": "pass",
+        "OC002": "pass",
+        "OC003": "pass",
+        "OC004": "pass",
+        "OC009": "pass"
+      }
+    },
+    "eth_l2_tvl_total": {
+      "rows_written": 3,
+      "quality_status": "warn",
+      "quality_summary": {
+        "OC001": "pass",
+        "OC002": "warn",
+        "OC003": "warn",
+        "OC004": "pass",
+        "OC009": "pass"
+      }
+    },
+    "eth_stablecoin_supply": {
+      "rows_written": 3,
+      "quality_status": "warn",
+      "quality_summary": {
+        "OC001": "pass",
+        "OC002": "pass",
+        "OC003": "pass",
+        "OC004": "pass",
+        "OC009": "warn"
+      }
+    }
+  },
+  "errors": [],
+  "warnings": [],
+  "created_at": "2026-02-28T14:01:40.105478+00:00"
+}

@@ -20,10 +20,10 @@ from . import __version__
 from .backtest import run_simple_backtest
 from .config import config_fingerprint
 from .data import apply_imputation, dataset_checksum, ensure_features, frame_as_numpy, load_dataset, normalize_dataset
-from .metrics import classification_scores, information_scores, regression_scores
+from .metrics import classification_scores, information_scores, regime_hit_rate, regression_scores, rolling_ic
 from .models import feature_importance, is_baseline, make_model, predict_baseline
-from .plots import plot_equity_curve, plot_feature_importance, plot_pred_vs_true
-from .validation import iter_time_splits
+from .plots import plot_equity_curve, plot_feature_importance, plot_pred_vs_true, plot_rolling_ic
+from .validation import iter_expanding_splits, iter_time_splits
 
 try:
     from marketlab_core.manifests import validate_artifacts_exist, validate_manifest, write_json_atomic
@@ -340,20 +340,35 @@ def execute_train(
         pdf[target] = y
         pdf = pdf.sort_values("ts").reset_index(drop=True)
 
-        split_kwargs = {
-            "train_window_days": int(walk_cfg["train_window_days"]),
-            "test_window_days": int(walk_cfg["test_window_days"]),
-            "step_days": int(walk_cfg["step_days"]),
-            "min_train_rows": int(walk_cfg["min_train_rows"]),
-            "min_test_rows": int(walk_cfg["min_test_rows"]),
-        }
-        splits = list(
-            iter_time_splits(
-                pdf,
-                ts_col="ts",
-                **split_kwargs,
+        walk_mode = str(walk_cfg.get("mode", "sliding")).lower()
+        if walk_mode == "expanding":
+            expanding_kwargs = {
+                "min_train_rows": int(walk_cfg.get("min_train_rows", 26)),
+                "test_rows": int(walk_cfg.get("test_rows", 1)),
+                "step_rows": int(walk_cfg.get("step_rows", 1)),
+            }
+            splits = list(
+                iter_expanding_splits(
+                    pdf,
+                    ts_col="ts",
+                    **expanding_kwargs,
+                )
             )
-        )
+        else:
+            split_kwargs = {
+                "train_window_days": int(walk_cfg["train_window_days"]),
+                "test_window_days": int(walk_cfg["test_window_days"]),
+                "step_days": int(walk_cfg["step_days"]),
+                "min_train_rows": int(walk_cfg["min_train_rows"]),
+                "min_test_rows": int(walk_cfg["min_test_rows"]),
+            }
+            splits = list(
+                iter_time_splits(
+                    pdf,
+                    ts_col="ts",
+                    **split_kwargs,
+                )
+            )
         if not splits:
             raise ValueError("walk-forward generated no splits; adjust windows or dataset size")
 
@@ -380,7 +395,12 @@ def execute_train(
             if is_baseline(model_name):
                 if model_name == "naive":
                     model_name = "naive0"
-                kind = "naive_last" if model_name == "naive_last" else "naive0"
+                if model_name == "naive_last":
+                    kind = "naive_last"
+                elif model_name == "naive_mean":
+                    kind = "naive_mean"
+                else:
+                    kind = "naive0"
                 y_pred = predict_baseline(kind, y_train, len(y_test))
                 model_info = {"type": f"baseline-{kind}"}
             else:
@@ -426,6 +446,7 @@ def execute_train(
         )
 
         predictions_for_backtest = np.where(np.isnan(all_predictions), 0.0, all_predictions)
+        annualize_sharpe_days = int(base_config["backtest"].get("annualize_sharpe_days", 252))
         backtest = run_simple_backtest(
             timestamps=np.asarray(pdf["ts"], dtype="datetime64[ns]"),
             y_true=np.asarray(pdf[target], dtype=float),
@@ -434,6 +455,7 @@ def execute_train(
             transaction_cost=float(base_config["backtest"]["transaction_cost"]),
             slippage=float(base_config["backtest"]["slippage"]),
             initial_capital=float(base_config["backtest"]["initial_capital"]),
+            annualize_sharpe_days=annualize_sharpe_days,
         )
 
         if fitted_model is not None:
@@ -506,6 +528,17 @@ def execute_train(
             out_path=pred_true_path,
         )
 
+        # Rolling IC and regime hit rate
+        ic_window = int(walk_cfg.get("min_train_rows", 26))
+        ic_values = rolling_ic(y_true_scored, y_pred_scored, window=min(ic_window, len(y_true_scored)))
+        regime_stats = regime_hit_rate(y_true_scored, y_pred_scored, threshold=threshold)
+
+        rolling_ic_plot_path: Path | None = None
+        if len(y_true_scored) >= 2:
+            rolling_ic_plot_path = plots_dir / "rolling_ic.png"
+            valid_ts = np.asarray(pdf["ts"])[valid]
+            plot_rolling_ic(valid_ts, ic_values, rolling_ic_plot_path, window=min(ic_window, len(y_true_scored)))
+
         model_artifacts: list[dict[str, str]] = []
         model_artifact_path = None if model_artifact is None else model_artifact.get("path")
         _register_artifact(
@@ -533,6 +566,10 @@ def execute_train(
             artifacts.append({"type": "plot", "name": "feature_importance", "path": "feature_importance.png"})
             artifacts.append(
                 {"type": "table", "name": "feature_importance", "path": "feature_importance.parquet"}
+            )
+        if rolling_ic_plot_path is not None and rolling_ic_plot_path.exists():
+            artifacts.append(
+                {"type": "plot", "name": "rolling_ic", "path": str(rolling_ic_plot_path.relative_to(staging_dir))}
             )
 
         completed_summary: dict[str, object] = {
@@ -582,6 +619,7 @@ def execute_train(
                 "information": information,
                 "trading": backtest["stats"],
                 "backtest": backtest["stats"],
+                "regime": regime_stats,
             },
             "artifacts": artifacts,
             "warnings": warnings,

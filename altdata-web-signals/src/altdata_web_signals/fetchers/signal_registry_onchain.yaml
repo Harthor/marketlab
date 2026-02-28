@@ -1,0 +1,87 @@
+version: 1
+
+providers:
+  mempool:
+    kind: public_http
+    base_url: "https://mempool.space/api"
+    format: json
+    rate_limit_note: "No publicados; usar cache y no abusar"
+  defillama:
+    kind: public_http
+    base_url: "https://api.llama.fi"
+    format: json
+    rate_limit_note: "Public API, generous rate limits"
+  stablecoins_llama:
+    kind: public_http
+    base_url: "https://stablecoins.llama.fi"
+    format: json
+
+signals:
+  - signal_id: "btc_mempool_vbytes"
+    asset: "BTC"
+    family: "onchain"
+    provider: "mempool"
+    endpoint: "/mempool"
+    frequency: "daily"
+    asof_policy: "same_day_end_utc"
+    transforms: ["log1p", "pct_change", "zscore_30d"]
+    checks: ["missing_gap", "flatline", "outlier_mad"]
+    history_note: "No public historical endpoint; accumulates from first fetch"
+    output:
+      unit: "vbytes"
+      dtype: "float"
+
+  - signal_id: "btc_median_fee_rate"
+    asset: "BTC"
+    family: "onchain"
+    provider: "mempool"
+    endpoint: "/v1/fees/mempool-blocks"
+    frequency: "daily"
+    asof_policy: "same_day_end_utc"
+    transforms: ["log1p", "pct_change", "zscore_30d", "burst_flag"]
+    checks: ["missing_gap", "flatline", "outlier_mad"]
+    history_note: "No public historical endpoint; accumulates from first fetch"
+    output:
+      unit: "sat/vB"
+      dtype: "float"
+
+  - signal_id: "eth_defi_tvl_total"
+    asset: "ETH"
+    family: "onchain"
+    provider: "defillama"
+    endpoint: "/v2/historicalChainTvl/Ethereum"
+    frequency: "daily"
+    asof_policy: "same_day_end_utc"
+    transforms: ["pct_change_7d", "zscore_90d"]
+    checks: ["missing_gap", "flatline", "outlier_mad"]
+    output:
+      unit: "USD"
+      dtype: "float"
+
+  - signal_id: "eth_l2_tvl_total"
+    asset: "ETH"
+    family: "onchain"
+    provider: "defillama"
+    endpoint: "/v2/historicalChainTvl/{chain}"
+    chains: ["Arbitrum", "Optimism", "Base"]
+    frequency: "daily"
+    asof_policy: "same_day_end_utc"
+    transforms: ["pct_change_7d", "zscore_90d"]
+    checks: ["missing_gap", "flatline", "outlier_mad"]
+    output:
+      unit: "USD"
+      dtype: "float"
+
+  - signal_id: "eth_stablecoin_supply"
+    asset: "ETH"
+    family: "onchain"
+    provider: "stablecoins_llama"
+    endpoint: "/stablecoin/{id}"
+    stablecoins: ["USDT", "USDC"]
+    frequency: "daily"
+    asof_policy: "same_day_end_utc"
+    transforms: ["pct_change_7d", "zscore_30d"]
+    checks: ["missing_gap", "flatline", "outlier_mad"]
+    output:
+      unit: "USD"
+      dtype: "float"

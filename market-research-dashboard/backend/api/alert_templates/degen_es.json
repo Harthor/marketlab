@@ -1,0 +1,18 @@
+{
+  "whale_accumulation": {
+    "title": "Acumulacion Ballena: {symbol}",
+    "message": "Consenso smart money {consensus_score:.0f}/100 para {symbol} — {wallets_buying} wallets comprando (neto ${net_usd:,.0f} USD). Tier-A activo: {tier_a_active}."
+  },
+  "liquidity_event": {
+    "title": "Liquidez Baja: {symbol}",
+    "message": "Liquidez de {symbol} cayo a ${liquidity_usd:,.0f} (debajo del umbral de ${min_liquidity_usd:,.0f}) en {chain}."
+  },
+  "rug_risk_detected": {
+    "title": "Riesgo de Rug: {symbol}",
+    "message": "{symbol} score de riesgo {risk_score}/100 supera umbral de {risk_threshold}. Flags de seguridad: {security_flags}."
+  },
+  "explosion_score_jump": {
+    "title": "Explosion de Score: {symbol}",
+    "message": "{symbol} universe score salto a {universe_score:.0f}/100 (umbral: {score_threshold}) — categoria: {category}, chain: {chain}."
+  }
+}

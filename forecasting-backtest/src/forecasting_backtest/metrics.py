@@ -77,3 +77,62 @@ def information_scores(y_true: np.ndarray, y_pred: np.ndarray, *, threshold: flo
         "average_return_conditional": avg_return,
         "trades": int(trade_mask.sum()),
     }
+
+
+def rolling_ic(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    *,
+    window: int = 26,
+) -> list[float | None]:
+    """Rolling Pearson correlation (Information Coefficient).
+
+    Returns a list with the same length as *y_true*.  The first
+    ``window - 1`` positions are ``None``.
+    """
+    n = len(y_true)
+    result: list[float | None] = [None] * n
+    if n < window:
+        return result
+
+    yt = np.asarray(y_true, dtype=float)
+    yp = np.asarray(y_pred, dtype=float)
+
+    for i in range(window - 1, n):
+        start = i - window + 1
+        t_slice = yt[start : i + 1]
+        p_slice = yp[start : i + 1]
+        if np.std(t_slice) == 0 or np.std(p_slice) == 0:
+            result[i] = 0.0
+        else:
+            result[i] = float(np.corrcoef(t_slice, p_slice)[0, 1])
+    return result
+
+
+def regime_hit_rate(
+    y_true: np.ndarray,
+    y_pred: np.ndarray,
+    *,
+    threshold: float = 0.0,
+) -> dict[str, float | int]:
+    """Directional hit rate split by bull (return > 0) vs bear (return <= 0)."""
+    yt = np.asarray(y_true, dtype=float)
+    yp = np.asarray(y_pred, dtype=float)
+
+    signal = np.where(yp > threshold, 1, 0)
+    correct = (signal == (yt > 0).astype(int))
+
+    bull_mask = yt > 0
+    bear_mask = ~bull_mask
+
+    bull_n = int(bull_mask.sum())
+    bear_n = int(bear_mask.sum())
+    bull_hit = float(correct[bull_mask].mean()) if bull_n > 0 else float("nan")
+    bear_hit = float(correct[bear_mask].mean()) if bear_n > 0 else float("nan")
+
+    return {
+        "bull_hit_rate": bull_hit,
+        "bear_hit_rate": bear_hit,
+        "bull_n": bull_n,
+        "bear_n": bear_n,
+    }
