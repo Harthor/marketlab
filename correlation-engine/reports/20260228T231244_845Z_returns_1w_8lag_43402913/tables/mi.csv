@@ -1,0 +1,15 @@
+feature,mutual_information,n_obs,n_effective
+close,0.08914387025461279,74,74
+signal_trends_bitcoin,0.007364495588523923,74,74
+signal_trends_bitcoin_crash,0.08189864084380272,74,74
+signal_trends_bitcoin_crash_delta,0.0,73,73
+signal_trends_bitcoin_crash_pct_change,0.0,73,73
+signal_trends_bitcoin_delta,0.0,73,73
+signal_trends_bitcoin_pct_change,0.0,73,73
+signal_trends_buy_bitcoin,0.0,74,74
+signal_trends_buy_bitcoin_delta,0.0,73,73
+signal_trends_buy_bitcoin_pct_change,0.0,73,73
+signal_trends_crypto,0.09377635900671644,74,74
+signal_trends_crypto_delta,0.0002488054114739846,73,73
+signal_trends_crypto_pct_change,0.12874244975256088,73,73
+signal_trends_fear_ratio,0.038309706453456105,74,74

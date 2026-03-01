@@ -1,0 +1,1699 @@
+{
+  "advanced_metrics": {
+    "asymmetry": {
+      "close": {
+        "delta": -0.11408804328512565,
+        "dominant_side": "positive",
+        "negative_corr": -0.07357382950621491,
+        "positive_corr": -0.18766187279134056
+      },
+      "signal_trends_bitcoin": {
+        "delta": -0.36181782475052116,
+        "dominant_side": "positive",
+        "negative_corr": -0.1833601541778815,
+        "positive_corr": 0.5451779789284027
+      },
+      "signal_trends_bitcoin_crash": {
+        "delta": -0.3384293664069427,
+        "dominant_side": "positive",
+        "negative_corr": -0.19392659180693578,
+        "positive_corr": 0.5323559582138785
+      },
+      "signal_trends_bitcoin_crash_delta": {
+        "delta": -0.17945842531498554,
+        "dominant_side": "positive",
+        "negative_corr": -0.10545993978842841,
+        "positive_corr": 0.28491836510341395
+      },
+      "signal_trends_bitcoin_crash_pct_change": {
+        "delta": -0.09567135465780517,
+        "dominant_side": "positive",
+        "negative_corr": -0.09480617575807941,
+        "positive_corr": 0.19047753041588458
+      },
+      "signal_trends_bitcoin_delta": {
+        "delta": -0.30806300778708406,
+        "dominant_side": "positive",
+        "negative_corr": -0.12278217039529385,
+        "positive_corr": 0.43084517818237794
+      },
+      "signal_trends_bitcoin_pct_change": {
+        "delta": -0.19993154984417966,
+        "dominant_side": "positive",
+        "negative_corr": -0.1530446779410503,
+        "positive_corr": 0.35297622778522997
+      },
+      "signal_trends_buy_bitcoin": {
+        "delta": -0.5286730068886241,
+        "dominant_side": "positive",
+        "negative_corr": -0.06357654950004216,
+        "positive_corr": 0.5922495563886662
+      },
+      "signal_trends_buy_bitcoin_delta": {
+        "delta": -0.4514888370173127,
+        "dominant_side": "positive",
+        "negative_corr": 0.01937947041948581,
+        "positive_corr": 0.47086830743679847
+      },
+      "signal_trends_buy_bitcoin_pct_change": {
+        "delta": -0.31312346611499364,
+        "dominant_side": "positive",
+        "negative_corr": -0.011758267305898133,
+        "positive_corr": 0.32488173342089177
+      },
+      "signal_trends_crypto": {
+        "delta": 0.09428029519256001,
+        "dominant_side": "negative",
+        "negative_corr": -0.14806228040348746,
+        "positive_corr": 0.05378198521092745
+      },
+      "signal_trends_crypto_delta": {
+        "delta": -0.040172292626074774,
+        "dominant_side": "none",
+        "negative_corr": 0.21445293820306235,
+        "positive_corr": 0.25462523082913713
+      },
+      "signal_trends_crypto_pct_change": {
+        "delta": -0.24601753888133787,
+        "dominant_side": "positive",
+        "negative_corr": 0.18066957266549788,
+        "positive_corr": 0.42668711154683575
+      },
+      "signal_trends_fear_ratio": {
+        "delta": 0.044676997204011804,
+        "dominant_side": "none",
+        "negative_corr": -0.25590481030635553,
+        "positive_corr": 0.21122781310234373
+      }
+    },
+    "bootstrap": {
+      "close": {
+        "estimate": 0.034716792146495985,
+        "lower": -0.0888756160966446,
+        "n_boot": 200,
+        "p_value_max_stat": 0.55,
+        "upper": 0.17958949583292255
+      },
+      "signal_trends_bitcoin": {
+        "estimate": 0.3336101284951819,
+        "lower": -0.025554273003962825,
+        "n_boot": 200,
+        "p_value_max_stat": 0.675,
+        "upper": 0.6158295427552131
+      },
+      "signal_trends_bitcoin_crash": {
+        "estimate": 0.20470099551051768,
+        "lower": -0.18662451928974091,
+        "n_boot": 200,
+        "p_value_max_stat": 0.71,
+        "upper": 0.5771278476064582
+      },
+      "signal_trends_bitcoin_crash_delta": {
+        "estimate": 0.08407123838179605,
+        "lower": -0.38737777187021094,
+        "n_boot": 200,
+        "p_value_max_stat": 0.955,
+        "upper": 0.42029205450797624
+      },
+      "signal_trends_bitcoin_crash_pct_change": {
+        "estimate": 0.008154851556868625,
+        "lower": -0.29084293574888465,
+        "n_boot": 200,
+        "p_value_max_stat": 0.96,
+        "upper": 0.28816218321709464
+      },
+      "signal_trends_bitcoin_delta": {
+        "estimate": 0.26952761503324063,
+        "lower": -0.1077825677955264,
+        "n_boot": 200,
+        "p_value_max_stat": 0.585,
+        "upper": 0.5376601310899835
+      },
+      "signal_trends_bitcoin_pct_change": {
+        "estimate": 0.31039832135783685,
+        "lower": -0.032238195860937756,
+        "n_boot": 200,
+        "p_value_max_stat": 0.7,
+        "upper": 0.5658429570171013
+      },
+      "signal_trends_buy_bitcoin": {
+        "estimate": 0.3621645129230578,
+        "lower": -0.04901430173762224,
+        "n_boot": 200,
+        "p_value_max_stat": 0.6,
+        "upper": 0.6601820807396831
+      },
+      "signal_trends_buy_bitcoin_delta": {
+        "estimate": 0.2783119665958843,
+        "lower": -0.04737077137779565,
+        "n_boot": 200,
+        "p_value_max_stat": 0.555,
+        "upper": 0.5289435147986911
+      },
+      "signal_trends_buy_bitcoin_pct_change": {
+        "estimate": 0.27753447108908075,
+        "lower": -0.033766981923522565,
+        "n_boot": 200,
+        "p_value_max_stat": 0.605,
+        "upper": 0.5092324949620669
+      },
+      "signal_trends_crypto": {
+        "estimate": -0.00956642514653395,
+        "lower": -0.19521572797787143,
+        "n_boot": 200,
+        "p_value_max_stat": 0.435,
+        "upper": 0.215831159693088
+      },
+      "signal_trends_crypto_delta": {
+        "estimate": 0.2753681688478934,
+        "lower": 0.09770795775067266,
+        "n_boot": 200,
+        "p_value_max_stat": 0.64,
+        "upper": 0.4041263036760461
+      },
+      "signal_trends_crypto_pct_change": {
+        "estimate": 0.4009890156015845,
+        "lower": 0.15529790999561216,
+        "n_boot": 200,
+        "p_value_max_stat": 0.505,
+        "upper": 0.6131732960609693
+      },
+      "signal_trends_fear_ratio": {
+        "estimate": 0.012139260079181612,
+        "lower": -0.24566790460982163,
+        "n_boot": 200,
+        "p_value_max_stat": 0.805,
+        "upper": 0.3326902125825463
+      }
+    },
+    "granger": {
+      "close": {
+        "best_lag": 1,
+        "direction": "none",
+        "p_value_forward": 0.21354526871700805,
+        "p_value_reverse": 0.1481096922933639
+      },
+      "signal_trends_bitcoin": {
+        "best_lag": 3,
+        "direction": "none",
+        "p_value_forward": 0.08945946477625724,
+        "p_value_reverse": 0.6629622446351335
+      },
+      "signal_trends_bitcoin_crash": {
+        "best_lag": 4,
+        "direction": "signal_to_price",
+        "p_value_forward": 0.04819986395432394,
+        "p_value_reverse": 0.14734243837067512
+      },
+      "signal_trends_bitcoin_crash_delta": {
+        "best_lag": 4,
+        "direction": "signal_to_price",
+        "p_value_forward": 0.014333635436342591,
+        "p_value_reverse": 0.11789999302817224
+      },
+      "signal_trends_bitcoin_crash_pct_change": {
+        "best_lag": 4,
+        "direction": "signal_to_price",
+        "p_value_forward": 0.021639367326923592,
+        "p_value_reverse": 0.22649438883516132
+      },
+      "signal_trends_bitcoin_delta": {
+        "best_lag": 2,
+        "direction": "signal_to_price",
+        "p_value_forward": 0.03983077136762055,
+        "p_value_reverse": 0.3682735993300078
+      },
+      "signal_trends_bitcoin_pct_change": {
+        "best_lag": 2,
+        "direction": "signal_to_price",
+        "p_value_forward": 0.0008222652166707121,
+        "p_value_reverse": 0.3754603677286489
+      },
+      "signal_trends_buy_bitcoin": {
+        "best_lag": 2,
+        "direction": "none",
+        "p_value_forward": 0.07447212707095084,
+        "p_value_reverse": 0.5197928733548687
+      },
+      "signal_trends_buy_bitcoin_delta": {
+        "best_lag": 1,
+        "direction": "signal_to_price",
+        "p_value_forward": 0.019967988720326083,
+        "p_value_reverse": 0.13077879487516836
+      },
+      "signal_trends_buy_bitcoin_pct_change": {
+        "best_lag": 1,
+        "direction": "signal_to_price",
+        "p_value_forward": 0.044455676198293076,
+        "p_value_reverse": 0.3810852216836352
+      },
+      "signal_trends_crypto": {
+        "best_lag": 4,
+        "direction": "bidirectional",
+        "p_value_forward": 0.032545800649695346,
+        "p_value_reverse": 0.022754660409212833
+      },
+      "signal_trends_crypto_delta": {
+        "best_lag": 4,
+        "direction": "bidirectional",
+        "p_value_forward": 0.027645289304742117,
+        "p_value_reverse": 0.007545968446679227
+      },
+      "signal_trends_crypto_pct_change": {
+        "best_lag": 4,
+        "direction": "none",
+        "p_value_forward": 0.10796925051774066,
+        "p_value_reverse": 0.05854343934854901
+      },
+      "signal_trends_fear_ratio": {
+        "best_lag": 4,
+        "direction": "none",
+        "p_value_forward": 0.14516779641153663,
+        "p_value_reverse": 0.09502631091414131
+      }
+    },
+    "regime": {
+      "close": [
+        {
+          "correlation": -0.18766187279134056,
+          "n": 42,
+          "p_value": 0.23400957312608386,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.07357382950621491,
+          "n": 32,
+          "p_value": 0.6890233525199471,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_bitcoin": [
+        {
+          "correlation": 0.5451779789284027,
+          "n": 42,
+          "p_value": 0.00018890627126701295,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.1833601541778815,
+          "n": 32,
+          "p_value": 0.3151262803175456,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_bitcoin_crash": [
+        {
+          "correlation": 0.5323559582138785,
+          "n": 42,
+          "p_value": 0.0002846623840824128,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.19392659180693578,
+          "n": 32,
+          "p_value": 0.2875525514118368,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_bitcoin_crash_delta": [
+        {
+          "correlation": 0.28491836510341395,
+          "n": 41,
+          "p_value": 0.07098421476578408,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.10545993978842841,
+          "n": 32,
+          "p_value": 0.5656686447050139,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_bitcoin_crash_pct_change": [
+        {
+          "correlation": 0.19047753041588458,
+          "n": 41,
+          "p_value": 0.23291157450508537,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.09480617575807941,
+          "n": 32,
+          "p_value": 0.6057619347264356,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_bitcoin_delta": [
+        {
+          "correlation": 0.43084517818237794,
+          "n": 41,
+          "p_value": 0.0049218973437307086,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.12278217039529385,
+          "n": 32,
+          "p_value": 0.5031974905537431,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_bitcoin_pct_change": [
+        {
+          "correlation": 0.35297622778522997,
+          "n": 41,
+          "p_value": 0.023594586842577963,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.1530446779410503,
+          "n": 32,
+          "p_value": 0.403014492548824,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_buy_bitcoin": [
+        {
+          "correlation": 0.5922495563886662,
+          "n": 42,
+          "p_value": 3.600360869743811e-05,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.06357654950004216,
+          "n": 32,
+          "p_value": 0.7295797998888811,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_buy_bitcoin_delta": [
+        {
+          "correlation": 0.47086830743679847,
+          "n": 41,
+          "p_value": 0.0018893645521207477,
+          "regime": "bull"
+        },
+        {
+          "correlation": 0.01937947041948581,
+          "n": 32,
+          "p_value": 0.9161576520152729,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_buy_bitcoin_pct_change": [
+        {
+          "correlation": 0.32488173342089177,
+          "n": 41,
+          "p_value": 0.03821714061969687,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.011758267305898133,
+          "n": 32,
+          "p_value": 0.949073313402466,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_crypto": [
+        {
+          "correlation": 0.05378198521092745,
+          "n": 42,
+          "p_value": 0.7351571613225744,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.14806228040348746,
+          "n": 32,
+          "p_value": 0.4186789526661067,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_crypto_delta": [
+        {
+          "correlation": 0.25462523082913713,
+          "n": 41,
+          "p_value": 0.10814599286757719,
+          "regime": "bull"
+        },
+        {
+          "correlation": 0.21445293820306235,
+          "n": 32,
+          "p_value": 0.23854247597847988,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_crypto_pct_change": [
+        {
+          "correlation": 0.42668711154683575,
+          "n": 41,
+          "p_value": 0.0054022021802827246,
+          "regime": "bull"
+        },
+        {
+          "correlation": 0.18066957266549788,
+          "n": 32,
+          "p_value": 0.3224021494100056,
+          "regime": "bear"
+        }
+      ],
+      "signal_trends_fear_ratio": [
+        {
+          "correlation": 0.21122781310234373,
+          "n": 42,
+          "p_value": 0.179333786078985,
+          "regime": "bull"
+        },
+        {
+          "correlation": -0.25590481030635553,
+          "n": 32,
+          "p_value": 0.15745353021440095,
+          "regime": "bear"
+        }
+      ]
+    },
+    "stability": {
+      "close": {
+        "consistency": 0.0,
+        "directionality": 0.0,
+        "regimeRobustness": 39.2,
+        "sampleSufficiency": 41.1,
+        "significance": 0.0,
+        "strength": 8.4,
+        "total": 14.1
+      },
+      "signal_trends_bitcoin": {
+        "consistency": 10.8,
+        "directionality": 11.7,
+        "regimeRobustness": 33.6,
+        "sampleSufficiency": 41.1,
+        "significance": 29.7,
+        "strength": 52.1,
+        "total": 31.7
+      },
+      "signal_trends_bitcoin_crash": {
+        "consistency": 0.0,
+        "directionality": 57.6,
+        "regimeRobustness": 36.4,
+        "sampleSufficiency": 41.1,
+        "significance": 0.0,
+        "strength": 29.9,
+        "total": 24.6
+      },
+      "signal_trends_bitcoin_crash_delta": {
+        "consistency": 0.0,
+        "directionality": 95.2,
+        "regimeRobustness": 37.0,
+        "sampleSufficiency": 40.6,
+        "significance": 0.0,
+        "strength": 4.6,
+        "total": 22.1
+      },
+      "signal_trends_bitcoin_crash_pct_change": {
+        "consistency": 0.0,
+        "directionality": 87.1,
+        "regimeRobustness": 49.8,
+        "sampleSufficiency": 40.6,
+        "significance": 0.0,
+        "strength": 1.3,
+        "total": 23.0
+      },
+      "signal_trends_bitcoin_delta": {
+        "consistency": 0.0,
+        "directionality": 66.9,
+        "regimeRobustness": 28.5,
+        "sampleSufficiency": 40.6,
+        "significance": 23.0,
+        "strength": 48.6,
+        "total": 32.0
+      },
+      "signal_trends_bitcoin_pct_change": {
+        "consistency": 0.0,
+        "directionality": 100.0,
+        "regimeRobustness": 43.4,
+        "sampleSufficiency": 40.6,
+        "significance": 18.3,
+        "strength": 46.7,
+        "total": 37.2
+      },
+      "signal_trends_buy_bitcoin": {
+        "consistency": 1.4,
+        "directionality": 28.4,
+        "regimeRobustness": 10.7,
+        "sampleSufficiency": 41.1,
+        "significance": 83.7,
+        "strength": 69.7,
+        "total": 39.4
+      },
+      "signal_trends_buy_bitcoin_delta": {
+        "consistency": 0.0,
+        "directionality": 88.9,
+        "regimeRobustness": 4.1,
+        "sampleSufficiency": 40.6,
+        "significance": 29.7,
+        "strength": 56.5,
+        "total": 32.4
+      },
+      "signal_trends_buy_bitcoin_pct_change": {
+        "consistency": 0.0,
+        "directionality": 61.7,
+        "regimeRobustness": 3.6,
+        "sampleSufficiency": 40.6,
+        "significance": 23.0,
+        "strength": 49.6,
+        "total": 26.8
+      },
+      "signal_trends_crypto": {
+        "consistency": 0.0,
+        "directionality": 74.9,
+        "regimeRobustness": 36.3,
+        "sampleSufficiency": 41.1,
+        "significance": 0.0,
+        "strength": 14.8,
+        "total": 22.6
+      },
+      "signal_trends_crypto_delta": {
+        "consistency": 14.2,
+        "directionality": 80.4,
+        "regimeRobustness": 84.2,
+        "sampleSufficiency": 40.6,
+        "significance": 29.7,
+        "strength": 53.2,
+        "total": 49.5
+      },
+      "signal_trends_crypto_pct_change": {
+        "consistency": 19.0,
+        "directionality": 0.0,
+        "regimeRobustness": 42.3,
+        "sampleSufficiency": 40.6,
+        "significance": 96.1,
+        "strength": 82.7,
+        "total": 51.4
+      },
+      "signal_trends_fear_ratio": {
+        "consistency": 0.0,
+        "directionality": 0.0,
+        "regimeRobustness": 82.5,
+        "sampleSufficiency": 41.1,
+        "significance": 0.0,
+        "strength": 7.1,
+        "total": 22.4
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "artifact_id": "table::feature_summary::tables/feature_summary.parquet::1",
+      "name": "feature_summary",
+      "path": "tables/feature_summary.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::feature_summary_csv::tables/feature_summary.csv::1",
+      "name": "feature_summary_csv",
+      "path": "tables/feature_summary.csv",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::correlations::tables/correlations.parquet::1",
+      "name": "correlations",
+      "path": "tables/correlations.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::correlations_csv::tables/correlations.csv::1",
+      "name": "correlations_csv",
+      "path": "tables/correlations.csv",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::top_correlations::tables/top_correlations.parquet::1",
+      "name": "top_correlations",
+      "path": "tables/top_correlations.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::top_correlations_csv::tables/top_correlations.csv::1",
+      "name": "top_correlations_csv",
+      "path": "tables/top_correlations.csv",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::rolling_corr::tables/rolling_corr.parquet::1",
+      "name": "rolling_corr",
+      "path": "tables/rolling_corr.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::rolling_corr_csv::tables/rolling_corr.csv::1",
+      "name": "rolling_corr_csv",
+      "path": "tables/rolling_corr.csv",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::lag::tables/lag.parquet::1",
+      "name": "lag",
+      "path": "tables/lag.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::lag_profile::tables/lag_profile.parquet::1",
+      "name": "lag_profile",
+      "path": "tables/lag_profile.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::lag_summary::tables/lag_summary.parquet::1",
+      "name": "lag_summary",
+      "path": "tables/lag_summary.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::lag_summary_csv::tables/lag_summary.csv::1",
+      "name": "lag_summary_csv",
+      "path": "tables/lag_summary.csv",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::mutual_information::tables/mi.parquet::1",
+      "name": "mutual_information",
+      "path": "tables/mi.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::mutual_information_csv::tables/mi.csv::1",
+      "name": "mutual_information_csv",
+      "path": "tables/mi.csv",
+      "type": "table"
+    },
+    {
+      "artifact_id": "table::bootstrap_ci::tables/bootstrap_ci.parquet::1",
+      "name": "bootstrap_ci",
+      "path": "tables/bootstrap_ci.parquet",
+      "type": "table"
+    },
+    {
+      "artifact_id": "plot::rolling_corr::plots/rolling_corr.png::1",
+      "name": "rolling_corr",
+      "path": "plots/rolling_corr.png",
+      "type": "plot"
+    },
+    {
+      "artifact_id": "plot::lag_profiles::plots/lag_profiles.png::1",
+      "name": "lag_profiles",
+      "path": "plots/lag_profiles.png",
+      "type": "plot"
+    },
+    {
+      "artifact_id": "manifest::summary::summary.json::1",
+      "name": "summary",
+      "path": "summary.json",
+      "type": "manifest"
+    }
+  ],
+  "completed_at_utc": "2026-02-28T23:12:45.964588+00:00",
+  "config": {
+    "bootstrap": 200,
+    "cache_root": "/Users/carlaherrera/.cache/correlation-engine",
+    "dataset": "/Users/carlaherrera/Desktop/marketlab/.claude/worktrees/charming-germain/altdata-web-signals/data/datasets/BTC-USD/btc_weekly_signals.parquet",
+    "distance_corr": false,
+    "max_lag": 8,
+    "min_effective_obs": 10,
+    "output_root": "/Users/carlaherrera/Desktop/marketlab/correlation-engine/reports",
+    "seed": 42,
+    "target": "returns_1w",
+    "timestamp": "ts_utc",
+    "top": 20,
+    "windows": [
+      8,
+      16,
+      26
+    ]
+  },
+  "config_file": null,
+  "config_hash": "0f6c306068d52843e4e3157d377dda97e8f166ed7a880c8557ff0ecb4cd2344a",
+  "created_at_utc": "2026-02-28T23:12:44.956038+00:00",
+  "created_utc": "2026-02-28T23:12:44.956038+00:00",
+  "dataset_hash": "43402913602fb05661cddc5a4242719e4916ee48fde6b2a87bbda9929a9b2137",
+  "dataset_path": "/Users/carlaherrera/Desktop/marketlab/.claude/worktrees/charming-germain/altdata-web-signals/data/datasets/BTC-USD/btc_weekly_signals.parquet",
+  "dataset_rows": 74,
+  "feature_summary_preview": [
+    {
+      "best_lag": null,
+      "feature": "close",
+      "metric": "pearson",
+      "n_effective": 74,
+      "p_value": 0.7217242216785219,
+      "score": -0.042100605658755536
+    },
+    {
+      "best_lag": null,
+      "feature": "close",
+      "metric": "spearman",
+      "n_effective": 74,
+      "p_value": 0.9447898144595888,
+      "score": -0.008189559422436134
+    },
+    {
+      "best_lag": 4,
+      "feature": "close",
+      "metric": "best_lag",
+      "n_effective": 70,
+      "p_value": 0.09623259568178069,
+      "score": -0.2004001235445449
+    },
+    {
+      "best_lag": null,
+      "feature": "close",
+      "metric": "mutual_information",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.08914387025461279
+    },
+    {
+      "best_lag": null,
+      "feature": "close",
+      "metric": "pearson_bootstrap",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.034716792146495985
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin",
+      "metric": "pearson",
+      "n_effective": 74,
+      "p_value": 0.025092138538464093,
+      "score": 0.26031732188914153
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin",
+      "metric": "spearman",
+      "n_effective": 74,
+      "p_value": 0.30286691600120336,
+      "score": 0.12139355966108388
+    },
+    {
+      "best_lag": 0,
+      "feature": "signal_trends_bitcoin",
+      "metric": "best_lag",
+      "n_effective": 74,
+      "p_value": 0.025092138538464093,
+      "score": 0.26031732188914153
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin",
+      "metric": "mutual_information",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.007364495588523923
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin",
+      "metric": "pearson_bootstrap",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.3336101284951819
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash",
+      "metric": "pearson",
+      "n_effective": 74,
+      "p_value": 0.20292117789054098,
+      "score": 0.1497280721893993
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash",
+      "metric": "spearman",
+      "n_effective": 74,
+      "p_value": 0.5576771515581781,
+      "score": 0.0692525313310255
+    },
+    {
+      "best_lag": -3,
+      "feature": "signal_trends_bitcoin_crash",
+      "metric": "best_lag",
+      "n_effective": 71,
+      "p_value": 0.03202027720499278,
+      "score": 0.25477159131120136
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash",
+      "metric": "mutual_information",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.08189864084380272
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash",
+      "metric": "pearson_bootstrap",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.20470099551051768
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_delta",
+      "metric": "pearson",
+      "n_effective": 73,
+      "p_value": 0.8477604976104487,
+      "score": 0.022860807305027778
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_delta",
+      "metric": "spearman",
+      "n_effective": 73,
+      "p_value": 0.2517358901436118,
+      "score": -0.13586782421041568
+    },
+    {
+      "best_lag": -5,
+      "feature": "signal_trends_bitcoin_crash_delta",
+      "metric": "best_lag",
+      "n_effective": 69,
+      "p_value": 0.0162149962959543,
+      "score": -0.28850016387188715
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_delta",
+      "metric": "mutual_information",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.0
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_delta",
+      "metric": "pearson_bootstrap",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.08407123838179605
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_pct_change",
+      "metric": "pearson",
+      "n_effective": 73,
+      "p_value": 0.9566100913154968,
+      "score": -0.006479751009042019
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_pct_change",
+      "metric": "spearman",
+      "n_effective": 73,
+      "p_value": 0.6246911342260516,
+      "score": -0.05821418003382376
+    },
+    {
+      "best_lag": 2,
+      "feature": "signal_trends_bitcoin_crash_pct_change",
+      "metric": "best_lag",
+      "n_effective": 71,
+      "p_value": 0.03476560298254593,
+      "score": 0.2509686801871866
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_pct_change",
+      "metric": "mutual_information",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.0
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_crash_pct_change",
+      "metric": "pearson_bootstrap",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.008154851556868625
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_delta",
+      "metric": "pearson",
+      "n_effective": 73,
+      "p_value": 0.03851589167362157,
+      "score": 0.24275007432201406
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_delta",
+      "metric": "spearman",
+      "n_effective": 73,
+      "p_value": 0.6789157393499806,
+      "score": 0.04926931758809288
+    },
+    {
+      "best_lag": 1,
+      "feature": "signal_trends_bitcoin_delta",
+      "metric": "best_lag",
+      "n_effective": 72,
+      "p_value": 0.024722015844018497,
+      "score": 0.26455592680036033
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_delta",
+      "metric": "mutual_information",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.0
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_delta",
+      "metric": "pearson_bootstrap",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.26952761503324063
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_pct_change",
+      "metric": "pearson",
+      "n_effective": 73,
+      "p_value": 0.046671379276032064,
+      "score": 0.23362598401118698
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_pct_change",
+      "metric": "spearman",
+      "n_effective": 73,
+      "p_value": 0.4066079322773457,
+      "score": 0.09859459136459833
+    },
+    {
+      "best_lag": 2,
+      "feature": "signal_trends_bitcoin_pct_change",
+      "metric": "best_lag",
+      "n_effective": 71,
+      "p_value": 0.001208024812308278,
+      "score": 0.37659479106582067
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_pct_change",
+      "metric": "mutual_information",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.0
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_bitcoin_pct_change",
+      "metric": "pearson_bootstrap",
+      "n_effective": 73,
+      "p_value": null,
+      "score": 0.31039832135783685
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_buy_bitcoin",
+      "metric": "pearson",
+      "n_effective": 74,
+      "p_value": 0.002329644016386697,
+      "score": 0.3486882942179821
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_buy_bitcoin",
+      "metric": "spearman",
+      "n_effective": 74,
+      "p_value": 0.1489129973968007,
+      "score": 0.16945850666923834
+    },
+    {
+      "best_lag": 0,
+      "feature": "signal_trends_buy_bitcoin",
+      "metric": "best_lag",
+      "n_effective": 74,
+      "p_value": 0.002329644016386697,
+      "score": 0.3486882942179821
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_buy_bitcoin",
+      "metric": "mutual_information",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.0
+    },
+    {
+      "best_lag": null,
+      "feature": "signal_trends_buy_bitcoin",
+      "metric": "pearson_bootstrap",
+      "n_effective": 74,
+      "p_value": null,
+      "score": 0.3621645129230578
+    }
+  ],
+  "kind": "correlation",
+  "plots": [
+    "plots/rolling_corr.png",
+    "plots/lag_profiles.png"
+  ],
+  "run_id": "20260228T231244_845Z_returns_1w_8lag_43402913",
+  "schema_version": "1.0",
+  "seed": 42,
+  "status": "complete",
+  "tables": [
+    "tables/feature_summary.csv",
+    "tables/correlations.csv",
+    "tables/top_correlations.csv",
+    "tables/rolling_corr.csv",
+    "tables/lag_summary.csv",
+    "tables/mi.csv"
+  ],
+  "top_features": {
+    "best_lag": [
+      {
+        "best_abs_corr": 0.41345667122826807,
+        "best_corr": 0.41345667122826807,
+        "best_lag": 0,
+        "best_p": 0.0002772044485137232,
+        "feature": "signal_trends_crypto_pct_change",
+        "lead_lag": "synchronous",
+        "n_effective": 73
+      },
+      {
+        "best_abs_corr": 0.3809487158875067,
+        "best_corr": -0.3809487158875067,
+        "best_lag": -5,
+        "best_p": 0.0012410021856082154,
+        "feature": "signal_trends_crypto_delta",
+        "lead_lag": "target_leads",
+        "n_effective": 69
+      },
+      {
+        "best_abs_corr": 0.37659479106582067,
+        "best_corr": 0.37659479106582067,
+        "best_lag": 2,
+        "best_p": 0.001208024812308278,
+        "feature": "signal_trends_bitcoin_pct_change",
+        "lead_lag": "feature_leads",
+        "n_effective": 71
+      },
+      {
+        "best_abs_corr": 0.3486882942179821,
+        "best_corr": 0.3486882942179821,
+        "best_lag": 0,
+        "best_p": 0.002329644016386697,
+        "feature": "signal_trends_buy_bitcoin",
+        "lead_lag": "synchronous",
+        "n_effective": 74
+      },
+      {
+        "best_abs_corr": 0.31974784614265533,
+        "best_corr": 0.31974784614265533,
+        "best_lag": 1,
+        "best_p": 0.006182499465951231,
+        "feature": "signal_trends_buy_bitcoin_delta",
+        "lead_lag": "feature_leads",
+        "n_effective": 72
+      },
+      {
+        "best_abs_corr": 0.28850016387188715,
+        "best_corr": -0.28850016387188715,
+        "best_lag": -5,
+        "best_p": 0.0162149962959543,
+        "feature": "signal_trends_bitcoin_crash_delta",
+        "lead_lag": "target_leads",
+        "n_effective": 69
+      },
+      {
+        "best_abs_corr": 0.2811464344476153,
+        "best_corr": 0.2811464344476153,
+        "best_lag": 1,
+        "best_p": 0.01674201113505081,
+        "feature": "signal_trends_buy_bitcoin_pct_change",
+        "lead_lag": "feature_leads",
+        "n_effective": 72
+      },
+      {
+        "best_abs_corr": 0.26455592680036033,
+        "best_corr": 0.26455592680036033,
+        "best_lag": 1,
+        "best_p": 0.024722015844018497,
+        "feature": "signal_trends_bitcoin_delta",
+        "lead_lag": "feature_leads",
+        "n_effective": 72
+      },
+      {
+        "best_abs_corr": 0.26379766277027006,
+        "best_corr": 0.26379766277027006,
+        "best_lag": -3,
+        "best_p": 0.026223974020737863,
+        "feature": "signal_trends_fear_ratio",
+        "lead_lag": "target_leads",
+        "n_effective": 71
+      },
+      {
+        "best_abs_corr": 0.26031732188914153,
+        "best_corr": 0.26031732188914153,
+        "best_lag": 0,
+        "best_p": 0.025092138538464093,
+        "feature": "signal_trends_bitcoin",
+        "lead_lag": "synchronous",
+        "n_effective": 74
+      },
+      {
+        "best_abs_corr": 0.2596815291096091,
+        "best_corr": -0.2596815291096091,
+        "best_lag": 4,
+        "best_p": 0.02993703015847265,
+        "feature": "signal_trends_crypto",
+        "lead_lag": "feature_leads",
+        "n_effective": 70
+      },
+      {
+        "best_abs_corr": 0.25477159131120136,
+        "best_corr": 0.25477159131120136,
+        "best_lag": -3,
+        "best_p": 0.03202027720499278,
+        "feature": "signal_trends_bitcoin_crash",
+        "lead_lag": "target_leads",
+        "n_effective": 71
+      },
+      {
+        "best_abs_corr": 0.2509686801871866,
+        "best_corr": 0.2509686801871866,
+        "best_lag": 2,
+        "best_p": 0.03476560298254593,
+        "feature": "signal_trends_bitcoin_crash_pct_change",
+        "lead_lag": "feature_leads",
+        "n_effective": 71
+      },
+      {
+        "best_abs_corr": 0.2004001235445449,
+        "best_corr": -0.2004001235445449,
+        "best_lag": 4,
+        "best_p": 0.09623259568178069,
+        "feature": "close",
+        "lead_lag": "feature_leads",
+        "n_effective": 70
+      }
+    ],
+    "distance_correlation": [],
+    "mi": [
+      {
+        "feature": "signal_trends_crypto_pct_change",
+        "mutual_information": 0.12874244975256088,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_crypto",
+        "mutual_information": 0.09377635900671644,
+        "n_effective": 74
+      },
+      {
+        "feature": "close",
+        "mutual_information": 0.08914387025461279,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash",
+        "mutual_information": 0.08189864084380272,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_fear_ratio",
+        "mutual_information": 0.038309706453456105,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_bitcoin",
+        "mutual_information": 0.007364495588523923,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_crypto_delta",
+        "mutual_information": 0.0002488054114739846,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_delta",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_pct_change",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_delta",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_pct_change",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin",
+        "mutual_information": 0.0,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_delta",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_pct_change",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      }
+    ],
+    "mutual_information": [
+      {
+        "feature": "signal_trends_crypto_pct_change",
+        "mutual_information": 0.12874244975256088,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_crypto",
+        "mutual_information": 0.09377635900671644,
+        "n_effective": 74
+      },
+      {
+        "feature": "close",
+        "mutual_information": 0.08914387025461279,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash",
+        "mutual_information": 0.08189864084380272,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_fear_ratio",
+        "mutual_information": 0.038309706453456105,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_bitcoin",
+        "mutual_information": 0.007364495588523923,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_crypto_delta",
+        "mutual_information": 0.0002488054114739846,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_delta",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_pct_change",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_delta",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_bitcoin_pct_change",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin",
+        "mutual_information": 0.0,
+        "n_effective": 74
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_delta",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_pct_change",
+        "mutual_information": 0.0,
+        "n_effective": 73
+      }
+    ],
+    "pearson": [
+      {
+        "feature": "signal_trends_crypto_pct_change",
+        "n_effective": 73,
+        "p_value": 0.0002772044485137232,
+        "pearson": 0.41345667122826807
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.002329644016386697,
+        "pearson": 0.3486882942179821
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.015387826745574769,
+        "pearson": 0.28267361446360734
+      },
+      {
+        "feature": "signal_trends_crypto_delta",
+        "n_effective": 73,
+        "p_value": 0.022928395616929036,
+        "pearson": 0.2660000152126121
+      },
+      {
+        "feature": "signal_trends_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.025092138538464093,
+        "pearson": 0.26031732188914153
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.03421465983980239,
+        "pearson": 0.2482295480347965
+      },
+      {
+        "feature": "signal_trends_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.03851589167362157,
+        "pearson": 0.24275007432201406
+      },
+      {
+        "feature": "signal_trends_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.046671379276032064,
+        "pearson": 0.23362598401118698
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash",
+        "n_effective": 74,
+        "p_value": 0.20292117789054098,
+        "pearson": 0.1497280721893993
+      },
+      {
+        "feature": "signal_trends_crypto",
+        "n_effective": 74,
+        "p_value": 0.5314724992034149,
+        "pearson": -0.07390168100158666
+      },
+      {
+        "feature": "close",
+        "n_effective": 74,
+        "p_value": 0.7217242216785219,
+        "pearson": -0.042100605658755536
+      },
+      {
+        "feature": "signal_trends_fear_ratio",
+        "n_effective": 74,
+        "p_value": 0.7635402568269323,
+        "pearson": -0.03556579962962327
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_delta",
+        "n_effective": 73,
+        "p_value": 0.8477604976104487,
+        "pearson": 0.022860807305027778
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_pct_change",
+        "n_effective": 73,
+        "p_value": 0.9566100913154968,
+        "pearson": -0.006479751009042019
+      }
+    ],
+    "pearson_abs": [
+      {
+        "feature": "signal_trends_crypto_pct_change",
+        "n_effective": 73,
+        "p_value": 0.0002772044485137232,
+        "pearson": 0.41345667122826807
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.002329644016386697,
+        "pearson": 0.3486882942179821
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.015387826745574769,
+        "pearson": 0.28267361446360734
+      },
+      {
+        "feature": "signal_trends_crypto_delta",
+        "n_effective": 73,
+        "p_value": 0.022928395616929036,
+        "pearson": 0.2660000152126121
+      },
+      {
+        "feature": "signal_trends_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.025092138538464093,
+        "pearson": 0.26031732188914153
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.03421465983980239,
+        "pearson": 0.2482295480347965
+      },
+      {
+        "feature": "signal_trends_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.03851589167362157,
+        "pearson": 0.24275007432201406
+      },
+      {
+        "feature": "signal_trends_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.046671379276032064,
+        "pearson": 0.23362598401118698
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash",
+        "n_effective": 74,
+        "p_value": 0.20292117789054098,
+        "pearson": 0.1497280721893993
+      },
+      {
+        "feature": "signal_trends_crypto",
+        "n_effective": 74,
+        "p_value": 0.5314724992034149,
+        "pearson": -0.07390168100158666
+      },
+      {
+        "feature": "close",
+        "n_effective": 74,
+        "p_value": 0.7217242216785219,
+        "pearson": -0.042100605658755536
+      },
+      {
+        "feature": "signal_trends_fear_ratio",
+        "n_effective": 74,
+        "p_value": 0.7635402568269323,
+        "pearson": -0.03556579962962327
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_delta",
+        "n_effective": 73,
+        "p_value": 0.8477604976104487,
+        "pearson": 0.022860807305027778
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_pct_change",
+        "n_effective": 73,
+        "p_value": 0.9566100913154968,
+        "pearson": -0.006479751009042019
+      }
+    ],
+    "spearman": [
+      {
+        "feature": "signal_trends_crypto_pct_change",
+        "n_effective": 73,
+        "p_value": 0.03167714923130424,
+        "spearman": 0.25173847357520324
+      },
+      {
+        "feature": "signal_trends_crypto_delta",
+        "n_effective": 73,
+        "p_value": 0.0797414911462151,
+        "spearman": 0.20642594307599652
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.1489129973968007,
+        "spearman": 0.16945850666923834
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_delta",
+        "n_effective": 73,
+        "p_value": 0.2517358901436118,
+        "spearman": -0.13586782421041568
+      },
+      {
+        "feature": "signal_trends_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.30286691600120336,
+        "spearman": 0.12139355966108388
+      },
+      {
+        "feature": "signal_trends_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.4066079322773457,
+        "spearman": 0.09859459136459833
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.41394195515117327,
+        "spearman": 0.0970691384032624
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash",
+        "n_effective": 74,
+        "p_value": 0.5576771515581781,
+        "spearman": 0.0692525313310255
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.5625102982193964,
+        "spearman": 0.06888891282358586
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_pct_change",
+        "n_effective": 73,
+        "p_value": 0.6246911342260516,
+        "spearman": -0.05821418003382376
+      },
+      {
+        "feature": "signal_trends_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.6789157393499806,
+        "spearman": 0.04926931758809288
+      },
+      {
+        "feature": "signal_trends_crypto",
+        "n_effective": 74,
+        "p_value": 0.8260823792066592,
+        "spearman": -0.025980963068819713
+      },
+      {
+        "feature": "signal_trends_fear_ratio",
+        "n_effective": 74,
+        "p_value": 0.928144321680151,
+        "spearman": 0.010664454921298241
+      },
+      {
+        "feature": "close",
+        "n_effective": 74,
+        "p_value": 0.9447898144595888,
+        "spearman": -0.008189559422436134
+      }
+    ],
+    "spearman_abs": [
+      {
+        "feature": "signal_trends_crypto_pct_change",
+        "n_effective": 73,
+        "p_value": 0.03167714923130424,
+        "spearman": 0.25173847357520324
+      },
+      {
+        "feature": "signal_trends_crypto_delta",
+        "n_effective": 73,
+        "p_value": 0.0797414911462151,
+        "spearman": 0.20642594307599652
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.1489129973968007,
+        "spearman": 0.16945850666923834
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_delta",
+        "n_effective": 73,
+        "p_value": 0.2517358901436118,
+        "spearman": -0.13586782421041568
+      },
+      {
+        "feature": "signal_trends_bitcoin",
+        "n_effective": 74,
+        "p_value": 0.30286691600120336,
+        "spearman": 0.12139355966108388
+      },
+      {
+        "feature": "signal_trends_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.4066079322773457,
+        "spearman": 0.09859459136459833
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_pct_change",
+        "n_effective": 73,
+        "p_value": 0.41394195515117327,
+        "spearman": 0.0970691384032624
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash",
+        "n_effective": 74,
+        "p_value": 0.5576771515581781,
+        "spearman": 0.0692525313310255
+      },
+      {
+        "feature": "signal_trends_buy_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.5625102982193964,
+        "spearman": 0.06888891282358586
+      },
+      {
+        "feature": "signal_trends_bitcoin_crash_pct_change",
+        "n_effective": 73,
+        "p_value": 0.6246911342260516,
+        "spearman": -0.05821418003382376
+      },
+      {
+        "feature": "signal_trends_bitcoin_delta",
+        "n_effective": 73,
+        "p_value": 0.6789157393499806,
+        "spearman": 0.04926931758809288
+      },
+      {
+        "feature": "signal_trends_crypto",
+        "n_effective": 74,
+        "p_value": 0.8260823792066592,
+        "spearman": -0.025980963068819713
+      },
+      {
+        "feature": "signal_trends_fear_ratio",
+        "n_effective": 74,
+        "p_value": 0.928144321680151,
+        "spearman": 0.010664454921298241
+      },
+      {
+        "feature": "close",
+        "n_effective": 74,
+        "p_value": 0.9447898144595888,
+        "spearman": -0.008189559422436134
+      }
+    ]
+  },
+  "warnings": [
+    "missing_artifact:README.md"
+  ]
+}

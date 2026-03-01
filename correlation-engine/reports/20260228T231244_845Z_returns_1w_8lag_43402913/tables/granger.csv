@@ -1,0 +1,15 @@
+feature,direction,p_value_forward,p_value_reverse,best_lag
+close,none,0.21354526871700805,0.1481096922933639,1
+signal_trends_bitcoin,none,0.08945946477625724,0.6629622446351335,3
+signal_trends_bitcoin_crash,signal_to_price,0.04819986395432394,0.14734243837067512,4
+signal_trends_bitcoin_crash_delta,signal_to_price,0.014333635436342591,0.11789999302817224,4
+signal_trends_bitcoin_crash_pct_change,signal_to_price,0.021639367326923592,0.22649438883516132,4
+signal_trends_bitcoin_delta,signal_to_price,0.03983077136762055,0.3682735993300078,2
+signal_trends_bitcoin_pct_change,signal_to_price,0.0008222652166707121,0.3754603677286489,2
+signal_trends_buy_bitcoin,none,0.07447212707095084,0.5197928733548687,2
+signal_trends_buy_bitcoin_delta,signal_to_price,0.019967988720326083,0.13077879487516836,1
+signal_trends_buy_bitcoin_pct_change,signal_to_price,0.044455676198293076,0.3810852216836352,1
+signal_trends_crypto,bidirectional,0.032545800649695346,0.022754660409212833,4
+signal_trends_crypto_delta,bidirectional,0.027645289304742117,0.007545968446679227,4
+signal_trends_crypto_pct_change,none,0.10796925051774066,0.05854343934854901,4
+signal_trends_fear_ratio,none,0.14516779641153663,0.09502631091414131,4

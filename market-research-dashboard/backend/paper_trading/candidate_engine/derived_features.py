@@ -19,14 +19,20 @@ def compute_liquidity_quality(token: dict[str, Any]) -> float:
 
 
 def compute_freshness(token: dict[str, Any]) -> float:
-    """Score how recent/fresh the signal data is.
+    """Score how recent/fresh the token data is.
 
-    Tokens with recent activity get a bonus.
-    Returns float in [0, 1].
+    Two-tier approach:
+    - New launches (< 720h / 30d): full ramp from 1.0 → 0.5
+    - Established tokens (>= 720h): gentle decline 0.5 → 0.25 over 1 year
+    Ensures bluechip tokens are never zeroed out by age alone.
+    Returns float in [0.25, 1].
     """
     age = token.get("age_hours", 0) or 0
-    # Newer tokens are fresher; very old tokens (>720h = 30d) get low freshness
-    return inv_ramp(age, 2, 720)
+    if age < 720:
+        # New launches: bonus for freshness, ramps from 1.0 down to 0.5
+        return 0.5 + 0.5 * inv_ramp(age, 2, 720)
+    # Established tokens: gentle decline from 0.5 to floor of 0.25
+    return max(0.25, 0.5 * inv_ramp(age, 720, 87600))
 
 
 def compute_risk_penalty(token: dict[str, Any]) -> float:

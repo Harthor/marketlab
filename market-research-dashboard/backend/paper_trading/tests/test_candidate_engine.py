@@ -69,8 +69,15 @@ class TestDerivedFeatures(TestCase):
         self.assertGreater(f, 0.9)
 
     def test_freshness_old_token(self):
+        # Old tokens get reduced freshness but never zero (floor=0.25)
         f = compute_freshness({"age_hours": 1000})
-        self.assertAlmostEqual(f, 0.0, places=1)
+        self.assertGreater(f, 0.25)
+        self.assertLess(f, 0.55)
+
+    def test_freshness_very_old_bluechip(self):
+        # Even very old tokens keep minimum freshness floor
+        f = compute_freshness({"age_hours": 50000})
+        self.assertGreaterEqual(f, 0.25)
 
     def test_risk_penalty_low(self):
         p = compute_risk_penalty({"risk_score": 10, "security_flags": []})
