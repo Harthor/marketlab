@@ -43,3 +43,11 @@ altdata-web-signals/vendor/
 
 # Python build artifacts
 *.egg-info/
+
+# Build/venv artifacts
+*.egg-info/
+.venv-mlab/
+*.pre-migration.bak
+correlation-engine/reports/
+forecasting-backtest/runs/
+forecasting-backtest/.demo_data/

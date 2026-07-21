@@ -85,18 +85,40 @@ class RunsApiTests(SimpleTestCase):
         manifest_name = 'summary.json' if kind == 'correlation' else 'run_summary.json'
         (manifest_dir / manifest_name).write_text(json.dumps(payload), encoding='utf-8')
 
-    def test_runs_endpoint_sanitizes_non_finite_in_manifest(self) -> None:
+    @staticmethod
+    def _canonical_manifest(**overrides) -> dict:
+        manifest = {
+            'schema_version': '2.0',
+            'kind': 'correlation',
+            'status': 'complete',
+            'run_id': 'canonical-run',
+            'created_at_utc': '2026-07-01T00:00:00+00:00',
+            'started_at_utc': '2026-07-01T00:00:00+00:00',
+            'dataset_path': 'dataset.parquet',
+            'dataset_hash': 'alpha',
+            'config_hash': 'cfg',
+            'seed': 1,
+            'top_features': {'pearson': []},
+            'artifacts': [],
+            'warnings': [],
+        }
+        manifest.update(overrides)
+        return manifest
+
+    def test_runs_endpoint_marks_legacy_manifest_invalid(self) -> None:
+        # Producers validate at write time; the reader refuses pre-2.0
+        # manifests instead of guessing, pointing at the migration tool.
         with tempfile.TemporaryDirectory() as temp_root:
             workspace = Path(temp_root)
             self._write_manifest(
                 workspace=workspace,
                 kind='correlation',
-                name='run-nonfinite',
+                name='run-legacy',
                 payload={
                     'dataset_hash': 'alpha',
                     'schema_version': '1.0',
                     'top_features': 5,
-                    'stats': {'score': float('nan'), 'loss': float('inf')},
+                    'stats': {'score': 1.0},
                 },
             )
 
@@ -105,13 +127,10 @@ class RunsApiTests(SimpleTestCase):
 
             self.assertEqual(response.status_code, 200)
             payload = json.loads(response.content.decode('utf-8'))
-            self.assertIsInstance(payload, list)
-            self.assertGreaterEqual(len(payload), 1)
+            self.assertEqual(len(payload), 1)
             item = payload[0]
-            self.assertEqual(item['status'], 'complete')
-            self.assertEqual(item['summary']['stats']['score'], None)
-            self.assertEqual(item['summary']['stats']['loss'], None)
-            self.assertIn('sanitized_nonfinite_values', item.get('warnings', []))
+            self.assertEqual(item['status'], 'invalid')
+            self.assertIn('migrate_manifests', item['error']['message'])
 
     def test_runs_endpoint_does_not_crash_on_corrupt_manifest(self) -> None:
         with tempfile.TemporaryDirectory() as temp_root:
@@ -141,15 +160,14 @@ class RunsApiTests(SimpleTestCase):
             table_path.write_text('a,b\n1,2\n3,4\n', encoding='utf-8')
             plot_path.write_text('fake image', encoding='utf-8')
 
-            manifest = {
-                'dataset_hash': 'beta',
-                'schema_version': '1.0',
-                'top_features': 4,
-                'artifacts': [
+            manifest = self._canonical_manifest(
+                run_id='art-list',
+                dataset_hash='beta',
+                artifacts=[
                     {'type': 'table', 'name': 'feature_report', 'path': 'tables/feature_report.csv'},
                     {'type': 'plot', 'name': 'feature_plot', 'path': 'plots/feature_plot.png'},
                 ],
-            }
+            )
             (base_dir / 'summary.json').write_text(json.dumps(manifest), encoding='utf-8')
 
             with override_settings(MARKETLAB_WORKSPACE=workspace):

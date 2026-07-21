@@ -36,7 +36,7 @@ def test_validate_manifest_correlation_ok() -> None:
     created_at = datetime(2026, 2, 26, 12, 0, tzinfo=UTC).isoformat()
     manifest = _base_manifest(created_at, created_at, [])
     manifest["kind"] = "correlation"
-    manifest["top_features"] = {"BTCUSDT": {"ETHUSDT": 0.91}}
+    manifest["top_features"] = {"pearson": [{"feature": "ETHUSDT", "value": 0.91}]}
 
     ok, errors = validate_manifest(manifest)
     assert ok, errors

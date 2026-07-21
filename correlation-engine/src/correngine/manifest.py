@@ -7,8 +7,25 @@ from typing import Any
 
 from .config import RunConfig
 
+try:
+    from marketlab_core.manifests import (
+        SCHEMA_VERSION,
+        ManifestValidationError,
+        validate_and_write_manifest,
+    )
+except ImportError as exc:  # pragma: no cover
+    raise ImportError(
+        "correngine requires marketlab-core for manifest contracts; "
+        "install it with: pip install -e ../marketlab-core"
+    ) from exc
 
-SCHEMA_VERSION = "1.0"
+__all__ = [
+    "SCHEMA_VERSION",
+    "ManifestValidationError",
+    "build_corr_manifest",
+    "write_corr_manifest_atomic",
+    "sanitize_for_json",
+]
 
 
 def sanitize_for_json(value: Any) -> Any:
@@ -50,46 +67,18 @@ def _now() -> str:
     return datetime.now(timezone.utc).isoformat()
 
 
-def _write_json(path: Path, payload: Any) -> None:
-    with path.open("w", encoding="utf-8") as handle:
-        json.dump(
-            payload,
-            handle,
-            indent=2,
-            sort_keys=True,
-            ensure_ascii=False,
-            allow_nan=False,
-        )
-
-
 def write_corr_manifest_atomic(run_dir: Path, manifest: dict[str, Any], filename: str = "summary.json") -> Path:
+    """Sanitize, validate against the canonical schema, and write atomically.
+
+    Non-finite statistics are represented as None (sanitize_for_json); any
+    remaining schema violation raises ManifestValidationError and nothing is
+    written. The producer's run fails instead of poisoning the workspace.
+    """
+
     run_dir.mkdir(parents=True, exist_ok=True)
     path = run_dir / filename
-
     payload = sanitize_for_json(manifest)
-    temp = path.with_suffix(path.suffix + ".tmp")
-    try:
-        _write_json(temp, payload)
-        temp.replace(path)
-    except ValueError as error:
-        if not isinstance(payload, dict):
-            raise
-        warnings = payload.get("warnings")
-        if isinstance(warnings, list):
-            warnings = list(warnings)
-        else:
-            warnings = []
-        warnings.append(f"json_serialization_warning:{type(error).__name__}:{error}")
-        payload["status"] = "partial"
-        if "top_features" not in payload:
-            payload["top_features"] = {}
-        payload["warnings"] = warnings
-        payload["error"] = {
-            "type": type(error).__name__,
-            "message": str(error),
-        }
-        _write_json(temp, payload)
-        temp.replace(path)
+    validate_and_write_manifest(path, payload)
     return path
 
 
@@ -128,6 +117,7 @@ def build_corr_manifest(
         "status": status,
         "created_at_utc": created_at_utc,
         "created_utc": created_utc,
+        "started_at_utc": str(dataset_meta.get("started_at_utc", created_at_utc)),
         "dataset_path": str(Path(dataset_meta["dataset_path"]).resolve()),
         "dataset_hash": str(dataset_meta["dataset_hash"]),
         "dataset_rows": int(dataset_meta["dataset_rows"]),

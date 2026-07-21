@@ -177,7 +177,7 @@ def test_pipeline_smoke(tmp_path: Path, model_name: str) -> None:
 
     data = json.loads((run_dir / "run_summary.json").read_text(encoding="utf-8"))
     assert data["status"] == "complete"
-    assert data["schema_version"] == "1.0"
+    assert data["schema_version"] == "2.0"
     assert "running" not in data["status"]
     assert data["kind"] == "forecast"
     assert data["split"] == {
@@ -198,7 +198,7 @@ def test_pipeline_smoke(tmp_path: Path, model_name: str) -> None:
     assert isinstance(data["metrics"]["trading"], dict)
     trading_stats = data["metrics"].get("trading", data["metrics"].get("backtest", {}))
     assert "cagr" in trading_stats
-    assert data["schema_version"] == "1.0"
+    assert data["schema_version"] == "2.0"
     assert data["status"] == "complete"
     assert isinstance(data.get("artifacts"), list)
     for artifact in data["artifacts"]:
