@@ -1,6 +1,6 @@
 {
   "run_id": "20260227T002853_300Z_returns_1d_5lag_c3ad9128_seed42",
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "kind": "correlation",
   "status": "skipped",
   "created_at_utc": "2026-02-27T00:28:53.301623+00:00",
@@ -47,5 +47,7 @@
   "errors": [
     "insufficient_data"
   ],
-  "completed_at_utc": "2026-02-27T00:28:53.301680+00:00"
+  "completed_at_utc": "2026-02-27T00:28:53.301680+00:00",
+  "started_at_utc": "2026-02-27T00:28:53.301623+00:00",
+  "error": null
 }

@@ -27,16 +27,15 @@
   "dataset_path": "/private/tmp/synthetic_corr.parquet",
   "dataset_rows": 50,
   "error": {
-    "message": "Artifact no encontrado: README.md",
-    "traceback_path": ".staging/traceback.txt",
-    "type": "FileNotFoundError"
+    "type": "FileNotFoundError",
+    "message": "Artifact no encontrado: README.md"
   },
   "kind": "correlation",
   "notes": [
     "run failed"
   ],
   "run_id": "20260227T010919_481Z_returns_1d_5lag_fc718f9a",
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "seed": 42,
   "status": "failed",
   "top_features": {
@@ -44,5 +43,7 @@
     "mi": [],
     "pearson": [],
     "spearman": []
-  }
+  },
+  "started_at_utc": "2026-02-27T01:09:19.779313+00:00",
+  "warnings": []
 }

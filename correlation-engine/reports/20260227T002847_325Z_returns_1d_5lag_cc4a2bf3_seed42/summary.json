@@ -1,6 +1,6 @@
 {
   "run_id": "20260227T002847_325Z_returns_1d_5lag_cc4a2bf3_seed42",
-  "schema_version": "1.0",
+  "schema_version": "2.0",
   "kind": "correlation",
   "status": "complete",
   "created_at_utc": "2026-02-27T00:28:47.384196+00:00",
@@ -310,5 +310,7 @@
       "n_effective": 600,
       "best_lag": null
     }
-  ]
+  ],
+  "started_at_utc": "2026-02-27T00:28:47.384196+00:00",
+  "error": null
 }
