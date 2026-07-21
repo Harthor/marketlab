@@ -11,9 +11,13 @@ from typing import Any, Final, Literal, TypeAlias
 
 from pydantic import BaseModel, Field, ValidationError, field_validator
 
-ArtifactType: TypeAlias = Literal["table", "plot", "model"]
+ArtifactType: TypeAlias = Literal["table", "plot", "model", "readme", "manifest"]
 ManifestKind: TypeAlias = Literal["correlation", "forecast"]
-ManifestStatus: TypeAlias = Literal["running", "complete", "failed", "partial"]
+ManifestStatus: TypeAlias = Literal["running", "complete", "failed", "partial", "skipped"]
+
+#: Canonical manifest schema version. Producers must write exactly this
+#: version; readers may refuse anything else and point at the migration tool.
+SCHEMA_VERSION: Final[str] = "2.0"
 
 REQUIRED_MANIFEST_KEYS: Final[set[str]] = {
     "schema_version",
@@ -79,6 +83,7 @@ class ManifestBase(BaseModel):
     config_hash: str
     seed: int
     artifacts: list[ManifestArtifact] = Field(default_factory=list)
+    warnings: list[str] = Field(default_factory=list)
     error: ManifestError | None = None
 
     @field_validator("schema_version", "run_id", "dataset_hash", "config_hash")
@@ -105,13 +110,16 @@ class ManifestBase(BaseModel):
 
 class CorrelationManifest(ManifestBase):
     kind: Literal["correlation"] = "correlation"
-    top_features: dict[str, dict[str, float]] = Field(default_factory=dict)
+    top_features: dict[str, list[Any]] = Field(default_factory=dict)
 
 
 class ForecastManifest(ManifestBase):
     kind: Literal["forecast"] = "forecast"
     model_name: str
-    metrics: dict[str, float]
+    # Metrics may be flat or grouped one level (e.g. metrics.trading.sharpe).
+    # None marks a metric that could not be computed (e.g. undefined Sharpe);
+    # NaN/Inf are rejected outright by find_non_finite at write time.
+    metrics: dict[str, float | None | dict[str, float | None]]
 
     @field_validator("model_name")
     @classmethod
@@ -188,7 +196,7 @@ def write_json_atomic(path: str | Path, obj: Any) -> None:
     target.parent.mkdir(parents=True, exist_ok=True)
 
     with tmp.open("w", encoding="utf-8") as f:
-        json.dump(obj, f, ensure_ascii=False, indent=2, default=str)
+        json.dump(obj, f, ensure_ascii=False, indent=2, default=str, allow_nan=False)
         f.flush()
         os.fsync(f.fileno())
 
@@ -206,3 +214,91 @@ def write_manifest_atomic(
     else:
         payload = manifest_obj
     write_json_atomic(path, payload)
+
+
+def sanitize_non_finite(obj: Any) -> Any:
+    """Recursively replace NaN/Inf floats (incl. numpy scalars) with None.
+
+    Producers run this before validate_and_write_manifest so that legitimately
+    uncomputable statistics become explicit nulls instead of invalid JSON.
+    """
+
+    import math
+
+    if isinstance(obj, float):
+        return obj if math.isfinite(obj) else None
+    if isinstance(obj, dict):
+        return {key: sanitize_non_finite(value) for key, value in obj.items()}
+    if isinstance(obj, (list, tuple)):
+        return [sanitize_non_finite(value) for value in obj]
+    try:  # numpy is optional at this layer
+        import numpy as np
+
+        if isinstance(obj, np.floating):
+            return float(obj) if np.isfinite(obj) else None
+        if isinstance(obj, np.integer):
+            return int(obj)
+    except ImportError:  # pragma: no cover
+        pass
+    return obj
+
+
+class ManifestValidationError(ValueError):
+    """Raised when a producer tries to persist an invalid manifest."""
+
+    def __init__(self, errors: list[str]):
+        self.errors = list(errors)
+        super().__init__("; ".join(self.errors))
+
+
+def find_non_finite(obj: Any, path: str = "$") -> list[str]:
+    """Return JSONPath-ish locations of every NaN/Inf float in a payload.
+
+    Walks the raw payload (including fields the pydantic models treat as
+    extras, e.g. embedded config blocks) so nothing non-finite can reach disk.
+    """
+
+    found: list[str] = []
+    if isinstance(obj, float):
+        import math
+
+        if not math.isfinite(obj):
+            found.append(path)
+    elif isinstance(obj, dict):
+        for key, value in obj.items():
+            found.extend(find_non_finite(value, f"{path}.{key}"))
+    elif isinstance(obj, (list, tuple)):
+        for index, value in enumerate(obj):
+            found.extend(find_non_finite(value, f"{path}[{index}]"))
+    return found
+
+
+def validate_and_write_manifest(path: str | Path, payload: Mapping[str, Any]) -> None:
+    """Single write-time gate for producers: validate, reject non-finite, write.
+
+    Raises ManifestValidationError instead of writing anything when the
+    payload does not conform to the canonical schema. This is intentionally
+    strict: a producer bug must fail its own run, not corrupt the workspace
+    that every reader trusts.
+    """
+
+    errors: list[str] = []
+
+    declared = str(payload.get("schema_version", ""))
+    if declared != SCHEMA_VERSION:
+        errors.append(
+            f"schema_version must be '{SCHEMA_VERSION}' (got '{declared or '<missing>'}')"
+        )
+
+    non_finite = find_non_finite(dict(payload))
+    if non_finite:
+        errors.append(f"non-finite floats at: {', '.join(non_finite[:10])}")
+
+    ok, validation_errors = validate_manifest(payload)
+    if not ok:
+        errors.extend(validation_errors)
+
+    if errors:
+        raise ManifestValidationError(errors)
+
+    write_json_atomic(path, dict(payload))

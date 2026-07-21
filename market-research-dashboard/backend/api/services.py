@@ -1,21 +1,28 @@
+"""Filesystem reader for canonical MarketLab run manifests.
+
+This module reads ONLY schema_version 2.0 manifests as defined in
+marketlab_core.manifests. Producers validate at write time, so the reader
+does not guess field spellings; a manifest that does not conform surfaces
+as an 'invalid' run pointing at tools/migrate_manifests.py.
+"""
+
 from __future__ import annotations
 
 import base64
 import binascii
 import csv
 import json
-import math
 import mimetypes
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any
 from urllib.parse import unquote
+from typing import Any, Dict, List, Optional, Tuple
 
 from django.conf import settings
 from django.core.exceptions import BadRequest
 
-from .utils import json_sanitize
+CANONICAL_SCHEMA_VERSION = "2.0"
 
 RUN_TYPES = {"correlation", "forecast"}
 
@@ -27,132 +34,21 @@ FORECAST_SUBPATH = "runs"
 CORRELATION_MANIFEST = "summary.json"
 FORECAST_MANIFEST = "run_summary.json"
 
-TABLE_EXTS = {".csv", ".json", ".parquet", ".feather"}
-PLOT_EXTS = {".png", ".jpg", ".jpeg", ".webp", ".svg"}
-
-TABLE_KEYS = (
-    "tables",
-    "table_artifacts",
-    "artifact_tables",
-    "table_files",
-    "table_paths",
-    "artifacts.tables",
-    "artifacts.table_artifacts",
-)
-
-PLOT_KEYS = (
-    "plots",
-    "plot_artifacts",
-    "artifact_plots",
-    "plot_files",
-    "plot_paths",
-    "artifacts.plots",
-    "artifacts.plot_artifacts",
-)
-
-CREATED_AT_KEYS = (
-    "created_at_utc",
-    "created_at",
-    "createdAt",
-    "created_at_iso",
-    "created_at_iso8601",
-    "created",
-    "run_started_at",
-    "start_time",
-)
-
-DATASET_HASH_KEYS = (
-    "dataset_hash",
-    "dataset_sha256",
-    "dataset_hash_id",
-    "datasetHash",
-    "dataset",
-    "dataset_name",
-    "datasetName",
-)
-DATASET_PATH_KEYS = (
-    "dataset_path",
-    "dataset.path",
-    "dataset.file",
-    "dataset_file",
-    "dataset_file_path",
-)
-
-MODEL_NAME_KEYS = (
-    "model_name",
-    "modelName",
-    "model",
-    "model_id",
-)
-
-TOP_FEATURES_KEYS = (
-    "top_features",
-    "top_features_count",
-    "top_feature_count",
-    "top_feature_counted",
-)
-
 RUN_STATUS_COMPLETE = "complete"
 RUN_STATUS_RUNNING = "running"
 RUN_STATUS_FAILED = "failed"
 RUN_STATUS_PARTIAL = "partial"
+RUN_STATUS_SKIPPED = "skipped"
 RUN_STATUS_STALE = "stale"
+RUN_STATUS_INVALID = "invalid"
 
-KNOWN_STATUS_KEYS = (
-    "status",
-    "state",
-    "run_status",
-    "run_state",
-    "status_code",
-)
-
-REQUIRED_STATUS_BY_KIND = {
-    "correlation": ("schema_version", "dataset_hash", "top_features"),
-    "forecast": ("schema_version", "dataset_hash", "model_name"),
+KNOWN_STATUSES = {
+    RUN_STATUS_COMPLETE,
+    RUN_STATUS_RUNNING,
+    RUN_STATUS_FAILED,
+    RUN_STATUS_PARTIAL,
+    RUN_STATUS_SKIPPED,
 }
-
-RUN_ERROR_KEYS = (
-    "error",
-    "error_message",
-    "message",
-    "exception",
-)
-
-
-def _extract_top_features_count(summary: dict[str, Any]) -> int | None:
-    value = summary.get("top_features")
-    if isinstance(value, int) and not isinstance(value, bool):
-        return value
-
-    if isinstance(value, str):
-        value = value.strip()
-        return int(value) if value.isdigit() else None
-
-    if isinstance(value, list):
-        return len(value)
-
-    if isinstance(value, dict):
-        max_len = 0
-        found = False
-        for item in value.values():
-            if isinstance(item, list):
-                found = True
-                if len(item) > max_len:
-                    max_len = len(item)
-        return max_len if found else 0
-
-    return None
-
-
-def _has_required_manifest_value(summary: dict[str, Any], field: str) -> bool:
-    if field == "dataset_hash":
-        return _extract_string(summary, DATASET_HASH_KEYS) is not None
-    if field == "top_features":
-        value = summary.get("top_features")
-        return value is not None
-    if field == "model_name":
-        return _extract_string(summary, MODEL_NAME_KEYS) is not None
-    return _extract_string(summary, (field,)) is not None
 
 
 @dataclass(frozen=True)
@@ -168,28 +64,28 @@ class RunSummary:
     kind: str
     name: str
     path: Path
-    created_at_utc: datetime | None
+    created_at_utc: Optional[datetime]
     dataset_hash: str
-    schema_version: str | None
+    schema_version: Optional[str]
     status: str
     status_ui: str
     is_stale: bool
-    error: str | None
-    errors: list[str] | None
+    error: Optional[str]
+    errors: Optional[List[str]]
     label: str
-    model_name: str | None
-    top_features: int | None
-    summary: dict[str, Any]
-    tables: list[RunArtifact]
-    plots: list[RunArtifact]
+    model_name: Optional[str]
+    top_features: Optional[int]
+    summary: Dict[str, Any]
+    tables: List[RunArtifact]
+    plots: List[RunArtifact]
 
 
 @dataclass(frozen=True)
 class DatasetSummary:
     name: str
     run_count: int
-    source_types: list[str]
-    last_seen: datetime | None
+    source_types: List[str]
+    last_seen: Optional[datetime]
     table_count: int
     plot_count: int
 
@@ -198,7 +94,7 @@ def _workspace_root() -> Path:
     return getattr(settings, 'MARKETLAB_WORKSPACE', Path(__file__).resolve().parents[2]).resolve()
 
 
-def _base_paths() -> list[tuple[str, Path]]:
+def _base_paths() -> List[Tuple[str, Path]]:
     workspace = _workspace_root()
     return [
         ('correlation', workspace / CORRELATION_ROOT_NAME / CORRELATION_SUBPATH),
@@ -211,7 +107,7 @@ def _run_id_from_path(run_type: str, path: Path) -> str:
     return f"{run_type}::{encoded}"
 
 
-def _decode_run_id(run_id: str) -> tuple[str, str]:
+def _decode_run_id(run_id: str) -> Tuple[str, str]:
     decoded_run_id = unquote(run_id)
 
     if '::' not in decoded_run_id:
@@ -234,498 +130,63 @@ def _manifest_for_kind(run_type: str) -> str:
     return CORRELATION_MANIFEST if run_type == 'correlation' else FORECAST_MANIFEST
 
 
-def _manifest_timestamp(path: Path) -> datetime | None:
+def _manifest_timestamp(path: Path) -> Optional[datetime]:
     try:
         return datetime.fromtimestamp(path.stat().st_mtime, tz=timezone.utc)
     except OSError:
         return None
 
 
-def _read_json_if_possible(path: Path) -> dict[str, Any] | None:
+def _read_json_if_possible(path: Path) -> Optional[Any]:
     try:
-        with open(path, encoding='utf-8') as handle:
-            payload = json.load(handle)
+        with open(path, 'r', encoding='utf-8') as handle:
+            return json.load(handle)
     except (OSError, json.JSONDecodeError):
         return None
 
-    return payload if isinstance(payload, dict) else None
 
-
-def _lookup_nested(payload: dict[str, Any], dotted_key: str) -> Any:
-    current: Any = payload
-    for segment in dotted_key.split('.'):
-        if not isinstance(current, dict):
-            return None
-        if segment not in current:
-            return None
-        current = current[segment]
-    return current
-
-
-def _extract_string(payload: dict[str, Any], keys: tuple[str, ...]) -> str | None:
-    for key in keys:
-        value = _lookup_nested(payload, key)
-        if isinstance(value, str):
-            normalized = value.strip()
-            if normalized:
-                return normalized
-    return None
-
-
-def _extract_dataset_path(summary: dict[str, Any], run_dir: Path) -> Path | None:
-    raw_path = _extract_string(summary, DATASET_PATH_KEYS)
-    if raw_path is None:
-        dataset_payload = summary.get("dataset")
-        if isinstance(dataset_payload, str):
-            raw_path = dataset_payload.strip()
-        elif isinstance(dataset_payload, dict):
-            raw_path = _extract_string(
-                dataset_payload,
-                (
-                    "path",
-                    "dataset_path",
-                    "file",
-                    "filename",
-                ),
-            )
-
-    if raw_path is None:
+def _parse_datetime(value: Any) -> Optional[datetime]:
+    if not isinstance(value, str) or not value.strip():
         return None
-
-    normalized = raw_path.strip()
-    if not normalized:
-        return None
-
-    dataset_path = Path(normalized).expanduser()
-    if dataset_path.is_absolute():
-        return dataset_path
-
-    return (run_dir / dataset_path).resolve()
-
-
-def _extract_dataset_meta_hash(meta: dict[str, Any]) -> str | None:
-    for key in ("out_sha256", "sha256", "hash", "dataset_hash"):
-        value = meta.get(key)
-        if isinstance(value, str):
-            cleaned = value.strip()
-            if cleaned:
-                return cleaned
-
-    nested_dataset = meta.get("dataset")
-    if isinstance(nested_dataset, dict):
-        for key in ("hash", "sha256", "out_sha256", "dataset_hash"):
-            value = nested_dataset.get(key)
-            if isinstance(value, str):
-                cleaned = value.strip()
-                if cleaned:
-                    return cleaned
-
-    nested_checksum = meta.get("checksum")
-    if isinstance(nested_checksum, dict):
-        for key in ("sha256", "hash", "out_sha256"):
-            value = nested_checksum.get(key)
-            if isinstance(value, str):
-                cleaned = value.strip()
-                if cleaned:
-                    return cleaned
-
-    return None
-
-
-def _is_dataset_stale(dataset_hash: str, summary: dict[str, Any], run_dir: Path) -> bool:
-    dataset_path = _extract_dataset_path(summary, run_dir)
-    if not dataset_path or not dataset_hash:
-        return False
-
-    meta_path = dataset_path.with_suffix(".meta.json")
-    if not meta_path.exists():
-        return False
-
-    meta_payload = _read_json_if_possible(meta_path)
-    if not meta_payload:
-        return False
-
-    current_hash = _extract_dataset_meta_hash(meta_payload)
-    if not current_hash:
-        return False
-
-    return dataset_hash != current_hash
-
-
-def _extract_int(payload: dict[str, Any], keys: tuple[str, ...]) -> int | None:
-    for key in keys:
-        value = _lookup_nested(payload, key)
-        if isinstance(value, bool):
-            continue
-        if isinstance(value, int):
-            return value
-        if isinstance(value, str):
-            normalized = value.strip()
-            if normalized.isdigit():
-                return int(normalized)
-    return None
-
-
-def _contains_non_finite(obj: Any) -> bool:
-    if isinstance(obj, float):
-        return not math.isfinite(obj)
-
     try:
-        import numpy as np  # type: ignore
-
-        if isinstance(obj, np.floating):
-            return not np.isfinite(obj)
-    except Exception:
-        pass
-
-    if isinstance(obj, dict):
-        return any(_contains_non_finite(value) for value in obj.values())
-
-    if isinstance(obj, (list, tuple, set)):
-        return any(_contains_non_finite(item) for item in obj)
-
-    return False
-
-
-def _extract_status(summary: dict[str, Any]) -> str | None:
-    raw = _extract_string(summary, KNOWN_STATUS_KEYS)
-    if raw is None:
-        return None
-
-    normalized = raw.strip().lower()
-    if normalized in {"running", "in_progress", "inprogress", "queued", "pending"}:
-        return RUN_STATUS_RUNNING
-    if normalized in {"failed", "error", "errored", "crashed", "cancelled", "canceled"}:
-        return RUN_STATUS_FAILED
-    if normalized in {"complete", "completed", "done", "success", "successful", "finished"}:
-        return RUN_STATUS_COMPLETE
-    if normalized in {"partial", "incomplete"}:
-        return RUN_STATUS_PARTIAL
-    return None
-
-
-def _extract_schema_version(summary: dict[str, Any]) -> str | None:
-    return _extract_string(summary, ("schema_version", "schema.version", "schemaVersion"))
-
-
-def _extract_error(summary: dict[str, Any]) -> str | None:
-    error_value = _extract_string(summary, RUN_ERROR_KEYS)
-    if error_value:
-        return error_value
-
-    raw_error = _lookup_nested(summary, "error.message")
-    if isinstance(raw_error, str) and raw_error.strip():
-        return raw_error.strip()
-
-    return None
-
-
-def _build_label(kind: str, model_name: str | None, top_features: int | None, summary: dict[str, Any]) -> str:
-    if model_name:
-        return model_name
-    if top_features is not None:
-        return f"top_features={top_features}"
-    summary_metric = _extract_string(
-        summary,
-        (
-            "label",
-            "run_label",
-            "metric",
-            "top_metric",
-            "top_metric_name",
-            "top_metric_value",
-            "performance_metric",
-            "display_metric",
-        ),
-    )
-    if summary_metric:
-        return summary_metric
-
-    for key in (
-        "sharpe",
-        "return",
-        "roi",
-        "profit",
-        "fitness",
-        "score",
-        "rmse",
-        "mae",
-    ):
-        raw = summary.get(key) if isinstance(summary, dict) else None
-        if isinstance(raw, (int, float)):
-            return f"{key}={raw}"
-
-    summary_label = _extract_string(
-        summary,
-        (
-            "name",
-            "run_name",
-            "display_name",
-            "strategy",
-            "experiment_name",
-            "experimentName",
-            "title",
-        ),
-    )
-    if summary_label:
-        return summary_label
-
-    return f"{kind} run"
-
-
-def _parse_datetime(value: Any) -> datetime | None:
-    if isinstance(value, datetime):
-        return value.replace(tzinfo=value.tzinfo or timezone.utc)
-
-    if isinstance(value, (int, float)):
-        try:
-            return datetime.fromtimestamp(value, tz=timezone.utc)
-        except (OSError, ValueError, OverflowError):
-            return None
-
-    if not isinstance(value, str):
-        return None
-
-    text = value.strip()
-    if not text:
-        return None
-
-    normalized = text.replace("Z", "+00:00")
-    try:
-        parsed = datetime.fromisoformat(normalized)
+        parsed = datetime.fromisoformat(value.strip().replace("Z", "+00:00"))
     except ValueError:
         return None
-
     if parsed.tzinfo is None:
         return parsed.replace(tzinfo=timezone.utc)
     return parsed.astimezone(timezone.utc)
 
 
-def _extract_datetime(payload: dict[str, Any]) -> datetime | None:
-    for key in CREATED_AT_KEYS:
-        value = _lookup_nested(payload, key)
-        parsed = _parse_datetime(value)
-        if parsed is not None:
-            return parsed
-    return None
+# ─── Staleness: compare manifest hash against the dataset's sidecar ────────
 
 
-def _discover_run_manifests(base_dir: Path, run_type: str) -> list[Path]:
-    if not base_dir.exists():
-        return []
-    manifest_name = _manifest_for_kind(run_type)
-    return sorted(base_dir.glob(f"*/{manifest_name}"))
+def _is_dataset_stale(dataset_hash: str, dataset_path: Optional[str], run_dir: Path) -> bool:
+    if not dataset_hash or not dataset_path:
+        return False
+
+    resolved = Path(dataset_path).expanduser()
+    if not resolved.is_absolute():
+        resolved = (run_dir / resolved).resolve()
+
+    meta_payload = _read_json_if_possible(resolved.with_suffix(".meta.json"))
+    if not isinstance(meta_payload, dict):
+        return False
+
+    current_hash = meta_payload.get("out_sha256") or meta_payload.get("sha256")
+    if not isinstance(current_hash, str) or not current_hash.strip():
+        return False
+
+    return dataset_hash != current_hash.strip()
 
 
-def _gather_artifact_values(
-    value: Any,
-    fallback_name: str | None = None,
-) -> list[tuple[str | None, str | None, Any]]:
-    if value is None:
-        return []
-
-    if isinstance(value, (str, Path)):
-        return [(fallback_name, None, value)]
-
-    if isinstance(value, (list, tuple, set)):
-        entries: list[tuple[str | None, str | None, Any]] = []
-        for item in value:
-            entries.extend(_gather_artifact_values(item, fallback_name=fallback_name))
-        return entries
-
-    if isinstance(value, dict):
-        if any(key in value for key in ('path', 'file', 'filename')) and (
-            any(key in value for key in ('path', 'file', 'filename', 'name', 'artifact_name'))
-        ):
-            path_value = value.get('path') or value.get('file') or value.get('filename')
-            if path_value is None:
-                return []
-            artifact_id = value.get('artifact_id')
-            if not isinstance(artifact_id, str) or not artifact_id.strip():
-                artifact_id = None
-            return [(value.get('name') or value.get('artifact_name') or fallback_name, artifact_id, path_value)]
-
-        dict_entries: list[tuple[str | None, str | None, Any]] = []
-        for key, item in value.items():
-            if not isinstance(item, (str, Path, list, tuple, set, dict)):
-                continue
-            dict_entries.extend(_gather_artifact_values(item, fallback_name=str(key)))
-        return dict_entries
-
-    return []
+# ─── Canonical manifest → RunSummary ───────────────────────────────────────
 
 
-
-
-def _collect_artifacts_from_manifest_items(payload: dict[str, Any], kind: str) -> list[tuple[str | None, str | None, Any]]:
-    raw_artifacts = payload.get("artifacts")
-    if not isinstance(raw_artifacts, list):
-        return []
-
-    entries: list[tuple[str | None, str | None, Any]] = []
-    target_kind = kind.lower()
-    for item in raw_artifacts:
-        if not isinstance(item, dict):
-            continue
-
-        raw_type = item.get("type")
-        if not isinstance(raw_type, str) or raw_type.strip().lower() != target_kind:
-            continue
-
-        raw_path = item.get("path") or item.get("file") or item.get("filename")
-        if raw_path is None:
-            continue
-
-        name = item.get("name") or item.get("artifact_name") or item.get("artifactName")
-        if isinstance(name, str) and not name.strip():
-            name = None
-
-        artifact_id = item.get('artifact_id')
-        if not isinstance(artifact_id, str) or not artifact_id.strip():
-            artifact_id = None
-
-        entries.append((name, artifact_id, raw_path))
-
-    return entries
-
-
-def _collect_artifacts_from_manifest_sections(payload: dict[str, Any], kind: str) -> list[tuple[str | None, str | None, Any]]:
-    section = payload.get(f"{kind}s") if isinstance(payload, dict) else None
-    if section is None:
-        return []
-    return _gather_artifact_values(section)
-
-
-def _collect_artifacts_from_files(payload: dict[str, Any], kind: str) -> list[tuple[str | None, str | None, Any]]:
-    raw_files = payload.get("files")
-    if not isinstance(raw_files, dict):
-        return []
-
-    entries: list[tuple[str | None, str | None, Any]] = []
-    for name, value in raw_files.items():
-        if not isinstance(name, str):
-            continue
-
-        if not isinstance(value, (str, Path)):
-            continue
-
-        path_text = str(value)
-        if kind == 'table' and Path(path_text).suffix.lower() in TABLE_EXTS:
-            entries.append((name, None, value))
-            continue
-
-        if kind == 'plot' and Path(path_text).suffix.lower() in PLOT_EXTS:
-            entries.append((name, None, value))
-    return entries
-
-
-def _artifact_key(
-    kind: str,
-    artifact_id: str | None,
-    raw_path: Any,
-    declared_name: str | None,
-    index: int,
-) -> str:
-    if artifact_id:
-        return f"id::{artifact_id}"
-
-    raw_path_text = str(raw_path).strip()
-    if raw_path_text:
-        return f"{kind.lower()}::{raw_path_text}"
-
-    fallback = (declared_name or "").strip().lower()
-    if fallback:
-        return f"{kind.lower()}::{fallback}::{index}"
-
-    return f"{kind.lower()}::<index>::{index}"
-
-
-def _normalize_artifact_path(run_dir: Path, raw_path: Any) -> Path:
-    path_text = str(raw_path).replace('\\', '/').strip()
-    if not path_text:
-        raise ValueError('artifact path is empty')
-
-    path = Path(path_text).expanduser()
-    if path.is_absolute():
-        return path
-    return (run_dir / path).resolve()
-
-
-def _collect_artifacts(payload: dict[str, Any], run_dir: Path, kind: str) -> list[RunArtifact]:
-    candidates: list[tuple[str | None, str | None, Any]] = []
-    source_keys = TABLE_KEYS if kind == 'table' else PLOT_KEYS
-    for key in source_keys:
-        value = _lookup_nested(payload, key)
-        if value is not None:
-            candidates.extend(_gather_artifact_values(value))
-    candidates.extend(_collect_artifacts_from_manifest_sections(payload, kind))
-
-    candidates.extend(_collect_artifacts_from_manifest_items(payload, kind))
-    candidates.extend(_collect_artifacts_from_files(payload, kind))
-
-    artifacts: list[RunArtifact] = []
-    seen: set[str] = set()
-    for index, (declared_name, artifact_id, raw_path) in enumerate(candidates):
-        try:
-            path = _normalize_artifact_path(run_dir, raw_path)
-        except ValueError:
-            continue
-
-        candidate_path = Path(raw_path).as_posix()
-        if '/' in candidate_path:
-            display_name = candidate_path
-        else:
-            display_name = Path(candidate_path).name
-
-        try:
-            relative_name = path.relative_to(run_dir).as_posix()
-            display_name = relative_name or display_name
-        except ValueError:
-            display_name = display_name or str(path.name)
-
-        normalized_key = _artifact_key(
-            kind=kind,
-            artifact_id=artifact_id,
-            raw_path=raw_path,
-            declared_name=declared_name,
-            index=index,
-        )
-        if normalized_key in seen:
-            continue
-
-        seen.add(normalized_key)
-        artifacts.append(
-            RunArtifact(
-                name=display_name,
-                path=path,
-                kind=kind,
-            )
-        )
-
-    return artifacts
-
-
-RUN_STATUS_INVALID = "invalid"
-
-
-def _read_manifest(path: Path) -> tuple[dict[str, Any], str | None]:
-    try:
-        with open(path, encoding='utf-8') as handle:
-            payload = json.load(handle)
-    except (OSError, json.JSONDecodeError) as exc:
-        return {}, str(exc)
-
-    if not isinstance(payload, dict):
-        return {}, 'Manifest is not a JSON object'
-
-    return payload, None
-
-
-def _build_invalid_run_summary(run_type: str, manifest: Path, errors: list[str]) -> RunSummary:
+def _build_invalid_run_summary(run_type: str, manifest: Path, errors: List[str]) -> RunSummary:
     run_dir = manifest.parent
     try:
         run_id = _run_id_from_path(run_type, run_dir.relative_to(_workspace_root()))
-    except Exception:
+    except ValueError:
         run_id = f"{run_type}::{manifest.name}"
 
     return RunSummary(
@@ -750,47 +211,101 @@ def _build_invalid_run_summary(run_type: str, manifest: Path, errors: list[str])
     )
 
 
+def _artifact_path(run_dir: Path, raw_path: str) -> Path:
+    path = Path(raw_path.replace('\\', '/')).expanduser()
+    if path.is_absolute():
+        return path
+    return (run_dir / path).resolve()
+
+
+def _collect_artifacts(summary: Dict[str, Any], run_dir: Path, kind: str) -> List[RunArtifact]:
+    artifacts: List[RunArtifact] = []
+    raw = summary.get("artifacts")
+    if not isinstance(raw, list):
+        return artifacts
+
+    for item in raw:
+        if not isinstance(item, dict) or item.get("type") != kind:
+            continue
+        raw_path = item.get("path")
+        name = item.get("name")
+        if not isinstance(raw_path, str) or not raw_path.strip():
+            continue
+        artifacts.append(
+            RunArtifact(
+                name=str(name).strip() if isinstance(name, str) and name.strip() else raw_path,
+                path=_artifact_path(run_dir, raw_path.strip()),
+                kind=kind,
+            )
+        )
+    return artifacts
+
+
+def _top_features_count(summary: Dict[str, Any]) -> Optional[int]:
+    value = summary.get("top_features")
+    if not isinstance(value, dict):
+        return None
+    lengths = [len(item) for item in value.values() if isinstance(item, list)]
+    return max(lengths) if lengths else 0
+
+
+def _build_label(kind: str, model_name: Optional[str], top_features: Optional[int], run_name: str) -> str:
+    if model_name:
+        return model_name
+    if top_features is not None:
+        return f"top_features={top_features}"
+    return run_name or f"{kind} run"
+
+
 def _build_run_summary(run_type: str, manifest_path: Path) -> RunSummary:
     run_dir = manifest_path.parent
-    summary: dict[str, Any]
-    parse_error: str | None
-    summary, parse_error = _read_manifest(manifest_path)
+    summary = _read_json_if_possible(manifest_path)
+    if not isinstance(summary, dict):
+        return _build_invalid_run_summary(run_type, manifest_path, ['manifest is not a JSON object'])
 
-    errors: list[str] = []
-    if parse_error:
-        errors.append(parse_error)
-        return _build_invalid_run_summary(run_type, manifest_path, errors)
+    schema_version = summary.get("schema_version")
+    if schema_version != CANONICAL_SCHEMA_VERSION:
+        return _build_invalid_run_summary(
+            run_type,
+            manifest_path,
+            [
+                f"unsupported schema_version {schema_version!r} "
+                f"(expected {CANONICAL_SCHEMA_VERSION!r}); run tools/migrate_manifests.py"
+            ],
+        )
 
-    if _contains_non_finite(summary):
-        errors.append('sanitized_nonfinite_values')
-        summary = json_sanitize(summary)
+    declared_status = summary.get("status")
+    if declared_status not in KNOWN_STATUSES:
+        return _build_invalid_run_summary(
+            run_type, manifest_path, [f"unknown status {declared_status!r}"]
+        )
 
     run_id = _run_id_from_path(run_type, run_dir.relative_to(_workspace_root()))
-    dataset_hash = _extract_string(summary, DATASET_HASH_KEYS) or run_dir.name
-    model_name = _extract_string(summary, MODEL_NAME_KEYS)
-    top_features = _extract_top_features_count(summary)
-    label = _build_label(kind=run_type, model_name=model_name, top_features=top_features, summary=summary)
-    created_at_utc = _extract_datetime(summary) or _manifest_timestamp(manifest_path)
-    schema_version = _extract_schema_version(summary)
-    error_message = _extract_error(summary)
+    dataset_hash = str(summary.get("dataset_hash") or run_dir.name)
+    model_name = summary.get("model_name") if isinstance(summary.get("model_name"), str) else None
+    top_features = _top_features_count(summary) if run_type == "correlation" else None
+    created_at_utc = _parse_datetime(summary.get("created_at_utc")) or _manifest_timestamp(manifest_path)
+
+    error_payload = summary.get("error")
+    if isinstance(error_payload, dict):
+        error_message = str(error_payload.get("message") or "") or None
+    elif isinstance(error_payload, str):
+        error_message = error_payload.strip() or None
+    else:
+        error_message = None
+
     tables = _collect_artifacts(summary, run_dir, kind='table')
     plots = _collect_artifacts(summary, run_dir, kind='plot')
-    declared_status = _extract_status(summary)
 
-    status = declared_status or RUN_STATUS_COMPLETE
-    if any(not artifact.path.is_file() for artifact in [*tables, *plots]):
+    status = str(declared_status)
+    if status == RUN_STATUS_COMPLETE and any(
+        not artifact.path.is_file() for artifact in [*tables, *plots]
+    ):
         status = RUN_STATUS_PARTIAL
-
-    if status in (RUN_STATUS_COMPLETE, RUN_STATUS_PARTIAL):
-        for required in REQUIRED_STATUS_BY_KIND.get(run_type, ()):
-            if not _has_required_manifest_value(summary, required):
-                status = RUN_STATUS_PARTIAL
-                break
-
-    if error_message:
+    if error_message and status not in (RUN_STATUS_FAILED, RUN_STATUS_RUNNING):
         status = RUN_STATUS_FAILED
 
-    is_stale = _is_dataset_stale(dataset_hash, summary, run_dir)
+    is_stale = _is_dataset_stale(dataset_hash, summary.get("dataset_path"), run_dir)
     status_ui = RUN_STATUS_STALE if is_stale else status
 
     return RunSummary(
@@ -800,13 +315,13 @@ def _build_run_summary(run_type: str, manifest_path: Path) -> RunSummary:
         path=run_dir,
         created_at_utc=created_at_utc,
         dataset_hash=dataset_hash,
-        schema_version=schema_version,
+        schema_version=str(schema_version),
         status=status,
         status_ui=status_ui,
         is_stale=is_stale,
         error=error_message,
-        errors=errors,
-        label=label,
+        errors=[str(item) for item in summary.get("errors", []) if isinstance(item, str)],
+        label=_build_label(run_type, model_name, top_features, run_dir.name),
         model_name=model_name,
         top_features=top_features,
         summary=summary,
@@ -815,23 +330,32 @@ def _build_run_summary(run_type: str, manifest_path: Path) -> RunSummary:
     )
 
 
+# ─── Listing / lookup ──────────────────────────────────────────────────────
+
+
+def _discover_run_manifests(base_dir: Path, run_type: str) -> List[Path]:
+    if not base_dir.exists():
+        return []
+    return sorted(base_dir.glob(f"*/{_manifest_for_kind(run_type)}"))
+
+
 def list_runs(
-    run_type: str | None = None,
-    dataset: str | None = None,
-) -> list[RunSummary]:
+    run_type: Optional[str] = None,
+    dataset: Optional[str] = None,
+) -> List[RunSummary]:
     runs, _ = list_runs_with_diagnostics(run_type=run_type, dataset=dataset)
     return runs
 
 
 def list_runs_with_diagnostics(
-    run_type: str | None = None,
-    dataset: str | None = None,
-) -> tuple[list[RunSummary], list[dict[str, str]]]:
+    run_type: Optional[str] = None,
+    dataset: Optional[str] = None,
+) -> Tuple[List[RunSummary], List[Dict[str, str]]]:
     if run_type is not None and run_type not in RUN_TYPES:
         raise BadRequest('run type must be correlation or forecast')
 
-    runs: list[RunSummary] = []
-    bad_manifests: list[dict[str, str]] = []
+    runs: List[RunSummary] = []
+    bad_manifests: List[Dict[str, str]] = []
     workspace_root = _workspace_root()
 
     for current_type, base_path in _base_paths():
@@ -839,43 +363,14 @@ def list_runs_with_diagnostics(
             continue
 
         for manifest in _discover_run_manifests(base_path, current_type):
-            manifest_path = str(manifest)
-            run: RunSummary
-            try:
-                run = _build_run_summary(current_type, manifest)
-            except Exception as exc:
-                error = f'Failed reading run manifest: {exc}'
-                run = _build_invalid_run_summary(
-                    current_type,
-                    manifest,
-                    [error],
-                )
-                bad_manifests.append(
-                    {
-                        'path': manifest_path,
-                        'error': error,
-                    }
-                )
+            run = _build_run_summary(current_type, manifest)
 
-            if run.status == 'invalid' and run.error:
-                existing_paths = {entry.get('path') for entry in bad_manifests}
-                if manifest_path not in existing_paths:
-                    bad_manifests.append(
-                        {
-                            'path': manifest_path,
-                            'error': run.error,
-                        }
-                    )
+            if run.status == RUN_STATUS_INVALID and run.error:
+                bad_manifests.append({'path': str(manifest), 'error': run.error})
 
             if dataset is not None and run.dataset_hash.lower() != dataset.lower():
                 continue
-
-            if not run.path.is_dir():
-                continue
-
-            try:
-                _ = run.path.relative_to(workspace_root)
-            except ValueError:
+            if not run.path.is_dir() or not run.path.is_relative_to(workspace_root):
                 continue
 
             runs.append(run)
@@ -883,8 +378,9 @@ def list_runs_with_diagnostics(
     runs.sort(key=lambda item: item.created_at_utc or datetime.fromtimestamp(0, tz=timezone.utc), reverse=True)
     return runs, bad_manifests
 
-def list_datasets() -> list[DatasetSummary]:
-    grouped: dict[str, dict[str, Any]] = {}
+
+def list_datasets() -> List[DatasetSummary]:
+    grouped: Dict[str, Dict[str, Any]] = {}
 
     for run in list_runs():
         bucket = grouped.setdefault(
@@ -908,19 +404,17 @@ def list_datasets() -> list[DatasetSummary]:
         ):
             bucket['last_seen'] = run.created_at_utc
 
-    result: list[DatasetSummary] = []
-    for bucket in grouped.values():
-        result.append(
-            DatasetSummary(
-                name=bucket['name'],
-                run_count=bucket['run_count'],
-                source_types=sorted(bucket['source_types']),
-                last_seen=bucket['last_seen'],
-                table_count=bucket['table_count'],
-                plot_count=bucket['plot_count'],
-            )
+    result = [
+        DatasetSummary(
+            name=bucket['name'],
+            run_count=bucket['run_count'],
+            source_types=sorted(bucket['source_types']),
+            last_seen=bucket['last_seen'],
+            table_count=bucket['table_count'],
+            plot_count=bucket['plot_count'],
         )
-
+        for bucket in grouped.values()
+    ]
     result.sort(key=lambda item: item.name.lower())
     return result
 
@@ -933,10 +427,10 @@ def get_run_summary(run_id: str) -> RunSummary:
     base_map = {run_kind: base for run_kind, base in _base_paths()}
     base_path = base_map[run_type].resolve()
 
-    if not str(candidate_path).startswith(str(base_path)):
+    if not candidate_path.is_relative_to(base_path):
         raise BadRequest('run_id does not point to a valid run path')
 
-    if not candidate_path.exists() or not candidate_path.is_dir():
+    if not candidate_path.is_dir():
         raise BadRequest('run_id does not map to an existing run')
 
     manifest = candidate_path / _manifest_for_kind(run_type)
@@ -946,30 +440,29 @@ def get_run_summary(run_id: str) -> RunSummary:
     return _build_run_summary(run_type, manifest)
 
 
-def get_run_health(run_id: str) -> dict[str, Any]:
-    run = get_run_summary(run_id)
-    schema_version = run.schema_version
-    warnings: list[str] = []
-    missing_artifacts: list[dict[str, str]] = []
+# ─── Health ────────────────────────────────────────────────────────────────
+
+
+def health_from_run(run: RunSummary) -> Dict[str, Any]:
+    """Compute health from an already-parsed RunSummary (no re-reading)."""
+
+    warnings: List[str] = []
+    missing_artifacts: List[Dict[str, str]] = []
 
     if run.errors:
         warnings.extend(run.errors)
 
-    if schema_version is None:
-        warnings.append('Manifest field "schema_version" is missing')
-
-    for required in REQUIRED_STATUS_BY_KIND.get(run.kind, ()):
-        if required == "schema_version":
-            continue
-        if not _has_required_manifest_value(run.summary, required):
-            warnings.append(f'Manifest field "{required}" is missing')
+    raw_warnings = run.summary.get("warnings")
+    if isinstance(raw_warnings, list):
+        warnings.extend(str(item) for item in raw_warnings if isinstance(item, str))
 
     for artifact in [*run.tables, *run.plots]:
         if not artifact.path.is_file():
-            if artifact.path.exists():
-                reason = "artifact path exists but is not a file"
-            else:
-                reason = "artifact file not found"
+            reason = (
+                "artifact path exists but is not a file"
+                if artifact.path.exists()
+                else "artifact file not found"
+            )
             missing_artifacts.append(
                 {
                     "kind": artifact.kind,
@@ -982,8 +475,6 @@ def get_run_health(run_id: str) -> dict[str, Any]:
     status = run.status
     if status == RUN_STATUS_COMPLETE and missing_artifacts:
         status = RUN_STATUS_PARTIAL
-    if run.error and status not in (RUN_STATUS_FAILED, RUN_STATUS_RUNNING):
-        status = RUN_STATUS_FAILED
 
     if run.is_stale and status not in (RUN_STATUS_FAILED, RUN_STATUS_RUNNING):
         warnings.append("dataset hash in manifest does not match dataset metadata sidecar")
@@ -993,20 +484,21 @@ def get_run_health(run_id: str) -> dict[str, Any]:
         "status": status,
         "status_ui": run.status_ui,
         "is_stale": run.is_stale,
-        "schema_version": schema_version,
+        "schema_version": run.schema_version,
         "missing_artifacts": missing_artifacts,
         "warnings": warnings,
-        "error": (
-            {
-                "message": run.error,
-            }
-            if run.error
-            else None
-        ),
+        "error": {"message": run.error} if run.error else None,
     }
 
 
-def _resolve_artifact_path(run: RunSummary, kind: str, name: str | None) -> RunArtifact:
+def get_run_health(run_id: str) -> Dict[str, Any]:
+    return health_from_run(get_run_summary(run_id))
+
+
+# ─── Artifact serving ──────────────────────────────────────────────────────
+
+
+def _resolve_artifact_path(run: RunSummary, kind: str, name: Optional[str]) -> RunArtifact:
     artifacts = run.tables if kind == 'table' else run.plots
     if not artifacts:
         raise FileNotFoundError(f'No {kind} artifacts declared for this run')
@@ -1019,33 +511,18 @@ def _resolve_artifact_path(run: RunSummary, kind: str, name: str | None) -> RunA
 
     target = name.strip().lower()
     for artifact in artifacts:
-        artifact_name = artifact.name.lower()
-        if artifact_name == target:
-            if artifact.path.is_file():
-                return artifact
-            break
-
-    stem_target = Path(target).stem
-    for artifact in artifacts:
-        if (
-            Path(artifact.name).name.lower() == target
-            or artifact.path.name.lower() == target
-            or artifact.path.stem.lower() == stem_target
-        ):
+        if artifact.name.lower() == target or artifact.path.name.lower() == target:
             if not artifact.path.is_file():
                 break
             return artifact
 
-    if artifacts:
-        available = ', '.join(artifact.name for artifact in artifacts)
-        raise FileNotFoundError(
-            f'Artifact {name} is not declared for this run. Available artifacts: {available}'
-        )
-
-    raise FileNotFoundError(f'No {kind} artifacts declared for this run')
+    available = ', '.join(artifact.name for artifact in artifacts)
+    raise FileNotFoundError(
+        f'Artifact {name} is not declared for this run. Available artifacts: {available}'
+    )
 
 
-def get_run_table(run_id: str, name: str | None, page: int, page_size: int) -> dict[str, Any]:
+def get_run_table(run_id: str, name: Optional[str], page: int, page_size: int) -> Dict[str, Any]:
     run = get_run_summary(run_id)
     artifact = _resolve_artifact_path(run, 'table', name)
 
@@ -1075,14 +552,14 @@ def get_run_table(run_id: str, name: str | None, page: int, page_size: int) -> d
     }
 
 
-def get_run_plot_file(run_id: str, name: str | None) -> tuple[Path, str]:
+def get_run_plot_file(run_id: str, name: Optional[str]) -> Tuple[Path, str]:
     run = get_run_summary(run_id)
     artifact = _resolve_artifact_path(run, 'plot', name)
     content_type = mimetypes.guess_type(str(artifact.path))[0] or 'application/octet-stream'
     return artifact.path, content_type
 
 
-def _read_table_file(path: Path, max_rows: int | None = None) -> list[dict[str, Any]]:
+def _read_table_file(path: Path, max_rows: Optional[int] = None) -> List[Dict[str, Any]]:
     suffix = path.suffix.lower()
     if suffix == '.csv':
         return _read_csv(path)
@@ -1093,16 +570,16 @@ def _read_table_file(path: Path, max_rows: int | None = None) -> list[dict[str, 
     raise BadRequest('Unsupported table format')
 
 
-def _read_csv(path: Path) -> list[dict[str, Any]]:
-    rows: list[dict[str, Any]] = []
-    with open(path, encoding='utf-8', newline='') as handle:
+def _read_csv(path: Path) -> List[Dict[str, Any]]:
+    rows: List[Dict[str, Any]] = []
+    with open(path, 'r', encoding='utf-8', newline='') as handle:
         reader = csv.DictReader(handle)
         for row in reader:
             rows.append({key: (value if value != '' else None) for key, value in row.items()})
     return rows
 
 
-def _read_json_table(path: Path) -> list[dict[str, Any]]:
+def _read_json_table(path: Path) -> List[Dict[str, Any]]:
     payload = _read_json_if_possible(path)
     if payload is None:
         raise BadRequest('Invalid JSON table file')
@@ -1119,10 +596,10 @@ def _read_json_table(path: Path) -> list[dict[str, Any]]:
     raise BadRequest('Unsupported JSON table shape')
 
 
-def _read_parquet_table(path: Path, max_rows: int | None = None) -> list[dict[str, Any]]:
+def _read_parquet_table(path: Path, max_rows: Optional[int] = None) -> List[Dict[str, Any]]:
     try:
         import pandas as pd
-    except Exception as exc:
+    except ImportError as exc:
         raise BadRequest('Parquet support missing: install pandas and pyarrow to read parquet tables') from exc
 
     try:
@@ -1131,13 +608,9 @@ def _read_parquet_table(path: Path, max_rows: int | None = None) -> list[dict[st
         else:
             frame = pd.read_feather(path)
     except Exception as exc:
-        message = str(exc).lower()
-        if 'pyarrow' in message or 'pandas' in message:
-            raise BadRequest('Parquet support missing: install pandas and pyarrow to read parquet tables') from exc
         raise BadRequest('Failed to read parquet table') from exc
 
     if max_rows is not None:
         frame = frame.head(max_rows)
 
-    rows = frame.to_dict(orient='records')
-    return [json_sanitize(dict(row)) for row in rows]
+    return [dict(row) for row in frame.to_dict(orient='records')]

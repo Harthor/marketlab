@@ -1,2 +1,0 @@
-[console_scripts]
-marketlab-core = marketlab_core.cli:main

@@ -87,11 +87,7 @@ class RunsView(APIView):
         payload = []
         for run in runs:
             run_payload = _to_run_payload(run)
-            try:
-                health = services.get_run_health(run.run_id)
-                run_payload['warnings'] = health.get('warnings', [])
-            except Exception:
-                run_payload['warnings'] = []
+            run_payload['warnings'] = services.health_from_run(run).get('warnings', [])
             payload.append(json_sanitize(run_payload))
 
         serializer = RunSummarySerializer(data=payload, many=True)
@@ -105,15 +101,11 @@ class RunDetailView(APIView):
             run = services.get_run_summary(run_id)
         except BadRequest as exc:
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_400_BAD_REQUEST)
-        except Exception as exc:
+        except (FileNotFoundError, LookupError) as exc:
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_404_NOT_FOUND)
 
         payload = _to_run_payload(run)
-        try:
-            health = services.get_run_health(run.run_id)
-            payload['warnings'] = health.get('warnings', [])
-        except Exception:
-            payload['warnings'] = []
+        payload['warnings'] = services.health_from_run(run).get('warnings', [])
 
         serializer = RunSummarySerializer(data=json_sanitize(payload))
         serializer.is_valid(raise_exception=True)
@@ -134,8 +126,6 @@ class RunTableView(APIView):
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_400_BAD_REQUEST)
         except (FileNotFoundError, LookupError) as exc:
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_404_NOT_FOUND)
-        except Exception as exc:
-            return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_404_NOT_FOUND)
 
         serializer = RunTableResponseSerializer(data=payload)
         serializer.is_valid(raise_exception=True)
@@ -152,8 +142,6 @@ class RunPlotView(APIView):
         except BadRequest as exc:
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_400_BAD_REQUEST)
         except (FileNotFoundError, LookupError) as exc:
-            return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_404_NOT_FOUND)
-        except Exception as exc:
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_404_NOT_FOUND)
 
         return FileResponse(
@@ -172,8 +160,6 @@ class RunHealthView(APIView):
         except BadRequest as exc:
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_400_BAD_REQUEST)
         except (FileNotFoundError, LookupError) as exc:
-            return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_404_NOT_FOUND)
-        except Exception as exc:
             return Response(json_sanitize({'detail': str(exc)}), status=status.HTTP_404_NOT_FOUND)
 
         serializer = RunHealthSerializer(data=payload)

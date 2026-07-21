@@ -26,14 +26,19 @@ from .plots import plot_equity_curve, plot_feature_importance, plot_pred_vs_true
 from .validation import iter_expanding_splits, iter_time_splits
 
 try:
-    from marketlab_core.manifests import validate_artifacts_exist, validate_manifest, write_json_atomic
-except Exception:
-    validate_artifacts_exist = None
-    validate_manifest = None
-    write_json_atomic = None
-
-
-RUN_SCHEMA_VERSION = "1.0"
+    from marketlab_core.manifests import (
+        SCHEMA_VERSION as RUN_SCHEMA_VERSION,
+        ManifestValidationError,
+        sanitize_non_finite,
+        validate_and_write_manifest,
+        validate_artifacts_exist,
+        validate_manifest,
+    )
+except ImportError as exc:  # pragma: no cover
+    raise ImportError(
+        "forecasting-backtest requires marketlab-core for manifest contracts; "
+        "install it with: pip install -e ../marketlab-core"
+    ) from exc
 
 
 def _new_run_id(model_name: str) -> str:
@@ -122,17 +127,8 @@ def _write_json(path: Path, payload: dict[str, object]) -> None:
             else:
                 normalized["warnings"] = ["dropped_empty_artifact_paths"]
             normalized["artifacts"] = cleaned_artifacts
-    if write_json_atomic is not None:
-        try:
-            write_json_atomic(path, normalized, allow_nan=False)
-        except TypeError:
-            write_json_atomic(path, normalized)
-        return
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(
-        json.dumps(normalized, indent=2, ensure_ascii=False, default=str, allow_nan=False),
-        encoding="utf-8",
-    )
+    normalized = sanitize_non_finite(normalized)
+    validate_and_write_manifest(path, normalized)
 
 
 def _flatten_metrics(metrics: object) -> dict[str, float]:

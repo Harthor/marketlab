@@ -101,7 +101,7 @@ def test_manifest_is_json_strict_and_has_required_fields() -> None:
     assert manifest["kind"] == "correlation"
     assert manifest["status"] == "complete"
     assert manifest["run_id"] == "manifest-test"
-    assert Path(manifest["dataset_path"]).resolve() == Path("/tmp/fake.parquet").resolve()
+    assert manifest["dataset_path"] == str(Path("/tmp/fake.parquet").resolve())
     assert manifest["dataset_hash"] == "abcdef123456"
     assert manifest["completed_at_utc"] == "2026-02-27T00:00:05+00:00"
     assert manifest["artifacts"]
@@ -116,6 +116,7 @@ def test_manifest_sanitizes_nonfinite_to_null(tmp_path: Path) -> None:
         "status": "complete",
         "created_at_utc": "2026-01-01T00:00:00+00:00",
         "created_utc": "2026-01-01T00:00:00+00:00",
+        "started_at_utc": "2026-01-01T00:00:00+00:00",
         "dataset_path": "/tmp/test.parquet",
         "dataset_hash": "abc",
         "dataset_rows": 1,
